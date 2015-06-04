@@ -7,12 +7,15 @@ use App\Http\Controllers\Controller;
 use App\Src\Category\CategoryRepository;
 use App\Src\Book\BookRepository;
 use App\Http\Requests\CreateBook;
+use App\Src\Book\traitBook;
 
 class AdminBookController extends Controller
 {
 
     public $category;
     public $book;
+
+    use traitBook;
 
     public function __construct(BookRepository $book,CategoryRepository $category)
     {
@@ -54,7 +57,14 @@ class AdminBookController extends Controller
     public function store(CreateBook $request)
     {
         // Job will handle the Storing the Book in the DB + Firing an event for PDF creation
-        $book = $this->dispatch(new BookPublished($request));
+        $request->merge(['url' => $this->generateFileName()]);
+
+        $book = $this->book->create($request->except('_token'));
+
+
+        event(new BookPublished($book));
+
+        //$book = $this->dispatch(new BookPublished($request));
         if($book) {
             // redirecting user with sucess
             return redirect()->back()->with(['success' => trans('word.book-created')]);

@@ -31,9 +31,7 @@ class PublishBook extends Job implements SelfHandling
         // Create a Entry In Database
         //$book = $this->storeInDB($bookRepository);
         // create a book within the DB
-        $this->request->input('url',$this->generateFileName());
 
-        $book = $bookRepository->create($this->request->except('_token'));
 
 
         // Create Book Meta Record in DB
