@@ -47,7 +47,7 @@
 
     <div class="form-group col-md-4 col-lg-4">
         {!! Form::label('title_en', trans('word.categories'), ['class' => 'control-label']) !!}
-        {!! Form::select('category', $categories ,null, ['class' => 'form-control','style'=>'text-align:left !important;']) !!}
+        {!! Form::select('category_id', $categories ,null, ['class' => 'form-control','style'=>'text-align:left !important;']) !!}
     </div>
 
 

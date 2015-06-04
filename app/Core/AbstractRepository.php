@@ -7,10 +7,10 @@
  */
 namespace App\Core;
 
+
 class AbstractRepository {
 
     public $model;
-
 
     public function getAll() {
         return $this->model->all();

@@ -5,10 +5,9 @@
  * Date: 5/31/15
  * Time: 9:18 PM
  */
-namespace App\Core\Category;
+namespace App\Src\Category;
 
 
-use App\Category;
 use App\Core\AbstractRepository;
 
 class CategoryRepository extends AbstractRepository {

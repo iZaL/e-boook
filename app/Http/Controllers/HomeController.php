@@ -1,6 +1,6 @@
 <?php namespace App\Http\Controllers;
 
-use App\Contactus;
+use App\Src\Contactus\Contactus;
 
 class HomeController extends Controller {
 

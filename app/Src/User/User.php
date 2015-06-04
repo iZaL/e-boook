@@ -1,12 +1,13 @@
-<?php namespace App;
+<?php namespace App\Src\User;
 
+use App\Core\AbstractModel;
 use Illuminate\Auth\Authenticatable;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract
+
+class User extends AbstractModel implements AuthenticatableContract, CanResetPasswordContract
 {
     use Authenticatable, CanResetPassword;
 
@@ -30,4 +31,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+    /*
+     * Relations
+     *
+     * Many to many relation
+     * user has many roles
+     * */
+
+    public function roles () {
+        return $this->belongsToMany('App\Src\Role\Role');
+    }
 }

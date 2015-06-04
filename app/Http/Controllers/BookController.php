@@ -1,7 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Requests;
-use App\Core\Book\BookRepository;
+use App\Src\Book\BookRepository;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 

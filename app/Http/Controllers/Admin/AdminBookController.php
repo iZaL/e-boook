@@ -1,12 +1,12 @@
 <?php namespace App\Http\Controllers\Admin;
 
 
+use App\Events\BookPublished;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Core\Category\CategoryRepository;
-use App\Core\Book\BookRepository;
-use Illuminate\Support\Facades\Session;
+use App\Src\Category\CategoryRepository;
+use App\Src\Book\BookRepository;
+use App\Http\Requests\CreateBook;
 
 class AdminBookController extends Controller
 {
@@ -48,12 +48,18 @@ class AdminBookController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
+     *  CreateBook Request Checks for the Rules of Create Book Form
      * @return Response
      */
-    public function store()
+    public function store(CreateBook $request)
     {
-        //
+        // Job will handle the Storing the Book in the DB + Firing an event for PDF creation
+        $book = $this->dispatch(new BookPublished($request));
+        if($book) {
+            // redirecting user with sucess
+            return redirect()->back()->with(['success' => trans('word.book-created')]);
+        }
+        return redirect()->back()->with(['error' => trans('word.book-not-created')]);
     }
 
     /**

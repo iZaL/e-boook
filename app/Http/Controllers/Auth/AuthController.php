@@ -1,6 +1,6 @@
 <?php namespace App\Http\Controllers\Auth;
 
-use App\User;
+use App\Src\User\User;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
