@@ -14,7 +14,7 @@ class Role extends AbstractModel
      * Many to many relation
      * role has many users
      * */
-    public function roles() {
-        return $this->belongsToMany('App\Src\User\User');
+    public function users() {
+        return $this->belongsToMany('App\Src\User\User','user_roles');
     }
 }

@@ -48,7 +48,9 @@
                                     </tr>
                                 @endforeach
                                 </tbody>
+
                             </table>
+
                         </div>
                     </div>
                 </div>
@@ -74,6 +76,8 @@
             <br>
 
         </div>
+        {!! $books->render() !!}
+
         <!-- END CONTENT ITEM -->
 
     </div>

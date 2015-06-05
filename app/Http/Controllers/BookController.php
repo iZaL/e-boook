@@ -21,7 +21,9 @@ class BookController extends Controller
     public function index()
     {
         //
-        $books = $this->book->paginate(3);
+        //$user = $this->userRepository->getById($id);
+
+        $books = $this->book->paginate(12);
 
         return view('modules.book.index',['books' => $books]);
     }
@@ -56,6 +58,7 @@ class BookController extends Controller
     public function show($id)
     {
         //
+        return 'from inside the book show';
     }
 
     /**

@@ -68,7 +68,7 @@
 
     @yield('title')
 
-    @include('partials.notifications')
+    @include('admin.partials.notifications')
 
     @section('content')
     @show

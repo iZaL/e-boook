@@ -2,10 +2,21 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Src\Book\BookRepository;
+use App\Src\User\User;
+use App\Src\User\UserRepository;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    public $userRepository;
+    public $bookRepository;
+
+
+    public function __construct(UserRepository $userRepository, BookRepository $bookRepository) {
+        $this->userRepository = $userRepository;
+        $this->bookRepository = $bookRepository;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -46,6 +57,13 @@ class UserController extends Controller
     public function show($id)
     {
         //
+        //$user = $this->userRepository->getById($id);
+        $books = $this->userRepository->getBooks($id);
+        $bookDrafted = $this->bookRepository->draftedBooks($id);
+
+
+
+        return view('modules.user.profile',['books'=>$books]);
     }
 
     /**

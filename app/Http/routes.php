@@ -28,7 +28,7 @@ Route::get('/lang/{lang}',['uses'=>'LanguageController@changeLocale']);
  * Book
  ***************************************************************************************************/
 
-//Route::resource('book','BookController');
+Route::resource('book','BookController');
 
 /***************************************************************************************************
  * Category
@@ -38,8 +38,9 @@ Route::resource('category','CategoryController',['only'=>'index','show']);
 
 
 /***************************************************************************************************
- *
+ * Profile
  ***************************************************************************************************/
+Route::get('/profile/{id}',['uses'=>'UserController@show']);
 
 
 
@@ -124,6 +125,16 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function () {
  * $this->modelRepository->methodCalled()->body/name/whatever
  * == if array you have to use foreach ()
  *
+ *  4 - Query Building for [Relations Model+RepositoryModel+Controller]
+ * 1- a has Many relation has been made inside the 2 models
+ * 2-  inside the Repository
+ *     ex. a user has many books - a book belongs to one user
+ *     2.1 - you have to create a new method oveer the Eloquant relation inside the repository
+ *     2.2 the query within the method  as the following :
+ *        - theModelInstance -> findOrNew -> book Method relation -> get()
+ *        - inside the controller you can fetch all this as the following
+ *          - $books = $this->userRepository->getBooks($id);
+ *
  * 4- HomeStead
  * a. you have install vagrant with VB
  * b. to add laravel image within the VB :: vagrant box add laravel/homestead
@@ -135,6 +146,10 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function () {
  *
  * 5- ServicesProvider
  * - simply this is the IOC container of the whole application
+ *
+ * 6- {{}} vs {!! !!}}
+ * {!! $books->render(); !!} - to echo HTML
+ * {{ Auth::user() }} to write php within the blade
  *
  *
  ***************************************************************************************************/

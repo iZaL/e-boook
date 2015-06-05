@@ -7,22 +7,35 @@ use App\Http\Controllers\Controller;
 use App\Src\Category\CategoryRepository;
 use App\Src\Book\BookRepository;
 use App\Http\Requests\CreateBook;
-use App\Src\Book\traitBook;
+use App\Src\Book\BookHelpers;
 
+/**
+ * Class AdminBookController
+ * @package App\Http\Controllers\Admin
+ */
 class AdminBookController extends Controller
 {
 
     public $category;
     public $book;
 
-    use traitBook;
+    use BookHelpers;
 
+    /**
+     * @param BookRepository $book
+     * @param CategoryRepository $category
+     */
     public function __construct(BookRepository $book,CategoryRepository $category)
     {
         $this->book = $book->model;
         $this->category = $category->model;
+        /*
+         * Middleware CreateBook only for Admin and Editor
+         * */
+        $this->middleware('before.create.book:Admin,Editor',['only'=>'create','store']);
 
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -56,7 +69,12 @@ class AdminBookController extends Controller
      */
     public function store(CreateBook $request)
     {
-        // Job will handle the Storing the Book in the DB + Firing an event for PDF creation
+        /*
+
+        - Job will handle the Storing the Book in the DB + Firing an event for PDF creation
+
+        */
+
         $request->merge(['url' => $this->generateFileName()]);
 
         $book = $this->book->create($request->except('_token'));

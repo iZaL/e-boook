@@ -7,7 +7,7 @@
  */
 namespace App\Src\Book;
 
-trait traitBook {
+trait BookHelpers {
 
     /**
      * @return string

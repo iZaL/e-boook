@@ -1,6 +1,7 @@
 <?php namespace App\Src\User;
 
 use App\Core\AbstractModel;
+use App\Src\User\UserHelpers;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
@@ -9,7 +10,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 class User extends AbstractModel implements AuthenticatableContract, CanResetPasswordContract
 {
-    use Authenticatable, CanResetPassword;
+    use Authenticatable, CanResetPassword, UserHelpers;
 
     /**
      * The database table used by the model.
@@ -39,6 +40,16 @@ class User extends AbstractModel implements AuthenticatableContract, CanResetPas
      * */
 
     public function roles () {
-        return $this->belongsToMany('App\Src\Role\Role');
+        return $this->belongsToMany('App\Src\Role\Role','user_roles');
+    }
+
+    /**
+     * One To Many Relation
+     * a user has many  books
+     * a book belongs to one user
+     * @return mixed
+     */
+    public function books() {
+        return $this->hasMany('App\Src\Book\Book');
     }
 }

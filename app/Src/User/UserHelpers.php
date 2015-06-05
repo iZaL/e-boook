@@ -1,0 +1,24 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: usamaahmed
+ * Date: 6/4/15
+ * Time: 2:22 PM
+ */
+
+namespace App\Src\User;
+
+
+/**
+ * Class UserHelpers
+ * @package App\Src\User
+ */
+trait UserHelpers {
+
+    /**
+     * @return the first role of a user
+     */
+    public function getRole () {
+        return $this->roles()->get()->first();
+    }
+}
