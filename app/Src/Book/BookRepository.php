@@ -43,4 +43,5 @@ class BookRepository extends AbstractRepository {
     {
         return $this->model->where('status', 'published');
     }
+
 }

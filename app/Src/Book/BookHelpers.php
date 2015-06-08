@@ -18,5 +18,8 @@ trait BookHelpers {
         return md5(uniqid(mt_rand(), true)) . '.pdf';
     }
 
+    private function generateGetMostFavorited () {
+
+    }
 
 }

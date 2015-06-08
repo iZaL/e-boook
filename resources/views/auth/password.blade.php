@@ -1,4 +1,4 @@
-@extends('app')
+@extends('layouts.one_col')
 
 @section('content')
 <div class="container-fluid">

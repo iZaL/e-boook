@@ -28,6 +28,7 @@ class Kernel extends HttpKernel
         'auth' => 'App\Http\Middleware\Authenticate',
         'auth.basic' => 'Illuminate\Auth\Middleware\AuthenticateWithBasicAuth',
         'guest' => 'App\Http\Middleware\RedirectIfAuthenticated',
-        'before.create.book' => 'App\Http\Middleware\BeforeCreateBook',
+        'admin.zone' => 'App\Http\Middleware\BeforeAdminZone',
+        'editor.zone' => 'App\Http\Middleware\BeforeEditorZone',
     ];
 }

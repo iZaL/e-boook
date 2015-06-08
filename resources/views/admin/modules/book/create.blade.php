@@ -1,7 +1,7 @@
 @extends('admin.layouts.one_col')
 
 @section('title')
-    <h1>Publish Your Book</h1>
+    Publish Your Book
 @stop
 
 @section('style')
@@ -30,10 +30,16 @@
 
     {!! Form::open(['action' => 'Admin\AdminBookController@store', 'method' => 'post'], ['class'=>'form-horizontal']) !!}
 
-    <div class="form-group ">
-        {!! Form::label('free', 'Free Book ?:') !!}
-        {!! Form::hidden('free', 0) !!}
-        {!! Form::checkbox('free', 1, false) !!}
+    <div class="row">
+        <div class="form-group col-lg-2 col-md-4">
+            {!! Form::label('free', 'Free Book ?:') !!}
+            {!! Form::hidden('free', 0) !!}
+            {!! Form::checkbox('free', 1, false) !!}
+        </div>
+        <div class="form-group col-md-4 col-lg-4">
+            {!! Form::label('price', trans('word.price') , ['class' => 'control-label']) !!}
+            {!! Form::text('price', null, ['class' => 'price form-control','placeholder'=> trans('word.price') ]) !!}
+        </div>
     </div>
     <div class="form-group col-md-4 col-lg-4">
         {!! Form::label('title_en', 'Title In English', ['class' => 'control-label']) !!}
@@ -49,11 +55,20 @@
         {!! Form::label('title_en', trans('word.categories'), ['class' => 'control-label']) !!}
         {!! Form::select('category_id', $categories ,null, ['class' => 'form-control','style'=>'text-align:left !important;']) !!}
     </div>
-
+    <div class="row">
+    <div class="form-group col-md-6 col-lg-6">
+        {!! Form::label('description_ar',  trans('word.description-ar') , ['class' => 'control-label']) !!}
+        {!! Form::textarea('description_ar', null, ['class' => 'form-control','placeholder'=> trans('word.descrption-ar')]) !!}
+    </div>
+    <div class="form-group col-md-6 col-lg-6">
+        {!! Form::label('description_en',  trans('word.description-en') , ['class' => 'control-label']) !!}
+        {!! Form::textarea('description_en', null, ['class' => 'form-control','placeholder'=> trans('word.descrption-en')]) !!}
+    </div>
+    </div>
 
     <div class="form-group">
         {!! Form::label('body', 'Book Content', ['class' => 'control-label']) !!}
-        {!! Form::textarea('body', null, ['content'=>'text/html; charset=utf-8','class' => 'form-control editor','placeholder'=>'Book Content']) !!}
+        {!! Form::textarea('body', null, ['class' => 'form-control editor','placeholder'=>'Book Content']) !!}
     </div>
 
     <div class="form-group">
@@ -61,5 +76,14 @@
     </div>
 
     {!! Form::close() !!}
-
+    <script>
+        $('form input:checkbox').on('change', function () {
+            if(this.checked) {
+                $('.price').attr('disabled','disabled');
+            }
+            else {
+                $('.price').removeAttr('disabled','disabled');
+            }
+        });
+    </script>
 @stop

@@ -250,6 +250,11 @@ td[align="center"] {
     -ms-transform: rotate(350deg);
 }
 
+.price {
+    color: #008000;
+    border: 1px dotted darkslategray;
+}
+
 .product-list-inline-large .thumbnail .price.price-over {
     /* Use for rotating price (IE9+) */
     -webkit-transform: rotate(355deg);

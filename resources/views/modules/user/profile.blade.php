@@ -6,13 +6,16 @@
 
             <!-- START CONTENT ITEM -->
             <ul class="nav nav-tabs">
-                <li class="active"><a href="#step1" data-toggle="tab"><b>step 1:</b> Books</a></li>
-                <li><a href="#step2" data-toggle="tab"><b>step 2:</b> Published Books</a></li>
-                <li><a href="#step3" data-toggle="tab"><b>step 3:</b> Personal Info</a></li>
+                <li class="active"><a href="#step1" data-toggle="tab"><i class="fa fa-aw fa-book"></i>{{ trans('word.books') }} </a></li>
+                <li><a href="#step2" data-toggle="tab"><i class="fa fa-aw fa-book"></i>{{ trans('word.books-draft') }}</a></li>
+                <li><a href="#step3" data-toggle="tab"><i class="fa fa-aw fa-book"></i>{{ trans('word.books-published') }}</a></li>
+                <li><a href="#step4" data-toggle="tab"><i class="fa fa-aw fa-profile"></i>{{ trans('word.favorite-books') }}</a></li>
+                <li><a href="#step5" data-toggle="tab"><i class="fa fa-aw fa-profile"></i>{{  trans('word.personal-info') }}</a></li>
             </ul>
 
             <div class="tab-content">
 
+                {{--All Books for a user--}}
                 <div class="tab-pane active" id="step1">
                     <div class="row">
                         <div class="col-xs-12 paddingTop10">
@@ -27,56 +30,201 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($books as $book)
-                                    <tr>
-                                        <td class="hidden-xs"><img src="img/product_01.jpg" width="75"></td>
-                                        <td>
-                                            <a href="detail.html"> {!! $book->title !!} </a>
+                                @if($books->count() > 0)
+                                    @foreach($books as $book)
+                                        <tr>
+                                            <td class="hidden-xs"><img src="img/product_01.jpg" width="75"></td>
+                                            <td>
+                                                <a href="{{ route('book.show',$book->id) }}"> {{ $book->__get('title') }} </a>
 
-                                            <p> {!! \Str::limit(strip_tags($book->body)) !!} </p>
-                                        </td>
-                                        <td>
-                                            <span> {{ $book->meta ? $book->meta->total_pages : 'N/A' }} </span>
+                                                <p> {{ Str::limit(strip_tags($book->__get('description'))) }} </p>
+                                            </td>
+                                            <td>
+                                                <span> {{ $book->meta ? $book->meta->total_pages : 'N/A' }} </span>
 
-                                        </td>
-                                        <td>
-                                            <span> {{ $book->status }} </span>
-                                        </td>
-                                        <td>
-                                            <span> {{ $book->updated_at->format('Y-m-d') }} </span>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                            </td>
+                                            <td>
+                                                <span> {{ $book->status }} </span>
+                                            </td>
+                                            <td>
+                                                <span> {{ $book->updated_at->format('Y-m-d') }} </span>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @else
+                                {{ trans('word.no-books-found') }}
+                                @endif
                                 </tbody>
 
                             </table>
 
                         </div>
+                        {{--pagination for all books--}}
+                        {!! $books->render() !!}
                     </div>
                 </div>
+
+                {{--Draft Books for a user--}}
 
                 <div class="tab-pane" id="step2">
                     <div class="row">
                         <div class="col-xs-12 paddingTop10">
-                            Published Books
+                            @if(count($draftBooks) > 0)
+                            <table class="table table-bordered table-order" id="draft">
+                                <thead>
+                                <tr>
+                                    <th class="hidden-xs">&nbsp;</th>
+                                    <th></th>
+                                    <th>Total Pages</th>
+                                    <th>Status</th>
+                                    <th>Last Edited</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($draftBooks as $book)
+                                        <tr>
+                                            <td class="hidden-xs"><img src="img/product_01.jpg" width="75"></td>
+                                            <td>
+                                                <a href="{{ action('BookController@show',$book->id) }}"> {!! $book->title !!} </a>
+
+                                                <p> {!! Str::limit(strip_tags($book->body)) !!} </p>
+                                            </td>
+                                            <td>
+                                                <span> {{ $book->meta ? $book->meta->total_pages : 'N/A' }} </span>
+
+                                            </td>
+                                            <td>
+                                                <span> {{ $book->status }} </span>
+                                            </td>
+                                            <td>
+                                                <span> {{ $book->updated_at->format('Y-m-d') }} </span>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            @else
+                                <div class="alert alert-warning" role="alert">{{ trans('word.no-books-found') }}</div>
+                            @endif
                         </div>
                     </div>
                 </div>
 
+                {{--Published Books for a user--}}
+
                 <div class="tab-pane" id="step3">
                     <div class="row">
                         <div class="col-xs-12 paddingTop10">
-                            Personal Info
+                            @if(count($publishedBooks) > 0)
+                            <table class="table table-bordered table-order">
+                                <thead>
+                                <tr>
+                                    <th class="hidden-xs">&nbsp;</th>
+                                    <th></th>
+                                    <th>Total Pages</th>
+                                    <th>Status</th>
+                                    <th>Last Edited</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($publishedBooks as $book)
+                                        <tr>
+                                            <td class="hidden-xs"><img src="img/product_01.jpg" width="75"></td>
+                                            <td>
+                                                <a href="detail.html"> {!! $book->title !!} </a>
+
+                                                <p> {!! Str::limit(strip_tags($book->body)) !!} </p>
+                                            </td>
+                                            <td>
+                                                <span> {{ $book->meta ? $book->meta->total_pages : 'N/A' }} </span>
+
+                                            </td>
+                                            <td>
+                                                <span> {{ $book->status }} </span>
+                                            </td>
+                                            <td>
+                                                <span> {{ $book->updated_at->format('Y-m-d') }} </span>
+                                            </td>
+                                        </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                            @else
+                                <div class="alert alert-warning" role="alert">{{ trans('word.no-books-found') }}</div>
+                            @endif
                         </div>
                     </div>
                 </div>
+
+
+                {{--Favorite List for a user --}}
+                <div class="tab-pane" id="step4">
+                    <div class="row">
+                        <div class="col-xs-12 paddingTop10">
+                            @if(count($favoriteBooks) > 0)
+                                <table class="table table-bordered table-order" id="draft">
+                                    <thead>
+                                    <tr>
+                                        <th class="hidden-xs">&nbsp;</th>
+                                        <th></th>
+                                        <th>Total Pages</th>
+                                        <th>Status</th>
+                                        <th>Last Edited</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($favoriteBooks as $book)
+                                        <tr>
+                                            <td class="hidden-xs"><img src="img/product_01.jpg" width="75"></td>
+                                            <td>
+                                                <a href="{{ action('BookController@show',$book->id) }}"> {!! $book->title !!} </a>
+
+                                                <p> {!! Str::limit(strip_tags($book->body)) !!} </p>
+                                            </td>
+                                            <td>
+                                                <span> {{ $book->meta ? $book->meta->total_pages : 'N/A' }} </span>
+
+                                            </td>
+                                            <td>
+                                                <span> {{ $book->status }} </span>
+                                            </td>
+                                            <td>
+                                                <span> {{ $book->updated_at->format('Y-m-d') }} </span>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            @else
+                                <div class="alert alert-warning" role="alert">{{ trans('word.no-books-found') }}</div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                {{--Person Information --}}
+
+                <div class="tab-pane" id="step5">
+                    <div class="row">
+                        <div class="col-xs-12 paddingTop10">
+                            <div class="well well-lg">
+
+                                <div>{{ trans('word.name') }} : {{ Auth::user()->__get('name') }}</div>
+                                <div>{{ trans('word.email') }} : {{ Auth::user()->name }}</div>
+                                <div>{{ trans('word.phone') }} : </div>
+                                <div>{{ trans('word.address') }} : </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 
             </div>
 
             <br>
 
         </div>
-        {!! $books->render() !!}
+
 
         <!-- END CONTENT ITEM -->
 

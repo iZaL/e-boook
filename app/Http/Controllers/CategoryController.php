@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Src\Book\BookRepository;
 use App\Src\Category\CategoryRepository;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -9,8 +10,10 @@ class CategoryController extends Controller
 {
 
     public $category;
-    public function __construct(CategoryRepository $category) {
+    public $bookRepository;
+    public function __construct(CategoryRepository $category, BookRepository $bookRepository) {
         $this->category = $category;
+        $this->bookRepository = $bookRepository;
     }
 
     /**
@@ -22,7 +25,8 @@ class CategoryController extends Controller
     {
         //
         $categories = $this->category->getAll();
-        return view('modules.category.index',['categories',$categories]);
+        $books = $this->bookRepository->model->paginate(9);
+        return view('modules.category.index',compact('categories','books'));
     }
 
     /**
@@ -54,6 +58,9 @@ class CategoryController extends Controller
     public function show($id)
     {
         //
+        $categories = $this->category->getAll();
+        $books = $this->bookRepository->model->where('category_id','=',$id)->paginate(9);
+        return view('modules.category.show',compact('categories','books'));
     }
 
     /**

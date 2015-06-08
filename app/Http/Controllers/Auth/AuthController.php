@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers\Auth;
 
+use App\Jobs\AssignSubscriberForNewUser;
 use App\Src\User\User;
 use Validator;
 use App\Http\Controllers\Controller;
@@ -39,8 +40,12 @@ class AuthController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
+            'name_en' => 'required|max:255',
+            'name_ar' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
+            'mobile' => 'numeric',
+            'bank_number' => 'max:255',
+            'bank_name' => 'max:255|alpha',
             'password' => 'required|confirmed|min:6',
         ]);
     }
@@ -53,10 +58,22 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
+
+        $user = User::create([
+            'name_ar' => $data['name_ar'],
+            'name_en' => $data['name_en'],
             'email' => $data['email'],
+            'mobile' => $data['mobile'],
+            'bank_name' => $data['bank_name'],
+            'bank_number' => $data['bank_number'],
+            'active' => '1',
             'password' => bcrypt($data['password']),
         ]);
+        /*
+         * When a user Registration is done . Assign Subscriber Role by Default to a user.
+         * */
+        $job = new AssignSubscriberForNewUser($user->id);
+        $this->dispatch($job);
+        return $user;
     }
 }

@@ -19,6 +19,8 @@ class CreateBooksTable extends Migration {
             $table->integer('category_id');
             $table->text('title_en');
             $table->text('title_ar');
+            $table->text('description_ar');
+            $table->text('description_en');
             $table->text('body');
             $table->text('cover_en');
             $table->text('cover_ar');

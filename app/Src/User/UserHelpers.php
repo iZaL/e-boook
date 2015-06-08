@@ -18,7 +18,30 @@ trait UserHelpers {
     /**
      * @return the first role of a user
      */
-    public function getRole () {
-        return $this->roles()->get()->first();
+    public function getUserRole () {
+        return $this->roles()->get()->first()->name;
     }
+
+    public function isAdmin() {
+        if($this->getUserRole() === 'Admin') {
+            return true;
+        }
+        return false;
+    }
+
+    public function isEditor () {
+        if($this->getUserRole() === 'Editor') {
+            return true;
+        }
+        return false;
+    }
+
+    public function isSubscriber () {
+        if($this->getUserRole() === 'Subscriber') {
+            return true;
+        }
+        return false;
+    }
+
+
 }

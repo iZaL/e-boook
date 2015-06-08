@@ -1,6 +1,8 @@
 <?php namespace App\Providers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -12,6 +14,13 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+       /* View::composer('modules.partials.toolbar', function($view)
+        {
+
+            $view->with('admin', Auth::user()->isAdmin());
+
+            $view->with('editor',Auth::user()->isEditor());
+        });*/
 
     }
 

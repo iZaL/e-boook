@@ -53,6 +53,18 @@
         <script src="/bower_components/colorbox/jquery.colorbox-min.js"></script>
         <script src="/bower_components/respond/dest/respond.min.js"></script>
         <script src="/js/script.js"></script>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES * * */
+            var disqus_shortname = 'ebookapp';
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.type = 'text/javascript';
+                s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+            }());
+        </script>
     @show
 
 </head>
@@ -65,7 +77,7 @@
 
     @include('partials.header')
 
-    @yield('title')
+    <h4>@yield('title')</h4>
 
     @include('partials.notifications')
 
@@ -74,9 +86,9 @@
 
     @include('partials.subfooter')
 
-    @include('partials.footer')
-
 </div>
+
+
 
 </body>
 

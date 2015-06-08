@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class ContactusTableSeeder extends Seeder
+class RoleTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,6 +12,6 @@ class ContactusTableSeeder extends Seeder
     public function run()
     {
         //
-        factory('App\Src\Contactus\Contactus',1)->create();
+        factory('App\Src\Role\Role',3)->create();
     }
 }

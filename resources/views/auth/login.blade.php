@@ -1,13 +1,9 @@
 @extends('layouts.one_col')
 
-@section('style')
-    @parent
-@stop
-
 @section('content')
     <div class="col-md-6 col-md-offset-3">
         <div class="login-panel panel panel-default">
-            <div class="panel-heading"><h3>Please Sign In</h3></div>
+            <div class="panel-heading"><h3>{{ trans('word.login') }}</h3></div>
             <div class="panel-body">
                 <form role="form" method="POST" action="{{ url('/auth/login') }}">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -32,6 +28,7 @@
                         <!-- Change this to a button or input when using this as a form -->
                     </fieldset>
                 </form>
+            </div>
             </div>
         </div>
     </div>

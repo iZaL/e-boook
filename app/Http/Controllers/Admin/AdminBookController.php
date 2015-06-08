@@ -4,10 +4,13 @@
 use App\Events\BookPublished;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Src\Book\BookMeta;
 use App\Src\Category\CategoryRepository;
 use App\Src\Book\BookRepository;
 use App\Http\Requests\CreateBook;
 use App\Src\Book\BookHelpers;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 /**
  * Class AdminBookController
@@ -16,8 +19,9 @@ use App\Src\Book\BookHelpers;
 class AdminBookController extends Controller
 {
 
-    public $category;
-    public $book;
+    public $categoryRepository;
+    public $bookRepository;
+    public $bookMeta;
 
     use BookHelpers;
 
@@ -25,15 +29,16 @@ class AdminBookController extends Controller
      * @param BookRepository $book
      * @param CategoryRepository $category
      */
-    public function __construct(BookRepository $book,CategoryRepository $category)
+    public function __construct(BookRepository $book,CategoryRepository $category, BookMeta $bookMeta)
     {
-        $this->book = $book->model;
-        $this->category = $category->model;
+        $this->bookRepository = $book;
+        $this->categoryRepository = $category;
+        $this->bookMeta = $bookMeta;
+        $this->middleware('App\Http\Middleware\BeforeAdminZone:Admin');
         /*
          * Middleware CreateBook only for Admin and Editor
+         * $this->middleware('before.create.book:Admin,Editor',['only'=>'create','store']);
          * */
-        $this->middleware('before.create.book:Admin,Editor',['only'=>'create','store']);
-
     }
 
     /**
@@ -43,7 +48,7 @@ class AdminBookController extends Controller
      */
     public function index()
     {
-        $books = $this->book->paginate(3);
+        $books = $this->bookRepository->model->paginate(5);
         return view('admin.modules.book.index',['books' => $books]);
     }
 
@@ -56,10 +61,11 @@ class AdminBookController extends Controller
     public function create()
     {
         //
-        $categories = $this->category->all();
+        $categories = $this->categoryRepository->model->all();
         $getLang = App()->getLocale();
         $categories = $categories->lists('name'.'_'.$getLang,'id');
-        return view('admin.modules.book.create',['categories'=>$categories]);
+
+        return view('admin.modules.book.create',compact('categories'));
     }
 
     /**
@@ -75,16 +81,24 @@ class AdminBookController extends Controller
 
         */
 
-        $request->merge(['url' => $this->generateFileName()]);
+        $request->merge(['url' => $this->generateFileName(),'user_id'=> Auth::id()]);
 
-        $book = $this->book->create($request->except('_token'));
-
+        $book = $this->bookRepository->model->create($request->except('_token','price'));
 
         event(new BookPublished($book));
+
+        $price = ($request->input('price')) ? $request->input('price') : '00.0';
+        $this->bookMeta->create([
+            'book_id' => $book->id,
+            'total_pages' => Session::get('total_pages'),
+            'price' => $price,
+        ]);
+
 
         //$book = $this->dispatch(new BookPublished($request));
         if($book) {
             // redirecting user with sucess
+            Session::forget('total_pages');
             return redirect()->back()->with(['success' => trans('word.book-created')]);
         }
         return redirect()->back()->with(['error' => trans('word.book-not-created')]);

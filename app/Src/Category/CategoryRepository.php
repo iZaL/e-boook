@@ -9,10 +9,15 @@ namespace App\Src\Category;
 
 
 use App\Core\AbstractRepository;
+use App\Src\Book\BookRepository;
 
 class CategoryRepository extends AbstractRepository {
 
-    public function __construct(Category $category) {
+    public $bookRepository;
+    public function __construct(Category $category, BookRepository $bookRepository) {
         $this->model = $category;
+        $this->bookRepository = $bookRepository;
     }
+
+
 }

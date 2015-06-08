@@ -33,8 +33,11 @@ class DatabaseSeeder extends Seeder {
             $this->cleanDatabase();
             $this->call('UsersTableSeeder');
             $this->call('BooksTableSeeder');
+            //$this->call('ContactusTableSeeder');
+            $this->call('CategoryTableSeeder');
+//            $this->call('FavoritesTableSeeder');
+            $this->call('BookMetasTableSeeder');
             $this->call('ContactusTableSeeder');
-//            $this->call('CategoryTableSeeder');
 //            $this->call('ShopTableSeeder');
 //            $this->call('BalanceTableSeeder');
 //            $this->call('EmployeeTableSeeder');

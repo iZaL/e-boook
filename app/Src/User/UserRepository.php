@@ -14,6 +14,8 @@ use App\Core\AbstractRepository;
 class UserRepository extends AbstractRepository {
 
 
+
+
     public function __construct(User $user) {
         $this->model = $user;
     }
@@ -24,11 +26,11 @@ class UserRepository extends AbstractRepository {
      * a book belongs to one user
      * @return mixed
      */
-    public function getBooks($id) {
+    public function getFavoritedBooks($id) {
         /**
-         * One To Many Relation
+         * Many To Many Relation = Favorite Relationship
          * a user has many  books
-         * a book belongs to one use
+         * a book belongs to Many users
          */
 
         /*
@@ -42,9 +44,24 @@ class UserRepository extends AbstractRepository {
          *          - $books = $this->userRepository->getBooks($id);
          *
          * */
-        return $this->model->firstOrNew(['id'=>$id])->books()->paginate(3);
+        return $this->model->books()->paginate(10);
     }
 
+    /**
+     * @return all books related to one user - for profile of each user
+     */
+    public function getAllBooksForUser($id) {
+        return $this->model->findOrNew($id)->book()->paginate(10);
+    }
+
+    public function getStatusBooks($id,$status) {
+        return $this->model->firstOrNew(['id'=>$id])->books()->where('books.status','=', $status)->paginate(10);
+    }
+
+    public function getFavoritedBooksForUser($id) {
+        // return all books that has been favorited by a user
+        return $this->model->findOrNew($id)->books()->paginate(10);
+    }
 
 
 }

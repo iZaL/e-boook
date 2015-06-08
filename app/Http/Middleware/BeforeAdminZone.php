@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class BeforeCreateBook
+class BeforeAdminZone
 {
     /**
      * Handle an incoming request.
@@ -13,13 +13,14 @@ class BeforeCreateBook
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next, $admin,$editor)
+    public function handle($request, Closure $next, $admin)
     {
-        if(in_array($request->user()->getRole()->name,[$admin,$editor],true)) {
+        //dd($request->user()->getUserRole());
+        if(in_array($request->user()->getUserRole(),[$admin],true)) {
             return $next($request);
         }
         else {
-            return redirect('/home')->with('errors',trans('word.not-auth'));
+            return redirect('/home')->with(['error' =>trans('word.needs-admin-auth')]);
         }
 
 

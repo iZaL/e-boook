@@ -18,7 +18,7 @@
                     <strong>E-mail</strong>: {{ $contactusInfo->email }}<br>
                 </address>
                 <div class="googlemap">
-                    <iframe width="100%" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/?ie=UTF8&amp;ll=42.065607,-77.189941&amp;spn=15.324445,23.620605&amp;t=m&amp;z=6&amp;output=embed"></iframe>
+                    <img src="/img/logo.png" alt="" class="img-responsive text-center col-lg-3 col-md-3 col-lg-offset-4 col-md-offset-4"/>
                 </div>
                 <!-- END CONTENT ITEM -->
 

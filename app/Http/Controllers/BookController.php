@@ -1,31 +1,42 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use App\Src\Book\BookHelpers;
 use App\Src\Book\BookRepository;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Src\Favorite\FavoriteRepository;
+use App\Src\User\UserRepository;
 
 class BookController extends Controller
 {
 
-    public $book;
-    public function __construct(BookRepository $book)
+
+    public $bookRepository;
+    public $favoriteRepository;
+    public $userRepository;
+    public function __construct(BookRepository $book,FavoriteRepository $favoriteRepository, UserRepository $userRepository)
     {
-        $this->book = $book->model;
+        $this->bookRepository = $book;
+        $this->favoriteRepository = $favoriteRepository;
+        $this->userRepository = $userRepository;
     }
     /**
      * Display a listing of the resource.
      *
      * @return Response
      */
-    public function index()
+    public function index($all ='4')
     {
         //
-        //$user = $this->userRepository->getById($id);
+        $books = $this->bookRepository->model->paginate($all);
 
-        $books = $this->book->paginate(12);
+        //$mostFavoriteBooks = $this->favoriteRepository->getMostFavorited();
+        //dd($mostFavoriteBooks);
+        //$mostFavoriteBooks = $this->userRepository->getFavorites();
 
-        return view('modules.book.index',['books' => $books]);
+
+        //$mostFavorites = $this->favoriteRepository->MostFavorites();
+
+        return view('modules.book.index',compact('books','mostFavoriteBooks'));
     }
 
     /**
@@ -57,8 +68,16 @@ class BookController extends Controller
      */
     public function show($id)
     {
-        //
-        return 'from inside the book show';
+        // get all books by book ID
+        $book = $this->bookRepository->getById($id);
+
+        // get the author of the book
+        $author = $book->user()->first();
+
+        // book info
+        $bookMeta = $book->BookMeta()->first();
+
+        return view('modules.book.show',['book'=> $book,'author'=> $author,'bookMeta' => $bookMeta]);
     }
 
     /**
@@ -92,5 +111,26 @@ class BookController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    public function addFavorite($userId,$bookId) {
+
+        $checkFavorite = $this->favoriteRepository->model->where(['book_id'=> $bookId,'user_id'=>$userId])->get();
+
+        if(count($checkFavorite) <= 0) {
+
+            $favorited = $this->favoriteRepository->model->create([
+                'book_id' => $bookId,
+                'user_id' => $userId
+            ]);
+
+            if ($favorited) {
+                return redirect()->back()->with(['success' => trans('word.book-added-to-favorites')]);
+            }
+
+        }
+
+        return redirect()->back()->with(['error' => trans('word.book-not-added-to-favorites')]);
     }
 }

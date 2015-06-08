@@ -24,6 +24,7 @@ class AdminCategoryController extends Controller
     public function create()
     {
         //
+        return 'this is from the Admin Category Controller @ create Method';
     }
 
     /**

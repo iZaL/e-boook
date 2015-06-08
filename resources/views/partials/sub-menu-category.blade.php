@@ -7,8 +7,10 @@
         <div class="col-xs-12">
             <div class="well well-small">
                 <ul class="nav nav-list">
-                    <li class="nav-header">Brands</li>
-                    <li class="active"><a href="#"><i class="fa fa-fw fa-book"></i> Brand A</a></li>
+                    <li class="nav-header">Books</li>
+                    @foreach($categories as $category)
+                        <li class="active"><a href="{{ action('CategoryController@show',$category->id) }}"><i class="fa fa-fw fa-book"></i> {{ $category->__get('name') }}</a></li>
+                    @endforeach
                 </ul>
             </div>
         </div>

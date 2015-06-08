@@ -1,12 +1,23 @@
 <?php
 
+/***************************************************************************************************
+ * Book
+ ***************************************************************************************************/
 
-Route::get('/home',['as'=>'home','uses'=>'BookController@index']);
+Route::get('/home/{all?}',['as'=>'home','uses'=>'BookController@index']);
 Route::get('/',['as'=>'home','uses'=>'BookController@index']);
+Route::resource('book','BookController',['only'=>['index','show']]);
 
-Route::get('contactus','HomeController@contactus');
 
-//Route::resource('user','UserController');
+/***************************************************************************************************
+ * Contactus
+ ***************************************************************************************************/
+Route::get('/contactus','HomeController@contactus');
+
+
+/***************************************************************************************************
+ * Authentication
+ ***************************************************************************************************/
 Route::controllers([
     'auth' => 'Auth\AuthController',
     'password' => 'Auth\PasswordController',
@@ -24,60 +35,105 @@ Route::controllers([
 
 Route::get('/lang/{lang}',['uses'=>'LanguageController@changeLocale']);
 
-/***************************************************************************************************
- * Book
- ***************************************************************************************************/
-
-Route::resource('book','BookController');
 
 /***************************************************************************************************
  * Category
  ***************************************************************************************************/
 
-Route::resource('category','CategoryController',['only'=>'index','show']);
-
+Route::resource('category','CategoryController',['only'=>['index','show']]);
 
 /***************************************************************************************************
- * Profile
+ *                                          Profile
+ *
  ***************************************************************************************************/
-Route::get('/profile/{id}',['uses'=>'UserController@show']);
-
-
+//Route::get('/profile/{id}/{status?}',['uses'=>'UserController@show']);
 
 
 /***************************************************************************************************
-  *                                          CMS
+  *                                          Users Zone
  *
  ***************************************************************************************************/
 
 
-Route::group(['prefix'=>'admin','middleware'=>'auth'],function () {
+Route::group(['prefix'=>'app'],function () {
 
-    /***************************************************************************************************
-     * Book
-     ***************************************************************************************************/
 
-    Route::get('/','Admin\AdminBookController@index');
 
-    Route::resource('book','Admin\AdminBookController');
+    Route::group(['middleware'=>'auth'],function () {
 
-    /***************************************************************************************************
-     * Category
-     ***************************************************************************************************/
-    Route::resource('category','Admin\AdminCategoryController');
+        // Subscriber Zone here : ONLY AUTH MIDDLEWARE IS REQUIRED
+        /***************************************************************************************************
+         *                                          Profile
+         *
+         ***************************************************************************************************/
+        Route::get('/profile/{id}/{status?}',['uses'=>'UserController@show']);
 
-    /***************************************************************************************************
-     * Contact Us
-     ***************************************************************************************************/
-    Route::get('contactus/edit','Admin\AdminContactUsController@edit');
-    Route::post('contactus','Admin\AdminContactUsController@update');
+        /***************************************************************************************************
+         *                                          Favorite
+         *
+         ***************************************************************************************************/
+        Route::get('/favorite/{user}/{book}',['uses'=>'BookController@addFavorite']);
 
-    /***************************************************************************************************
-     * User
-     ***************************************************************************************************/
-    Route::resource('user','Admin\AdminUserController');
-    Route::get('user/role/{id}','Admin\AdminUserController@getEditUser');
-});
+
+        /***************************************************************************************************
+         *                                          Admin & Editor Zone
+         * an admin can write + read + delete books
+         * an admin can assign roles for other users (Author [write,edit,read] + Subscriber [read])
+         ***************************************************************************************************/
+
+        Route::group(['middleware'=>'admin.zone:Admin'], function () {
+
+            /***************************************************************************************************
+             * Book
+             ***************************************************************************************************/
+
+            Route::get('/','Admin\AdminBookController@index');
+
+            Route::resource('book','Admin\AdminBookController');
+
+            /***************************************************************************************************
+             * Category
+             ***************************************************************************************************/
+            Route::resource('category','Admin\AdminCategoryController',['except'=>'delete']);
+
+            /***************************************************************************************************
+             * Contact Us
+             ***************************************************************************************************/
+            Route::get('contactus/edit','Admin\AdminContactUsController@edit');
+            Route::post('contactus','Admin\AdminContactUsController@update');
+
+            /***************************************************************************************************
+             * User
+             ***************************************************************************************************/
+            Route::resource('user','Admin\AdminUserController');
+            //Route::get('user/role/{id}','Admin\AdminUserController@getEditUser');
+
+        });
+
+        /***************************************************************************************************
+         *                                          Editor Zone
+         *
+         ***************************************************************************************************/
+        // Route::group(['middleware'=>'editor.zone:Editor'], function () {
+
+            /***************************************************************************************************
+             * Book Routes for Editor
+             ***************************************************************************************************/
+
+           // Route::get('/','Admin\AdminBookController@index');
+
+          //  Route::resource('book','Admin\AdminBookController',['except'=>'delete']);
+
+        //}); // end of editor middlware
+
+
+
+    }); // end of auth middlware
+
+
+
+
+}); // end of prefix app
 
 
 
@@ -99,7 +155,7 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function () {
  * 1- Conflict - AbstractRepository with (ModelRepository)
  * when you start working within the controller for example UserController
  * you start your code with the constructor saying $this->user = $userRepository
- * don't i repeat don't use $userRepository->model because of the following
+ * don't i repeat don't use $userRepository->model in the constructor only use it within the methods $this->user->model
  * - the query build must be in one line or one function in the case of return
  * so you have to use within the UserRepository itself $this->model->whatever the query will then return to the controller
  * then in the controller you may use $this->user->then any function within the UserRepository
@@ -117,10 +173,11 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function () {
  * D. from the locale middleware change the app::setLocale with the new value of the session locale
  *
  * 3- Query Builder
- * you have to end up the methods within the Repository or the Model(User) like so :
+ * - you have to end up the methods within the Repository or the Model(User) like so :
  * return $this->get(['body'])->take(2); / $this->where('id','=','1')->get(['body']);
- * within the controller call a method that returns a query
- * then to reach to the value of the element
+ * within the controller call a method that returns a query from the Repository or the model
+ * - you have to assign this value with in the view('whatever',[assign it here]);
+ * then to reach to the value of the element inside the view itself
  * == if single element
  * $this->modelRepository->methodCalled()->body/name/whatever
  * == if array you have to use foreach ()
@@ -129,11 +186,22 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function () {
  * 1- a has Many relation has been made inside the 2 models
  * 2-  inside the Repository
  *     ex. a user has many books - a book belongs to one user
- *     2.1 - you have to create a new method oveer the Eloquant relation inside the repository
+ *     2.1 - you have to create a new method over the Eloquant relation inside the repository
  *     2.2 the query within the method  as the following :
  *        - theModelInstance -> findOrNew -> book Method relation -> get()
+ *        - please notice that you have specified the user through FindOrNew
  *        - inside the controller you can fetch all this as the following
  *          - $books = $this->userRepository->getBooks($id);
+ *          - also note that you can get all relation related to a model as the following :
+ *              in the BookController you wrote $book = $this->bookRepo->model->paginate()
+ *              now you can get the relation between a book and a user as the following :
+ *              $user = $book->user()->first();
+ *
+ * 5- also note the following important point :
+ *  in the controller you made this :
+ *  $book = $this->bookRepo->model->paginate()
+ *  and also you made this in another method
+ *
  *
  * 4- HomeStead
  * a. you have install vagrant with VB
@@ -150,6 +218,13 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function () {
  * 6- {{}} vs {!! !!}}
  * {!! $books->render(); !!} - to echo HTML
  * {{ Auth::user() }} to write php within the blade
+ *
+ *
+ * 7- Middleware
+ * - create a middleware php artisan make:middlesware Whatever
+ * - register the name of the middleware in the kernal
+ * - after doing this --> you assign the middleware to the route or to route::group
+ * - that means that the middleware still didn't work still you have to assign the middleware within each controller (still not sure about this line)
  *
  *
  ***************************************************************************************************/

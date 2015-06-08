@@ -1,6 +1,7 @@
 <?php namespace App\Src\User;
 
 use App\Core\AbstractModel;
+use App\Core\LocaleTrait;
 use App\Src\User\UserHelpers;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -10,7 +11,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 class User extends AbstractModel implements AuthenticatableContract, CanResetPasswordContract
 {
-    use Authenticatable, CanResetPassword, UserHelpers;
+    use Authenticatable, CanResetPassword, UserHelpers, LocaleTrait;
 
     /**
      * The database table used by the model.
@@ -24,7 +25,7 @@ class User extends AbstractModel implements AuthenticatableContract, CanResetPas
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password'];
+    protected $fillable = ['name_ar','name_en','active', 'email', 'password'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -32,6 +33,9 @@ class User extends AbstractModel implements AuthenticatableContract, CanResetPas
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+    protected $localeStrings = ['name'];
+
     /*
      * Relations
      *
@@ -43,13 +47,29 @@ class User extends AbstractModel implements AuthenticatableContract, CanResetPas
         return $this->belongsToMany('App\Src\Role\Role','user_roles');
     }
 
+
     /**
-     * One To Many Relation
-     * a user has many  books
+     * @return all books for specific author
+     * one to many relation
+     * a user has many books
      * a book belongs to one user
+     * TABLE : books
+     */
+    public function book() {
+
+        return $this->hasMany('App\Src\Book\Book','user_id');
+    }
+
+    /**
+     * Many To Many Relation Users + Books = Favorites
+     * a user has many  books
+     * a book belongs to Many
      * @return mixed
+     * Table : book_user
      */
     public function books() {
-        return $this->hasMany('App\Src\Book\Book');
+        return $this->belongsToMany('App\Src\Book\Book','book_user');
     }
+
+
 }
