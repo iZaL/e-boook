@@ -75,7 +75,8 @@ class BookController extends Controller
         $author = $book->user()->first();
 
         // book info
-        $bookMeta = $book->BookMeta()->first();
+        $bookMeta = $book->meta()->first();
+
 
         return view('modules.book.show',['book'=> $book,'author'=> $author,'bookMeta' => $bookMeta]);
     }

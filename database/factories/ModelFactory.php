@@ -17,6 +17,8 @@ $factory->define('App\Src\User\User', function($faker) {
         'name_ar' => 'افضل',
         'email' => 'uusa35@gmail.com',
         'password' => bcrypt('admin'),
+        'bank_number' => $faker->creditCardNumber,
+        'bank_name' => $faker->company,
         'remember_token' => str_random(10),
         'active' => 1
     ];
@@ -45,7 +47,7 @@ $factory->define('App\Src\Contactus\Contactus', function ($faker) {
     return [
         'company' => $faker->company,
         'mobile' => $faker->phoneNumber,
-        'phone' => $faker->phoneNumber,
+        'phone'  => $faker->phoneNumber,
         'address' => $faker->address,
         'zipcode' => $faker->phoneNumber,
         'country' => $faker->country,
@@ -59,22 +61,17 @@ $factory->define('App\Src\Category\Category', function ($faker) {
     ];
 });
 
-//$factory->define('App\Src\Favorite\Favorite', function ($faker) {
-//    return [
-//        'user_id' => 'App\Src\User\User',
-//        'book_id' => 'App\Src\Book\Book'
-//    ];
-//});
 
 $factory->define('App\Src\Book\BookMeta', function ($faker) {
     return [
-        'book_id' => 'App\Src\Book\Book',
+        'book_id' => $faker->numberBetween(1,10),
         'total_pages' => $faker->randomDigit,
         'price' => $faker->randomDigit
     ];
 });
-/*$factor->define('App\Src\Role\Role', function ($faker) {
+
+$factory->define('App\Src\Role\Role', function ($faker) {
     return [
-        'name' => 'admin'
+        'name' => 'Admin'
     ];
-});*/
+});

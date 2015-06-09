@@ -7,7 +7,8 @@ use App\Core\AbstractModel;
 class Role extends AbstractModel
 {
     //
-    protected $fillable = ['user_id','role_id'];
+    protected $table = 'roles';
+    protected $fillable = ['name'];
 
     /*
      * Relations

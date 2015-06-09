@@ -152,7 +152,7 @@ Route::group(['prefix'=>'app'],function () {
 /***************************************************************************************************
  * lessons learnt & hints + Reminders
  *
- * 1- Conflict - AbstractRepository with (ModelRepository)
+ * 1- Conflict - AbstractRepository with (ModelRepository) [Design Pattern]
  * when you start working within the controller for example UserController
  * you start your code with the constructor saying $this->user = $userRepository
  * don't i repeat don't use $userRepository->model in the constructor only use it within the methods $this->user->model
@@ -196,11 +196,14 @@ Route::group(['prefix'=>'app'],function () {
  *              in the BookController you wrote $book = $this->bookRepo->model->paginate()
  *              now you can get the relation between a book and a user as the following :
  *              $user = $book->user()->first();
+ *      2.3 if you reached an instance of a book like so $book = $this->bookRepo->getById($id)
+ *          then you can continue chaining the other relations of the same Model.
  *
  * 5- also note the following important point :
  *  in the controller you made this :
  *  $book = $this->bookRepo->model->paginate()
  *  and also you made this in another method
+ *  $book = $this->bookRepo->customizedMethod()
  *
  *
  * 4- HomeStead
@@ -220,11 +223,31 @@ Route::group(['prefix'=>'app'],function () {
  * {{ Auth::user() }} to write php within the blade
  *
  *
+ *
+ * 7- FORMS HINTS
+ * 7.1 - for select drop down menu you do the following :
+ *      - $categories array should be sent with the view = list(key,$value);
+ *      {!! Form::select('category_id', $categories ,null, ['class' => 'form-control','style'=>'text-align:left !important;']) !!}
+ * 7.2 notice how you used trans() within the inputs
+ *      {!! Form::textarea('description_en', null, ['class' => 'form-control','placeholder'=> trans('word.descrption-en')]) !!}
+ * 7.3 notice how you wrote the whole form
+ *  - Form::open([array includes action/route and post/get/put method],[array includes attributes])
+ *  - <div class="form-group col-md-4 col-lg-4">
+    {!! Form::label('title_en', 'Title In English', ['class' => 'control-label']) !!}
+    {!! Form::text('title_en', null, ['class' => 'form-control','placeholder'=>'Book Title in English']) !!}
+    </div>
+ *
+ *
  * 7- Middleware
  * - create a middleware php artisan make:middlesware Whatever
  * - register the name of the middleware in the kernal
- * - after doing this --> you assign the middleware to the route or to route::group
- * - that means that the middleware still didn't work still you have to assign the middleware within each controller (still not sure about this line)
+ * - after doing this --> you assign the middleware to the route or to route::group() as the following :
+ *  Route::group(['middleware'=>'auth'],function () {
+*      //// code
+            Route::group(['middleware'=>'app.admin.zon:Admin'],function () {});
+ *          /// code
+ * });
+ * - that means that the middleware still didn't work you have to assign the middleware within each controller (still not sure about this line)
  *
  *
  ***************************************************************************************************/

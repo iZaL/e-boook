@@ -1,11 +1,11 @@
 @extends('layouts.one_col')
 
 @section('content')
-
     <!-- START CONTENT ITEM -->
+
     <div class="row">
         <div class="col-xs-9">
-            <h2>Product name</h2>
+            <h2><span class="label label-default">{{ Str::limit($book->__get('title'),20) }}</span></h2>
         </div>
         <div class="col-xs-3">
             <div class="social-icons pull-right">
@@ -27,8 +27,8 @@
         <div class="col-xs-12 col-sm-5 col-md-4">
 
             <!-- START CONTENT ITEM -->
-            <a class="product-detail-lightbox colorbox" rel="colorbox1" href="/img/banner_01.jpg" title="Product A">
-                <img class="product-image img-responsive" alt="Product A" src="/img/banner_01.jpg"></a>
+            <a class="product-detail-lightbox colorbox" rel="colorbox1" href="{{ storage_path('app/cover_'.App::getLocale().'/large/'.$book->__get('cover')) }}" title="Product A">
+                <img class="product-image img-responsive" alt="Product A" src="{{ storage_path('app/cover_'.App::getLocale().'/large/'.$book->__get('cover')) }}"></a>
             <!-- END CONTENT ITEM -->
 
         </div>
@@ -69,6 +69,7 @@
                     <div class="col-xs-12">
                         <h3>{{ trans('word.description') }}</h3>
                         <p>{{ $book->__get('description') }}</p>
+
                     </div>
                 </div>
                 <hr>
@@ -77,7 +78,10 @@
                         <a class="btn btn-block btn-primary"><i class="fa fa-fw fa-indent"></i>  {{ trans('word.order-now') }}</a>
                     </div>
                     <div class="col-xs-12 col-md-4">
-                        <a class="btn btn-block btn-warning {{ (!Auth::user()) ? 'disabled' : '' }}" href="{{ (Auth::user()) ? action('BookController@addFavorite', [Auth::user()->id,$book->id]) : '#' }}"><i class="fa fa-fw fa-star"></i>  {{ trans('word.add-favorite') }}</a>
+                        <a class="btn btn-block btn-danger {{ (!Auth::user()) ? 'disabled' : '' }}" href="{{ (Auth::user()) ? action('BookController@addFavorite', [Auth::user()->id,$book->id]) : '#' }}"><i class="fa fa-fw fa-heart"></i>  {{ trans('word.add-favorite') }}</a>
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                        <a class="btn btn-block btn-default {{ (!Auth::user()) ? 'disabled' : '' }}" href="{{ (Auth::user()) && ($book->free == 0) ? storage_path().'/app/pdfs/'.$book->url  : '#' }}"><i class="fa fa-fw fa-star"></i>  {{ trans('word.book-preview') }}</a>
                     </div>
                     {{--Rating System--}}
 

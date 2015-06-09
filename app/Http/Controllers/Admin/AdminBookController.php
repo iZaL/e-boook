@@ -4,6 +4,7 @@
 use App\Events\BookPublished;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Jobs\CreateBookCover;
 use App\Src\Book\BookMeta;
 use App\Src\Category\CategoryRepository;
 use App\Src\Book\BookRepository;
@@ -32,8 +33,11 @@ class AdminBookController extends Controller
     public function __construct(BookRepository $book,CategoryRepository $category, BookMeta $bookMeta)
     {
         $this->bookRepository = $book;
+
         $this->categoryRepository = $category;
+
         $this->bookMeta = $bookMeta;
+
         $this->middleware('App\Http\Middleware\BeforeAdminZone:Admin');
         /*
          * Middleware CreateBook only for Admin and Editor
@@ -49,6 +53,7 @@ class AdminBookController extends Controller
     public function index()
     {
         $books = $this->bookRepository->model->paginate(5);
+
         return view('admin.modules.book.index',['books' => $books]);
     }
 
@@ -62,7 +67,9 @@ class AdminBookController extends Controller
     {
         //
         $categories = $this->categoryRepository->model->all();
+
         $getLang = App()->getLocale();
+
         $categories = $categories->lists('name'.'_'.$getLang,'id');
 
         return view('admin.modules.book.create',compact('categories'));
@@ -76,29 +83,43 @@ class AdminBookController extends Controller
     public function store(CreateBook $request)
     {
         /*
-
         - Job will handle the Storing the Book in the DB + Firing an event for PDF creation
-
         */
 
         $request->merge(['url' => $this->generateFileName(),'user_id'=> Auth::id()]);
 
-        $book = $this->bookRepository->model->create($request->except('_token','price'));
+        // create a book meta
+        // create a book
+        // create a pdf
+        // create images
+        // pass the book and images to update the book with cover url
 
+        // create a book record
+        $book = $this->bookRepository->model->create($request->except('_token','price','cover_ar','cover_en'));
+
+        // check if the
+        $price = ($request->input('price') > 0) ? $request->input('price') : '00.0';
+
+
+        // create a pdf
         event(new BookPublished($book));
 
-        $price = ($request->input('price')) ? $request->input('price') : '00.0';
+        // create images wit a job
+
+
+        // create meta for a book
         $this->bookMeta->create([
             'book_id' => $book->id,
             'total_pages' => Session::get('total_pages'),
             'price' => $price,
         ]);
 
+        $this->dispatch(new CreateBookCover($book, $request));
 
-        //$book = $this->dispatch(new BookPublished($request));
         if($book) {
-            // redirecting user with sucess
+
             Session::forget('total_pages');
+
             return redirect()->back()->with(['success' => trans('word.book-created')]);
         }
         return redirect()->back()->with(['error' => trans('word.book-not-created')]);

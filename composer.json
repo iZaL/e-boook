@@ -11,7 +11,8 @@
 	  "h4cc/wkhtmltoimage-amd64": "0.12.x",
 	  "knplabs/knp-snappy": "0.3.*@dev",
 	  "setasign/fpdi": "1.5.4",
-	  "setasign/fpdf": "dev-master"
+	  "setasign/fpdf": "dev-master",
+		"intervention/image": "dev-master"
 	},
 	"require-dev": {
 	  "mockery/mockery": "0.9.*",

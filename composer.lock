@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a44970af6cbe0a4b9e74d90e1f6cc34c",
+    "hash": "c84e7560858eb553bcc66d0f4006a110",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -303,6 +303,62 @@
             "time": "2015-01-22 08:01:37"
         },
         {
+            "name": "intervention/image",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Intervention/image.git",
+                "reference": "f388f8cbdecb28e960d257c975dc9b5254c4c7ba"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Intervention/image/zipball/f388f8cbdecb28e960d257c975dc9b5254c4c7ba",
+                "reference": "f388f8cbdecb28e960d257c975dc9b5254c4c7ba",
+                "shasum": ""
+            },
+            "require": {
+                "ext-fileinfo": "*",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9.2",
+                "phpunit/phpunit": "3.*"
+            },
+            "suggest": {
+                "ext-gd": "to use GD library based image processing.",
+                "ext-imagick": "to use Imagick based image processing.",
+                "intervention/imagecache": "Caching extension for the Intervention Image library"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Intervention\\Image\\": "src/Intervention/Image"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Oliver Vogel",
+                    "email": "oliver@olivervogel.net",
+                    "homepage": "http://olivervogel.net/"
+                }
+            ],
+            "description": "Image handling and manipulation library with support for Laravel integration",
+            "homepage": "http://image.intervention.io/",
+            "keywords": [
+                "gd",
+                "image",
+                "imagick",
+                "laravel",
+                "thumbnail",
+                "watermark"
+            ],
+            "time": "2015-06-05 13:31:06"
+        },
+        {
             "name": "jakub-onderka/php-console-color",
             "version": "0.1",
             "source": {
@@ -517,7 +573,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/3c1d7672ec207fbd51f3757182a552f4ddd3836e",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/861358ecb610f3e5b10a0f9f0a0f61b09806439d",
                 "reference": "3c1d7672ec207fbd51f3757182a552f4ddd3836e",
                 "shasum": ""
             },
@@ -2106,7 +2162,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/c0114360dccbd0e7c1ce3d6440e5ceae25807e56",
+                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/3edaea0e8056edde00f7d0af13ed0d406412182d",
                 "reference": "c0114360dccbd0e7c1ce3d6440e5ceae25807e56",
                 "shasum": ""
             },
@@ -2160,7 +2216,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-ide-helper/zipball/89b585b242b598d25a32a36a75df0141323ad30a",
+                "url": "https://api.github.com/repos/barryvdh/laravel-ide-helper/zipball/bb3bba2c5beb6c372dc3c144239ff20f48998bd6",
                 "reference": "89b585b242b598d25a32a36a75df0141323ad30a",
                 "shasum": ""
             },
@@ -3651,6 +3707,7 @@
     "stability-flags": {
         "knplabs/knp-snappy": 20,
         "setasign/fpdf": 20,
+        "intervention/image": 20,
         "barryvdh/laravel-debugbar": 20,
         "barryvdh/laravel-ide-helper": 20,
         "laracasts/generators": 20,

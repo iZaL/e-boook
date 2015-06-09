@@ -26,7 +26,8 @@ class CreateBooksTable extends Migration {
             $table->text('cover_ar');
             $table->text('url');
             $table->boolean('free'); // url or html
-            $table->enum('status',['draft','published'])->default('draft'); // url or html
+            $table->enum('status',['draft','published'])->default('draft');
+            $table->enum('type',['book','poem']);
             $table->bigInteger('views'); // url or html
             $table->timestamps();
             $table->softDeletes();

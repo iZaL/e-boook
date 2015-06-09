@@ -30,7 +30,11 @@ class CreateBook extends Request
             'title_en' => 'required|min:5',
             'title_ar' => 'required|min:5',
             'category_id' => 'required',
-            'body'     => 'required|min:10'
+            'body'     => 'required|min:10',
+            'price'     => 'required|numeric|max:500',
+            'cover_ar' => 'required',
+            'cover_en' => 'required',
+            'type'     => 'required'
         ];
     }
 }

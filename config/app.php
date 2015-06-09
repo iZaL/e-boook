@@ -146,6 +146,7 @@ return [
         'App\Providers\RouteServiceProvider',
         'Barryvdh\Debugbar\ServiceProvider',
         'Collective\Html\HtmlServiceProvider',
+        'Intervention\Image\ImageServiceProvider',
 
     ],
 
@@ -198,6 +199,7 @@ return [
         'Form'      => 'Collective\Html\FormFacade',
         'Html'      => 'Collective\Html\HtmlFacade',
         'Str'       => 'Illuminate\Support\Str',
+        'Image' => 'Intervention\Image\Facades\Image',
 
     ],
 

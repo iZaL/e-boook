@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class CategoryTableSeeder extends Seeder
+class RolesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,6 +12,6 @@ class CategoryTableSeeder extends Seeder
     public function run()
     {
         //
-        factory('App\Src\Category\Category',5)->create();
+        factory('App\Src\Role\Role',3)->create();
     }
 }
