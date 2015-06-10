@@ -33,7 +33,7 @@
                                 @if($books->count() > 0)
                                     @foreach($books as $book)
                                         <tr>
-                                            <td class="hidden-xs"><img src="img/product_01.jpg" width="75"></td>
+                                            <td class="hidden-xs"><img src="{{ storage_path('app/cover_'.App::getLocale().'/thumbnail/'.$book->__get('cover')) }}" alt=""></td>
                                             <td>
                                                 <a href="{{ route('book.show',$book->id) }}"> {{ $book->__get('title') }} </a>
 
@@ -83,7 +83,7 @@
                                 <tbody>
                                     @foreach($draftBooks as $book)
                                         <tr>
-                                            <td class="hidden-xs"><img src="img/product_01.jpg" width="75"></td>
+                                            <td class="hidden-xs"><img src="<img src="{{ storage_path('app/cover_'.App::getLocale().'/thumbnail/'.$book->__get('cover')) }}" alt=""></td>
                                             <td>
                                                 <a href="{{ action('BookController@show',$book->id) }}"> {!! $book->title !!} </a>
 
@@ -129,9 +129,9 @@
                                 <tbody>
                                     @foreach($publishedBooks as $book)
                                         <tr>
-                                            <td class="hidden-xs"><img src="img/product_01.jpg" width="75"></td>
+                                            <td class="hidden-xs"><img src="{{ storage_path('app/cover_'.App::getLocale().'/thumbnail/'.$book->__get('cover')) }}" alt=""></td>
                                             <td>
-                                                <a href="detail.html"> {!! $book->title !!} </a>
+                                                <a href="{{ action('BookController@show'),$book->id }}"> {!! $book->title !!} </a>
 
                                                 <p> {!! Str::limit(strip_tags($book->body)) !!} </p>
                                             </td>
@@ -169,13 +169,13 @@
                                         <th></th>
                                         <th>Total Pages</th>
                                         <th>Status</th>
-                                        <th>Last Edited</th>
+                                        <th>{{ trans('word.remove') }}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     @foreach($favoriteBooks as $book)
                                         <tr>
-                                            <td class="hidden-xs"><img src="img/product_01.jpg" width="75"></td>
+                                            <td class="hidden-xs"><<img src="{{ storage_path('app/cover_'.App::getLocale().'/thumbnail/'.$book->__get('cover')) }}" alt=""></td>
                                             <td>
                                                 <a href="{{ action('BookController@show',$book->id) }}"> {!! $book->title !!} </a>
 
@@ -189,7 +189,7 @@
                                                 <span> {{ $book->status }} </span>
                                             </td>
                                             <td>
-                                                <span> {{ $book->updated_at->format('Y-m-d') }} </span>
+                                                <a class="btn btn-danger" href="{{ action('BookController@removeBookFromUserFavoriteList',[Auth::id(),$book->id]) }}">{{ trans('word.remove') }}</a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -206,13 +206,13 @@
                 <div class="tab-pane" id="step5">
                     <div class="row">
                         <div class="col-xs-12 paddingTop10">
-                            <div class="well well-lg">
 
+                            <div class="well well-lg">
+                                <a class="btn btn-info {{ (App::getLocale('lang') ==='ar') ? 'pull-left' : 'pull-right'  }}" href="{{ action('UserController@edit',Auth::id()) }}">{{ trans('word.edit') }}</a>
                                 <div>{{ trans('word.name') }} : {{ Auth::user()->__get('name') }}</div>
                                 <div>{{ trans('word.email') }} : {{ Auth::user()->name }}</div>
                                 <div>{{ trans('word.phone') }} : </div>
                                 <div>{{ trans('word.address') }} : </div>
-
                             </div>
                         </div>
                     </div>

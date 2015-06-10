@@ -13,7 +13,6 @@
                                     @if(Auth::user()->isAdmin() || Auth::user()->isEditor())
                                         <a href="{{ action('Admin\AdminBookController@index') }}" class="btn btn-primary col-lg-12"><i class="fa fa-user fa-aw"></i>&nbsp;{{ trans('word.admin-panel') }}</a>
                                     @endif
-
                                     <a href="/auth/logout" class="btn btn-danger col-lg-12"><i class="fa fa-sign-out fa-aw"></i>&nbsp;{{ trans('word.logout') }}</a>
                                 </div>
                             @else
@@ -27,12 +26,17 @@
                                           <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
                                         {!! Form::password('password', ['class' => 'form-control','placeholder'=>trans('word.password')]) !!}
                                     </div>
-                                    {!! Form::submit(trans('word.login'), ['class' => 'form-control btn btn-primary']) !!}
 
-                                    <a class="col-md-12 btn btn-danger" href="/auth/register">{{ trans('word.register') }}</a>
+                                        {!! Form::submit(trans('word.login'), ['class' => 'form-control btn btn-primary']) !!}
+
+                                    {!! Form::close() !!}
+
+
 
 
                                     {!! Form::close() !!}
+                                    <a class="col-md-12 btn btn-danger" href="/auth/register">{{ trans('word.register') }}</a>
+                                    <a class="col-md-12 btn btn-danger" href="{{ action('Auth\PasswordController@getEmail') }}">{{ trans('word.reset') }}</a>
 
                                 </div>
                             @endif

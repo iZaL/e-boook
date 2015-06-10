@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Src\Contactus\Contactus;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Input;
 
 class AdminContactUsController extends Controller
@@ -16,6 +17,7 @@ class AdminContactUsController extends Controller
     }
 
     public function edit() {
+        Cache::forget('contactusInfo');
         $contactInfo = $this->contactus->find(1)->first();
         return view('admin.modules.contactus.edit',['contactInfo' => $contactInfo]);
     }

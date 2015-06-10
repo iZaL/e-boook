@@ -25,7 +25,7 @@ class User extends AbstractModel implements AuthenticatableContract, CanResetPas
      *
      * @var array
      */
-    protected $fillable = ['name_ar','name_en','active', 'email', 'password'];
+    protected $fillable = ['name_ar','name_en','active', 'email','mobile','bank_name','bank_number', 'password'];
 
     /**
      * The attributes excluded from the model's JSON form.

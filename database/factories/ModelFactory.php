@@ -51,6 +51,9 @@ $factory->define('App\Src\Contactus\Contactus', function ($faker) {
         'address' => $faker->address,
         'zipcode' => $faker->phoneNumber,
         'country' => $faker->country,
+        'youtube' => $faker->country,
+        'instagram' => $faker->country,
+        'twitter' => $faker->country,
     ];
 });
 

@@ -29,7 +29,7 @@
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         @if($message->all())
         @foreach ($message->all() as $m)
-            <li>{{ $m }}  </li>
+            <li> {{ $m }}  </li>
         @endforeach
         @endif
     </div>

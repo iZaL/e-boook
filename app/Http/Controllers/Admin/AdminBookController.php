@@ -52,7 +52,7 @@ class AdminBookController extends Controller
      */
     public function index()
     {
-        $books = $this->bookRepository->model->paginate(5);
+        $books = $this->bookRepository->model->paginate(15);
 
         return view('admin.modules.book.index',['books' => $books]);
     }

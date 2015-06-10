@@ -40,7 +40,7 @@ class CreateBookCover extends Job implements SelfHandling
      */
     public function handle(Image $cover)
     {
-        $covers = ['name'=>'cover_ar','name'=>'cover_en'];
+        $covers = ['cover_ar','cover_en'];
         foreach($covers as $coverImage) {
             $fileName = $this->request->file($coverImage)->getClientOriginalName();
             $fileName = Str::random(5).''.$fileName;

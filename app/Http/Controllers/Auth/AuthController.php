@@ -45,7 +45,7 @@ class AuthController extends Controller
             'email' => 'required|email|max:255|unique:users',
             'mobile' => 'numeric',
             'bank_number' => 'max:255',
-            'bank_name' => 'max:255|alpha',
+            'bank_name' => 'max:255',
             'password' => 'required|confirmed|min:6',
         ]);
     }
@@ -58,7 +58,6 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-
         $user = User::create([
             'name_ar' => $data['name_ar'],
             'name_en' => $data['name_en'],

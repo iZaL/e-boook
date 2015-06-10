@@ -37,8 +37,8 @@ class HomeController extends Controller {
 	}
 
 	public function contactus() {
-		$contactusInfo = $this->contactus->all()->first();
-		return view('pages.contactus',['contactusInfo'=> $contactusInfo]);
+		//$contactusInfo = $this->contactus->all()->first();
+		return view('pages.contactus');
 	}
 
 }

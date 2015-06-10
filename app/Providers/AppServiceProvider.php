@@ -1,6 +1,8 @@
 <?php namespace App\Providers;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 
@@ -13,14 +15,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
-       /* View::composer('modules.partials.toolbar', function($view)
-        {
+        // create cache from contact us for 20 minutes
+        // this cache will be cleared if the admin only clicked AdminContactUsController@edit
+        $contactusInfo = Cache::remember('contactusInfo', 20, function() {
+            return DB::table('contactus')->first();
+        });
 
-            $view->with('admin', Auth::user()->isAdmin());
+        // share the contact us information all over the views from the cache
+        view()->share('contactusInfo', $contactusInfo);
 
-            $view->with('editor',Auth::user()->isEditor());
-        });*/
+
 
     }
 

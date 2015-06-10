@@ -52,7 +52,7 @@ class UserController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the Profile of a user
      *
      * @param  int  $id
      * @return Response
@@ -82,7 +82,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = $this->userRepository->getById($id);
+        return view('auth.edit',['user' => $user]);
     }
 
     /**
@@ -94,6 +95,7 @@ class UserController extends Controller
     public function update($id)
     {
         //
+
     }
 
     /**
@@ -106,4 +108,5 @@ class UserController extends Controller
     {
         //
     }
+
 }

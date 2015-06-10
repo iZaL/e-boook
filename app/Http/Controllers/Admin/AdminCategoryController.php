@@ -14,6 +14,7 @@ class AdminCategoryController extends Controller
     public function index()
     {
         //
+        return 'this is from index';
     }
 
     /**

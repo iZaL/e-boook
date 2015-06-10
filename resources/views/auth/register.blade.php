@@ -5,9 +5,11 @@
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
 			<div class="panel panel-default">
-				<div class="panel-heading">Register</div>
+				<div class="panel-heading">{{ trans('word.register') }}</div>
 				<div class="panel-body">
-					<div class="alert alert-info" role="alert">{{trans('word.fields-required')}}</div>
+					<div class="alert alert-info" role="alert">{{trans('word.fields-required')}} </br>
+					{{trans('word.bank-info-not-shown')}}
+					</div>
 					<form class="form-horizontal" role="form" method="POST" action="{{ url('/auth/register') }}">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
@@ -22,7 +24,7 @@
 						<div class="form-group">
 							<label class="col-md-4 control-label">{{ trans('word.name_ar') }}*</label>
 							<div class="col-md-6">
-								<input type="text" class="form-control" name="name_ar" value="{{ old('name_er') }}">
+								<input type="text" class="form-control" name="name_ar" value="{{ old('name_ar') }}">
 							</div>
 						</div>
 
@@ -41,7 +43,7 @@
 						<div class="form-group">
 							<label class="col-md-4 control-label">{{ trans('word.bank-number') }}</label>
 							<div class="col-md-6">
-								<input type="text" class="form-control" name="bank_account" value="{{ old('bank_account') }}">
+								<input type="text" class="form-control" name="bank_number" value="{{ old('bank_number') }}">
 							</div>
 						</div>
 						<div class="form-group">

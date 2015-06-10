@@ -27,7 +27,7 @@ class BookController extends Controller
     public function index($all ='4')
     {
         //
-        $books = $this->bookRepository->model->paginate($all);
+        $books = $this->bookRepository->model->with('meta')->paginate($all);
 
         //$mostFavoriteBooks = $this->favoriteRepository->getMostFavorited();
         //dd($mostFavoriteBooks);
@@ -36,7 +36,7 @@ class BookController extends Controller
 
         //$mostFavorites = $this->favoriteRepository->MostFavorites();
 
-        return view('modules.book.index',compact('books','mostFavoriteBooks'));
+        return view('modules.book.index',compact('books','mostFavoriteBooks','bookMeta'));
     }
 
     /**
@@ -133,5 +133,12 @@ class BookController extends Controller
         }
 
         return redirect()->back()->with(['error' => trans('word.book-not-added-to-favorites')]);
+    }
+
+    public function removeBookFromUserFavoriteList($userId,$bookId) {
+
+        $this->favoriteRepository->model->where(['book_id'=> $bookId,'user_id'=>$userId])->delete();
+
+        return redirect()->back();
     }
 }

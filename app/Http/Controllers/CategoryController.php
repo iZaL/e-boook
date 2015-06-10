@@ -25,7 +25,7 @@ class CategoryController extends Controller
     {
         //
         $categories = $this->category->getAll();
-        $books = $this->bookRepository->model->paginate(9);
+        $books = $this->bookRepository->model->with('meta')->paginate(5);
         return view('modules.category.index',compact('categories','books'));
     }
 

@@ -21,6 +21,9 @@ class CreateContactusTable extends Migration
             $table->string('country');
             $table->integer('zipcode');
             $table->string('email');
+            $table->string('youtube');
+            $table->string('instagram');
+            $table->string('twitter');
             $table->timestamps();
         });
     }

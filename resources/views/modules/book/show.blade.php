@@ -62,7 +62,7 @@
                         <strong>{{ trans('word.book-created_at') }}:</strong> <span>{{ $book->created_at->format('d-m-Y') }}</span><br>
                     </div>
                     <div class="col-xs-6 col-sm-7 col-md-5">
-                        <span class="label label-important price">KD {{  (!$book->free) ? $bookMeta->price : trans('word.free') }}</span>
+                        <span class="label label-important price"> {{  (!$book->free) ? 'KD'.$bookMeta->price : trans('word.free') }}</span>
                     </div>
                 </div>
                 <div class="row">

@@ -55,7 +55,7 @@ class UserRepository extends AbstractRepository {
     }
 
     public function getStatusBooks($id,$status) {
-        return $this->model->firstOrNew(['id'=>$id])->books()->where('books.status','=', $status)->paginate(10);
+        return $this->model->firstOrNew(['id'=>$id])->book()->where('books.status','=', $status)->paginate(10);
     }
 
     public function getFavoritedBooksForUser($id) {

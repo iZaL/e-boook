@@ -5,7 +5,6 @@
         @include('forms.contactus')
         <div class="col-xs-12 col-sm-6">
             <div class="well">
-
                 <!-- START CONTENT ITEM -->
                 <address>
                     <strong>{{ $contactusInfo->company }}</strong><br>

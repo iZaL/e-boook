@@ -43,16 +43,24 @@ Route::get('/lang/{lang}',['uses'=>'LanguageController@changeLocale']);
 Route::resource('category','CategoryController',['only'=>['index','show']]);
 
 /***************************************************************************************************
- *                                          Profile
+ *                                          Users
  *
  ***************************************************************************************************/
 //Route::get('/profile/{id}/{status?}',['uses'=>'UserController@show']);
+// Password reset link request routes...
+Route::get('password/email', 'Auth\PasswordController@getEmail');
+Route::post('password/email', 'Auth\PasswordController@postEmail');
+
+// Password reset routes...
+Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
+Route::post('password/reset', 'Auth\PasswordController@postReset');
 
 
 /***************************************************************************************************
   *                                          Users Zone
  *
  ***************************************************************************************************/
+
 
 
 Route::group(['prefix'=>'app'],function () {
@@ -68,11 +76,22 @@ Route::group(['prefix'=>'app'],function () {
          ***************************************************************************************************/
         Route::get('/profile/{id}/{status?}',['uses'=>'UserController@show']);
 
+
         /***************************************************************************************************
          *                                          Favorite
          *
          ***************************************************************************************************/
         Route::get('/favorite/{user}/{book}',['uses'=>'BookController@addFavorite']);
+        Route::get('/favorite/remove/{user}/{book}',['uses'=>'BookController@removeBookFromUserFavoriteList']);
+
+
+        /***************************************************************************************************
+         *                                          Favorite
+         *
+         ***************************************************************************************************/
+        Route::get('user/info/{user}',['uses'=>'UserController@edit']);
+        Route::post('user/info/{user}',['uses'=>'UserController@update']);
+
 
 
         /***************************************************************************************************

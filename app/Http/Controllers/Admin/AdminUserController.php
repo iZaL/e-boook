@@ -24,11 +24,8 @@ class AdminUserController extends Controller
      * */
 
     public function index() {
-        return $allUsers = $this->userRepository->getAll();
-        return view('admin.modules.user.index',['allUsers' => $allUsers]);
+        $users = $this->userRepository->model->with('roles')->paginate(10);
+        return view('admin.modules.user.index',['users' => $users]);
     }
-/*
-    public function getRole($id) {
-        return $this->userRepository->model->getUserRole
-    }*/
+
 }
