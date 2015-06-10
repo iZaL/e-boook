@@ -168,4 +168,10 @@ class AdminBookController extends Controller
     {
         //
     }
+
+    public function getBookByType ($type = 'book') {
+        $books = $this->bookRepository->model->where('type','=',$type)->paginate(15);
+
+        return view('admin.modules.book.index',['books' => $books]);
+    }
 }

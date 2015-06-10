@@ -14,6 +14,8 @@
                 <li><a href="#step3" data-toggle="tab"><i class="fa fa-aw fa-book"></i>{{ trans('word.books-published') }}</a></li>
             </ul>
 
+            {{--All Books--}}
+
             <div class="tab-content">
 
                 <div class="tab-pane active" id="step1">

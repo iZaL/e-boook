@@ -24,7 +24,9 @@ class AdminUserController extends Controller
      * */
 
     public function index() {
-        $users = $this->userRepository->model->with('roles')->paginate(10);
+
+        $users = $this->userRepository->model->with('roles')->where('id','!=','1')->paginate(10);
+
         return view('admin.modules.user.index',['users' => $users]);
     }
 

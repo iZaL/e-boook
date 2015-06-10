@@ -23,6 +23,7 @@
             <!-- START CONTENT ITEM -->
             <div class="row" style="text-align: center">
                 @foreach($books as $book)
+
                     <div class="col-xs-12 col-md-3" style="margin:0px;">
                         <div class=" product-list-inline-small">
                             <div class="thumbnail">

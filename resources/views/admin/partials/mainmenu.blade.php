@@ -1,3 +1,4 @@
+
 <div class="row hidden-print ethiopic">
     <div class="col-xs-12">
 
@@ -21,7 +22,9 @@
                         <a class="dropdown-toggle" data-toggle="dropdown" href="/admin/book"><i class="fa fa-book fa-aw"></i>&nbsp; {{ trans('word.books') }} <b
                                     class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="{{ action('Admin\AdminBookController@index') }}"><i class="fa fa-pencil fa-fw"></i>&nbsp;{{ trans('word.books') }}</a></li>
+                            <li><a href="{{ action('Admin\AdminBookController@index') }}"><i class="fa fa-pencil fa-fw"></i>&nbsp;{{ trans('word.all-book-poem') }}</a></li>
+                            <li><a href="{{ action('Admin\AdminBookController@getBookByType') }}/book"><i class="fa fa-pencil fa-fw"></i>&nbsp;{{ trans('word.book') }}</a></li>
+                            <li><a href="{{ action('Admin\AdminBookController@getBookByType') }}/poem"><i class="fa fa-pencil fa-fw"></i>&nbsp;{{ trans('word.poem') }}</a></li>
                             <li><a href="{{ action('Admin\AdminBookController@create') }}"><i class="fa fa-pencil fa-fw"></i>&nbsp;{{ trans('word.create-book') }} || {{ trans('word.poem') }}</a></li>
                         </ul>
                     </li>

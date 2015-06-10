@@ -43,7 +43,7 @@ Route::get('/lang/{lang}',['uses'=>'LanguageController@changeLocale']);
 Route::resource('category','CategoryController',['only'=>['index','show']]);
 
 /***************************************************************************************************
- *                                          Users
+ *                                          Guests
  *
  ***************************************************************************************************/
 //Route::get('/profile/{id}/{status?}',['uses'=>'UserController@show']);
@@ -103,17 +103,31 @@ Route::group(['prefix'=>'app'],function () {
         Route::group(['middleware'=>'admin.zone:Admin'], function () {
 
             /***************************************************************************************************
+             * User
+             ***************************************************************************************************/
+            Route::resource('user','Admin\AdminUserController');
+            //Route::get('user/role/{id}','Admin\AdminUserController@getEditUser');
+
+
+            /***************************************************************************************************
              * Book
              ***************************************************************************************************/
 
+            // route to fetch books only
             Route::get('/','Admin\AdminBookController@index');
 
-            Route::resource('book','Admin\AdminBookController');
+            // route to fetch peoms only
+            Route::get('/{type?}','Admin\AdminBookController@getBookByType');
+
+            // resource route for book & poem
+            Route::resource('book','Admin\AdminBookController',['except'=>'index']);
+
 
             /***************************************************************************************************
              * Category
              ***************************************************************************************************/
             Route::resource('category','Admin\AdminCategoryController',['except'=>'delete']);
+
 
             /***************************************************************************************************
              * Contact Us
@@ -121,11 +135,6 @@ Route::group(['prefix'=>'app'],function () {
             Route::get('contactus/edit','Admin\AdminContactUsController@edit');
             Route::post('contactus','Admin\AdminContactUsController@update');
 
-            /***************************************************************************************************
-             * User
-             ***************************************************************************************************/
-            Route::resource('user','Admin\AdminUserController');
-            //Route::get('user/role/{id}','Admin\AdminUserController@getEditUser');
 
         });
 
