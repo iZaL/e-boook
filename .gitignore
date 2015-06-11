@@ -3,3 +3,4 @@
 .env
 /template
 /storage/app
+/public/img/cover
