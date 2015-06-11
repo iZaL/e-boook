@@ -69,7 +69,7 @@
                 <div class="tab-pane" id="step2">
                     <div class="row">
                         <div class="col-xs-12 paddingTop10">
-                            @if(count($draftBooks) > 0)
+
                             <table class="table table-bordered table-order" id="draft">
                                 <thead>
                                 <tr>
@@ -81,7 +81,8 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($draftBooks as $book)
+                                    @foreach($books as $book)
+                                        @if($book->status === 'draft')
                                         <tr>
                                             <td class="hidden-xs"><img src="<img src="{{ storage_path('app/cover_'.App::getLocale().'/thumbnail/'.$book->__get('cover')) }}" alt=""></td>
                                             <td>
@@ -100,12 +101,10 @@
                                                 <span> {{ $book->updated_at->format('Y-m-d') }} </span>
                                             </td>
                                         </tr>
+                                        @endif
                                     @endforeach
                                 </tbody>
                             </table>
-                            @else
-                                <div class="alert alert-warning" role="alert">{{ trans('word.no-books-found') }}</div>
-                            @endif
                         </div>
                     </div>
                 </div>
@@ -115,7 +114,6 @@
                 <div class="tab-pane" id="step3">
                     <div class="row">
                         <div class="col-xs-12 paddingTop10">
-                            @if(count($publishedBooks) > 0)
                             <table class="table table-bordered table-order">
                                 <thead>
                                 <tr>
@@ -127,7 +125,8 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($publishedBooks as $book)
+                                    @foreach($books as $book)
+                                        @if($book->status === 'published')
                                         <tr>
                                             <td class="hidden-xs"><img src="{{ storage_path('app/cover_'.App::getLocale().'/thumbnail/'.$book->__get('cover')) }}" alt=""></td>
                                             <td>
@@ -146,12 +145,14 @@
                                                 <span> {{ $book->updated_at->format('Y-m-d') }} </span>
                                             </td>
                                         </tr>
+                                        @endif
                                 @endforeach
+                                        {{--@else
+                                            <div class="alert alert-warning" role="alert">{{ trans('word.no-books-found') }}</div>
+                                        @endif--}}
                                 </tbody>
                             </table>
-                            @else
-                                <div class="alert alert-warning" role="alert">{{ trans('word.no-books-found') }}</div>
-                            @endif
+
                         </div>
                     </div>
                 </div>
@@ -175,7 +176,7 @@
                                     <tbody>
                                     @foreach($favoriteBooks as $book)
                                         <tr>
-                                            <td class="hidden-xs"><<img src="{{ storage_path('app/cover_'.App::getLocale().'/thumbnail/'.$book->__get('cover')) }}" alt=""></td>
+                                            <td class="hidden-xs"><img src="{{ storage_path('app/cover_'.App::getLocale().'/thumbnail/'.$book->__get('cover')) }}" alt=""></td>
                                             <td>
                                                 <a href="{{ action('BookController@show',$book->id) }}"> {!! $book->title !!} </a>
 

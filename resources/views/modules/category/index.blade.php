@@ -32,9 +32,6 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="row product-list-inline-small">
-
-
-
                         <!-- START CONTENT ITEM -->
                         <div class="row" style="text-align: center">
                             @foreach($books as $book)

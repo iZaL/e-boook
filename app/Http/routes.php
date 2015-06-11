@@ -4,8 +4,9 @@
  * Book
  ***************************************************************************************************/
 
-Route::get('/home/{all?}',['as'=>'home','uses'=>'BookController@index']);
+Route::get('/home',['as'=>'home','uses'=>'BookController@index']);
 Route::get('/',['as'=>'home','uses'=>'BookController@index']);
+Route::get('/books',['uses'=>'BookController@getAllBooks']);
 Route::resource('book','BookController',['only'=>['index','show']]);
 
 
@@ -40,7 +41,8 @@ Route::get('/lang/{lang}',['uses'=>'LanguageController@changeLocale']);
  * Category
  ***************************************************************************************************/
 
-Route::resource('category','CategoryController',['only'=>['index','show']]);
+Route::get('category',['uses'=>'CategoryController@index']);
+Route::get('category/{id}',['uses'=>'CategoryController@show']);
 
 /***************************************************************************************************
  *                                          Guests
@@ -109,6 +111,13 @@ Route::group(['prefix'=>'app'],function () {
             //Route::get('user/role/{id}','Admin\AdminUserController@getEditUser');
 
 
+
+            /***************************************************************************************************
+             * Category
+             ***************************************************************************************************/
+            Route::resource('category','Admin\AdminCategoryController',['except'=>'delete']);
+
+
             /***************************************************************************************************
              * Book
              ***************************************************************************************************/
@@ -120,13 +129,7 @@ Route::group(['prefix'=>'app'],function () {
             Route::get('/{type?}','Admin\AdminBookController@getBookByType');
 
             // resource route for book & poem
-            Route::resource('book','Admin\AdminBookController',['except'=>'index']);
-
-
-            /***************************************************************************************************
-             * Category
-             ***************************************************************************************************/
-            Route::resource('category','Admin\AdminCategoryController',['except'=>'delete']);
+            Route::resource('book','Admin\AdminBookController');
 
 
             /***************************************************************************************************

@@ -18,12 +18,12 @@ class AdminContactUsController extends Controller
 
     public function edit() {
         Cache::forget('contactusInfo');
-        $contactInfo = $this->contactus->find(1)->first();
+        $contactInfo = $this->contactus->first();
         return view('admin.modules.contactus.edit',['contactInfo' => $contactInfo]);
     }
 
     public function update(Request $request) {
-        $this->contactus->update(Input::except('_token'));
+        $this->contactus->update($request->input()->except('_token'));
         return redirect()->back()->with('success','Contact Us Information has been updated');
 
     }

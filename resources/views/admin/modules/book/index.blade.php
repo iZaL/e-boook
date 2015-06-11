@@ -9,9 +9,9 @@
 
             <!-- START CONTENT ITEM -->
             <ul class="nav nav-tabs">
-                <li class="active"><a href="#step1" data-toggle="tab"><i class="fa fa-aw fa-book"></i>{{ trans('word.books') }} </a></li>
-                <li><a href="#step2" data-toggle="tab"><i class="fa fa-aw fa-book"></i>{{ trans('word.books-draft') }}</a></li>
-                <li><a href="#step3" data-toggle="tab"><i class="fa fa-aw fa-book"></i>{{ trans('word.books-published') }}</a></li>
+                <li class="active"><a href="#step1" data-toggle="tab"><i class="fa fa-aw fa-book"></i>{{ trans('word.volumes') }} </a></li>
+                <li><a href="#step2" data-toggle="tab"><i class="fa fa-aw fa-book"></i>{{ trans('word.draft') }}</a></li>
+                <li><a href="#step3" data-toggle="tab"><i class="fa fa-aw fa-book"></i>{{ trans('word.published') }}</a></li>
             </ul>
 
             {{--All Books--}}
@@ -23,18 +23,20 @@
                         <div class="col-xs-12 paddingTop10">
                             <table class="table table-bordered table-order">
                                 <thead>
-                                <tr>
+                                <tr class="info">
                                     <th class="hidden-xs">&nbsp;</th>
-                                    <th></th>
-                                    <th>Total Pages</th>
-                                    <th>Status</th>
-                                    <th>Last Edited</th>
+                                    <th>{{ trans('word.name') }}</th>
+                                    <th>{{ trans('word.total-pages') }}</th>
+                                    <th>{{ trans('word.book-type') }}</th>
+                                    <th>{{ trans('word.created-at') }}</th>
+                                    <th>{{ trans('word.edit') }}</th>
+                                    <th>{{ trans('word.delete') }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($books as $book)
                                     <tr>
-                                        <td class="hidden-xs"><img src="{{ storage_path('app/cover_'.App::getLocale().'/thumbnail/'.$book->__get('cover')) }}" alt=""></td>
+                                        <td class="hidden-xs"><img class="img-table img-rounded img-responsive " src="/img/cover/cover_{{App::getLocale()}}/thumbnail/{{$book->__get('cover') }}" alt=""></td>
                                         <td>
                                             <a href="{{ action('BookController@show', $book->id) }}"> {!! $book->title !!} </a>
 
@@ -49,6 +51,18 @@
                                         </td>
                                         <td>
                                             <span> {{ $book->updated_at->format('Y-m-d') }} </span>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-primary" href="{{ action('Admin\AdminBookController@edit',$book->id) }}">{{trans('word.edit')}}</a>
+                                        </td>
+                                        <td>
+                                            {{--Delete Btn with Modal to confirm delete process--}}
+                                            @if($admin)
+                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" href="">
+                                                    {{trans('word.delete')}}
+                                                </button>
+                                                @include('admin.partials._delete_modal')
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
@@ -66,19 +80,19 @@
                         <div class="col-xs-12 paddingTop10">
                             <table class="table table-bordered table-order">
                                 <thead>
-                                <tr>
+                                <tr class="info">
                                     <th class="hidden-xs">&nbsp;</th>
-                                    <th></th>
-                                    <th>Total Pages</th>
-                                    <th>Status</th>
-                                    <th>Last Edited</th>
+                                    <th>{{ trans('word.book-name') }}</th>
+                                    <th>{{ trans('word.total-pages') }}</th>
+                                    <th>{{ trans('word.book-type') }}</th>
+                                    <th>{{ trans('word.created-at') }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($books as $book)
                                     @if($book->status === 'draft')
                                         <tr>
-                                            <td class="hidden-xs"><img src="{{ storage_path('app/cover_'.App::getLocale().'/thumbnail/'.$book->__get('cover')) }}" alt=""></td>
+                                            <td class="hidden-xs"><img class="img-table img-rounded img-responsive " src="/img/cover/cover_{{App::getLocale()}}/thumbnail/{{$book->__get('cover') }}" alt=""></td>
                                             <td>
                                                 <a href="{{ action('BookController@show', $book->id) }}"> {!! $book->title !!} </a>
 
@@ -109,19 +123,19 @@
                         <div class="col-xs-12 paddingTop10">
                             <table class="table table-bordered table-order">
                                 <thead>
-                                <tr>
+                                <tr class="info">
                                     <th class="hidden-xs">&nbsp;</th>
-                                    <th></th>
-                                    <th>Total Pages</th>
-                                    <th>Status</th>
-                                    <th>Last Edited</th>
+                                    <th>{{ trans('word.book-name') }}</th>
+                                    <th>{{ trans('word.total-pages') }}</th>
+                                    <th>{{ trans('word.book-type') }}</th>
+                                    <th>{{ trans('word.created-at') }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($books as $book)
                                     @if($book->status === 'published')
                                         <tr>
-                                            <td class="hidden-xs"><img src="{{ storage_path('app/cover_'.App::getLocale().'/thumbnail/'.$book->__get('cover')) }}" alt=""></td>
+                                            <td class="hidden-xs"><img class="img-table img-rounded img-responsive " src="/img/cover/cover_{{App::getLocale()}}/thumbnail/{{$book->__get('cover') }}" alt=""></td>
                                             <td>
                                                 <a href="{{ action('BookController@show', $book->id) }}"> {!! $book->title !!} </a>
 
@@ -158,8 +172,5 @@
         <!-- END CONTENT ITEM -->
 
     </div>
-
-@stop
-
 
 @stop

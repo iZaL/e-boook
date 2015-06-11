@@ -51,7 +51,7 @@ class UserRepository extends AbstractRepository {
      * @return all books related to one user - for profile of each user
      */
     public function getAllBooksForUser($id) {
-        return $this->model->findOrNew($id)->book()->paginate(10);
+        return $this->model->findOrNew($id)->book()->with('meta')->paginate(10);
     }
 
     public function getStatusBooks($id,$status) {
@@ -60,7 +60,7 @@ class UserRepository extends AbstractRepository {
 
     public function getFavoritedBooksForUser($id) {
         // return all books that has been favorited by a user
-        return $this->model->findOrNew($id)->books()->paginate(10);
+        return $this->model->findOrNew($id)->books()->with('meta')->paginate(10);
     }
 
 

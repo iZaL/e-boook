@@ -12,7 +12,8 @@
 	  "knplabs/knp-snappy": "0.3.*@dev",
 	  "setasign/fpdi": "1.5.4",
 	  "setasign/fpdf": "dev-master",
-		"intervention/image": "dev-master"
+	  "intervention/image": "dev-master",
+	  "guzzlehttp/guzzle": "~5.3|~6.0"
 	},
 	"require-dev": {
 	  "mockery/mockery": "0.9.*",

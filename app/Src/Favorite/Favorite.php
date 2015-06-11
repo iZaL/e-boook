@@ -23,7 +23,7 @@ class Favorite extends Model
         ->select('user_id','book_id',DB::raw('count(book_id) as book_count'))
         ->groupBy('book_id')
         ->orderBy('book_id','desc')
-        ->take(5)->get();
+        ->take(4)->get();
         return $books;
     }
 

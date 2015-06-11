@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers\Admin;
 
 
+use App\Core\LocaleTrait;
 use App\Events\BookPublished;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -24,21 +25,23 @@ class AdminBookController extends Controller
     public $bookRepository;
     public $bookMeta;
 
-    use BookHelpers;
+    use BookHelpers, LocaleTrait;
+
+    protected $localeStrings = ['name_ar','name_en'];
 
     /**
      * @param BookRepository $book
      * @param CategoryRepository $category
      */
-    public function __construct(BookRepository $book,CategoryRepository $category, BookMeta $bookMeta)
+    public function __construct(BookRepository $book,CategoryRepository $categoryRepository, BookMeta $bookMeta)
     {
         $this->bookRepository = $book;
 
-        $this->categoryRepository = $category;
+        $this->categoryRepository = $categoryRepository;
 
         $this->bookMeta = $bookMeta;
 
-        $this->middleware('App\Http\Middleware\BeforeAdminZone:Admin');
+        //$this->middleware('App\Http\Middleware\BeforeAdminZone:Admin');
         /*
          * Middleware CreateBook only for Admin and Editor
          * $this->middleware('before.create.book:Admin,Editor',['only'=>'create','store']);
@@ -52,7 +55,7 @@ class AdminBookController extends Controller
      */
     public function index()
     {
-        $books = $this->bookRepository->model->paginate(15);
+        $books = $this->bookRepository->model->with('meta')->paginate(15);
 
         return view('admin.modules.book.index',['books' => $books]);
     }
@@ -66,13 +69,14 @@ class AdminBookController extends Controller
     public function create()
     {
         //
-        $categories = $this->categoryRepository->model->all();
+        $categories = $this->categoryRepository->model->first();
 
         $getLang = App()->getLocale();
 
-        $categories = $categories->lists('name'.'_'.$getLang,'id');
+        $categories = $categories->lists('name_'.$getLang,'id');
 
-        return view('admin.modules.book.create',compact('categories'));
+
+        return view('admin.modules.book.create',['categories'=> $categories]);
     }
 
     /**
@@ -166,12 +170,13 @@ class AdminBookController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return 'from inside the destroy method';
     }
 
     public function getBookByType ($type = 'book') {
-        $books = $this->bookRepository->model->where('type','=',$type)->paginate(15);
+        $books = $this->bookRepository->model->where('type','=',$type)->with('meta')->paginate(15);
+        $admin = Auth::user()->isAdmin();
 
-        return view('admin.modules.book.index',['books' => $books]);
+        return view('admin.modules.book.index',['books' => $books,'admin'=> $admin]);
     }
 }

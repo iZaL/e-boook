@@ -3,9 +3,18 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateCategory;
+use App\Src\Category\CategoryRepository;
+use Illuminate\Http\Request;
 
 class AdminCategoryController extends Controller
 {
+    public $categoryRepository;
+
+    public function __construct (CategoryRepository $categoryRepository) {
+        $this->categoryRepository = $categoryRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,8 +22,8 @@ class AdminCategoryController extends Controller
      */
     public function index()
     {
-        //
-        return 'this is from index';
+        $categories = $this->categoryRepository->getAll();
+        return view('admin.modules.category.index',['categories'=>$categories]);
     }
 
     /**
@@ -25,7 +34,7 @@ class AdminCategoryController extends Controller
     public function create()
     {
         //
-        return 'this is from the Admin Category Controller @ create Method';
+        return view('admin.modules.category.create');
     }
 
     /**
@@ -33,9 +42,10 @@ class AdminCategoryController extends Controller
      *
      * @return Response
      */
-    public function store()
+    public function store(CreateCategory $request)
     {
-        //
+        $this->categoryRepository->model->create($request->except('_token'));
+        return redirect()->back()->with('success' , trans('word.create-success-category'));
     }
 
     /**
@@ -57,7 +67,8 @@ class AdminCategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = $this->categoryRepository->getById($id);
+        return view('admin.modules.category.edit',['category'=>$category]);
     }
 
     /**
@@ -66,9 +77,13 @@ class AdminCategoryController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
+    public function update($id,Request $request)
     {
-        //
+        $this->categoryRepository->model->where('id','=',$id)->update([
+            'name_ar' => $request->input('name_ar'),
+            'name_en' => $request->input('name_en')
+        ]);
+        return redirect()->back()->with('success',trans('word.create-category-success'));
     }
 
     /**

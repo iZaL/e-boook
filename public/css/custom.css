@@ -12,3 +12,7 @@
 .navbar .nav > li > .dropdown-menu {
     width: 289px;
 }
+.img-table {
+    width: 25px;
+    height: auto;
+}

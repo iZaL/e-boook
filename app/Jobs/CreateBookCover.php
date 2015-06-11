@@ -45,8 +45,8 @@ class CreateBookCover extends Job implements SelfHandling
             $fileName = $this->request->file($coverImage)->getClientOriginalName();
             $fileName = Str::random(5).''.$fileName;
             $realPath = $this->request->file($coverImage)->getRealPath();
-            $cover->make($realPath)->resize('150','225')->save(storage_path('app/'.$coverImage.'/thumbnail/'.$fileName));
-            $cover->make($realPath)->resize('400','600')->save(storage_path('app/'.$coverImage.'/large/'.$fileName));
+            $cover->make($realPath)->resize('150','225')->save(public_path('img/cover/'.$coverImage.'/thumbnail/'.$fileName));
+            $cover->make($realPath)->resize('400','600')->save(public_path('img/cover/'.$coverImage.'/large/'.$fileName));
             $this->book->where('id','=',$this->book->id)->update([$coverImage => $fileName]);
             $this->book->save();
         }

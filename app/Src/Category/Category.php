@@ -6,8 +6,13 @@ use App\Core\LocaleTrait;
 class Category extends AbstractModel
 {
     //
-    use LocaleTrait;
+
+    public $table = 'categories';
+
+    protected $fillable = ['name_ar','name_en'];
 
     protected $localeStrings = ['name'];
+
+    use LocaleTrait;
 
 }

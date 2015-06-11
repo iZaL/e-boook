@@ -24,13 +24,12 @@ class BookController extends Controller
      *
      * @return Response
      */
-    public function index($all ='4')
+    public function index($all = '4')
     {
-        //
         $books = $this->bookRepository->model->with('meta')->paginate($all);
 
-        //$mostFavoriteBooks = $this->favoriteRepository->getMostFavorited();
-        //dd($mostFavoriteBooks);
+        $mostFavoriteBooks = $this->favoriteRepository->getMostFavorited();
+
         //$mostFavoriteBooks = $this->userRepository->getFavorites();
 
 
@@ -140,5 +139,11 @@ class BookController extends Controller
         $this->favoriteRepository->model->where(['book_id'=> $bookId,'user_id'=>$userId])->delete();
 
         return redirect()->back();
+    }
+
+    public function getAllBooks() {
+        $books = $this->bookRepository->model->with('meta')->paginate(10);
+        $render = true;
+        return view('modules.book.index',compact('books','render'));
     }
 }

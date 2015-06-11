@@ -13,10 +13,11 @@ use App\Src\Book\BookRepository;
 
 class CategoryRepository extends AbstractRepository {
 
-    public $bookRepository;
-    public function __construct(Category $category, BookRepository $bookRepository) {
+    public $category;
+
+    public function __construct(Category $category) {
+
         $this->model = $category;
-        $this->bookRepository = $bookRepository;
     }
 
 

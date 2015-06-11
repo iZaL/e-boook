@@ -22,10 +22,9 @@ elixir(function (mix)
 
  mix.scripts([
   'sass/bootstrap/javascripts/jquery.js',
-
   'sass/bootstrap/javascripts/bootstrap.min.js',
-  'sass/bootstrap/javascripts/bootstrap/',
-  //'resources/assets/sass/vendor/bootstrap/javascripts/bootstrap-timepicker.min.js',
+  //'sass/bootstrap/javascripts/bootstrap/',
+  // 'resources/assets/sass/vendor/bootstrap/javascripts/bootstrap-timepicker.min.js',
   //'app.js',
  ], 'public/js/app.js','resources/assets/','./');
  mix.version([

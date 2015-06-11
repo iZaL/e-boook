@@ -12,11 +12,11 @@
 
                                     <a href="{{ action('UserController@show',Auth::id()) }}" class="btn btn-primary col-lg-12"><i class="fa fa-user fa-aw"></i>&nbsp;{{ trans('word.profile') }}</a>
 
-                                    @if(Auth::user()->isAdmin() || Auth::user()->isEditor())
+                                    {{--@if(Auth::user()->isAdmin() || Auth::user()->isEditor())--}}
 
                                         <a href="{{ action('Admin\AdminBookController@index') }}" class="btn btn-primary col-lg-12"><i class="fa fa-user fa-aw"></i>&nbsp;{{ trans('word.admin-panel') }}</a>
 
-                                    @endif
+                                    {{--@endif--}}
 
                                     <a href="/auth/logout" class="btn btn-danger col-lg-12"><i class="fa fa-sign-out fa-aw"></i>&nbsp;{{ trans('word.logout') }}</a>
                                 </div>

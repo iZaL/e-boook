@@ -27,13 +27,12 @@ class FavoriteRepository extends AbstractRepository{
      * @return most favorite books from all users
      */
     public function getMostFavorited() {
-        dd($this->model->MostFavorited());
         return ($this->generateGetMostFavorited($this->model->MostFavorited()));
     }
 
     public function generateGetMostFavorited($mostFavorites) {
         $mostFavoriteArray = [];
-        for($i=0;$i <=4 ;$i++) {
+        for($i=0;$i <=3 ;$i++) {
             $mostFavoriteArray = array_add($mostFavoriteArray,$i,$this->bookRepository->model->where('id','=',$mostFavorites[$i]->book_id)->first());
         }
         return $mostFavoriteArray;
