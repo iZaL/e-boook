@@ -23,14 +23,7 @@ class CreateBookCover extends Job implements SelfHandling
         $this->book = $book;
         $this->request = $request;
         // good size is 600 * 400
-        /*
-        $filename = $image->getClientOriginalName();
-        $filename = Str::random(5).''.$filename;
-        $realpath = $image->getRealPath();
-        $imgThumbnail = Image::make($realpath)->resize('200','200')->save(public_path('uploads/thumbnail/'.$filename));
-        $imageLarge = Image::make($realpath)->resize('500','500')->save(public_path('uploads/large/'.$filename));
-        $createdPost->photos()->create(['path'=>$filename]);
-        */
+
     }
 
     /**
@@ -40,7 +33,17 @@ class CreateBookCover extends Job implements SelfHandling
      */
     public function handle(Image $cover)
     {
-        $covers = ['cover_ar','cover_en'];
+        // check the array of covers for cover_ar and cover_en
+        // creating array
+        // creating the covers
+        $covers = [];
+        if(!is_null($this->request->file('cover_ar'))) {
+            $covers = array_add($covers,0,'cover_ar');
+        }
+        if(!is_null($this->request->file('cover_en'))) {
+            $covers = array_add($covers,0,'cover_en');
+        }
+        //$covers = ['cover_ar','cover_en'];
         foreach($covers as $coverImage) {
             $fileName = $this->request->file($coverImage)->getClientOriginalName();
             $fileName = Str::random(5).''.$fileName;

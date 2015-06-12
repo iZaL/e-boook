@@ -54,14 +54,25 @@ class UserRepository extends AbstractRepository {
         return $this->model->findOrNew($id)->book()->with('meta')->paginate(10);
     }
 
+    /**
+     * @param $id
+     * @param $status
+     * @return all books that has type book or poem / admin control panel
+     */
     public function getStatusBooks($id,$status) {
         return $this->model->firstOrNew(['id'=>$id])->book()->where('books.status','=', $status)->paginate(10);
     }
 
+    /**
+     * @param $id
+     * @return return all books that has been favorited by a user / profile
+     */
     public function getFavoritedBooksForUser($id) {
-        // return all books that has been favorited by a user
         return $this->model->findOrNew($id)->books()->with('meta')->paginate(10);
     }
 
+    public function getActiveStatusForUser($id) {
+        return $this->model->findOrNew($id)->first();
+    }
 
 }

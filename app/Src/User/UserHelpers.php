@@ -43,5 +43,12 @@ trait UserHelpers {
         return false;
     }
 
+    public function isActive () {
+        if($this->getActiveStatusForUser()->active === 1) {
+            return true;
+        }
+        return false;
+    }
+
 
 }

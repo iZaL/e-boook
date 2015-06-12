@@ -4,15 +4,14 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-
-class CreateBook extends Request
+class EditBook extends Request
 {
+
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-
     public function authorize()
     {
         return true;
@@ -31,8 +30,8 @@ class CreateBook extends Request
             'category_id' => 'required',
             'body'     => 'required|min:10',
             'price'     => 'required|numeric|max:500',
-            'cover_ar' => 'required',
-            'cover_en' => 'required',
+            'cover_ar' => 'mimes:jpeg,bmp,png',
+            'cover_en' => 'mimes:jpeg,bmp,png',
             'type'     => 'required'
         ];
     }

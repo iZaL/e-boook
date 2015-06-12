@@ -26,7 +26,8 @@ class BookController extends Controller
      */
     public function index($all = '4')
     {
-        $books = $this->bookRepository->model->with('meta')->paginate($all);
+        $books = $this->bookRepository->model->with('meta')->orderBy('created_at','desc')->paginate($all);
+
 
         $mostFavoriteBooks = $this->favoriteRepository->getMostFavorited();
 
@@ -141,8 +142,9 @@ class BookController extends Controller
         return redirect()->back();
     }
 
+
     public function getAllBooks() {
-        $books = $this->bookRepository->model->with('meta')->paginate(10);
+        $books = $this->bookRepository->model->with('meta')->orderBy('created_at','desc')->paginate(10);
         $render = true;
         return view('modules.book.index',compact('books','render'));
     }

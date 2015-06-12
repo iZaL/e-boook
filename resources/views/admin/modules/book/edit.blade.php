@@ -30,9 +30,17 @@
 
 @section('content')
 
-    {!! Form::open(['action' => 'Admin\AdminBookController@store', 'method' => 'post','files'=>'true'], ['class'=>'form-horizontal']) !!}
-
+    {!! Form::model($book,['action' => 'Admin\AdminBookController@update', 'method' => 'PATCH','files'=>'true'], ['class'=>'form-horizontal']) !!}
+        {!! Form::hidden('id',$book->id)!!}
     <div class="row">
+        <div class="row page-header">
+            <div class="col-lg-2 col-md-2 col-lg-offset-4">
+                <img class="img-thumbnail img-responsive " src="/img/cover/cover_ar/thumbnail/{{$book->cover_ar }}" alt="">
+            </div>
+            <div class="col-lg-2 col-md-2 ">
+                <img class="img-thumbnail img-responsive " src="/img/cover/cover_en/thumbnail/{{$book->cover_en }}" alt="">
+            </div>
+        </div>
         <div class="form-group col-lg-4 col-md-4">
             {!! Form::label('free', trans('word.free-book'))  !!}
             {!! Form::hidden('free', 0) !!}
@@ -41,7 +49,6 @@
             {!! Form::radio('type', 'book',true) !!}
             {!! Form::label('type', trans('word.preview-as-poem'))!!}
             {!! Form::radio('type', 'poem', false) !!}
-
         </div>
         <div class="form-group col-md-2 col-lg-2">
             {!! Form::hidden('price',0) !!}

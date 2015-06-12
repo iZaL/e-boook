@@ -13,6 +13,7 @@ use App\Http\Requests\CreateBook;
 use App\Src\Book\BookHelpers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class AdminBookController
@@ -55,7 +56,7 @@ class AdminBookController extends Controller
      */
     public function index()
     {
-        $books = $this->bookRepository->model->with('meta')->paginate(15);
+        $books = $this->bookRepository->model->with('meta')->orderBy('created_at','ASC')->paginate(15);
 
         return view('admin.modules.book.index',['books' => $books]);
     }
@@ -68,13 +69,11 @@ class AdminBookController extends Controller
      */
     public function create()
     {
-        //
         $categories = $this->categoryRepository->model->first();
 
         $getLang = App()->getLocale();
 
         $categories = $categories->lists('name_'.$getLang,'id');
-
 
         return view('admin.modules.book.create',['categories'=> $categories]);
     }
@@ -148,7 +147,16 @@ class AdminBookController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        $book = $this->bookRepository->model->where('id','=',$id)->with('meta')->first();
+
+        $getLang = App()->getLocale();
+
+        $categories = $this->categoryRepository->model->first();
+
+        $categories = $categories->lists('name_'.$getLang,'id');
+
+        return view('admin.modules.book.edit',['book'=>$book,'categories'=>$categories]);
     }
 
     /**
@@ -157,9 +165,60 @@ class AdminBookController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
+    public function update(Requests\EditBook $request)
     {
-        //
+
+        /*
+         * check if new covers
+         * get all data in the request
+         * create new covers if added
+         * create new pdf file
+         * get the url of the new file and add to the request
+         *
+         * */
+        $cover_ar = ($request->file('cover_ar')) ? $request->file('cover_ar') : '' ;
+
+        $cover_en = ($request->file('cover_en')) ? $request->file('cover_en') : '' ;
+
+        $id = $request->input('id');
+
+        // check if cover_ar changed
+        if(is_null($cover_ar)) {
+           $request->except('cover_ar');
+        }
+
+        // check if the cover_en changed
+        if(is_null($cover_en)) {
+            $request->except('cover_en');
+        }
+
+        $request->merge(['url' => $this->generateFileName()]);
+
+        $price = ($request->input('price') > 0) ? $request->input('price') : '00.0';
+
+        // update the book table
+        $this->bookRepository->model->where('id','=',$id)->update($request->except('_token','_method','price','total_pages'));
+
+        $book = $this->bookRepository->model->where('id','=',$id)->first();
+
+        if($book) {
+
+            event(new BookPublished($book));
+
+            $this->dispatch(new CreateBookCover($book, $request));
+
+            $total_pages = Session::get('total_pages');
+
+
+            // update the book_metas table
+            $this->bookMeta->where('book_id','=',$book->id)->update([
+                'price' => $price,
+                'total_pages' => $total_pages
+            ]);
+
+            return redirect()->back()->with('success',trans('word.success-update'));
+        }
+        return redirect()->back()->with('success',trans('word.error-update'));
     }
 
     /**
@@ -170,11 +229,16 @@ class AdminBookController extends Controller
      */
     public function destroy($id)
     {
-        return 'from inside the destroy method';
+        if($this->bookRepository->getById($id)->delete()) {
+
+            return redirect()->back()->with('success',trans('word.success-delete'));
+        }
+
+        return redirect()->back()->with('success',trans('word.error-delete'));
     }
 
     public function getBookByType ($type = 'book') {
-        $books = $this->bookRepository->model->where('type','=',$type)->with('meta')->paginate(15);
+        $books = $this->bookRepository->model->where('type','=',$type)->with('meta')->orderBy('created_at','desc')->paginate(15);
         $admin = Auth::user()->isAdmin();
 
         return view('admin.modules.book.index',['books' => $books,'admin'=> $admin]);

@@ -50,7 +50,7 @@
                                             <span> {{ $book->status }} </span>
                                         </td>
                                         <td>
-                                            <span> {{ $book->updated_at->format('Y-m-d') }} </span>
+                                            <span> {{ $book->created_at->format('Y-m-d') }} </span>
                                         </td>
                                         <td>
                                             <a class="btn btn-primary" href="{{ action('Admin\AdminBookController@edit',$book->id) }}">{{trans('word.edit')}}</a>
@@ -106,7 +106,7 @@
                                                 <span> {{ $book->status }} </span>
                                             </td>
                                             <td>
-                                                <span> {{ $book->updated_at->format('Y-m-d') }} </span>
+                                                <span> {{ $book->created_at->format('Y-m-d') }} </span>
                                             </td>
                                         </tr>
                                     @endif
@@ -149,7 +149,7 @@
                                                 <span> {{ $book->status }} </span>
                                             </td>
                                             <td>
-                                                <span> {{ $book->updated_at->format('Y-m-d') }} </span>
+                                                <span> {{ $book->created_at->format('Y-m-d') }} </span>
                                             </td>
                                         </tr>
                                     @endif
