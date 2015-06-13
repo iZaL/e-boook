@@ -27,7 +27,7 @@
             </div>
             <!-- END CONTENT ITEM -->
 
-            <img src="/img/banner_top.jpg" alt="No shipping" class="img-responsive">
+{{--            <img src="/img/banner_top.jpg" alt="No shipping" class="img-responsive">--}}
 
         </div>
     </div>

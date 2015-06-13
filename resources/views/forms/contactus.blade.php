@@ -1,7 +1,8 @@
     <div class="col-xs-12 col-sm-6">
 
                 <!-- START CONTENT ITEM -->
-                <form class="form-horizontal">
+
+                {!! Form::open(['action'=>'HomeController@sendContactUs','method'=>'post'],['class'=>'form-horizontal']) !!}
                     <fieldset>
                         <div class="form-group">
                             <label class="col-xs-12 col-sm-4 control-label" for="field_01">{{ trans('word.name') }}</label>
@@ -42,7 +43,7 @@
                             <button class="btn btn-primary">{{ trans('word.send') }} <i class="icon-chevron-right icon-white"></i> </button>
                         </div>
                     </fieldset>
-                </form>
+                {!! Form::close() !!}
                 <!-- END CONTENT ITEM -->
 
             </div>

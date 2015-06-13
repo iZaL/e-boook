@@ -1,11 +1,15 @@
 @extends('admin.layouts.one_col')
 
-@section('title')
-    <h3>{{ trans('word.contactus') }}</h3>
-@stop
-
 @section('content')
-
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h3>{{ trans('word.contactus') }}</h3>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
     {!! Form::model($contactInfo, ['action' => ['Admin\AdminContactUsController@update'], 'method' => 'post'], ['class'=>'form-horizontal']) !!}
 
     <div class="form-group col-md-4 col-lg-4">
@@ -59,5 +63,7 @@
     </div>
 
     {!! Form::close() !!}
+    </div>
+</div>
 
 @stop

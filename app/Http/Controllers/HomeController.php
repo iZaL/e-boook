@@ -1,6 +1,8 @@
 <?php namespace App\Http\Controllers;
 
 use App\Src\Contactus\Contactus;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller {
 
@@ -39,6 +41,23 @@ class HomeController extends Controller {
 	public function contactus() {
 		//$contactusInfo = $this->contactus->all()->first();
 		return view('pages.contactus');
+	}
+
+	public function sendContactUs(Request $request) {
+
+		$data = $request->except('_token');
+
+		Mail::later(2,'emails.contactus', ['data'=>$data], function ($message) {
+
+			$message->from('test@test.com', 'Contact Us');
+
+			$message->subject('Contact Us');
+
+			$message->to('uusa35@gmail.com');
+			/*->cc();*/
+		});
+
+		return redirect()->back()->with('success',trans('success-contactus'));
 	}
 
 }

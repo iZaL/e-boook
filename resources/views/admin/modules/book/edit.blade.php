@@ -1,11 +1,5 @@
 @extends('admin.layouts.one_col')
 
-@section('title')
-    <h3>Publish Your Book</h3>
-    <p style="color:red;">(*) - {{ trans('word.all-started-required') }}</p>
-    <p style="color:red;">(*) - {{ trans('word.cover-instructions') }}</p>
-@stop
-
 @section('style')
     @parent
 @stop
@@ -29,7 +23,19 @@
 @stop
 
 @section('content')
-
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h3>{{ trans('word.book-edit') }}</h3>
+                </div>
+                <div class="col-lg-6">
+                    <p style="color:red;">(*) - {{ trans('word.all-started-required') }}</p>
+                    <p style="color:red;">(*) - {{ trans('word.cover-instructions') }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
     {!! Form::model($book,['action' => 'Admin\AdminBookController@update', 'method' => 'PATCH','files'=>'true'], ['class'=>'form-horizontal']) !!}
         {!! Form::hidden('id',$book->id)!!}
     <div class="row">
@@ -96,10 +102,17 @@
     </div>
 
     <div class="form-group">
-        {!! Form::submit('Save Draft', ['class' => 'btn btn-primary form-control']) !!}
+        <div class="col-lg-6">
+            {!! Form::submit(trans('word.save'), ['class' => 'btn btn-primary form-control']) !!}
+        </div>
+        <div class="col-lg-6">
+            <a class="btn btn-danger form-control" href="{{ action('Admin\AdminBookController@index') }}">{{ trans('word.cancel') }}</a>
+        </div>
     </div>
 
     {!! Form::close() !!}
+    </div>
+</div>
     <script>
         $('.free').on('change', function () {
             if(this.checked) {

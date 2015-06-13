@@ -40,6 +40,7 @@
                             </td>
                             <td>
                                 <span>{{ ($user->active === 1) ? 'active' : 'Not active'}}</span>
+                                <a class="btn btn-info btn-sm" href="{{ action('UserController@edit',$user->id) }}"><i class="fa fa-edit"></i></a>
                             </td>
                             <td>
                                 <span>{{ ($user->bank_name) ? $user->bank_name : trans('word.n-a') }}</span>

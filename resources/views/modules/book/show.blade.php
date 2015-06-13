@@ -27,7 +27,7 @@
         <div class="col-xs-12 col-sm-5 col-md-4">
 
             <!-- START CONTENT ITEM -->
-            <a class="product-detail-lightbox colorbox" rel="colorbox1" href="/img/cover/cover_{{App::getLocale()}}/large/{{$book->__get('cover') }}" title="{{ $book->title }} A">
+            <a class="product-detail-lightbox colorbox" rel="colorbox1" href="/img/cover/cover_{{App::getLocale()}}/large/{{$book->__get('cover') }}" title="{{ $book->title }}">
                 <img class="details_page product-image img-responsive" src="/img/cover/cover_{{App::getLocale()}}/thumbnail/{{$book->__get('cover') }}" alt="{{ $book->title }}"></a>
 
             <!-- END CONTENT ITEM -->

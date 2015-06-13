@@ -14,6 +14,7 @@ Route::resource('book','BookController',['only'=>['index','show']]);
  * Contactus
  ***************************************************************************************************/
 Route::get('/contactus','HomeController@contactus');
+Route::post('/contactus','HomeController@sendContactUs');
 
 
 /***************************************************************************************************

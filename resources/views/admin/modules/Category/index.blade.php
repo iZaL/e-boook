@@ -14,7 +14,7 @@
                         <div class="col-xs-12 paddingTop10">
                             <table class="table table-bordered table-order">
                                 <thead>
-                                <tr class="info">
+                                <tr class="info text-center">
                                     <th>{{ trans('id') }}</th>
                                     <th>{{ trans('word.name-ar') }}</th>
                                     <th>{{ trans('word.name-en') }}</th>
@@ -35,8 +35,10 @@
                                         <td>
                                             <span> {{ $category->name_en }} </span>
                                         </td>
-                                        <td>
-                                            <a href="{{ action('Admin\AdminCategoryController@edit',$category->id) }}" class="text-center btn btn-primary">{{trans('word.edit')}}</a>
+                                        <td class="text-center">
+                                            <a href="{{ action('Admin\AdminCategoryController@edit',$category->id) }}" class="text-center btn btn-primary btn-sm">
+                                                <i class="fa fa-trash-o fa-2x"></i>
+                                            </a>
                                         </td>
                                         <td>
                                             <span> {{ $category->created_at->format('Y-m-d') }} </span>

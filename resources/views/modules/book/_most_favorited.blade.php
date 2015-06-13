@@ -19,7 +19,7 @@
                 <div class="col-xs-12 col-md-3" style="margin:0px;">
                     <div class=" product-list-inline-small">
                         <div class="thumbnail">
-                            <a href="{{ action('BookController@show',$book->id) }}"><img class="img-responsive " src="/img/cover/cover_{{App::getLocale()}}/thumbnail/{{$book->__get('cover') }}" alt=""></a>
+                            <a href="{{ action('BookController@show',$book->id) }}"><img class="img-responsive " src="/img/cover/cover_{{App::getLocale()}}/thumbnail/{{ $book->__get('cover') }}" alt=""></a>div
                             <div class="caption">
                                 <a href="{{ action('BookController@show',$book->id) }}"><h4>{{ $book->__get('title') }}</h4></a>
                                 <p>{!! Str::limit($book->__get('body'),25) !!} </p>

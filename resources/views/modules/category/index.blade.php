@@ -38,7 +38,7 @@
                                 <div class="col-xs-12 col-md-4" style="margin:0px;">
                                     <div class=" product-list-inline-small">
                                         <div class="thumbnail">
-                                            <a href="{{ action('BookController@show',$book->id) }}"><img src="{{ storage_path('app/cover_'.App::getLocale().'/thumbnail/'.$book->__get('cover')) }}" alt=""></a>
+                                            <a href="{{ action('BookController@show',$book->id) }}"><img src="/img/cover/cover_{{App::getLocale()}}/thumbnail/{{$book->__get('cover') }}" alt="{{ $book->title }}""></a>
                                             <div class="caption">
                                                 <a href="{{ action('BookController@show',$book->id) }}"><h4>{{ $book->__get('title') }}</h4></a>
                                                 <p>{!! Str::limit($book->__get('body'),25) !!} </p>

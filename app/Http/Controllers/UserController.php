@@ -95,10 +95,13 @@ class UserController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
+    public function update(Request $request)
     {
-        //
-
+        $user = $this->userRepository->model->where('id','=',$request->input('id'))->update($request->except('_token','id'));
+        if($user) {
+            return redirect()->back()->with('success',trans('word.success-edit-user'));
+        }
+        return redirect()->back()->with('error',trans('word.error-edit-user'));
     }
 
     /**

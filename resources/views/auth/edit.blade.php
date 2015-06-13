@@ -11,6 +11,7 @@
 
 						{!! Form::model($user,['action'=>['UserController@update'],'method' =>'post','role'=>'form','class'=>'form-horizontal']) !!}
 
+					{!! Form::hidden('id',$user->id) !!}
 						<div class="form-group">
 							<label class="col-md-4 control-label">{{ trans('word.name_en') }}*</label>
 							<div class="col-md-6">
@@ -32,6 +33,14 @@
 								<input type="email" class="form-control" name="email" value="{{ $user->email }}">
 							</div>
 						</div>
+					@if(Auth::user()->isAdmin())
+						<div class="form-group">
+							<label class="col-md-4 control-label">{{ trans('word.active') }}*</label>
+							<div class="col-md-6">
+								{!! Form::select('active',['1'=>'active','0'=>'deactivated'],$user->active,['class'=>'form-control']) !!}
+							</div>
+						</div>
+					@endif
 						<div class="form-group">
 							<label class="col-md-4 control-label">{{ trans('word.mobile') }}</label>
 							<div class="col-md-6">

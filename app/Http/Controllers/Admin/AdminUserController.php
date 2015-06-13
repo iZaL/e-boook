@@ -28,6 +28,7 @@ class AdminUserController extends Controller
         $users = $this->userRepository->model->with('roles')->where('id','!=','1')->paginate(10);
 
         return view('admin.modules.user.index',['users' => $users]);
+
     }
 
 }

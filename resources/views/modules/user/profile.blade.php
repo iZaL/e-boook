@@ -33,7 +33,7 @@
                                 @if($books->count() > 0)
                                     @foreach($books as $book)
                                         <tr>
-                                            <td class="hidden-xs"><img src="{{ storage_path('app/cover_'.App::getLocale().'/thumbnail/'.$book->__get('cover')) }}" alt=""></td>
+                                            <td class="hidden-xs"><img class="img-table img-responsive" src="/img/cover/cover_{{App::getLocale()}}/thumbnail/{{$book->__get('cover') }}" alt="{{ $book->title }}"></td>
                                             <td>
                                                 <a href="{{ route('book.show',$book->id) }}"> {{ $book->__get('title') }} </a>
 
@@ -84,7 +84,7 @@
                                     @foreach($books as $book)
                                         @if($book->status === 'draft')
                                         <tr>
-                                            <td class="hidden-xs"><img src="<img src="{{ storage_path('app/cover_'.App::getLocale().'/thumbnail/'.$book->__get('cover')) }}" alt=""></td>
+                                            <td class="hidden-xs"><img class="img-table img-responsive" src="/img/cover/cover_{{App::getLocale()}}/thumbnail/{{$book->__get('cover') }}" alt="{{ $book->title }}"></td>
                                             <td>
                                                 <a href="{{ action('BookController@show',$book->id) }}"> {!! $book->title !!} </a>
 
@@ -128,7 +128,7 @@
                                     @foreach($books as $book)
                                         @if($book->status === 'published')
                                         <tr>
-                                            <td class="hidden-xs"><img src="{{ storage_path('app/cover_'.App::getLocale().'/thumbnail/'.$book->__get('cover')) }}" alt=""></td>
+                                            <td class="hidden-xs"><img class="img-table img-responsive" src="/img/cover/cover_{{App::getLocale()}}/thumbnail/{{$book->__get('cover') }}" alt="{{ $book->title }}"></td>
                                             <td>
                                                 <a href="{{ action('BookController@show'),$book->id }}"> {!! $book->title !!} </a>
 
@@ -176,7 +176,7 @@
                                     <tbody>
                                     @foreach($favoriteBooks as $book)
                                         <tr>
-                                            <td class="hidden-xs"><img src="{{ storage_path('app/cover_'.App::getLocale().'/thumbnail/'.$book->__get('cover')) }}" alt=""></td>
+                                            <td class="hidden-xs"><img class="img-table img-responsive" src="/img/cover/cover_{{App::getLocale()}}/thumbnail/{{$book->__get('cover') }}" alt="{{ $book->title }}"></td>
                                             <td>
                                                 <a href="{{ action('BookController@show',$book->id) }}"> {!! $book->title !!} </a>
 
@@ -209,11 +209,21 @@
                         <div class="col-xs-12 paddingTop10">
 
                             <div class="well well-lg">
-                                <a class="btn btn-info {{ (App::getLocale('lang') ==='ar') ? 'pull-left' : 'pull-right'  }}" href="{{ action('UserController@edit',Auth::id()) }}">{{ trans('word.edit') }}</a>
-                                <div>{{ trans('word.name') }} : {{ Auth::user()->__get('name') }}</div>
-                                <div>{{ trans('word.email') }} : {{ Auth::user()->name }}</div>
-                                <div>{{ trans('word.phone') }} : </div>
-                                <div>{{ trans('word.address') }} : </div>
+                                <div class="row">
+
+                                    <div class="col-lg-10">
+
+                                        <div>{{ trans('word.name') }} : {{ Auth::user()->__get('name') }}</div>
+                                        <div>{{ trans('word.email') }} : {{ Auth::user()->name }}</div>
+                                        <div>{{ trans('word.phone') }} : </div>
+                                        <div>{{ trans('word.address') }} : </div>
+                                    </div>
+                                    
+                                    <div class="col-lg-2">
+                                        <a class="btn btn-info {{ (App::getLocale('lang') ==='ar') ? 'pull-left' : 'pull-right'  }}" href="{{ action('UserController@edit',Auth::id()) }}">{{ trans('word.edit') }}</a></br>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>

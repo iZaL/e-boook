@@ -18,6 +18,7 @@
 }
 
 .details_page {
-    height: 60%;
+    height: 50%;
     width: auto;
+    max-width: 180px;
 }
