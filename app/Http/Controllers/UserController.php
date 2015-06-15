@@ -103,6 +103,7 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
+        // check if authenticated in order to change the active & Role of a user
         if(Auth::user()->isAdmin()) {
             $user = $this->userRepository->model->where('id','=',$request->input('id'))->update($request->except('_token','id','role_name'));
             DB::table('user_roles')->where('user_id','=',$request->input('id'))->update([
@@ -110,6 +111,7 @@ class UserController extends Controller
             ]);
             return redirect()->back()->with('success', trans('word.success-edit-user'));
         }
+        // if normal user only change the normal data
         $user = $this->userRepository->model->where('id', '=', $request->input('id'))->update($request->except('_token', 'id', 'active', 'role_name'));
         if ($user) {
             return redirect()->back()->with('success', trans('word.success-edit-user'));

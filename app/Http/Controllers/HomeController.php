@@ -34,6 +34,13 @@ class HomeController extends Controller {
 
 	public function sendContactUs(Request $request) {
 
+		$this->validate($request, [
+			'name' => 'required|max:255',
+			'email' => 'required|email',
+			'subject' => 'required',
+			'content' => 'required'
+		]);
+
 		$data = $request->except('_token');
 
 		Mail::later(2,'emails.contactus', ['data'=>$data], function ($message) {

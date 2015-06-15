@@ -158,6 +158,11 @@ class BookController extends Controller
             ->orWhere('title_ar','like','%'.$searchItem.'%')
             ->orWhere('title_en','like','%'.$searchItem.'%')
             ->orWhere('body','like','%'.$searchItem.'%')->with('meta')->get();
-        return view('modules.book.index',['books'=> $searchResults]);
+        if(count($searchResults) > 0) {
+            return view('modules.book.index', ['books' => $searchResults]);
+        }
+        else {
+            return redirect()->back()->with(['error' => trans('word.no-results')]);
+        }
     }
 }
