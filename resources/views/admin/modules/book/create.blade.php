@@ -97,7 +97,7 @@
 
         <div class="form-group">
             <div class="col-lg-6">
-                {!! Form::submit('Save Draft', ['class' => 'btn btn-primary form-control']) !!}
+                {!! Form::submit(trans('word.save'), ['class' => 'btn btn-primary form-control']) !!}
             </div>
             <div class="col-lg-6">
                 <a class="btn btn-danger form-control" href="{{ action('Admin\AdminBookController@index') }}">{{ trans('word.cancel') }}</a>

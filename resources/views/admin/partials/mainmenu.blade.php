@@ -17,7 +17,9 @@
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-left {{ App::getLocale() == 'ar' ? 'pull-right': '' }}">
                     <li><a href="{{ url('/home') }}"><i class="fa fa-home"></i>&nbsp; {{ trans('word.go-back-home') }}</a></li>
+                    @if(Auth::user()->isAdmin())
                     <li><a href="{{ action('Admin\AdminUserController@index') }}"><i class="fa fa-home"></i>&nbsp; {{ trans('word.users') }}</a></li>
+                    @endif
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="/admin/book"><i class="fa fa-book fa-aw"></i>&nbsp; {{ trans('word.books') }} <b
                                     class="caret"></b></a>

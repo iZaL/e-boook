@@ -9,7 +9,7 @@
 				<div class="panel-body">
 					<div class="alert alert-info" role="alert">{{trans('word.fields-required')}}</div>
 
-						{!! Form::model($user,['action'=>['UserController@update'],'method' =>'post','role'=>'form','class'=>'form-horizontal']) !!}
+					{!! Form::model($user,['action'=>['UserController@update'],'method' =>'post','role'=>'form','class'=>'form-horizontal']) !!}
 
 					{!! Form::hidden('id',$user->id) !!}
 						<div class="form-group">
@@ -38,6 +38,12 @@
 							<label class="col-md-4 control-label">{{ trans('word.active') }}*</label>
 							<div class="col-md-6">
 								{!! Form::select('active',['1'=>'active','0'=>'deactivated'],$user->active,['class'=>'form-control']) !!}
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-4 control-label">{{ trans('word.role') }}*</label>
+							<div class="col-md-6">
+								{!! Form::select('role_name',$roles,$user->roles->first()->id,['class'=>'form-control']) !!}
 							</div>
 						</div>
 					@endif

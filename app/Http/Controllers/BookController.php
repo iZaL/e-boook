@@ -5,6 +5,7 @@ use App\Src\Book\BookHelpers;
 use App\Src\Book\BookRepository;
 use App\Src\Favorite\FavoriteRepository;
 use App\Src\User\UserRepository;
+use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
@@ -147,5 +148,16 @@ class BookController extends Controller
         $books = $this->bookRepository->model->with('meta')->orderBy('created_at','desc')->paginate(10);
         $render = true;
         return view('modules.book.index',compact('books','render'));
+    }
+
+    public function showSearchResults(Request $request) {
+        $searchItem = $request->input('search');
+        $searchResults = $this->bookRepository->model
+            ->orWhere('description_ar','like','%'.$searchItem.'%')
+            ->orWhere('description_en','like','%'.$searchItem.'%')
+            ->orWhere('title_ar','like','%'.$searchItem.'%')
+            ->orWhere('title_en','like','%'.$searchItem.'%')
+            ->orWhere('body','like','%'.$searchItem.'%')->with('meta')->get();
+        return view('modules.book.index',['books'=> $searchResults]);
     }
 }

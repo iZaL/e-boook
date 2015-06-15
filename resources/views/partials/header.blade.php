@@ -19,12 +19,14 @@
 
 
             <!-- START CONTENT ITEM -->
+            {!! Form::open(['action'=>'BookController@showSearchResults','method'=>'get']) !!}
             <div class="input-group form-search header-search">
-                <input class="form-control search-query" type="text" placeholder="Search all books...">
+                <input class="form-control search-query" type="text" placeholder="Search all books..." name="search">
                 <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">{{ trans('word.search') }}</button>
+                    {!! Form::submit(trans('word.search'), ['class' => 'btn btn-default form-control']) !!}
                 </span>
             </div>
+            {!! Form::close() !!}
             <!-- END CONTENT ITEM -->
 
 {{--            <img src="/img/banner_top.jpg" alt="No shipping" class="img-responsive">--}}

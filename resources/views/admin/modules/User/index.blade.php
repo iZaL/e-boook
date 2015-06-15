@@ -20,6 +20,7 @@
                         <th>{{ trans('word.bank-name') }}</th>
                         <th>{{ trans('word.bank-number') }}</th>
                         <th>{{ trans('word.history-subscribe') }}</th>
+                        <th>{{ trans('word.edit') }}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -40,7 +41,6 @@
                             </td>
                             <td>
                                 <span>{{ ($user->active === 1) ? 'active' : 'Not active'}}</span>
-                                <a class="btn btn-info btn-sm" href="{{ action('UserController@edit',$user->id) }}"><i class="fa fa-edit"></i></a>
                             </td>
                             <td>
                                 <span>{{ ($user->bank_name) ? $user->bank_name : trans('word.n-a') }}</span>
@@ -51,6 +51,11 @@
 
                             <td>
                                 <span> {{ $user->created_at->format('Y-m-d') }} </span>
+                            </td>
+                            <td>
+                                <span>
+                                    <a class="btn btn-warning btn-sm" href="{{ action('UserController@edit',$user->id) }}"><i class="fa fa-edit"></i></a>
+                                </span>
                             </td>
                         </tr>
                     @endforeach

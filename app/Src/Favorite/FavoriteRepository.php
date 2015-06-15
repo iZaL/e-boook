@@ -10,8 +10,7 @@ namespace App\Src\Favorite;
 
 use App\Core\AbstractRepository;
 use App\Src\Book\BookRepository;
-use App\Src\Favorite\Favorite;
-use Illuminate\Support\Facades\DB;
+
 
 class FavoriteRepository extends AbstractRepository{
 
@@ -31,10 +30,14 @@ class FavoriteRepository extends AbstractRepository{
     }
 
     public function generateGetMostFavorited($mostFavorites) {
+
         $mostFavoriteArray = [];
-        for($i=0;$i <=3 ;$i++) {
+        /*for($i=0;$i <=3 ;$i++) {
             $mostFavoriteArray = array_add($mostFavoriteArray,$i,$this->bookRepository->model->where('id','=',$mostFavorites[$i]->book_id)->first());
-        }
+        }*/
+        $mostFavoriteArray = $this->bookRepository->model
+                            ->whereIn('id',[$mostFavorites[0]->book_id,$mostFavorites[1]->book_id,$mostFavorites[2]->book_id,$mostFavorites[3]->book_id])
+                            ->with('meta')->get();
         return $mostFavoriteArray;
     }
 

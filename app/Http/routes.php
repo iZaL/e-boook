@@ -8,6 +8,7 @@ Route::get('/home',['as'=>'home','uses'=>'BookController@index']);
 Route::get('/',['as'=>'home','uses'=>'BookController@index']);
 Route::get('/books',['uses'=>'BookController@getAllBooks']);
 Route::resource('book','BookController',['only'=>['index','show']]);
+Route::get('search',['uses'=>'BookController@showSearchResults']);
 
 
 /***************************************************************************************************

@@ -4,21 +4,26 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Src\Book\BookRepository;
 use App\Src\Favorite\FavoriteRepository;
+use App\Src\Role\RoleRepository;
 use App\Src\User\User;
 use App\Src\User\UserRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
     public $userRepository;
     public $bookRepository;
     public $favoriteRepository;
+    public $roleRepository;
 
 
-    public function __construct(UserRepository $userRepository, BookRepository $bookRepository, FavoriteRepository $favoriteRepository) {
+    public function __construct(UserRepository $userRepository, BookRepository $bookRepository, FavoriteRepository $favoriteRepository, RoleRepository $roleRepository) {
         $this->userRepository = $userRepository;
         $this->bookRepository = $bookRepository;
         $this->favoriteRepository = $favoriteRepository;
+        $this->roleRepository = $roleRepository;
     }
     /**
      * Display a listing of the resource.
@@ -85,8 +90,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = $this->userRepository->getById($id);
-        return view('auth.edit',['user' => $user]);
+        $roles = $this->roleRepository->getAll()->lists('name','id');
+        $user = $this->userRepository->model->where('id','=',$id)->with('roles')->first();
+        return view('auth.edit',['user' => $user,'roles'=>$roles]);
     }
 
     /**
@@ -97,10 +103,18 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
-        $user = $this->userRepository->model->where('id','=',$request->input('id'))->update($request->except('_token','id'));
-        if($user) {
-            return redirect()->back()->with('success',trans('word.success-edit-user'));
+        if(Auth::user()->isAdmin()) {
+            $user = $this->userRepository->model->where('id','=',$request->input('id'))->update($request->except('_token','id','role_name'));
+            DB::table('user_roles')->where('user_id','=',$request->input('id'))->update([
+                'role_id' => $request->input('role_name')
+            ]);
+            return redirect()->back()->with('success', trans('word.success-edit-user'));
         }
+        $user = $this->userRepository->model->where('id', '=', $request->input('id'))->update($request->except('_token', 'id', 'active', 'role_name'));
+        if ($user) {
+            return redirect()->back()->with('success', trans('word.success-edit-user'));
+        }
+
         return redirect()->back()->with('error',trans('word.error-edit-user'));
     }
 

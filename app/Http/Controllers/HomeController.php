@@ -18,17 +18,6 @@ class HomeController extends Controller {
 	*/
 
 	/**
-	 * Create a new controller instance.
-	 *
-	 * @return void
-	 */
-	public $contactus;
-	public function __construct(Contactus $contactus)
-	{
-		$this->contactus = $contactus;
-	}
-
-	/**
 	 * Show the application dashboard to the user.
 	 *
 	 * @return Response
