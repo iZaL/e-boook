@@ -17,7 +17,7 @@
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-left {{ App::getLocale() == 'ar' ? 'pull-right': '' }}">
                     <li><a href="{{ url('/home') }}"><i class="fa fa-home"></i>&nbsp; {{ trans('word.go-back-home') }}</a></li>
-                    @if(Auth::user()->isAdmin())
+                    @if($admin)
                     <li><a href="{{ action('Admin\AdminUserController@index') }}"><i class="fa fa-home"></i>&nbsp; {{ trans('word.users') }}</a></li>
                     @endif
                     <li class="dropdown">
@@ -30,6 +30,7 @@
                             <li><a href="{{ action('Admin\AdminBookController@create') }}"><i class="fa fa-pencil fa-fw"></i>&nbsp;{{ trans('word.create-book') }} || {{ trans('word.poem') }}</a></li>
                         </ul>
                     </li>
+                    @if($admin)
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-folder-open-o fa-aw"></i>&nbsp;{{ trans('word.categories') }} <b
                                     class="caret"></b></a>
@@ -39,6 +40,7 @@
                         </ul>
                     <li><a href="{{ action('Admin\AdminContactUsController@edit') }}"><i class="fa fa-indent fa-fw"></i>&nbsp;{{ trans('word.contact-us') }}</a></li>
                     </li>
+                    @endif
 
 
                 </ul>

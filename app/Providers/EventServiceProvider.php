@@ -15,6 +15,10 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\CreatePdf',
             'App\Listeners\CalculateBookPage',
         ],
+        'App\Events\NewBookPreview' => [
+            'App\Listeners\CreateBookPreview',
+            'App\Listeners\CalculateBookPreviewPage'
+        ],
     ];
 
     /**

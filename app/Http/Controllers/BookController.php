@@ -1,11 +1,13 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use App\Jobs\CreatePreviewBook;
 use App\Src\Book\BookHelpers;
 use App\Src\Book\BookRepository;
 use App\Src\Favorite\FavoriteRepository;
 use App\Src\User\UserRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 
 class BookController extends Controller
 {
@@ -27,7 +29,7 @@ class BookController extends Controller
      */
     public function index($all = '4')
     {
-        $books = $this->bookRepository->model->with('meta')->orderBy('created_at','desc')->paginate($all);
+        $books = $this->bookRepository->model->where('status','=','published')->with('meta')->orderBy('created_at','desc')->paginate($all);
 
 
         $mostFavoriteBooks = $this->favoriteRepository->getMostFavorited();
@@ -150,6 +152,10 @@ class BookController extends Controller
         return view('modules.book.index',compact('books','render'));
     }
 
+    /**
+     * @param Request $request
+     * @return search function responsible to search all books title , descriptions and even content of each book
+     */
     public function showSearchResults(Request $request) {
         $searchItem = $request->input('search');
         $searchResults = $this->bookRepository->model
@@ -164,5 +170,32 @@ class BookController extends Controller
         else {
             return redirect()->back()->with(['error' => trans('word.no-results')]);
         }
+    }
+
+    public function getFreePdfFile($bookUrl) {
+
+        if($this->bookRepository->model->where('url','=',$bookUrl)->first()) {
+
+            $link = storage_path('app/pdfs/').$bookUrl;
+
+            return Response::make(file_get_contents($link), 200, [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'inline; '.$bookUrl,
+            ]);
+        }
+
+        return redirect()->back()->with(['error'=>trans('word.no-file')]);
+    }
+
+
+
+    /**
+     * @param $bookUrl
+     * @return creating on the fly a link with 10 pages of a pdf file of a book
+     */
+    public function createNewPreview($bookUrl) {
+
+     return $this->dispatch(new CreatePreviewBook($bookUrl));
+
     }
 }

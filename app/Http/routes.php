@@ -71,6 +71,13 @@ Route::group(['prefix'=>'app'],function () {
 
 
 
+
+
+    /***************************************************************************************************
+     *                                          Auth Zone
+     *
+     ***************************************************************************************************/
+
     Route::group(['middleware'=>'auth'],function () {
 
         // Subscriber Zone here : ONLY AUTH MIDDLEWARE IS REQUIRED
@@ -97,6 +104,29 @@ Route::group(['prefix'=>'app'],function () {
         Route::post('user/info/{user}',['uses'=>'UserController@update']);
 
 
+        /***************************************************************************************************
+         *                                          Books
+         *
+         ***************************************************************************************************/
+
+        Route::get('/book/pdf/{url}',['uses'=>'BookController@getFreePdfFile']);
+        Route::get('/book/pdf/preview/{url}',['uses' => 'BookController@createNewPreview']);
+
+
+        /***************************************************************************************************
+         *                                          Editor Zone
+         *
+         ***************************************************************************************************/
+        /*Route::group(['middleware'=>'editor.zone:Editor'], function () {
+
+            /***************************************************************************************************
+             * Book Routes for Editor
+             ***************************************************************************************************/
+
+            //Route::resource('book','Admin\AdminBookController',['except'=>'delete']);
+
+        //}); // end of editor middlware*/
+
 
         /***************************************************************************************************
          *                                          Admin & Editor Zone
@@ -104,7 +134,7 @@ Route::group(['prefix'=>'app'],function () {
          * an admin can assign roles for other users (Author [write,edit,read] + Subscriber [read])
          ***************************************************************************************************/
 
-        Route::group(['middleware'=>'admin.zone:Admin'], function () {
+        Route::group(['middleware'=>'admin.zone:Admin,Editor'], function () {
 
             /***************************************************************************************************
              * User
@@ -142,23 +172,6 @@ Route::group(['prefix'=>'app'],function () {
 
 
         });
-
-        /***************************************************************************************************
-         *                                          Editor Zone
-         *
-         ***************************************************************************************************/
-        // Route::group(['middleware'=>'editor.zone:Editor'], function () {
-
-            /***************************************************************************************************
-             * Book Routes for Editor
-             ***************************************************************************************************/
-
-           // Route::get('/','Admin\AdminBookController@index');
-
-          //  Route::resource('book','Admin\AdminBookController',['except'=>'delete']);
-
-        //}); // end of editor middlware
-
 
 
     }); // end of auth middlware

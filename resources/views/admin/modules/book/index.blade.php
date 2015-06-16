@@ -54,14 +54,14 @@
                                         </td>
                                         <td>
                                             <a class="btn btn-primary btn-sm" href="{{ action('Admin\AdminBookController@edit',$book->id) }}">
-                                                <i class="fa fa-trash-o fa-2x"></i>
+                                                <i class="fa fa-pencil fa-2x"></i>
                                             </a>
                                         </td>
                                         <td>
                                             {{--Delete Btn with Modal to confirm delete process--}}
                                             @if($admin)
                                                 <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal" href="">
-                                                    <i class="fa fa-pencil fa-2x"></i>
+                                                    <i class="fa fa-trash-o fa-2x"></i>
                                                 </button>
                                                 @include('admin.partials._delete_modal')
                                             @endif

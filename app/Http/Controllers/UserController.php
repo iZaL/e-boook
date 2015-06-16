@@ -64,22 +64,13 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
-
         $Allbooks = $this->userRepository->getAllBooksForUser($id);
 
-
-        //$draftBooks = $this->userRepository->getStatusBooks($id,'draft');
-
-        //$publishedBooks = $this->userRepository->getStatusBooks($id,'published');
-
-        // the problem is here .. Stopped here for favorite tab ?? we are unable to make favorite relation
         $favoriteBooks = $this->userRepository->getFavoritedBooksForUser($id);
 
+        $user = Auth::user();
 
-
-        //return view('modules.user.profile',['books'=>$Allbooks,'draftBooks'=>$draftBooks,'publishedBooks'=>$publishedBooks,'favoriteBooks'=>$favoriteBooks]);
-        return view('modules.user.profile',['books'=>$Allbooks,'favoriteBooks'=>$favoriteBooks]);
+        return view('modules.user.profile',['books'=>$Allbooks,'favoriteBooks'=>$favoriteBooks,'user'=>$user]);
     }
 
     /**

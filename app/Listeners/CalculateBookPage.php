@@ -6,6 +6,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Session;
 use Knp\Snappy\Pdf;
 
+
 class CalculateBookPage implements ShouldQueue
 {
 

@@ -25,6 +25,7 @@ class AdminBookController extends Controller
     public $categoryRepository;
     public $bookRepository;
     public $bookMeta;
+    public $admin;
 
     use BookHelpers, LocaleTrait;
 
@@ -42,6 +43,8 @@ class AdminBookController extends Controller
 
         $this->bookMeta = $bookMeta;
 
+        $this->admin = Auth::user()->isAdmin();
+
         //$this->middleware('App\Http\Middleware\BeforeAdminZone:Admin');
         /*
          * Middleware CreateBook only for Admin and Editor
@@ -56,9 +59,17 @@ class AdminBookController extends Controller
      */
     public function index()
     {
-        $books = $this->bookRepository->model->with('meta')->orderBy('created_at','ASC')->paginate(15);
 
-        return view('admin.modules.book.index',['books' => $books]);
+        if($this->admin) {
+            $books = $this->bookRepository->model->with('meta')->orderBy('created_at', 'ASC')->paginate(15);
+        }
+        else {
+            $books = $this->bookRepository->model
+                    ->where('user_id','=',Auth::user()->id)->with('meta')
+                    ->orderBy('created_at', 'ASC')->paginate(15);
+        }
+
+        return view('admin.modules.book.index',['books' => $books,'admin'=>$this->admin]);
     }
 
 
@@ -238,8 +249,17 @@ class AdminBookController extends Controller
     }
 
     public function getBookByType ($type = 'book') {
-        $books = $this->bookRepository->model->where('type','=',$type)->with('meta')->orderBy('created_at','desc')->paginate(15);
-        $admin = Auth::user()->isAdmin();
+
+        $admin = $this->admin;
+        if($admin) {
+            $books = $this->bookRepository->model->where('type','=',$type)->with('meta')->orderBy('created_at','desc')->paginate(15);
+        }
+        else {
+            $books = $this->bookRepository->model
+                ->where('user_id','=',Auth::user()->id)->with('meta')
+                ->where('type','=',$type)
+                ->orderBy('created_at', 'ASC')->paginate(15);
+        }
 
         return view('admin.modules.book.index',['books' => $books,'admin'=> $admin]);
     }

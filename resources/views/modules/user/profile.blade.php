@@ -190,7 +190,7 @@
                                                 <span> {{ $book->status }} </span>
                                             </td>
                                             <td>
-                                                <a class="btn btn-danger" href="{{ action('BookController@removeBookFromUserFavoriteList',[Auth::id(),$book->id]) }}">{{ trans('word.remove') }}</a>
+                                                <a class="btn btn-danger" href="{{ action('BookController@removeBookFromUserFavoriteList',[$user->id,$book->id]) }}">{{ trans('word.remove') }}</a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -213,14 +213,14 @@
 
                                     <div class="col-lg-10">
 
-                                        <div>{{ trans('word.name') }} : {{ Auth::user()->__get('name') }}</div>
-                                        <div>{{ trans('word.email') }} : {{ Auth::user()->name }}</div>
+                                        <div>{{ trans('word.name') }} : {{ $user->__get('name') }}</div>
+                                        <div>{{ trans('word.email') }} : {{ $user->email }}</div>
                                         <div>{{ trans('word.phone') }} : </div>
                                         <div>{{ trans('word.address') }} : </div>
                                     </div>
                                     
                                     <div class="col-lg-2">
-                                        <a class="btn btn-info {{ (App::getLocale('lang') ==='ar') ? 'pull-left' : 'pull-right'  }}" href="{{ action('UserController@edit',Auth::id()) }}">{{ trans('word.edit') }}</a></br>
+                                        <a class="btn btn-info {{ (App::getLocale('lang') ==='ar') ? 'pull-left' : 'pull-right'  }}" href="{{ action('UserController@edit',$user->id) }}">{{ trans('word.edit') }}</a></br>
                                     </div>
                                 </div>
 

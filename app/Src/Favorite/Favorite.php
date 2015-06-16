@@ -26,7 +26,6 @@ class Favorite extends Model
         ->get();
 
         return $books;
-
     }
 
 }

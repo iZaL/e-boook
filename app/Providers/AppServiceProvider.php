@@ -23,6 +23,7 @@ class AppServiceProvider extends ServiceProvider
 
         });
 
+
         // share the contact us information all over the views from the cache
         view()->share('contactusInfo', $contactusInfo);
 

@@ -18,6 +18,7 @@ class CreatePurchasesTable extends Migration {
             $table->increments('id');
             $table->integer('user_id');
             $table->integer('book_id');
+			$table->enum('stage',['order','under_process','purchased']);
             $table->timestamps();
             $table->softDeletes();
 		});

@@ -31,7 +31,6 @@
                 <img class="details_page product-image img-responsive" src="/img/cover/cover_{{App::getLocale()}}/thumbnail/{{$book->__get('cover') }}" alt="{{ $book->title }}"></a>
 
             <!-- END CONTENT ITEM -->
-
         </div>
 
         <div class="hidden-xs col-sm-2 col-md-1">
@@ -75,14 +74,28 @@
                 </div>
                 <hr>
                 <div class="row">
+                    @if(!Auth::user())
+                    <div class="row">
+                        <div class="col-lg-8 alert alert-info col-lg-offset-2">
+                                {{ trans('word.needs-registeration') }}
+                                <a class="btn btn-success btn-sm" href="/auth/register">{{ trans('word.register') }}</a>
+
+                        </div>
+                    </div>
+                    @endif
                     <div class="col-xs-12 col-md-4">
-                        <a class="btn btn-block btn-primary"><i class="fa fa-fw fa-indent"></i>  {{ trans('word.order-now') }}</a>
+                        <a class="btn btn-block btn-primary {{ (!Auth::user()) ? 'disabled' : '' }} alt="{{ trans('word.needs-registeration') }}"><i class="fa fa-fw fa-indent"></i>  {{ trans('word.order-now') }}</a>
                     </div>
                     <div class="col-xs-12 col-md-4">
                         <a class="btn btn-block btn-danger {{ (!Auth::user()) ? 'disabled' : '' }}" href="{{ (Auth::user()) ? action('BookController@addFavorite', [Auth::user()->id,$book->id]) : '#' }}"><i class="fa fa-fw fa-heart"></i>  {{ trans('word.add-favorite') }}</a>
                     </div>
                     <div class="col-xs-12 col-md-4">
-                        <a class="btn btn-block btn-default {{ (!Auth::user()) ? 'disabled' : '' }}" href="{{ (Auth::user()) && ($book->free === 0) ? storage_path().'/app/pdfs/'.$book->url  : '#' }}"><i class="fa fa-fw fa-star"></i>  {{ trans('word.book-preview') }}</a>
+
+                        <a class="btn btn-block btn-default {{ (!Auth::user()) ? 'disabled' : '' }}"
+                           href="{{ (Auth::user()) && ($book->free === 0) ? action('BookController@createNewPreview',$book->url) : '#' }}">
+                            <i class="fa fa-fw fa-star"></i>  {{ trans('word.book-preview') }}
+                        </a>
+
                     </div>
                     {{--Rating System--}}
 
