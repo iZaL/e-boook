@@ -32,9 +32,11 @@ class FavoriteRepository extends AbstractRepository {
 
     public function generateGetMostFavorited($mostFavorites) {
 
+
         $mostFavoriteArray = $this->bookRepository->model
             ->whereIn('id',[$mostFavorites[0]->book_id,$mostFavorites[1]->book_id,$mostFavorites[2]->book_id,$mostFavorites[3]->book_id])
             ->with('meta')->get();
+
 
         return $mostFavoriteArray;
 
