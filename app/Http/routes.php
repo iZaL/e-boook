@@ -61,6 +61,12 @@ Route::post('password/reset', 'Auth\PasswordController@postReset');
 
 
 /***************************************************************************************************
+ *                                          Profile Page
+ *
+ ***************************************************************************************************/
+Route::get('/profile/user/{id}',['uses'=>'UserController@showSingleProfile']);
+
+/***************************************************************************************************
   *                                          Users Zone
  *
  ***************************************************************************************************/
@@ -81,6 +87,7 @@ Route::group(['prefix'=>'app'],function () {
     Route::group(['middleware'=>'auth'],function () {
 
         // Subscriber Zone here : ONLY AUTH MIDDLEWARE IS REQUIRED
+
         /***************************************************************************************************
          *                                          Profile
          *
@@ -100,8 +107,8 @@ Route::group(['prefix'=>'app'],function () {
          *                                          Favorite
          *
          ***************************************************************************************************/
-        Route::get('user/info/{user}',['uses'=>'UserController@edit']);
-        Route::post('user/info/{user}',['uses'=>'UserController@update']);
+        Route::get('user/{user}',['uses'=>'UserController@edit']);
+        Route::post('user/{user}',['uses'=>'UserController@update']);
 
 
         /***************************************************************************************************
@@ -111,21 +118,24 @@ Route::group(['prefix'=>'app'],function () {
 
         Route::get('/book/pdf/{url}',['uses'=>'BookController@getFreePdfFile']);
         Route::get('/book/pdf/preview/{url}',['uses' => 'BookController@createNewPreview']);
+        Route::get('/book/order/{bookId}/{userId}',['uses'=>'BookController@CreateNewOrder']);
 
 
         /***************************************************************************************************
          *                                          Editor Zone
          *
          ***************************************************************************************************/
-        /*Route::group(['middleware'=>'editor.zone:Editor'], function () {
+        Route::group(['prefix'=>'editor','middleware'=>'editor.zone:Editor'], function () {
 
             /***************************************************************************************************
              * Book Routes for Editor
              ***************************************************************************************************/
 
-            //Route::resource('book','Admin\AdminBookController',['except'=>'delete']);
+            Route::resource('book','Admin\AdminBookController', ['except'=>['destroy']]);
+            Route::get('book/type/{type?}','Admin\AdminBookController@getBookByType');
 
-        //}); // end of editor middlware*/
+
+        }); // end of editor middlware*/
 
 
         /***************************************************************************************************
@@ -134,7 +144,7 @@ Route::group(['prefix'=>'app'],function () {
          * an admin can assign roles for other users (Author [write,edit,read] + Subscriber [read])
          ***************************************************************************************************/
 
-        Route::group(['middleware'=>'admin.zone:Admin,Editor'], function () {
+        Route::group(['prefix'=>'admin','middleware'=>'admin.zone:Admin'], function () {
 
             /***************************************************************************************************
              * User
@@ -158,10 +168,16 @@ Route::group(['prefix'=>'app'],function () {
             Route::get('/','Admin\AdminBookController@index');
 
             // route to fetch peoms only
-            Route::get('/{type?}','Admin\AdminBookController@getBookByType');
+            Route::get('/book/type/{type?}','Admin\AdminBookController@getBookByType');
 
             // resource route for book & poem
             Route::resource('book','Admin\AdminBookController');
+
+            /***************************************************************************************************
+             *                                          Profile
+             *
+             ***************************************************************************************************/
+            Route::get('/profile/{id}/{status?}',['uses'=>'Admin\AdminUserController@show']);
 
 
             /***************************************************************************************************
@@ -297,5 +313,13 @@ Route::group(['prefix'=>'app'],function () {
  *
  *
  ***************************************************************************************************/
+
+
+/*
+ * Pending ::
+ * 1- make order system
+ * 2- make rating system
+ * 3- make abstraction to the whole application
+ * */
 
 

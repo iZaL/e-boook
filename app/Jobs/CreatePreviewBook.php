@@ -32,14 +32,27 @@ class CreatePreviewBook extends Job implements SelfHandling
          * Steps to split a pdf
          * */
 
-        $this->pdfPreview->setSourceFile($this->fileName);
+        $totalPageNumber = $this->pdfPreview->setSourceFile($this->fileName);
 
-        for($i=1;$i<=10;$i++) {
+        // check the total pages of each book
 
-            $this->pdfPreview->AddPage();
+        if($totalPageNumber >= 10) {
+            for ($i = 1; $i <= 10; $i++) {
 
-            $this->pdfPreview->useTemplate($this->pdfPreview->importPage($i));
+                $this->pdfPreview->AddPage();
 
+                $this->pdfPreview->useTemplate($this->pdfPreview->importPage($i));
+
+            }
+        }
+        else {
+            for ($i = 1; $i <= $totalPageNumber; $i++) {
+
+                $this->pdfPreview->AddPage();
+
+                $this->pdfPreview->useTemplate($this->pdfPreview->importPage($i));
+
+            }
         }
 
         return $this->pdfPreview->Output();

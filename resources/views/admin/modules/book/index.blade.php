@@ -53,13 +53,19 @@
                                             <span> {{ $book->created_at->format('Y-m-d') }} </span>
                                         </td>
                                         <td>
-                                            <a class="btn btn-primary btn-sm" href="{{ action('Admin\AdminBookController@edit',$book->id) }}">
+                                            @if(Session::get('role.admin'))
+                                            <a class="btn btn-primary btn-sm" href="{{ route('app.admin.book.edit',$book->id) }}">
                                                 <i class="fa fa-pencil fa-2x"></i>
                                             </a>
+                                            @elseif(Session::get('role.editor'))
+                                                <a class="btn btn-primary btn-sm" href="{{ route('app.editor.book.edit',$book->id) }}">
+                                                    <i class="fa fa-pencil fa-2x"></i>
+                                                </a>
+                                            @endif
                                         </td>
                                         <td>
                                             {{--Delete Btn with Modal to confirm delete process--}}
-                                            @if($admin)
+                                            @if(Session::get('role.admin'))
                                                 <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal" href="">
                                                     <i class="fa fa-trash-o fa-2x"></i>
                                                 </button>

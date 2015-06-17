@@ -13,10 +13,10 @@ class BeforeAdminZone
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next, $admin,$editor)
+    public function handle($request, Closure $next, $admin)
     {
         //dd($request->user()->getUserRole());
-        if(in_array($request->user()->getUserRole(),[$admin,$editor],true)) {
+        if(in_array($request->user()->getUserRole(),[$admin],true)) {
             return $next($request);
         }
         else {

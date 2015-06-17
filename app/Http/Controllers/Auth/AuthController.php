@@ -2,6 +2,8 @@
 
 use App\Jobs\AssignSubscriberForNewUser;
 use App\Src\User\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -74,5 +76,14 @@ class AuthController extends Controller
         $job = new AssignSubscriberForNewUser($user->id);
         $this->dispatch($job);
         return $user;
+    }
+
+    public function getLogout() {
+
+        Session::flush();
+
+        Auth::logout();
+
+        return redirect('/');
     }
 }

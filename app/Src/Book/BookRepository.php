@@ -44,4 +44,17 @@ class BookRepository extends AbstractRepository {
         return $this->model->where('status', 'published');
     }
 
+    public function increaseBookViewById($bookId) {
+
+        $this->model->where('id','=',$bookId)->increment('views');
+
+    }
+
+    public function increaseBookViewByUrl($bookUrl) {
+
+        $this->model->where('url','=',$bookUrl)->increment('views');
+
+    }
+
+
 }

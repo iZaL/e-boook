@@ -1,5 +1,7 @@
 <?php namespace App\Providers;
 
+use App\Src\User\User;
+use App\Src\User\UserRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
@@ -24,6 +26,8 @@ class AppServiceProvider extends ServiceProvider
         });
 
 
+
+
         // share the contact us information all over the views from the cache
         view()->share('contactusInfo', $contactusInfo);
 
@@ -38,7 +42,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+
         if ($this->app->environment() == 'local') {
             $this->app->register('Laracasts\Generators\GeneratorsServiceProvider');
         }

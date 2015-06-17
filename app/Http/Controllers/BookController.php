@@ -5,8 +5,11 @@ use App\Jobs\CreatePreviewBook;
 use App\Src\Book\BookHelpers;
 use App\Src\Book\BookRepository;
 use App\Src\Favorite\FavoriteRepository;
+use App\Src\Purchase\Purchase;
+use App\Src\Purchase\PurchaseRepository;
 use App\Src\User\UserRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 
 class BookController extends Controller
@@ -16,11 +19,15 @@ class BookController extends Controller
     public $bookRepository;
     public $favoriteRepository;
     public $userRepository;
-    public function __construct(BookRepository $book,FavoriteRepository $favoriteRepository, UserRepository $userRepository)
+    public $purchaseRepository;
+    public $authUser;
+
+    public function __construct(BookRepository $book,FavoriteRepository $favoriteRepository, UserRepository $userRepository, PurchaseRepository $purchaseRepository)
     {
         $this->bookRepository = $book;
         $this->favoriteRepository = $favoriteRepository;
         $this->userRepository = $userRepository;
+        $this->purchaseRepository = $purchaseRepository;
     }
     /**
      * Display a listing of the resource.
@@ -29,15 +36,10 @@ class BookController extends Controller
      */
     public function index($all = '4')
     {
+        // get 4 published books for index
         $books = $this->bookRepository->model->where('status','=','published')->with('meta')->orderBy('created_at','desc')->paginate($all);
-
-
+        // get 4 published and most favorite books for index
         $mostFavoriteBooks = $this->favoriteRepository->getMostFavorited();
-
-        //$mostFavoriteBooks = $this->userRepository->getFavorites();
-
-
-        //$mostFavorites = $this->favoriteRepository->MostFavorites();
 
         return view('modules.book.index',compact('books','mostFavoriteBooks','bookMeta'));
     }
@@ -79,7 +81,6 @@ class BookController extends Controller
 
         // book info
         $bookMeta = $book->meta()->first();
-
 
         return view('modules.book.show',['book'=> $book,'author'=> $author,'bookMeta' => $bookMeta]);
     }
@@ -157,30 +158,47 @@ class BookController extends Controller
      * @return search function responsible to search all books title , descriptions and even content of each book
      */
     public function showSearchResults(Request $request) {
+
         $searchItem = $request->input('search');
+
         $searchResults = $this->bookRepository->model
             ->orWhere('description_ar','like','%'.$searchItem.'%')
             ->orWhere('description_en','like','%'.$searchItem.'%')
             ->orWhere('title_ar','like','%'.$searchItem.'%')
             ->orWhere('title_en','like','%'.$searchItem.'%')
             ->orWhere('body','like','%'.$searchItem.'%')->with('meta')->get();
+
         if(count($searchResults) > 0) {
+
             return view('modules.book.index', ['books' => $searchResults]);
+
         }
+
         else {
+
             return redirect()->back()->with(['error' => trans('word.no-results')]);
+
         }
     }
 
+    /**
+     * @param $bookUrl
+     * @return full link of the free book
+     */
     public function getFreePdfFile($bookUrl) {
 
-        if($this->bookRepository->model->where('url','=',$bookUrl)->first()) {
+        if($book = $this->bookRepository->model->where('url','=',$bookUrl)->first()) {
+
+            // every request on preview .. View will be increased
+            $this->bookRepository->increaseBookViewById($book->id);
 
             $link = storage_path('app/pdfs/').$bookUrl;
 
             return Response::make(file_get_contents($link), 200, [
+
                 'Content-Type' => 'application/pdf',
                 'Content-Disposition' => 'inline; '.$bookUrl,
+
             ]);
         }
 
@@ -195,7 +213,33 @@ class BookController extends Controller
      */
     public function createNewPreview($bookUrl) {
 
-     return $this->dispatch(new CreatePreviewBook($bookUrl));
+        // every request on preview .. View will be increased
+        $this->bookRepository->increaseBookViewByUrl($bookUrl);
+
+        return $this->dispatch(new CreatePreviewBook($bookUrl));
 
     }
+
+    /**
+     * @param Create New Order
+     */
+    public function CreateNewOrder($bookId,$authUser) {
+
+        if($this->purchaseRepository->model->where('book_id','=',$bookId)->where('user_id','=',$authUser->id)->first()) {
+            return redirect()->back()->with(['error'=>trans('word.error-order-repeated')]);
+        }
+        else {
+            if($this->purchaseRepository->model->create([
+                'book_id' => $bookId,
+                'user_id' => $authUser,
+                'stage' => 'order'
+            ])) {
+                return redirect()->back()->with(['success'=>trans('word.success-order-created')]);
+            }
+            else {
+                return redirect()->back()->with(['error'=>trans('word.error-order-created')]);
+            }
+        }
+    }
+
 }

@@ -25,7 +25,6 @@ class AdminBookController extends Controller
     public $categoryRepository;
     public $bookRepository;
     public $bookMeta;
-    public $admin;
 
     use BookHelpers, LocaleTrait;
 
@@ -43,7 +42,6 @@ class AdminBookController extends Controller
 
         $this->bookMeta = $bookMeta;
 
-        $this->admin = Auth::user()->isAdmin();
 
         //$this->middleware('App\Http\Middleware\BeforeAdminZone:Admin');
         /*
@@ -60,7 +58,7 @@ class AdminBookController extends Controller
     public function index()
     {
 
-        if($this->admin) {
+        if(Session::get('role.admin')) {
             $books = $this->bookRepository->model->with('meta')->orderBy('created_at', 'ASC')->paginate(15);
         }
         else {
@@ -69,7 +67,7 @@ class AdminBookController extends Controller
                     ->orderBy('created_at', 'ASC')->paginate(15);
         }
 
-        return view('admin.modules.book.index',['books' => $books,'admin'=>$this->admin]);
+        return view('admin.modules.book.index',['books' => $books]);
     }
 
 
@@ -159,7 +157,12 @@ class AdminBookController extends Controller
     public function edit($id)
     {
 
-        $book = $this->bookRepository->model->where('id','=',$id)->with('meta')->first();
+        $book = $this->bookRepository->model->where('id','=',$id)->where('user_id','=',Auth::user()->id)->with('meta')->first();
+
+        if(!$book) {
+
+            return redirect('/')->with('error',trans('word.error-no-auth'));
+        }
 
         $getLang = App()->getLocale();
 
@@ -167,7 +170,9 @@ class AdminBookController extends Controller
 
         $categories = $categories->lists('name_'.$getLang,'id');
 
-        return view('admin.modules.book.edit',['book'=>$book,'categories'=>$categories]);
+        $status = ['draft'=>'draft','published'=>'published'];
+
+        return view('admin.modules.book.edit',['book'=>$book,'categories'=>$categories,'status'=>$status]);
     }
 
     /**
@@ -245,13 +250,12 @@ class AdminBookController extends Controller
             return redirect()->back()->with('success',trans('word.success-delete'));
         }
 
-        return redirect()->back()->with('success',trans('word.error-delete'));
+        return redirect()->back()->with('error',trans('word.error-delete'));
     }
 
     public function getBookByType ($type = 'book') {
 
-        $admin = $this->admin;
-        if($admin) {
+        if(Session::get('role.admin') || Session::get('role.editor')) {
             $books = $this->bookRepository->model->where('type','=',$type)->with('meta')->orderBy('created_at','desc')->paginate(15);
         }
         else {
@@ -261,6 +265,6 @@ class AdminBookController extends Controller
                 ->orderBy('created_at', 'ASC')->paginate(15);
         }
 
-        return view('admin.modules.book.index',['books' => $books,'admin'=> $admin]);
+        return view('admin.modules.book.index',['books' => $books]);
     }
 }

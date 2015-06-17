@@ -39,4 +39,8 @@ class Book extends AbstractModel
         return $this->hasOne('App\Src\Book\BookMeta');
     }
 
+    public function purchases() {
+        return $this->hasMany('App\Src\Purchase\Purchase','book_id');
+    }
+
 }

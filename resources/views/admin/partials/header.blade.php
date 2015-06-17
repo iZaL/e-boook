@@ -4,7 +4,7 @@
     <div id="fb-root"></div>
 
     <!-- toolbar -->
-@include('admin.partials.toolbar')
+@include('partials.toolbar')
 
     <div class="row header-top hidden-print">
 

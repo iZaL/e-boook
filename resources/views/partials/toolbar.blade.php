@@ -4,19 +4,23 @@
         <nav class="navbar navbar-right header-nav" role="navigation">
             <ul class="nav navbar-nav">
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{ Auth::user() ? trans('word.account') : trans('word.login')}}</a>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{ Session::get('auth.id') ? trans('word.account') : trans('word.login')}}</a>
                     <ul class="dropdown-menu">
                         <li>
-                            @if(Auth::user())
+                            @if(Session::get('role'))
                                 <div class="dropdown-content col-md-4 col-lg-3">
 
-                                    <a href="{{ action('UserController@show',Auth::id()) }}" class="btn btn-primary col-lg-12"><i class="fa fa-user fa-aw"></i>&nbsp;{{ trans('word.profile') }}</a>
+                                    @if(Session::get('role.admin'))
 
-                                    @if(Auth::user()->isAdmin() || Auth::user()->isEditor())
+                                        <a href="{{ route('app.admin.book.index') }}" class="btn btn-primary col-lg-12"><i class="fa fa-user fa-aw"></i>&nbsp;{{ trans('word.admin-panel') }}</a>
 
-                                        <a href="{{ action('Admin\AdminBookController@index') }}" class="btn btn-primary col-lg-12"><i class="fa fa-user fa-aw"></i>&nbsp;{{ trans('word.admin-panel') }}</a>
+                                    @elseif(Session::get('role.editor'))
+
+                                        <a href="{{ route('app.editor.book.index') }}" class="btn btn-primary col-lg-12"><i class="fa fa-user fa-aw"></i>&nbsp;{{ trans('word.admin-panel') }}</a>
 
                                     @endif
+
+                                        <a href="{{ action('UserController@show',Session::get('auth.id')) }}" class="btn btn-primary col-lg-12"><i class="fa fa-user fa-aw"></i>&nbsp;{{ trans('word.profile') }}</a>
 
                                     <a href="/auth/logout" class="btn btn-danger col-lg-12"><i class="fa fa-sign-out fa-aw"></i>&nbsp;{{ trans('word.logout') }}</a>
                                 </div>

@@ -25,7 +25,10 @@ class Favorite extends Model
         ->orderBy('book_id','asc')
         ->get();
 
-        return $books;
+        if($books) {
+            return $books;
+        }
+        return false;
     }
 
 }

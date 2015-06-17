@@ -54,7 +54,7 @@
             <div class="well">
                 <div class="row">
                     <div class="col-xs-6 col-sm-5 col-md-7 {{ App::getLocale('locale') === 'ar' ? 'text-left' : ''  }}">
-                        <strong>{{ trans('word.author') }}</strong> <a href="{{ action('UserController@show', $author->id) }}"><span>{{ $author->__get('name') }}</span></a><br>
+                        <strong>{{ trans('word.author') }}</strong> <a href="{{ action('UserController@showSingleProfile', $author->id) }}"><span>{{ $author->__get('name') }}</span></a><br>
                         <strong>{{ trans('word.author-email') }}:</strong> <span>{{ $author->email }}</span><br>
                         <strong>{{ trans('word.pages-count') }}:</strong> <span>{{ $bookMeta->total_pages }}</span><br>
                         <strong>{{ trans('word.book-extention') }}</strong> <span>{{ trans('word.pdf') }}</span><br>
@@ -66,15 +66,22 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-12">
+                    <div class="col-lg-12">
                         <h3>{{ trans('word.description') }}</h3>
-                        <p>{{ $book->__get('description') }}</p>
-
                     </div>
+                    <div class="col-lg-10">
+                        <p>{{ $book->__get('description') }}</p>
+                        </br>
+                    </div>
+                    <div class="col-lg-2">
+                        {{--Views Number --}}
+                        <a class="btn btn-warning btn-sm" href="#"><i class="fa fa-eye fa-aw"></i> {{ $book->views }}</a>
+                    </div>
+
                 </div>
-                <hr>
+
                 <div class="row">
-                    @if(!Auth::user())
+                    @if(!Session::get('auth.id'))
                     <div class="row">
                         <div class="col-lg-8 alert alert-info col-lg-offset-2">
                                 {{ trans('word.needs-registeration') }}
@@ -84,19 +91,27 @@
                     </div>
                     @endif
                     <div class="col-xs-12 col-md-4">
-                        <a class="btn btn-block btn-primary {{ (!Auth::user()) ? 'disabled' : '' }} alt="{{ trans('word.needs-registeration') }}"><i class="fa fa-fw fa-indent"></i>  {{ trans('word.order-now') }}</a>
+                        <a class="btn btn-block btn-primary {{ (! Session::get('auth.id') || $book->free) ? 'disabled' : '' }}" alt="{{ trans('word.make-order') }}" href="{{ action('BookController@CreateNewOrder',[$book->id,Session::get('auth.id')]) }}"><i class="fa fa-fw fa-indent"></i>  {{ trans('word.order-now') }}</a>
                     </div>
                     <div class="col-xs-12 col-md-4">
-                        <a class="btn btn-block btn-danger {{ (!Auth::user()) ? 'disabled' : '' }}" href="{{ (Auth::user()) ? action('BookController@addFavorite', [Auth::user()->id,$book->id]) : '#' }}"><i class="fa fa-fw fa-heart"></i>  {{ trans('word.add-favorite') }}</a>
+                        <a class="btn btn-block btn-danger {{ (! Session::get('auth.id')) ? 'disabled' : '' }}" href="{{ (Session::get('auth.id')) ? action('BookController@addFavorite', [Session::get('auth.id'),$book->id]) : '#' }}"><i class="fa fa-fw fa-heart"></i>  {{ trans('word.add-favorite') }}</a>
                     </div>
                     <div class="col-xs-12 col-md-4">
-
-                        <a class="btn btn-block btn-default {{ (!Auth::user()) ? 'disabled' : '' }}"
-                           href="{{ (Auth::user()) && ($book->free === 0) ? action('BookController@createNewPreview',$book->url) : '#' }}">
-                            <i class="fa fa-fw fa-star"></i>  {{ trans('word.book-preview') }}
+                        {{--Full Link for the Free Books-- Free Value = 1 --}}
+                        @if($book->free)
+                            <a class="btn btn-block btn-default {{ (!Session::get('auth.id')) ? 'disabled' : '' }}"
+                               href="{{ action('BookController@getFreePdfFile',$book->url) }}">
+                                <i class="fa fa-fw fa-book"></i>  {{ trans('word.book-full-preview') }}
+                            </a>
+                        @else
+                        {{--Preview Link for Paid Books Only 10 Pages can be previewed - Free Value = 0 --}}
+                        <a class="btn btn-block btn-default {{ (!Session::get('auth.id')) ? 'disabled' : '' }}"
+                           href="{{ (Session::get('auth.id') && !$book->free) ? action('BookController@createNewPreview',$book->url) : '#' }}">
+                            <i class="fa fa-fw fa-book"></i>  {{ trans('word.book-preview') }}
                         </a>
-
+                        @endif
                     </div>
+
                     {{--Rating System--}}
 
 

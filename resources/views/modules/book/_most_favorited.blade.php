@@ -19,10 +19,10 @@
                 <div class="col-xs-12 col-md-3" style="margin:0px;">
                     <div class=" product-list-inline-small">
                         <div class="thumbnail">
-                            <a href="{{ action('BookController@show',$book->id) }}"><img class="img-responsive " src="/img/cover/cover_{{App::getLocale()}}/thumbnail/{{ $book->__get('cover') }}" alt=""></a>div
+                            <a href="{{ action('BookController@show',$book->id) }}"><img class="img-responsive " src="/img/cover/cover_{{App::getLocale()}}/thumbnail/{{ $book->__get('cover') }}" alt=""></a>
                             <div class="caption">
-                                <a href="{{ action('BookController@show',$book->id) }}"><h4>{{ $book->__get('title') }}</h4></a>
-                                <p>{!! Str::limit($book->__get('body'),25) !!} </p>
+                                <a href="{{ action('BookController@show',$book->id) }}"><h4>{{ Str::limit($book->__get('title'),25) }}</h4></a>
+                                <p>{!! e(Str::limit($book->__get('body'),25)) !!} </p>
                                 <span class="label label-info price pull-right">{{ ($book->free === 0) ? $book->meta->price.' KD': trans('word.free') }}</span>
                             </div>
                         </div>

@@ -38,6 +38,7 @@ $factory->define('App\Src\Book\Book', function($faker) {
         'description_ar' => 'تفاصيل الموضوع تفاصيل الموضوع',
         'description_en' => $faker->paragraph(2),
         'body' => $faker->text,
+        'status' => 'published',
         'url' => 'test.pdf',
         'free' => 0,
     ];

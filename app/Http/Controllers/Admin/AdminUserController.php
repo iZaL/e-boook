@@ -31,4 +31,13 @@ class AdminUserController extends Controller
 
     }
 
+    public function show($id) {
+
+        $Allbooks = $this->userRepository->getAllBooksForUser($id);
+
+        $favoriteBooks = $this->userRepository->getFavoritedBooksForUser($id);
+
+        return view('modules.user.profile',['books'=>$Allbooks,'favoriteBooks'=>$favoriteBooks,'user'=>$this->authUser]);
+    }
+
 }

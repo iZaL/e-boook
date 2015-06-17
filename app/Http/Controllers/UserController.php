@@ -6,6 +6,7 @@ use App\Src\Book\BookRepository;
 use App\Src\Favorite\FavoriteRepository;
 use App\Src\Role\RoleRepository;
 use App\Src\User\User;
+use App\Src\User\UserHelpers;
 use App\Src\User\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,13 +18,19 @@ class UserController extends Controller
     public $bookRepository;
     public $favoriteRepository;
     public $roleRepository;
+    public $authUser;
 
+
+    use UserHelpers;
 
     public function __construct(UserRepository $userRepository, BookRepository $bookRepository, FavoriteRepository $favoriteRepository, RoleRepository $roleRepository) {
         $this->userRepository = $userRepository;
         $this->bookRepository = $bookRepository;
         $this->favoriteRepository = $favoriteRepository;
         $this->roleRepository = $roleRepository;
+        $this->authUser = Auth::user();
+
+        $this->middleware('grant.access',['only'=>['show','edit','update']]);
     }
     /**
      * Display a listing of the resource.
@@ -64,13 +71,23 @@ class UserController extends Controller
      */
     public function show($id)
     {
+        /*
+         * 1- a visitor is the owner
+         * 2- a visitor is just a visitor
+         * 3- a visitor is the administrator
+         * */
+
+        // checks if the authintecated user is the same user who is visiting the profile page
+
         $Allbooks = $this->userRepository->getAllBooksForUser($id);
 
         $favoriteBooks = $this->userRepository->getFavoritedBooksForUser($id);
 
-        $user = Auth::user();
+        return view('modules.user.profile',['books'=>$Allbooks,'favoriteBooks'=>$favoriteBooks,'user'=>$this->authUser]);
 
-        return view('modules.user.profile',['books'=>$Allbooks,'favoriteBooks'=>$favoriteBooks,'user'=>$user]);
+
+        //return redirect()->back()->with('error', trans('word.error-no-auth'));
+
     }
 
     /**
@@ -81,6 +98,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+
         $roles = $this->roleRepository->getAll()->lists('name','id');
         $user = $this->userRepository->model->where('id','=',$id)->with('roles')->first();
         return view('auth.edit',['user' => $user,'roles'=>$roles]);
@@ -94,6 +112,8 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
+
+
         // check if authenticated in order to change the active & Role of a user
         if(Auth::user()->isAdmin()) {
             $user = $this->userRepository->model->where('id','=',$request->input('id'))->update($request->except('_token','id','role_name'));
@@ -103,7 +123,9 @@ class UserController extends Controller
             return redirect()->back()->with('success', trans('word.success-edit-user'));
         }
         // if normal user only change the normal data
+
         $user = $this->userRepository->model->where('id', '=', $request->input('id'))->update($request->except('_token', 'id', 'active', 'role_name'));
+
         if ($user) {
             return redirect()->back()->with('success', trans('word.success-edit-user'));
         }
@@ -120,6 +142,14 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function showSingleProfile($userId) {
+
+        $user = $this->userRepository->getById($userId)->first();
+
+        return view('modules.user._single_profile',['user'=>$user]);
+
     }
 
 }

@@ -36,7 +36,11 @@
             </div>
         </div>
         <div class="panel-body">
-    {!! Form::model($book,['action' => 'Admin\AdminBookController@update', 'method' => 'PATCH','files'=>'true'], ['class'=>'form-horizontal']) !!}
+            @if(Session::get('role.admin'))
+            {!! Form::model($book,['route' => 'app.admin.book.update', 'method' => 'PATCH','files'=>'true'], ['class'=>'form-horizontal']) !!}
+            @elseif(Session::get('role.editor'))
+            {!! Form::model($book,['route' => 'app.editor.book.update', 'method' => 'PATCH','files'=>'true'], ['class'=>'form-horizontal']) !!}
+            @endif
         {!! Form::hidden('id',$book->id)!!}
     <div class="row">
         <div class="row page-header">
@@ -80,20 +84,26 @@
         {!! Form::text('title_ar', null, ['class' => 'form-control','placeholder'=>'Book Title in Arabic']) !!}
     </div>
 
-    <div class="form-group col-md-4 col-lg-4">
+    <div class="form-group col-md-2 col-lg-2">
 
         {!! Form::label('category_id', trans('word.categories'), ['class' => 'control-label']) !!}*
         {!! Form::select('category_id', $categories ,null, ['class' => 'form-control','style'=>'text-align:left !important;']) !!}
     </div>
+    @if(Session::get('role.admin'))
+    <div class="form-group col-md-2 col-lg-2">
+        {!! Form::label('status', trans('word.categories'), ['class' => 'control-label']) !!}*
+        {!! Form::select('status', $status ,null, ['class' => 'form-control','style'=>'text-align:left !important;']) !!}
+    </div>
+    @endif
     <div class="row">
-    <div class="form-group col-md-6 col-lg-6">
-        {!! Form::label('description_ar',  trans('word.description-ar') , ['class' => 'control-label']) !!}*
-        {!! Form::textarea('description_ar', null, ['class' => 'form-control','placeholder'=> trans('word.descrption-ar')]) !!}
-    </div>
-    <div class="form-group col-md-6 col-lg-6">
-        {!! Form::label('description_en',  trans('word.description-en') , ['class' => 'control-label']) !!}*
-        {!! Form::textarea('description_en', null, ['class' => 'form-control','placeholder'=> trans('word.descrption-en')]) !!}
-    </div>
+        <div class="form-group col-md-6 col-lg-6">
+            {!! Form::label('description_ar',  trans('word.description-ar') , ['class' => 'control-label']) !!}*
+            {!! Form::textarea('description_ar', null, ['class' => 'form-control','placeholder'=> trans('word.descrption-ar')]) !!}
+        </div>
+        <div class="form-group col-md-6 col-lg-6">
+            {!! Form::label('description_en',  trans('word.description-en') , ['class' => 'control-label']) !!}*
+            {!! Form::textarea('description_en', null, ['class' => 'form-control','placeholder'=> trans('word.descrption-en')]) !!}
+        </div>
     </div>
 
     <div class="form-group">

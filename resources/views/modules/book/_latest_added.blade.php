@@ -23,9 +23,9 @@
                             <a href="{{ action('BookController@show',$book->id) }}"><img class="img-responsive " src="/img/cover/cover_{{App::getLocale()}}/thumbnail/{{$book->__get('cover') }}" alt=""></a>
                             <div class="caption">
                                 <div class="row">
-                                    <a href="{{ action('BookController@show',$book->id) }}"><h4>{{ $book->__get('title') }}</h4></a>
-                                    <p>{!! Str::limit($book->__get('body'),25) !!} </p>
-                                    <span class="label label-info price pull-right">{{ ($book->free === 0) ? $book->meta->price.' KD': trans('word.free') }}</span>
+                                    <a href="{{ action('BookController@show',$book->id) }}"><h4>{!! Str::limit($book->__get('title'),25) !!}</h4></a>
+                                    <p>{!! e(Str::limit($book->__get('body'),25)) !!} </p>
+                                    <span class="label label-info price pull-right">{{ ($book->free === 0) ? $book->meta->price.' KD': e(trans('word.free')) }}</span>
                                 </div>
                             </div>
                         </div>

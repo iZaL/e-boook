@@ -16,7 +16,8 @@ class Kernel extends HttpKernel
         'Illuminate\Session\Middleware\StartSession',
         'Illuminate\View\Middleware\ShareErrorsFromSession',
         'App\Http\Middleware\VerifyCsrfToken',
-        'App\Http\Middleware\Locale'
+        'App\Http\Middleware\Locale',
+        'App\Http\Middleware\GetUserRole',
     ];
 
     /**
@@ -30,5 +31,6 @@ class Kernel extends HttpKernel
         'guest' => 'App\Http\Middleware\RedirectIfAuthenticated',
         'admin.zone' => 'App\Http\Middleware\BeforeAdminZone',
         'editor.zone' => 'App\Http\Middleware\BeforeEditorZone',
+        'grant.access' => 'App\Http\Middleware\GrantAccessForAuthUser'
     ];
 }
