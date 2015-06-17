@@ -91,10 +91,10 @@
                     </div>
                     @endif
                     <div class="col-xs-12 col-md-4">
-                        <a class="btn btn-block btn-primary {{ (! Session::get('auth.id') || $book->free) ? 'disabled' : '' }}" alt="{{ trans('word.make-order') }}" href="{{ action('BookController@CreateNewOrder',[$book->id,Session::get('auth.id')]) }}"><i class="fa fa-fw fa-indent"></i>  {{ trans('word.order-now') }}</a>
+                        <a class="btn btn-block btn-primary {{ (! Session::get('auth.id') || $book->free) ? 'disabled' : '' }}" alt="{{ trans('word.make-order') }}" href="{{ action('BookController@getCreateNewOrder',[$book->id,Session::get('auth.id')]) }}"><i class="fa fa-fw fa-indent"></i>  {{ trans('word.order-now') }}</a>
                     </div>
                     <div class="col-xs-12 col-md-4">
-                        <a class="btn btn-block btn-danger {{ (! Session::get('auth.id')) ? 'disabled' : '' }}" href="{{ (Session::get('auth.id')) ? action('BookController@addFavorite', [Session::get('auth.id'),$book->id]) : '#' }}"><i class="fa fa-fw fa-heart"></i>  {{ trans('word.add-favorite') }}</a>
+                        <a class="btn btn-block btn-danger {{ (! Session::get('auth.id')) ? 'disabled' : '' }}" href="{{ (Session::get('auth.id')) ? action('BookController@getCreateNewFavoriteList', [Session::get('auth.id'),$book->id]) : '#' }}"><i class="fa fa-fw fa-heart"></i>  {{ trans('word.add-favorite') }}</a>
                     </div>
                     <div class="col-xs-12 col-md-4">
                         {{--Full Link for the Free Books-- Free Value = 1 --}}
@@ -106,7 +106,7 @@
                         @else
                         {{--Preview Link for Paid Books Only 10 Pages can be previewed - Free Value = 0 --}}
                         <a class="btn btn-block btn-default {{ (!Session::get('auth.id')) ? 'disabled' : '' }}"
-                           href="{{ (Session::get('auth.id') && !$book->free) ? action('BookController@createNewPreview',$book->url) : '#' }}">
+                           href="{{ (Session::get('auth.id') && !$book->free) ? action('BookController@getCreateNewPreview',$book->url) : '#' }}">
                             <i class="fa fa-fw fa-book"></i>  {{ trans('word.book-preview') }}
                         </a>
                         @endif

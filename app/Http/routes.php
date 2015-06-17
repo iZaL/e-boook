@@ -8,7 +8,7 @@ Route::get('/home',['as'=>'home','uses'=>'BookController@index']);
 Route::get('/',['as'=>'home','uses'=>'BookController@index']);
 Route::get('/books',['uses'=>'BookController@getAllBooks']);
 Route::resource('book','BookController',['only'=>['index','show']]);
-Route::get('search',['uses'=>'BookController@showSearchResults']);
+Route::get('search',['uses'=>'BookController@getShowSearchResults']);
 
 
 /***************************************************************************************************
@@ -99,9 +99,9 @@ Route::group(['prefix'=>'app'],function () {
          *                                          Favorite
          *
          ***************************************************************************************************/
-        Route::get('/favorite/{user}/{book}',['uses'=>'BookController@addFavorite']);
-        Route::get('/favorite/remove/{user}/{book}',['uses'=>'BookController@removeBookFromUserFavoriteList']);
-        Route::get('/orders/remove/{user}/{book}',['uses'=>'BookController@removeBookFromUserOrderList']);
+        Route::get('/favorite/{user}/{book}',['uses'=>'BookController@getCreateNewFavoriteList']);
+        Route::get('/favorite/remove/{user}/{book}',['uses'=>'BookController@getRemoveBookFromUserFavoriteList']);
+        Route::get('/orders/remove/{user}/{book}',['uses'=>'BookController@getRemoveBookFromUserOrderList']);
 
 
 
@@ -119,8 +119,8 @@ Route::group(['prefix'=>'app'],function () {
          ***************************************************************************************************/
 
         Route::get('/book/pdf/{url}',['uses'=>'BookController@getFreePdfFile']);
-        Route::get('/book/pdf/preview/{url}',['uses' => 'BookController@createNewPreview']);
-        Route::get('/book/order/{bookId}/{userId}',['uses'=>'BookController@CreateNewOrder']);
+        Route::get('/book/pdf/preview/{url}',['uses' => 'BookController@getCreateNewPreview']);
+        Route::get('/book/order/{bookId}/{userId}',['uses'=>'BookController@getCreateNewOrder']);
 
 
         /***************************************************************************************************
@@ -174,6 +174,7 @@ Route::group(['prefix'=>'app'],function () {
 
             // resource route for book & poem
             Route::resource('book','Admin\AdminBookController');
+            Route::get('/orders/accept/{userId}/{bookId}/{stage}','Admin\AdminBookController@getAcceptOrder');
 
             /***************************************************************************************************
              *                                          Profile

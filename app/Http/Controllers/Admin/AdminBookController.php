@@ -11,6 +11,7 @@ use App\Src\Category\CategoryRepository;
 use App\Src\Book\BookRepository;
 use App\Http\Requests\CreateBook;
 use App\Src\Book\BookHelpers;
+use App\Src\Purchase\PurchaseRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -25,6 +26,7 @@ class AdminBookController extends Controller
     public $categoryRepository;
     public $bookRepository;
     public $bookMeta;
+    public $purchaseRepository;
 
     use BookHelpers, LocaleTrait;
 
@@ -34,7 +36,7 @@ class AdminBookController extends Controller
      * @param BookRepository $book
      * @param CategoryRepository $category
      */
-    public function __construct(BookRepository $book,CategoryRepository $categoryRepository, BookMeta $bookMeta)
+    public function __construct(BookRepository $book,CategoryRepository $categoryRepository, BookMeta $bookMeta, PurchaseRepository $purchaseRepository)
     {
         $this->bookRepository = $book;
 
@@ -42,12 +44,7 @@ class AdminBookController extends Controller
 
         $this->bookMeta = $bookMeta;
 
-
-        //$this->middleware('App\Http\Middleware\BeforeAdminZone:Admin');
-        /*
-         * Middleware CreateBook only for Admin and Editor
-         * $this->middleware('before.create.book:Admin,Editor',['only'=>'create','store']);
-         * */
+        $this->purchaseRepository = $purchaseRepository;
     }
 
     /**
@@ -67,7 +64,10 @@ class AdminBookController extends Controller
                     ->orderBy('created_at', 'ASC')->paginate(15);
         }
 
-        return view('admin.modules.book.index',['books' => $books]);
+        $orders = $this->purchaseRepository->model->with('book')->get();
+
+
+        return view('admin.modules.book.index',['books' => $books,'orders'=>$orders]);
     }
 
 
@@ -160,12 +160,11 @@ class AdminBookController extends Controller
         if(Session::get('role.admin')) {
 
             $book = $this->bookRepository->model->where('id','=',$id)->with('meta')->first();
-
         }
 
-        if(!$book) {
+        elseif(Session::get('role.editor')) {
 
-            return redirect('/')->with('error',trans('word.error-no-auth'));
+            $book = $this->bookRepository->model->where(['id'=>$id,'user_id'=>Session::get('auth.id')])->with('meta')->first();
         }
 
         $getLang = App()->getLocale();
@@ -229,7 +228,6 @@ class AdminBookController extends Controller
 
             $total_pages = Session::get('total_pages');
 
-
             // update the book_metas table
             $this->bookMeta->where('book_id','=',$book->id)->update([
                 'price' => $price,
@@ -257,6 +255,7 @@ class AdminBookController extends Controller
         return redirect()->back()->with('error',trans('word.error-delete'));
     }
 
+
     public function getBookByType ($type = 'book') {
 
         if(Session::get('role.admin') || Session::get('role.editor')) {
@@ -271,4 +270,13 @@ class AdminBookController extends Controller
 
         return view('admin.modules.book.index',['books' => $books]);
     }
+
+    public function getAcceptOrder($userId,$bookId,$stage) {
+
+        $this->purchaseRepository->model->where(['user_id'=>$userId,'book_id'=>$bookId])->update([
+            'stage' => $stage
+        ]);
+        return redirect()->back()->with(['succes'=>trans('success.order')]);
+    }
+
 }

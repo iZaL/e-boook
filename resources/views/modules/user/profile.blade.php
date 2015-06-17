@@ -191,7 +191,7 @@
                                                 <span> {{ $book->status }} </span>
                                             </td>
                                             <td>
-                                                <a class="btn btn-danger" href="{{ action('BookController@removeBookFromUserOrderList',[$user->id,$book->id]) }}">{{ trans('word.remove') }}</a>
+                                                <a class="btn btn-danger" href="{{ action('BookController@getRemoveBookFromUserOrderList',[$user->id,$book->id]) }}">{{ trans('word.remove') }}</a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -237,7 +237,7 @@
                                                 <span> {{ $book->status }} </span>
                                             </td>
                                             <td>
-                                                <a class="btn btn-danger" href="{{ action('BookController@removeBookFromUserOrderList',[$user->id,$book->id]) }}">{{ trans('word.remove') }}</a>
+                                                <a class="btn btn-danger" href="{{ action('BookController@getRemoveBookFromUserOrderList',[$user->id,$book->id]) }}">{{ trans('word.remove') }}</a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -265,8 +265,8 @@
 
                                         <div>{{ trans('word.name') }} : {{ $user->__get('name') }}</div>
                                         <div>{{ trans('word.email') }} : {{ $user->email }}</div>
-                                        <div>{{ trans('word.phone') }} : </div>
-                                        <div>{{ trans('word.address') }} : </div>
+                                        <div>{{ trans('word.mobile') }} : {{ $user->mobile }}</div>
+
                                     </div>
                                     
                                     <div class="col-lg-2">

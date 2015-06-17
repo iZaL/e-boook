@@ -119,7 +119,7 @@ class BookController extends Controller
     }
 
 
-    public function addFavorite($userId,$bookId) {
+    public function getCreateNewFavoriteList($userId,$bookId) {
 
         $checkFavorite = $this->favoriteRepository->model->where(['book_id'=> $bookId,'user_id'=>$userId])->get();
 
@@ -131,28 +131,41 @@ class BookController extends Controller
             ]);
 
             if ($favorited) {
-                return redirect()->back()->with(['success' => trans('word.book-added-to-favorites')]);
+                return redirect()->back()->with(['success' => trans('word.success-book-favorites')]);
             }
 
         }
 
-        return redirect()->back()->with(['error' => trans('word.book-not-added-to-favorites')]);
+        return redirect()->back()->with(['error' => trans('word.error-book-favorites')]);
     }
 
-    public function removeBookFromUserFavoriteList($userId,$bookId) {
+    /**
+     * @param $userId
+     * @param $bookId
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function getRemoveBookFromUserFavoriteList($userId,$bookId) {
 
         $this->favoriteRepository->model->where(['book_id'=> $bookId,'user_id'=>$userId])->delete();
 
         return redirect()->back();
     }
 
-    public function removeBookFromUserOrderList($userId,$bookId) {
+    /**
+     * @param $userId
+     * @param $bookId
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function getRemoveBookFromUserOrderList($userId,$bookId) {
 
         $this->purchaseRepository->model->where(['book_id'=> $bookId,'user_id'=>$userId,'stage'=>'order'])->delete();
 
         return redirect()->back()->with(['success'=>trans('word.order-removed')]);
     }
 
+    /**
+     * @return \Illuminate\View\View
+     */
     public function getAllBooks() {
         $books = $this->bookRepository->model->where('status','=','published')->with('meta')->orderBy('created_at','desc')->paginate(10);
         $render = true;
@@ -163,19 +176,11 @@ class BookController extends Controller
      * @param Request $request
      * @return search function responsible to search all books title , descriptions and even content of each book
      */
-    public function showSearchResults(Request $request) {
+    public function getShowSearchResults(Request $request) {
 
         $searchItem = $request->input('search');
 
-        $searchResults = $this->bookRepository->model
-            // no results for drafts -- only for published
-            ->having('status','=','published')
-            ->orWhere('description_ar','like','%'.$searchItem.'%')
-            ->orWhere('description_en','like','%'.$searchItem.'%')
-            ->orWhere('title_ar','like','%'.$searchItem.'%')
-            ->orWhere('title_en','like','%'.$searchItem.'%')
-            ->orWhere('body','like','%'.$searchItem.'%')
-            ->with('meta')->get();
+        $searchResults = $this->bookRepository->SearchBooks($searchItem);
 
         if(count($searchResults) > 0) {
 
@@ -220,7 +225,7 @@ class BookController extends Controller
      * @param $bookUrl
      * @return creating on the fly a link with 10 pages of a pdf file of a book
      */
-    public function createNewPreview($bookUrl) {
+    public function getCreateNewPreview($bookUrl) {
 
         // every request on preview .. View will be increased
         $this->bookRepository->increaseBookViewByUrl($bookUrl);
@@ -232,7 +237,7 @@ class BookController extends Controller
     /**
      * @param Create New Order
      */
-    public function CreateNewOrder($bookId,$authId) {
+    public function getCreateNewOrder($bookId,$authId) {
 
         if($this->purchaseRepository->model->where('book_id','=',$bookId)->where('user_id','=',$authId)->first()) {
             return redirect()->back()->with(['error'=>trans('word.error-order-repeated')]);

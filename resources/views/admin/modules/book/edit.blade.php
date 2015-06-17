@@ -116,7 +116,7 @@
             {!! Form::submit(trans('word.save'), ['class' => 'btn btn-primary form-control']) !!}
         </div>
         <div class="col-lg-6">
-            <a class="btn btn-danger form-control" href="{{ action('Admin\AdminBookController@index') }}">{{ trans('word.cancel') }}</a>
+            <a class="btn btn-danger form-control" href="{{ route('home') }}">{{ trans('word.cancel') }}</a>
         </div>
     </div>
 

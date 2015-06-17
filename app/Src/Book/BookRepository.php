@@ -56,5 +56,21 @@ class BookRepository extends AbstractRepository {
 
     }
 
+    public function SearchBooks($searchItem) {
+        return $this->model
+            // no results for drafts -- only for published
+            ->having('status','=','published')
+            ->orWhere('description_ar','like','%'.$searchItem.'%')
+            ->orWhere('description_en','like','%'.$searchItem.'%')
+            ->orWhere('title_ar','like','%'.$searchItem.'%')
+            ->orWhere('title_en','like','%'.$searchItem.'%')
+            ->orWhere('body','like','%'.$searchItem.'%')
+            ->with('meta')->get();
+    }
+
+    public function getAllBookOrders() {
+        return $this->model->users_orders()->with('meta')->get();
+    }
+
 
 }

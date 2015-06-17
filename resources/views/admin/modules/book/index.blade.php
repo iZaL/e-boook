@@ -12,6 +12,7 @@
                 <li class="active"><a href="#step1" data-toggle="tab"><i class="fa fa-aw fa-book"></i>{{ trans('word.volumes') }} </a></li>
                 <li><a href="#step2" data-toggle="tab"><i class="fa fa-aw fa-book"></i>{{ trans('word.draft') }}</a></li>
                 <li><a href="#step3" data-toggle="tab"><i class="fa fa-aw fa-book"></i>{{ trans('word.published') }}</a></li>
+                <li><a href="#step4" data-toggle="tab"><i class="fa fa-aw fa-order"></i>{{ trans('word.orders') }}</a></li>
             </ul>
 
             {{--All Books--}}
@@ -168,6 +169,62 @@
                         </div>
                     </div>
                 </div>
+
+
+                {{--Orders --}}
+
+                <div class="tab-pane" id="step4">
+                    <div class="row">
+                        <div class="col-xs-12 paddingTop10">
+                            @if(count($orders) > 0)
+                                <table class="table table-bordered table-order" id="draft">
+                                    <thead>
+                                    <tr>
+                                        <th class="hidden-xs">&nbsp;</th>
+                                        <th></th>
+                                        <th>{{ trans('word.total-pages') }}</th>
+                                        <th>{{ trans('word.status') }}</th>
+                                        <th>{{ trans('word.order-stage') }}</th>
+                                        <th>{{ trans('word.remove') }}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($orders as $order)
+                                        <tr>
+                                            <td class="hidden-xs"><img class="img-table img-responsive" src="/img/cover/cover_{{App::getLocale()}}/thumbnail/{{$book->__get('cover') }}" alt="{{ $book->title }}"></td>
+                                            <td>
+                                                <a href="{{ action('BookController@show',$order->book->id) }}"> {!! $order->book->title !!} </a>
+
+                                                <p> {!! Str::limit(strip_tags($book->body)) !!} </p>
+                                            </td>
+                                            <td>
+                                                <span> {{ $order->book->meta ? $order->book->meta->total_pages : 'N/A' }} </span>
+
+                                            </td>
+                                            <td>
+                                                <span> {{ $order->book->status }} </span>
+                                            </td>
+                                            <td>
+                                                <span> {{ $order->stage }} </span>
+                                            </td>
+                                            <td>
+                                                @if($order->stage === 'order')
+                                                <a class="btn btn-success" href="{{ action('Admin\AdminBookController@getAcceptOrder',[$order->user_id,$order->book->id,'under_process']) }}">{{ trans('word.accept') }}</a>
+                                                @elseif($order->stage === 'under_process')
+                                                <a class="btn btn-primary" href="{{ action('Admin\AdminBookController@getAcceptOrder',[$order->user_id,$order->book->id,'purchased']) }}">{{ trans('word.purchased') }}</a>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            @else
+                                <div class="alert alert-warning" role="alert">{{ trans('word.no-books-found') }}</div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+
 
                 {!! $books->render() !!}
             </div>
