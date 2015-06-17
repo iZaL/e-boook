@@ -40,4 +40,6 @@ class AdminUserController extends Controller
         return view('modules.user.profile',['books'=>$Allbooks,'favoriteBooks'=>$favoriteBooks,'user'=>$this->authUser]);
     }
 
+
+
 }

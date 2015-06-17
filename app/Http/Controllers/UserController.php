@@ -11,6 +11,7 @@ use App\Src\User\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
@@ -83,7 +84,9 @@ class UserController extends Controller
 
         $favoriteBooks = $this->userRepository->getFavoritedBooksForUser($id);
 
-        return view('modules.user.profile',['books'=>$Allbooks,'favoriteBooks'=>$favoriteBooks,'user'=>$this->authUser]);
+        $orders = $this->userRepository->getAllOrdersByUser($id);
+
+        return view('modules.user.profile',['books'=>$Allbooks,'favoriteBooks'=>$favoriteBooks,'user'=>$this->authUser,'orders'=>$orders]);
 
 
         //return redirect()->back()->with('error', trans('word.error-no-auth'));
@@ -100,7 +103,9 @@ class UserController extends Controller
     {
 
         $roles = $this->roleRepository->getAll()->lists('name','id');
+
         $user = $this->userRepository->model->where('id','=',$id)->with('roles')->first();
+
         return view('auth.edit',['user' => $user,'roles'=>$roles]);
     }
 
@@ -113,16 +118,18 @@ class UserController extends Controller
     public function update(Request $request)
     {
 
-
         // check if authenticated in order to change the active & Role of a user
-        if(Auth::user()->isAdmin()) {
+        if(Session::get('role.admin')) {
             $user = $this->userRepository->model->where('id','=',$request->input('id'))->update($request->except('_token','id','role_name'));
             DB::table('user_roles')->where('user_id','=',$request->input('id'))->update([
                 'role_id' => $request->input('role_name')
             ]);
             return redirect()->back()->with('success', trans('word.success-edit-user'));
         }
+
         // if normal user only change the normal data
+
+
 
         $user = $this->userRepository->model->where('id', '=', $request->input('id'))->update($request->except('_token', 'id', 'active', 'role_name'));
 
@@ -149,6 +156,10 @@ class UserController extends Controller
         $user = $this->userRepository->getById($userId)->first();
 
         return view('modules.user._single_profile',['user'=>$user]);
+
+    }
+
+    public function getAllOrdersForUser($id) {
 
     }
 

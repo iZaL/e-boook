@@ -101,6 +101,8 @@ Route::group(['prefix'=>'app'],function () {
          ***************************************************************************************************/
         Route::get('/favorite/{user}/{book}',['uses'=>'BookController@addFavorite']);
         Route::get('/favorite/remove/{user}/{book}',['uses'=>'BookController@removeBookFromUserFavoriteList']);
+        Route::get('/orders/remove/{user}/{book}',['uses'=>'BookController@removeBookFromUserOrderList']);
+
 
 
         /***************************************************************************************************

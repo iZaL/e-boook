@@ -75,4 +75,8 @@ class UserRepository extends AbstractRepository {
         return $this->model->findOrNew($id)->first();
     }
 
+    public function getAllOrdersByUser($id) {
+        return $this->model->findOrNew($id)->books_orders()->where('stage','=','order')->with('meta')->paginate(10);
+    }
+
 }

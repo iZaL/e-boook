@@ -25,7 +25,7 @@ class CategoryController extends Controller
     {
         //
         $categories = $this->categoryRepository->getAll();
-        $books = $this->bookRepository->model->with('meta')->paginate(5);
+        $books = $this->bookRepository->model->where('status','=','published')->with('meta')->paginate(5);
         return view('modules.category.index',['categories' => $categories, 'books' => $books]);
     }
 
@@ -58,7 +58,7 @@ class CategoryController extends Controller
     public function show($id)
     {
         $categories = $this->categoryRepository->getAll();
-        $books = $this->bookRepository->model->where('category_id','=',$id)->paginate(9);
+        $books = $this->bookRepository->model->where(['category_id' => $id,'status'=>'published'])->paginate(9);
         return view('modules.category.show',compact('categories','books'));
     }
 

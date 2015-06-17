@@ -21,7 +21,7 @@ class AdminContactUsController extends Controller
         Cache::forget('contactusInfo');
 
         $contactInfo = $this->contactus->first();
-        
+
         return view('admin.modules.contactus.edit',['contactInfo' => $contactInfo]);
     }
 

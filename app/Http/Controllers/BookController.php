@@ -74,7 +74,7 @@ class BookController extends Controller
     public function show($id)
     {
         // get all books by book ID
-        $book = $this->bookRepository->getById($id);
+        $book = $this->bookRepository->model->where(['id'=>$id,'status'=>'published'])->first();
 
         // get the author of the book
         $author = $book->user()->first();
@@ -146,9 +146,15 @@ class BookController extends Controller
         return redirect()->back();
     }
 
+    public function removeBookFromUserOrderList($userId,$bookId) {
+
+        $this->purchaseRepository->model->where(['book_id'=> $bookId,'user_id'=>$userId,'stage'=>'order'])->delete();
+
+        return redirect()->back()->with(['success'=>trans('word.order-removed')]);
+    }
 
     public function getAllBooks() {
-        $books = $this->bookRepository->model->with('meta')->orderBy('created_at','desc')->paginate(10);
+        $books = $this->bookRepository->model->where('status','=','published')->with('meta')->orderBy('created_at','desc')->paginate(10);
         $render = true;
         return view('modules.book.index',compact('books','render'));
     }
@@ -162,11 +168,14 @@ class BookController extends Controller
         $searchItem = $request->input('search');
 
         $searchResults = $this->bookRepository->model
+            // no results for drafts -- only for published
+            ->having('status','=','published')
             ->orWhere('description_ar','like','%'.$searchItem.'%')
             ->orWhere('description_en','like','%'.$searchItem.'%')
             ->orWhere('title_ar','like','%'.$searchItem.'%')
             ->orWhere('title_en','like','%'.$searchItem.'%')
-            ->orWhere('body','like','%'.$searchItem.'%')->with('meta')->get();
+            ->orWhere('body','like','%'.$searchItem.'%')
+            ->with('meta')->get();
 
         if(count($searchResults) > 0) {
 
@@ -223,15 +232,15 @@ class BookController extends Controller
     /**
      * @param Create New Order
      */
-    public function CreateNewOrder($bookId,$authUser) {
+    public function CreateNewOrder($bookId,$authId) {
 
-        if($this->purchaseRepository->model->where('book_id','=',$bookId)->where('user_id','=',$authUser->id)->first()) {
+        if($this->purchaseRepository->model->where('book_id','=',$bookId)->where('user_id','=',$authId)->first()) {
             return redirect()->back()->with(['error'=>trans('word.error-order-repeated')]);
         }
         else {
             if($this->purchaseRepository->model->create([
                 'book_id' => $bookId,
-                'user_id' => $authUser,
+                'user_id' => $authId,
                 'stage' => 'order'
             ])) {
                 return redirect()->back()->with(['success'=>trans('word.success-order-created')]);
@@ -240,6 +249,7 @@ class BookController extends Controller
                 return redirect()->back()->with(['error'=>trans('word.error-order-created')]);
             }
         }
+        return redirect()->back()->with(['error'=>trans('word.error-order-created')]);
     }
 
 }

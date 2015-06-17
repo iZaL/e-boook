@@ -19,6 +19,7 @@
                     <li><a href="{{ url('/home') }}"><i class="fa fa-home"></i>&nbsp; {{ trans('word.go-back-home') }}</a></li>
                     @if(Session::get('role.admin'))
                     <li><a href="{{ action('Admin\AdminUserController@index') }}"><i class="fa fa-home"></i>&nbsp; {{ trans('word.users') }}</a></li>
+                    {{--<li><a href="{{ action('Admin\BookController@getOrders') }}"><i class="fa fa-home"></i>&nbsp; {{ trans('word.users') }}</a></li>--}}
                     @endif
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="/admin/book"><i class="fa fa-book fa-aw"></i>&nbsp; {{ trans('word.books') }} <b

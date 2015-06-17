@@ -13,7 +13,7 @@ use App\Http\Requests\CreateBook;
 use App\Src\Book\BookHelpers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use Symfony\Component\HttpFoundation\Request;
+
 
 /**
  * Class AdminBookController
@@ -157,7 +157,11 @@ class AdminBookController extends Controller
     public function edit($id)
     {
 
-        $book = $this->bookRepository->model->where('id','=',$id)->where('user_id','=',Auth::user()->id)->with('meta')->first();
+        if(Session::get('role.admin')) {
+
+            $book = $this->bookRepository->model->where('id','=',$id)->with('meta')->first();
+
+        }
 
         if(!$book) {
 

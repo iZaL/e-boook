@@ -38,7 +38,11 @@
         </div>
     </div>
     <div class="panel-body">
-        {!! Form::open(['action' => 'Admin\AdminBookController@store', 'method' => 'post','files'=>'true'], ['class'=>'form-horizontal']) !!}
+        @if(Session::get('role.admin'))
+        {!! Form::open(['action' => 'app.admin.book.store', 'method' => 'post','files'=>'true'], ['class'=>'form-horizontal']) !!}
+        @elseif(Session::get('role.editor'))
+            {!! Form::open(['route' => 'app.editor.book.store', 'method' => 'post','files'=>'true'], ['class'=>'form-horizontal']) !!}
+        @endif
         <div class="row">
             <div class="form-group col-lg-4 col-md-4">
                 {!! Form::label('free', trans('word.free-book'))  !!}

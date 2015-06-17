@@ -39,8 +39,16 @@ class Book extends AbstractModel
         return $this->hasOne('App\Src\Book\BookMeta');
     }
 
-    public function purchases() {
-        return $this->hasMany('App\Src\Purchase\Purchase','book_id');
+    /**
+     * Many To Many Relation - Order Relation
+     * a user has many books
+     * a book belongs to many users
+     * Table : purchases
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function users_orders() {
+        // this book belongs to many users where forign id is user_id and
+        return $this->belongsToMany('App\Src\User\User','purchases');
     }
 
 }
