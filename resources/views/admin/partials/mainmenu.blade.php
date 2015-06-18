@@ -18,7 +18,7 @@
                 <ul class="nav navbar-nav navbar-left {{ App::getLocale() == 'ar' ? 'pull-right': '' }}">
                     <li><a href="{{ url('/home') }}"><i class="fa fa-home"></i>&nbsp; {{ trans('word.go-back-home') }}</a></li>
                     @if(Session::get('role.admin'))
-                    <li><a href="{{ action('Admin\AdminUserController@index') }}"><i class="fa fa-home"></i>&nbsp; {{ trans('word.users') }}</a></li>
+                    <li><a href="{{ action('Admin\AdminUserController@index') }}"><i class="fa fa-users"></i>&nbsp; {{ trans('word.users') }}</a></li>
                     {{--<li><a href="{{ action('Admin\BookController@getOrders') }}"><i class="fa fa-home"></i>&nbsp; {{ trans('word.users') }}</a></li>--}}
                     @endif
                     <li class="dropdown">

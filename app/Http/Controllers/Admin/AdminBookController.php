@@ -66,7 +66,6 @@ class AdminBookController extends Controller
 
         $orders = $this->purchaseRepository->model->with('book')->get();
 
-
         return view('admin.modules.book.index',['books' => $books,'orders'=>$orders]);
     }
 
@@ -183,18 +182,14 @@ class AdminBookController extends Controller
      *
      * @param  int  $id
      * @return Response
+     * * check if new covers
+     * get all data in the request
+     * create new covers if added
+     * create new pdf file
+     * get the url of the new file and add to the request
      */
     public function update(Requests\EditBook $request)
     {
-
-        /*
-         * check if new covers
-         * get all data in the request
-         * create new covers if added
-         * create new pdf file
-         * get the url of the new file and add to the request
-         *
-         * */
         $cover_ar = ($request->file('cover_ar')) ? $request->file('cover_ar') : '' ;
 
         $cover_en = ($request->file('cover_en')) ? $request->file('cover_en') : '' ;
@@ -216,11 +211,9 @@ class AdminBookController extends Controller
         $price = ($request->input('price') > 0) ? $request->input('price') : '00.0';
 
         // update the book table
-        $this->bookRepository->model->where('id','=',$id)->update($request->except('_token','_method','price','total_pages'));
+        $this->bookRepository->getById($id)->update($request->except('_token','_method','price','total_pages'));
 
-        $book = $this->bookRepository->model->where('id','=',$id)->first();
-
-        if($book) {
+        if($book = $this->bookRepository->getById($id)->first()) {
 
             event(new BookPublished($book));
 
@@ -256,7 +249,26 @@ class AdminBookController extends Controller
     }
 
 
-    public function getBookByType ($type = 'book') {
+    public function getAcceptOrder($userId,$bookId,$stage) {
+
+        $this->purchaseRepository->model->where(['user_id'=>$userId,'book_id'=>$bookId])->update([
+            'stage' => $stage
+        ]);
+
+        return redirect()->back()->with(['success'=>trans('success.order')]);
+    }
+
+    public function getDeleteOrder($userId,$bookId) {
+
+        if($this->purchaseRepository->deleteOrder($userId,$bookId)) {
+
+            return redirect()->back()->with(['success'=>trans('success.delete-order')]);
+
+        }
+
+    }
+
+    /*    public function getBookByType ($type = 'book') {
 
         if(Session::get('role.admin') || Session::get('role.editor')) {
             $books = $this->bookRepository->model->where('type','=',$type)->with('meta')->orderBy('created_at','desc')->paginate(15);
@@ -269,14 +281,6 @@ class AdminBookController extends Controller
         }
 
         return view('admin.modules.book.index',['books' => $books]);
-    }
-
-    public function getAcceptOrder($userId,$bookId,$stage) {
-
-        $this->purchaseRepository->model->where(['user_id'=>$userId,'book_id'=>$bookId])->update([
-            'stage' => $stage
-        ]);
-        return redirect()->back()->with(['succes'=>trans('success.order')]);
-    }
+    }*/
 
 }

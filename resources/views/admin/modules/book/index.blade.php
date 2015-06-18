@@ -185,7 +185,8 @@
                                         <th>{{ trans('word.total-pages') }}</th>
                                         <th>{{ trans('word.status') }}</th>
                                         <th>{{ trans('word.order-stage') }}</th>
-                                        <th>{{ trans('word.remove') }}</th>
+                                        <th>{{ trans('word.stage-change') }}</th>
+                                        <th>{{ trans('word.stage-delete') }}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -193,9 +194,9 @@
                                         <tr>
                                             <td class="hidden-xs"><img class="img-table img-responsive" src="/img/cover/cover_{{App::getLocale()}}/thumbnail/{{$book->__get('cover') }}" alt="{{ $book->title }}"></td>
                                             <td>
-                                                <a href="{{ action('BookController@show',$order->book->id) }}"> {!! $order->book->title !!} </a>
+                                                <a href="{{ action('BookController@show',$order->book->id) }}"> {{ $order->book->title }}} </a>
 
-                                                <p> {!! Str::limit(strip_tags($book->body)) !!} </p>
+                                                <p> {{ e(Str::limit(strip_tags($order->book->body))) }} </p>
                                             </td>
                                             <td>
                                                 <span> {{ $order->book->meta ? $order->book->meta->total_pages : 'N/A' }} </span>
@@ -207,12 +208,15 @@
                                             <td>
                                                 <span> {{ $order->stage }} </span>
                                             </td>
-                                            <td>
+                                            <td class="text-center">
                                                 @if($order->stage === 'order')
                                                 <a class="btn btn-success" href="{{ action('Admin\AdminBookController@getAcceptOrder',[$order->user_id,$order->book->id,'under_process']) }}">{{ trans('word.accept') }}</a>
                                                 @elseif($order->stage === 'under_process')
                                                 <a class="btn btn-primary" href="{{ action('Admin\AdminBookController@getAcceptOrder',[$order->user_id,$order->book->id,'purchased']) }}">{{ trans('word.purchased') }}</a>
                                                 @endif
+                                            </td>
+                                            <td class="text-center">
+                                                <a class="btn btn-danger btn-sm" href="{{ action('Admin\AdminBookController@getDeleteOrder',[$order->user_id,$order->book->id]) }}"><i class="fa fa-trash-o fa-2x"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach

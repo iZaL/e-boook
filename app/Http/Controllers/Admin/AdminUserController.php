@@ -31,13 +31,17 @@ class AdminUserController extends Controller
 
     }
 
+    /**
+     * @param $id
+     * @return Profile of a User :: Includes all books and orders for a user
+     */
     public function show($id) {
 
         $Allbooks = $this->userRepository->getAllBooksForUser($id);
 
         $favoriteBooks = $this->userRepository->getFavoritedBooksForUser($id);
 
-        return view('modules.user.profile',['books'=>$Allbooks,'favoriteBooks'=>$favoriteBooks,'user'=>$this->authUser]);
+        return view('modules.user.profile',['books'=>$Allbooks,'favoriteBooks'=>$favoriteBooks]);
     }
 
 

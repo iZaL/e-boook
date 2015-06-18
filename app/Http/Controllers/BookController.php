@@ -2,14 +2,11 @@
 
 use App\Http\Requests;
 use App\Jobs\CreatePreviewBook;
-use App\Src\Book\BookHelpers;
 use App\Src\Book\BookRepository;
 use App\Src\Favorite\FavoriteRepository;
-use App\Src\Purchase\Purchase;
 use App\Src\Purchase\PurchaseRepository;
 use App\Src\User\UserRepository;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 
 class BookController extends Controller
@@ -125,12 +122,10 @@ class BookController extends Controller
 
         if(count($checkFavorite) <= 0) {
 
-            $favorited = $this->favoriteRepository->model->create([
+            if($favorited = $this->favoriteRepository->model->create([
                 'book_id' => $bookId,
                 'user_id' => $userId
-            ]);
-
-            if ($favorited) {
+            ])) {
                 return redirect()->back()->with(['success' => trans('word.success-book-favorites')]);
             }
 
@@ -167,8 +162,11 @@ class BookController extends Controller
      * @return \Illuminate\View\View
      */
     public function getAllBooks() {
+
         $books = $this->bookRepository->model->where('status','=','published')->with('meta')->orderBy('created_at','desc')->paginate(10);
+
         $render = true;
+
         return view('modules.book.index',compact('books','render'));
     }
 
@@ -178,9 +176,7 @@ class BookController extends Controller
      */
     public function getShowSearchResults(Request $request) {
 
-        $searchItem = $request->input('search');
-
-        $searchResults = $this->bookRepository->SearchBooks($searchItem);
+        $searchResults = $this->bookRepository->SearchBooks($request->input('search'));
 
         if(count($searchResults) > 0) {
 
@@ -239,22 +235,19 @@ class BookController extends Controller
      */
     public function getCreateNewOrder($bookId,$authId) {
 
-        if($this->purchaseRepository->model->where('book_id','=',$bookId)->where('user_id','=',$authId)->first()) {
+        if($this->purchaseRepository->checkOrderExists($bookId,$authId)) {
+
             return redirect()->back()->with(['error'=>trans('word.error-order-repeated')]);
         }
-        else {
-            if($this->purchaseRepository->model->create([
-                'book_id' => $bookId,
-                'user_id' => $authId,
-                'stage' => 'order'
-            ])) {
-                return redirect()->back()->with(['success'=>trans('word.success-order-created')]);
-            }
-            else {
-                return redirect()->back()->with(['error'=>trans('word.error-order-created')]);
-            }
+
+        if($this->purchaseRepository->createNewOrder($bookId,$authId)) {
+
+            return redirect()->back()->with(['success'=>trans('word.success-order-created')]);
+
         }
+
         return redirect()->back()->with(['error'=>trans('word.error-order-created')]);
+
     }
 
 }

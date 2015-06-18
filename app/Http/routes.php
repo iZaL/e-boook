@@ -114,7 +114,7 @@ Route::group(['prefix'=>'app'],function () {
 
 
         /***************************************************************************************************
-         *                                          Books
+         *                                          Books Routes for Auth
          *
          ***************************************************************************************************/
 
@@ -175,6 +175,7 @@ Route::group(['prefix'=>'app'],function () {
             // resource route for book & poem
             Route::resource('book','Admin\AdminBookController');
             Route::get('/orders/accept/{userId}/{bookId}/{stage}','Admin\AdminBookController@getAcceptOrder');
+            Route::get('/orders/delete/{userId}/{bookId}','Admin\AdminBookController@getDeleteOrder');
 
             /***************************************************************************************************
              *                                          Profile

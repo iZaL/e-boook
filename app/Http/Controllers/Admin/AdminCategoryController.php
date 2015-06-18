@@ -45,6 +45,7 @@ class AdminCategoryController extends Controller
     public function store(CreateCategory $request)
     {
         $this->categoryRepository->model->create($request->except('_token'));
+
         return redirect()->back()->with('success' , trans('word.create-success-category'));
     }
 
@@ -68,6 +69,7 @@ class AdminCategoryController extends Controller
     public function edit($id)
     {
         $category = $this->categoryRepository->getById($id);
+
         return view('admin.modules.category.edit',['category'=>$category]);
     }
 
@@ -83,6 +85,7 @@ class AdminCategoryController extends Controller
             'name_ar' => $request->input('name_ar'),
             'name_en' => $request->input('name_en')
         ]);
+
         return redirect()->back()->with('success',trans('word.create-category-success'));
     }
 

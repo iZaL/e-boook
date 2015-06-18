@@ -75,7 +75,7 @@
                     </div>
                     <div class="col-lg-2">
                         {{--Views Number --}}
-                        <a class="btn btn-warning btn-sm" href="#"><i class="fa fa-eye fa-aw"></i> {{ $book->views }}</a>
+                        <a class="btn btn-info btn-sm" href="#"><i class="fa fa-eye fa-aw"></i> {{ $book->views }}</a>
                     </div>
 
                 </div>
@@ -91,7 +91,7 @@
                     </div>
                     @endif
                     <div class="col-xs-12 col-md-4">
-                        <a class="btn btn-block btn-primary {{ (! Session::get('auth.id') || $book->free) ? 'disabled' : '' }}" alt="{{ trans('word.make-order') }}" href="{{ action('BookController@getCreateNewOrder',[$book->id,Session::get('auth.id')]) }}"><i class="fa fa-fw fa-indent"></i>  {{ trans('word.order-now') }}</a>
+                        <a class="btn btn-block btn-primary {{ (! Session::get('auth.id') || $book->free) ? 'disabled' : '' }}" alt="{{ trans('word.make-order') }}" href="{{ action('BookController@getCreateNewOrder',[$book->id,Session::get('auth.id')]) }}"><i class="fa fa-fw fa-list-alt"></i>  {{ trans('word.order-now') }}</a>
                     </div>
                     <div class="col-xs-12 col-md-4">
                         <a class="btn btn-block btn-danger {{ (! Session::get('auth.id')) ? 'disabled' : '' }}" href="{{ (Session::get('auth.id')) ? action('BookController@getCreateNewFavoriteList', [Session::get('auth.id'),$book->id]) : '#' }}"><i class="fa fa-fw fa-heart"></i>  {{ trans('word.add-favorite') }}</a>
