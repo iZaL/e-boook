@@ -28,26 +28,17 @@ class DatabaseSeeder extends Seeder {
      */
     public function run()
     {
-        if ( App::environment() == 'local' ) {
+        //if ( App::environment() == 'local' ) {
             Model::unguard();
-            $this->cleanDatabase();
+           // $this->cleanDatabase();
                 $this->call('UsersTableSeeder');
                 $this->call('BooksTableSeeder');
                 $this->call('CategoriesTableSeeder');
                 $this->call('BookMetasTableSeeder');
                 $this->call('ContactusTableSeeder');
                 $this->call('RolesTableSeeder');
-        }
-        elseif ( App::environment() == 'production' ) {
-            Model::unguard();
-            $this->cleanDatabase();
-            $this->call('UsersTableSeeder');
-            $this->call('BooksTableSeeder');
-            $this->call('CategoriesTableSeeder');
-            $this->call('BookMetasTableSeeder');
-            $this->call('ContactusTableSeeder');
-            $this->call('RolesTableSeeder');
-        }
+        //}
+
     }
 
     private function cleanDatabase()
