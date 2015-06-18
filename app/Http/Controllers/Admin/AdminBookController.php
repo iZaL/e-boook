@@ -211,9 +211,9 @@ class AdminBookController extends Controller
         $price = ($request->input('price') > 0) ? $request->input('price') : '00.0';
 
         // update the book table
-        $this->bookRepository->where('id','=',$id)->update($request->except('_token','_method','price','total_pages'));
+        $this->bookRepository->model->where('id','=',$id)->update($request->except('_token','_method','price','total_pages'));
 
-        if($book = $this->bookRepository->where('id','=',$id)->first()) {
+        if($book = $this->bookRepository->model->where('id','=',$id)->first()) {
 
             event(new BookPublished($book));
 
