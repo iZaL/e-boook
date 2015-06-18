@@ -54,7 +54,7 @@
         <div class="form-group col-lg-4 col-md-4">
             {!! Form::label('free', trans('word.free-book'))  !!}
             {!! Form::hidden('free', 0) !!}
-            {!! Form::checkbox('free', 1, true,['class'=>'free']) !!} </br>
+            {!! Form::checkbox('free', 1, $book->free,['class'=>'free']) !!} </br>
             {!! Form::label('type', trans('word.preview-as-book'))!!}
             {!! Form::radio('type', 'book',true) !!}
             {!! Form::label('type', trans('word.preview-as-poem'))!!}
@@ -63,7 +63,7 @@
         <div class="form-group col-md-2 col-lg-2">
             {!! Form::hidden('price',0) !!}
             {!! Form::label('price', trans('word.price') , ['class' => 'control-label']) !!}*
-            {!! Form::text('price', 0, ['class' => 'price form-control','placeholder'=> trans('word.price-kd'),'disabled'=>'disabled']) !!}
+            {!! Form::text('price', $book->meta->price , ['class' => 'price form-control','placeholder'=> trans('word.price-kd'),'disabled'=>'disabled']) !!}
         </div>
         <div class="form-group col-md-3 col-lg-3">
             {!! Form::label('cover_ar', trans('word.cover_ar') , ['class' => 'control-label']) !!}*

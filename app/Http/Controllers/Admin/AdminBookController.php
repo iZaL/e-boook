@@ -159,6 +159,7 @@ class AdminBookController extends Controller
         if(Session::get('role.admin')) {
 
             $book = $this->bookRepository->model->where('id','=',$id)->with('meta')->first();
+
         }
 
         elseif(Session::get('role.editor')) {
@@ -209,7 +210,6 @@ class AdminBookController extends Controller
         $request->merge(['url' => $this->generateFileName()]);
 
         $price = ($request->input('price') > 0) ? $request->input('price') : '00.0';
-
 
         // update the book table
         $this->bookRepository->model->where('id','=',$id)->update($request->except('_token','_method','price','total_pages'));
