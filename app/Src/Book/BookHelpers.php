@@ -15,11 +15,8 @@ trait BookHelpers {
      */
     private function generateFileName()
     {
-        return md5(uniqid(mt_rand(), true)) . '.pdf';
+        return md5(uniqid(mt_rand(10,1202020), true)) . '.pdf';
     }
 
-    private function generateGetMostFavorited () {
-
-    }
 
 }
