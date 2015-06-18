@@ -19,11 +19,11 @@ class AppServiceProvider extends ServiceProvider
     {
         // create cache from contact us for 20 minutes
         // this cache will be cleared if the admin only clicked AdminContactUsController@edit
-        $contactusInfo = Cache::remember('contactusInfo', 20, function() {
+        /*$contactusInfo = Cache::remember('contactusInfo', 20, function() {
 
             return DB::table('contactus')->first();
 
-        });
+        });*/
 
 
 
