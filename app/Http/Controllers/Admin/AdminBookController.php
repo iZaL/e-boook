@@ -208,8 +208,6 @@ class AdminBookController extends Controller
 
         $request->merge(['url' => $this->generateFileName()]);
 
-        dd($request->input('url'));
-
         $price = ($request->input('price') > 0) ? $request->input('price') : '00.0';
 
         // update the book table

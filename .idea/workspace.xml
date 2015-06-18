@@ -51,8 +51,8 @@
       <file leaf-file-name="AdminBookController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AdminBookController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6560606" vertical-offset="2822" max-vertical-offset="4410">
-              <caret line="217" column="73" selection-start-line="217" selection-start-column="73" selection-end-line="217" selection-end-column="73" />
+            <state vertical-scroll-proportion="0.4969697" vertical-offset="2792" max-vertical-offset="4380">
+              <caret line="208" column="62" selection-start-line="208" selection-start-column="62" selection-end-line="208" selection-end-column="62" />
               <folding>
                 <element signature="e#46#71#0#PHP" expanded="true" />
               </folding>
@@ -518,7 +518,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/app/Http/Controllers/Admin/AdminBookController.php</url>
-          <line>233</line>
+          <line>231</line>
         </line-breakpoint>
       </breakpoints>
       <option name="time" value="1" />
@@ -926,8 +926,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AdminBookController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6560606" vertical-offset="2822" max-vertical-offset="4410">
-          <caret line="217" column="73" selection-start-line="217" selection-start-column="73" selection-end-line="217" selection-end-column="73" />
+        <state vertical-scroll-proportion="0.4969697" vertical-offset="2792" max-vertical-offset="4380">
+          <caret line="208" column="62" selection-start-line="208" selection-start-column="62" selection-end-line="208" selection-end-column="62" />
           <folding>
             <element signature="e#46#71#0#PHP" expanded="true" />
           </folding>
