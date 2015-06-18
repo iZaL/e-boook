@@ -75,8 +75,8 @@
       <file leaf-file-name="AppServiceProvider.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Providers/AppServiceProvider.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.36515152" vertical-offset="134" max-vertical-offset="855">
-              <caret line="25" column="13" selection-start-line="21" selection-start-column="8" selection-end-line="25" selection-end-column="13" />
+            <state vertical-scroll-proportion="0.50151515" vertical-offset="134" max-vertical-offset="855">
+              <caret line="31" column="10" selection-start-line="31" selection-start-column="10" selection-end-line="31" selection-end-column="10" />
               <folding>
                 <element signature="e#32#54#0#PHP" expanded="true" />
               </folding>
@@ -1087,8 +1087,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Providers/AppServiceProvider.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36515152" vertical-offset="134" max-vertical-offset="855">
-          <caret line="25" column="13" selection-start-line="21" selection-start-column="8" selection-end-line="25" selection-end-column="13" />
+        <state vertical-scroll-proportion="0.50151515" vertical-offset="134" max-vertical-offset="855">
+          <caret line="31" column="10" selection-start-line="31" selection-start-column="10" selection-end-line="31" selection-end-column="10" />
           <folding>
             <element signature="e#32#54#0#PHP" expanded="true" />
           </folding>
