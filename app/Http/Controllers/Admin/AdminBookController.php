@@ -208,12 +208,14 @@ class AdminBookController extends Controller
 
         $request->merge(['url' => $this->generateFileName()]);
 
+        dd($request->input('url'));
+
         $price = ($request->input('price') > 0) ? $request->input('price') : '00.0';
 
         // update the book table
-        $this->bookRepository->getById($id)->update($request->except('_token','_method','price','total_pages'));
+        $this->bookRepository->where('id','=',$id)->update($request->except('_token','_method','price','total_pages'));
 
-        if($book = $this->bookRepository->getById($id)->first()) {
+        if($book = $this->bookRepository->where('id','=',$id)->first()) {
 
             event(new BookPublished($book));
 
