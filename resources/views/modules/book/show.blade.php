@@ -56,13 +56,13 @@
                     <div class="col-xs-6 col-sm-5 col-md-7 {{ App::getLocale('locale') === 'ar' ? 'text-left' : ''  }}">
                         <strong>{{ trans('word.author') }}</strong> <a href="{{ action('UserController@showSingleProfile', $author->id) }}"><span>{{ $author->__get('name') }}</span></a><br>
                         <strong>{{ trans('word.author-email') }}:</strong> <span>{{ $author->email }}</span><br>
-                        <strong>{{ trans('word.pages-count') }}:</strong> <span>{{ $bookMeta->total_pages }}</span><br>
+                        <strong>{{ trans('word.pages-count') }}:</strong> <span>{{ $bookMeta ? $bookMeta->total_pages : '' }}</span><br>
                         <strong>{{ trans('word.book-extention') }}</strong> <span>{{ trans('word.pdf') }}</span><br>
                         <strong>{{ trans('word.book-type') }}:</strong> <span>{{ $book->status }}</span><br>
                         <strong>{{ trans('word.book-created_at') }}:</strong> <span>{{ $book->created_at->format('d-m-Y') }}</span><br>
                     </div>
                     <div class="col-xs-6 col-sm-7 col-md-5">
-                        <span class="label label-important price"> {{  (!$book->free) ? 'KD'.$bookMeta->price : trans('word.free') }}</span>
+                        <span class="label label-important price"> {{  (!$book->free) ? ($bookMeta ?  'KD'.$bookMeta->price : '' ) : trans('word.free') }}</span>
                     </div>
                 </div>
                 <div class="row">
