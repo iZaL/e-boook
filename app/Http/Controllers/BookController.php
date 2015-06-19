@@ -34,7 +34,7 @@ class BookController extends Controller
     public function index($all = '4')
     {
         // get 4 published books for index
-        $books = $this->bookRepository->model->where('status','=','published')->with('meta')->orderBy('created_at','desc')->paginate($all);
+        $books = $this->bookRepository->model->with('meta')->where('status','=','published')->orderBy('created_at','desc')->paginate($all);
         // get 4 published and most favorite books for index
         $mostFavoriteBooks = $this->favoriteRepository->getMostFavorited();
 

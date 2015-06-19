@@ -12,12 +12,14 @@ use App\Core\AbstractRepository;
 use App\Src\Book\BookRepository;
 
 
-class FavoriteRepository extends AbstractRepository {
+class FavoriteRepository extends AbstractRepository
+{
 
 
     public $bookRepository;
 
-    public function __construct(Favorite $favorite, BookRepository $bookRepository) {
+    public function __construct(Favorite $favorite, BookRepository $bookRepository)
+    {
 
         $this->model = $favorite;
         $this->bookRepository = $bookRepository;
@@ -26,20 +28,31 @@ class FavoriteRepository extends AbstractRepository {
     /**
      * @return most favorite books from all users
      */
-    public function getMostFavorited() {
+    public function getMostFavorited()
+    {
         return ($this->generateGetMostFavorited($this->model->MostFavorited()));
     }
 
-    public function generateGetMostFavorited($mostFavorites) {
+    public function generateGetMostFavorited($mostFavorites)
+    {
+
+        if ($mostFavorites) {
+            $mostFavoriteArray = $this->bookRepository->model
+                ->with('meta')
+                ->whereIn('id', [
+                    $mostFavorites[0]->book_id,
+                    $mostFavorites[1]->book_id,
+                    $mostFavorites[2]->book_id,
+                    $mostFavorites[3]->book_id
+                ])
+                ->get();
 
 
-        $mostFavoriteArray = $this->bookRepository->model
-            ->whereIn('id',[$mostFavorites[0]->book_id,$mostFavorites[1]->book_id,$mostFavorites[2]->book_id,$mostFavorites[3]->book_id])
-            ->with('meta')->get();
+        }
 
+        $mostFavoriteArray = $this->bookRepository->model->with('meta')->get();
 
         return $mostFavoriteArray;
-
 
     }
 
