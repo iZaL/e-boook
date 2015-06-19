@@ -20,7 +20,15 @@ elixir(function (mix)
  ]);
 
  mix.styles([
-
+  "bower_components/nivoslider/nivo-slider.css",
+  "bower_components/colorbox/example1/colorbox.css",
+  "bower_components/nivoslider/themes/bar/bar.css",
+  "bower_components/nivoslider/themes/light/light.css",
+  "bower_components/fontawesome/css/font-awesome.min.css",
+  "style.css",
+  "custom.css",
+  "admin.css",
+  "sb-admin-2.css"
  ], 'public/css/everything.css');
 
  mix.scripts([
