@@ -19,7 +19,9 @@ trait UserHelpers {
      * @return the first role of a user
      */
     public function getUserRole () {
-        return $this->roles()->get()->first()->name;
+        if(!is_null($this->roles()->get()->first())) {
+            return $this->roles()->get()->first()->name;
+        }
     }
 
     public function isAdmin() {
