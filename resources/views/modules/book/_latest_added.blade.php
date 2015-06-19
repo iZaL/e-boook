@@ -25,7 +25,7 @@
                                 <div class="row">
                                     <a href="{{ action('BookController@show',$book->id) }}"><h4>{!! Str::limit($book->__get('title'),25) !!}</h4></a>
                                     <p>{!! e(Str::limit($book->__get('body'),25)) !!} </p>
-                                    <span class="label label-info price pull-right">{{ ($book->free == 0) ? $book->meta->price.' KD': e(trans('word.free')) }}</span>
+                                    <span class="label label-info price pull-right">{{ ($book->free == 0) ? ($book->meta ? $book->meta->price.' KD' : ''): e(trans('word.free')) }}</span>
                                 </div>
                             </div>
                         </div>
