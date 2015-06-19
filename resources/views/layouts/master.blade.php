@@ -20,7 +20,7 @@
     @section('style')
         @include('partials.fonts')
         <link rel="stylesheet" href="/css/app.css"/>
-        @if(App::getLocale() === 'ar')
+        @if(App::getLocale() == 'ar')
             <link href="/bower_components/bootstrap-rtl/dist/css/bootstrap-rtl.css" rel="stylesheet">
             <link rel="stylesheet" href="/css/custom_ar.css">
         @endif
@@ -32,7 +32,7 @@
         <link rel="stylesheet" href="/css/style.css">
         <link rel="stylesheet" href="/css/custom.css">--}}
         <link rel="stylesheet" href="/css/everything.css"/>
-        @if(App::getLocale() === 'en')
+        @if(App::getLocale() == 'en')
             <link rel="stylesheet" href="/css/custom_en.css">
         @endif
 
