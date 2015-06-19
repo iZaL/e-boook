@@ -250,6 +250,12 @@ class AdminBookController extends Controller
     }
 
 
+    /**
+     * @param $userId
+     * @param $bookId
+     * @param Admin to accept order (change status to [order/under_process/purchased£])
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function getAcceptOrder($userId,$bookId,$stage) {
 
         $this->purchaseRepository->model->where(['user_id'=>$userId,'book_id'=>$bookId])->update([

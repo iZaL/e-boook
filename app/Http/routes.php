@@ -315,7 +315,17 @@ Route::group(['prefix'=>'app'],function () {
  * });
  * - that means that the middleware still didn't work you have to assign the middleware within each controller (still not sure about this line)
  *
+ *8- elixir
  *
+/*
+ * 1- elixir(function (mix){
+ * mix.sass(["name of the file within the resources/assets/ then create a folder sass if you will use sass or create less folder"]);
+ * mix.scripts([list of files that will be cloned in the public/js],'path to the file in public','base path for cloned files','./');
+ * mix.version(['public/css/app.css','public/js/app.js']);
+ * });
+ *
+ * 2- within the app.sass you will import all files needed
+ * @import url (whatever)
  ***************************************************************************************************/
 
 
