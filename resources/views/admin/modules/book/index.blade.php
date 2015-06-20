@@ -30,8 +30,12 @@
                                     <th>{{ trans('word.total-pages') }}</th>
                                     <th>{{ trans('word.book-type') }}</th>
                                     <th>{{ trans('word.created-at') }}</th>
+                                    <th>{{ trans('word.status') }}</th>
                                     <th>{{ trans('word.edit') }}</th>
+                                    @if(Session::get('role.admin'))
                                     <th>{{ trans('word.delete') }}</th>
+                                    @endif
+                                    <th>{{ trans('word.create-preview') }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -54,25 +58,38 @@
                                             <span> {{ $book->created_at->format('Y-m-d') }} </span>
                                         </td>
                                         <td>
-                                            @if(Session::get('role.admin'))
+                                            <span> {{ $book->status }} </span>
+                                        </td>
+                                        @if(Session::get('role.admin'))
+                                        <td>
                                             <a class="btn btn-primary btn-sm" href="{{ route('app.admin.book.edit',$book->id) }}">
                                                 <i class="fa fa-pencil fa-2x"></i>
                                             </a>
+                                        </td>
+
                                             @elseif(Session::get('role.editor'))
-                                                <a class="btn btn-primary btn-sm" href="{{ route('app.editor.book.edit',$book->id) }}">
+                                        <td>
+                                            <a class="btn btn-primary btn-sm" href="{{ route('app.editor.book.edit',$book->id) }}">
                                                     <i class="fa fa-pencil fa-2x"></i>
                                                 </a>
-                                            @endif
                                         </td>
                                         <td>
-                                            {{--Delete Btn with Modal to confirm delete process--}}
-                                            @if(Session::get('role.admin'))
-                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal" href="">
-                                                    <i class="fa fa-trash-o fa-2x"></i>
-                                                </button>
-                                                @include('admin.partials._delete_modal')
-                                            @endif
+                                            <a class="btn btn-info btn-rounded btn-sm" href="{{ route('app.editor.book.getCreateNewCustomizedPreview',[$book->id,$book->user_id,$book->meta->total_pages]) }}"><i class="fa fa-newspaper-o fa-2x"></i></a>
                                         </td>
+                                        @endif
+                                        {{--Delete Btn with Modal to confirm delete process--}}
+                                        @if(Session::get('role.admin'))
+                                        <td>
+                                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal" href="">
+                                                <i class="fa fa-trash-o fa-2x"></i>
+                                            </button>
+                                            @include('admin.partials._delete_modal')
+                                        </td>
+                                        {{-- Create New Customized Preview--}}
+                                        <td>
+                                            <a class="btn btn-info btn-rounded btn-sm" href="{{ route('app.admin.book.getCreateNewCustomizedPreview',[$book->id,$book->user_id,$book->meta->total_pages]) }}"><i class="fa fa-newspaper-o fa-2x"></i></a>
+                                        </td>
+                                        @endif
                                     </tr>
                                 @endforeach
                                 </tbody>

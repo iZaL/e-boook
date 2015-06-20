@@ -65,7 +65,7 @@ class User extends AbstractModel implements AuthenticatableContract, CanResetPas
      * a user has many  books
      * a book belongs to Many
      * @return mixed
-     * Table : book_user
+     * Table : favorites
      */
     public function books() {
         return $this->belongsToMany('App\Src\Book\Book','book_user');

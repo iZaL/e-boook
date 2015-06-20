@@ -135,6 +135,17 @@ Route::group(['prefix'=>'app'],function () {
 
             Route::resource('book','Admin\AdminBookController', ['except'=>['destroy']]);
             Route::get('book/type/{type?}','Admin\AdminBookController@getBookByType');
+            /*
+             * Routes to create / post / delete Preview Book for Editor
+             * */
+            Route::get('/book/pdf/preview/customized/{bookId}/{authorId}/{total_pages}',
+                        ['as' =>'app.editor.book.getCreateNewCustomizedPreview','uses' => 'Admin\AdminBookController@getCreateNewCustomizedPreview']);
+
+            Route::post('/book/pdf/preview/customized',
+                ['as' =>'app.editor.book.postCreateNewCustomizedPreview','uses' => 'Admin\AdminBookController@postCreateNewCustomizedPreview']);
+
+            Route::delete('/book/pdf/preview/customized/{bookId}/{authorId}/{total_pages}',
+                ['as' =>'app.editor.book.deleteCreateNewCustomizedPreview','uses' => 'Admin\AdminBookController@deleteCreateNewCustomizedPreview']);
 
 
         }); // end of editor middlware*/
@@ -170,10 +181,24 @@ Route::group(['prefix'=>'app'],function () {
             Route::get('/','Admin\AdminBookController@index');
 
             // route to fetch peoms only
-            Route::get('/book/type/{type?}','Admin\AdminBookController@getBookByType');
+            Route::get('/book/preview/{type?}','Admin\AdminBookController@getBookByType');
 
             // resource route for book & poem
             Route::resource('book','Admin\AdminBookController');
+            /*
+             * Routes to create / post / delete Preview Book for Admin
+             * */
+            Route::get('/book/pdf/preview/customized/{bookId}/{authorId}/{total_pages}',
+                    ['as' =>'app.admin.book.getCreateNewCustomizedPreview','uses' => 'Admin\AdminBookController@getCreateNewCustomizedPreview']);
+
+            Route::post('/book/pdf/preview/test',
+                ['as' =>'app.admin.book.postCreateNewCustomizedPreview','uses' => 'Admin\AdminBookController@postCreateNewCustomizedPreview']);
+
+            Route::delete('/book/pdf/preview/customized/{bookId}/{authorId}/{total_pages}',
+                ['as' =>'app.admin.book.deleteCreateNewCustomizedPreview','uses' => 'Admin\AdminBookController@deleteCreateNewCustomizedPreview']);
+
+
+            // Routes for Accept Order / Delete Order
             Route::get('/orders/accept/{userId}/{bookId}/{stage}','Admin\AdminBookController@getAcceptOrder');
             Route::get('/orders/delete/{userId}/{bookId}','Admin\AdminBookController@getDeleteOrder');
 
@@ -331,8 +356,8 @@ Route::group(['prefix'=>'app'],function () {
 
 /*
  * Pending ::
- * 1- make order system
- * 2- make rating system
+ * 1- make rating system
+ * 2- assing some pages for specific user.
  * 3- make abstraction to the whole application
  * */
 

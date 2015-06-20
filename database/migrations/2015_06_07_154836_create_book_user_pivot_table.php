@@ -12,6 +12,7 @@ class CreateBookUserPivotTable extends Migration
      */
     public function up()
     {
+        // this table responsible about favorites
         Schema::create('book_user', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('book_id')->unsigned()->index();

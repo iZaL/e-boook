@@ -39,9 +39,9 @@
     </div>
     <div class="panel-body">
         @if(Session::get('role.admin'))
-        {!! Form::open(['action' => 'app.admin.book.store', 'method' => 'post','files'=>'true'], ['class'=>'form-horizontal']) !!}
+        {!! Form::open(['route' => 'app.admin.book.store', 'method' => 'post','files'=>'true'], ['class'=>'form-horizontal']) !!}
         @elseif(Session::get('role.editor'))
-            {!! Form::open(['route' => 'app.editor.book.store', 'method' => 'post','files'=>'true'], ['class'=>'form-horizontal']) !!}
+        {!! Form::open(['route' => 'app.editor.book.store', 'method' => 'post','files'=>'true'], ['class'=>'form-horizontal']) !!}
         @endif
         <div class="row">
             <div class="form-group col-lg-4 col-md-4">

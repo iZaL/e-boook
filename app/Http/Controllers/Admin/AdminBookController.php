@@ -12,7 +12,13 @@ use App\Src\Book\BookRepository;
 use App\Http\Requests\CreateBook;
 use App\Src\Book\BookHelpers;
 use App\Src\Purchase\PurchaseRepository;
+use App\Src\Role\RoleRepository;
+use App\Src\User\UserRepository;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
 
 
@@ -27,6 +33,8 @@ class AdminBookController extends Controller
     public $bookRepository;
     public $bookMeta;
     public $purchaseRepository;
+    public $userRepository;
+    public $roleRepository;
 
     use BookHelpers, LocaleTrait;
 
@@ -36,7 +44,7 @@ class AdminBookController extends Controller
      * @param BookRepository $book
      * @param CategoryRepository $category
      */
-    public function __construct(BookRepository $book,CategoryRepository $categoryRepository, BookMeta $bookMeta, PurchaseRepository $purchaseRepository)
+    public function __construct(BookRepository $book,CategoryRepository $categoryRepository, BookMeta $bookMeta, PurchaseRepository $purchaseRepository,UserRepository $userRepository,RoleRepository $roleRepository)
     {
         $this->bookRepository = $book;
 
@@ -45,6 +53,8 @@ class AdminBookController extends Controller
         $this->bookMeta = $bookMeta;
 
         $this->purchaseRepository = $purchaseRepository;
+
+        $this->userRepository = $userRepository;
     }
 
     /**
@@ -275,6 +285,34 @@ class AdminBookController extends Controller
 
     }
 
+    public function getCreateNewCustomizedPreview($bookId,$authId,$total_pages) {
+
+        //$book = $this->bookRepository->getById($bookId)->where('user_id','=',$authId)->with('meta')->first();
+
+        //$users = $this->userRepository->model->where('id','!=',2)->get();
+
+        $users = DB::table('users')->where('users.id','!=',$authId)->join('user_roles', 'user_roles.user_id', '=', 'users.id')
+            ->where('user_roles.role_id','!=',1)->get();
+        $usersList = [];
+
+        foreach($users as $user) {
+            array_set($usersList,$user->id,$user->name_ar);
+        }
+
+        //$usersList = $users->lists('name_'.App::getlocale(),'id');
+
+
+        return view('admin.modules.book._create_preview_form',compact('bookId','authId','total_pages','usersList'));
+
+    }
+
+    public function postCreateNewCustomizedPreview() {
+        dd(Input::all());
+    }
+
+    public function deleteCreateNewCustomizedPreview() {
+        return 'this is from delete method';
+    }
     /*    public function getBookByType ($type = 'book') {
 
         if(Session::get('role.admin') || Session::get('role.editor')) {
