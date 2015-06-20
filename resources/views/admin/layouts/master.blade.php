@@ -23,9 +23,7 @@
 
     @show
 
-    @section('script')
-        @include('partials.scripts')
-    @show
+
 
 </head>
 
@@ -49,7 +47,9 @@
     {{--@include('partials.footer')--}}
 
 </div>
-
+@section('script')
+    @include('partials.scripts')
+@show
 </body>
 
 

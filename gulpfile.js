@@ -32,12 +32,10 @@ elixir(function (mix)
  ], 'public/css/everything.css');
 
  mix.scripts([
-
-   'sass/bootstrap/javascripts/jquery.js',
+   'bower_components/jquery/dist/jquery.min.js',
    'sass/bootstrap/javascripts/bootstrap.min.js',
    "bower_components/modernizr/modernizr.js",
     'bower_components/nivoslider/jquery.nivo.slider.pack.js',
-    'bower_components/colorbox/jquery.colorbox-min.js',
     'bower_components/colorbox/jquery.colorbox-min.js',
     'bower_components/respond/dest/respond.min.js',
     'js/script.js',

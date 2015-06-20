@@ -38,16 +38,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/modules/book/index.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.375" vertical-offset="0" max-vertical-offset="390">
-              <caret line="15" column="48" selection-start-line="15" selection-start-column="48" selection-end-line="15" selection-end-column="48" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="profile.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/modules/user/profile.blade.php">
           <provider selected="true" editor-type-id="text-editor">
@@ -61,28 +51,38 @@
       <file leaf-file-name="master.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/layouts/master.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.117647" vertical-offset="135" max-vertical-offset="915">
-              <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+            <state vertical-scroll-proportion="-4.5686274" vertical-offset="247" max-vertical-offset="915">
+              <caret line="32" column="12" selection-start-line="32" selection-start-column="12" selection-end-line="32" selection-end-column="12" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mainmenu.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/partials/mainmenu.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.0" vertical-offset="0" max-vertical-offset="600">
-              <caret line="16" column="80" selection-start-line="16" selection-start-column="80" selection-end-line="16" selection-end-column="80" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="master.blade.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="master.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/admin/layouts/master.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.32330826" vertical-offset="190" max-vertical-offset="930">
-              <caret line="27" column="9" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
+            <state vertical-scroll-proportion="-26.458334" vertical-offset="130" max-vertical-offset="930">
+              <caret line="51" column="5" selection-start-line="51" selection-start-column="5" selection-end-line="51" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="gulpfile.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/gulpfile.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.7402032" vertical-offset="0" max-vertical-offset="990">
+              <caret line="34" column="44" selection-start-line="34" selection-start-column="44" selection-end-line="34" selection-end-column="44" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="show.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/modules/book/show.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-11.25" vertical-offset="195" max-vertical-offset="2235">
+              <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -138,7 +138,6 @@
         <option value="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" />
         <option value="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" />
         <option value="$PROJECT_DIR$/app/Src/Book/BookHelpers.php" />
-        <option value="$PROJECT_DIR$/resources/views/modules/book/show.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/modules/book/_latest_added.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/modules/book/_most_favorited.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/modules/category/show.blade.php" />
@@ -163,12 +162,13 @@
         <option value="$PROJECT_DIR$/resources/views/modules/user/profile.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/modules/book/create.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/partials/mainmenu.blade.php" />
-        <option value="$PROJECT_DIR$/gulpfile.js" />
         <option value="$PROJECT_DIR$/resources/assets/css/custom.css" />
         <option value="$PROJECT_DIR$/resources/views/partials/styles.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/partials/scripts.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/admin/layouts/master.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/modules/book/show.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/layouts/master.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/admin/layouts/master.blade.php" />
+        <option value="$PROJECT_DIR$/gulpfile.js" />
       </list>
     </option>
   </component>
@@ -235,8 +235,26 @@
               <option name="myItemId" value="resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+          </PATH>
+          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
+              <option name="myItemId" value="ebook" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ebook" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sass" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -254,11 +272,15 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
+              <option name="myItemId" value="assets" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="partials" />
+              <option name="myItemId" value="sass" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bootstrap" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -273,6 +295,118 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sass" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bootstrap" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javascripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ebook" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ebook" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ebook" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ebook" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bower_components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ebook" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ebook" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bower_components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jquery" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ebook" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ebook" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bower_components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jquery" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dist" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -330,7 +464,7 @@
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../lts" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="SearchEverywhereHistoryKey" value="sty&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/partials/styles.blade.php&#10;scrip&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/partials/scripts.blade.php&#10;mas&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/admin/layouts/master.blade.php&#10;custom.css&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/assets/css/custom.css&#10;gul&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/gulpfile.js&#10;main&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/partials/mainmenu.blade.php&#10;crea&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/admin/modules/book/create.blade.php&#10;mast&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/admin/layouts/master.blade.php&#10;create&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/admin/modules/book/create.blade.php&#10;master&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/admin/layouts/master.blade.php&#10;BookCon&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/Controllers/BookController.php&#10;profile&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/modules/user/profile.blade.php&#10;index&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/modules/book/index.blade.php&#10;BookC&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/Controllers/BookController.php&#10;route&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/routes.php&#10;AdminBoo&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/Controllers/Admin/AdminBookController.php&#10;routes&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/routes.php&#10;_c&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/admin/modules/book/_create_preview_form.blade.php&#10;role&#9;null&#9;null&#10;Admin&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/Controllers/Admin/AdminBookController.php&#10;_cr&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/admin/modules/book/_create_preview_form.blade.php&#10;User&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Src/User/User.php&#10;_create&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/admin/modules/book/_create_preview_form.blade.php&#10;AdminB&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/Controllers/Admin/AdminBookController.php&#10;_cre&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/admin/modules/book/_create_preview_form.blade.php&#10;_pre&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/admin/modules/book/_create_preview_form.blade.php&#10;rout&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/routes.php&#10;inde&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/admin/modules/book/index.blade.php&#10;Adminb&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/Controllers/Admin/AdminBookController.php&#10;mainmen&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/admin/partials/mainmenu.blade.php&#10;Favorite&#9;null&#9;null&#10;.env&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/.env&#10;Book&#9;null&#9;null&#10;gulp&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/gulpfile.js&#10;HomeCon&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/Controllers/HomeController.php&#10;edit&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/admin/modules/book/edit.blade.php&#10;BookRE&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Src/Book/BookRepository.php&#10;show&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/modules/category/show.blade.php&#10;_most&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/modules/book/_most_favorited.blade.php&#10;_late&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/modules/book/_latest_added.blade.php&#10;UserCon&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/Controllers/UserController.php&#10;UserHel&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Src/User/UserHelpers.php&#10;_latest&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/modules/book/_latest_added.blade.php&#10;Adm&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/Controllers/Admin/AdminBookController.php&#10;AdminBook&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/Controllers/Admin/AdminBookController.php&#10;Datab&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/database/seeds/DatabaseSeeder.php&#10;appSer&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Providers/AppServiceProvider.php&#10;UserHelp&#9;null&#9;null&#10;appS&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Providers/AppServiceProvider.php&#10;bookCon&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/Controllers/Admin/AdminBookController.php" />
+    <property name="SearchEverywhereHistoryKey" value="gul&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/gulpfile.js&#10;show&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/modules/book/show.blade.php&#10;sty&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/partials/styles.blade.php&#10;scrip&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/partials/scripts.blade.php&#10;mas&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/admin/layouts/master.blade.php&#10;custom.css&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/assets/css/custom.css&#10;main&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/partials/mainmenu.blade.php&#10;crea&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/admin/modules/book/create.blade.php&#10;mast&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/admin/layouts/master.blade.php&#10;create&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/admin/modules/book/create.blade.php&#10;master&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/admin/layouts/master.blade.php&#10;BookCon&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/Controllers/BookController.php&#10;profile&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/modules/user/profile.blade.php&#10;index&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/modules/book/index.blade.php&#10;BookC&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/Controllers/BookController.php&#10;route&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/routes.php&#10;AdminBoo&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/Controllers/Admin/AdminBookController.php&#10;routes&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/routes.php&#10;_c&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/admin/modules/book/_create_preview_form.blade.php&#10;role&#9;null&#9;null&#10;Admin&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/Controllers/Admin/AdminBookController.php&#10;_cr&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/admin/modules/book/_create_preview_form.blade.php&#10;User&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Src/User/User.php&#10;_create&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/admin/modules/book/_create_preview_form.blade.php&#10;AdminB&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/Controllers/Admin/AdminBookController.php&#10;_cre&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/admin/modules/book/_create_preview_form.blade.php&#10;_pre&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/admin/modules/book/_create_preview_form.blade.php&#10;rout&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/routes.php&#10;inde&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/admin/modules/book/index.blade.php&#10;Adminb&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/Controllers/Admin/AdminBookController.php&#10;mainmen&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/admin/partials/mainmenu.blade.php&#10;Favorite&#9;null&#9;null&#10;.env&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/.env&#10;Book&#9;null&#9;null&#10;gulp&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/gulpfile.js&#10;HomeCon&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/Controllers/HomeController.php&#10;edit&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/admin/modules/book/edit.blade.php&#10;BookRE&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Src/Book/BookRepository.php&#10;_most&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/modules/book/_most_favorited.blade.php&#10;_late&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/modules/book/_latest_added.blade.php&#10;UserCon&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/Controllers/UserController.php&#10;UserHel&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Src/User/UserHelpers.php&#10;_latest&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/modules/book/_latest_added.blade.php&#10;Adm&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/Controllers/Admin/AdminBookController.php&#10;AdminBook&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/Controllers/Admin/AdminBookController.php&#10;Datab&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/database/seeds/DatabaseSeeder.php&#10;appSer&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Providers/AppServiceProvider.php&#10;UserHelp&#9;null&#9;null&#10;appS&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Providers/AppServiceProvider.php&#10;bookCon&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/Controllers/Admin/AdminBookController.php" />
     <property name="FullScreen" value="false" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
   </component>
@@ -343,11 +477,11 @@
       <recent name="$PROJECT_DIR$/resources/assets/sass" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public" />
       <recent name="$PROJECT_DIR$/public/css" />
       <recent name="$PROJECT_DIR$/resources/assets" />
       <recent name="$PROJECT_DIR$/resources/assets/js" />
       <recent name="$PROJECT_DIR$/resources/assets/css" />
-      <recent name="$PROJECT_DIR$/public/css/all" />
     </key>
   </component>
   <component name="RunManager">
@@ -465,54 +599,11 @@
           <line>242</line>
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="1" />
+      <option name="time" value="2" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/Providers/AppServiceProvider.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.0" vertical-offset="171" max-vertical-offset="855">
-          <caret line="21" column="36" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/seeds/DatabaseSeeder.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-16.25" vertical-offset="45" max-vertical-offset="870">
-          <caret line="30" column="10" selection-start-line="30" selection-start-column="10" selection-end-line="30" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Src/Book/BookHelpers.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.5" vertical-offset="0" max-vertical-offset="330">
-          <caret line="17" column="44" selection-start-line="17" selection-start-column="44" selection-end-line="17" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Src/User/UserHelpers.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.375" vertical-offset="111" max-vertical-offset="795">
-          <caret line="21" column="52" selection-start-line="21" selection-start-column="52" selection-end-line="21" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UserController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.57345974" vertical-offset="1782" max-vertical-offset="2415">
-          <caret line="154" column="0" selection-start-line="154" selection-start-column="0" selection-end-line="154" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/modules/book/show.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="449" max-vertical-offset="2235">
-          <caret line="54" column="33" selection-start-line="54" selection-start-column="33" selection-end-line="54" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Src/Book/BookRepository.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.4772727" vertical-offset="0" max-vertical-offset="1140">
@@ -567,14 +658,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.18181819" vertical-offset="0" max-vertical-offset="660">
           <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/assets/sass/app.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="635">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -792,14 +875,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/partials/mainmenu.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.0" vertical-offset="0" max-vertical-offset="600">
-          <caret line="16" column="80" selection-start-line="16" selection-start-column="80" selection-end-line="16" selection-end-column="80" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/partials/fonts.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.04511278" vertical-offset="0" max-vertical-offset="665">
@@ -820,22 +895,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2394775" vertical-offset="0" max-vertical-offset="689">
           <caret line="11" column="16" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gulpfile.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.82728595" vertical-offset="90" max-vertical-offset="1020">
-          <caret line="44" column="18" selection-start-line="44" selection-start-column="18" selection-end-line="44" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/layouts/master.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.117647" vertical-offset="135" max-vertical-offset="915">
-          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -867,10 +926,94 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/resources/assets/bower_components/bootstrap/js/.jscsrc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5864662" vertical-offset="0" max-vertical-offset="665">
+          <caret line="26" column="36" selection-start-line="26" selection-start-column="36" selection-end-line="26" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/assets/sass/app.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.046875" vertical-offset="0" max-vertical-offset="640">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/assets/sass/bootstrap/javascripts/jquery.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.06531204" vertical-offset="45" max-vertical-offset="138240">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/assets/sass/bootstrap/javascripts/bootstrap-sprockets.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.26124817" vertical-offset="0" max-vertical-offset="689">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/assets/sass/bootstrap/javascripts/bootstrap.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.043541364" vertical-offset="0" max-vertical-offset="689">
+          <caret line="6" column="15" selection-start-line="6" selection-start-column="15" selection-end-line="6" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/assets/sass/bootstrap/javascripts/bootstrap.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.52249634" vertical-offset="0" max-vertical-offset="34785">
+          <caret line="28" column="15" selection-start-line="28" selection-start-column="15" selection-end-line="28" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/modules/book/show.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.25" vertical-offset="195" max-vertical-offset="2235">
+          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/partials/mainmenu.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.36090225" vertical-offset="0" max-vertical-offset="665">
+          <caret line="16" column="80" selection-start-line="16" selection-start-column="80" selection-end-line="16" selection-end-column="80" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/layouts/master.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.5686274" vertical-offset="247" max-vertical-offset="915">
+          <caret line="32" column="12" selection-start-line="32" selection-start-column="12" selection-end-line="32" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/admin/layouts/master.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.32330826" vertical-offset="190" max-vertical-offset="930">
-          <caret line="27" column="9" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
+        <state vertical-scroll-proportion="-26.458334" vertical-offset="130" max-vertical-offset="930">
+          <caret line="51" column="5" selection-start-line="51" selection-start-column="5" selection-end-line="51" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gulpfile.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7402032" vertical-offset="0" max-vertical-offset="990">
+          <caret line="34" column="44" selection-start-line="34" selection-start-column="44" selection-end-line="34" selection-end-column="44" />
           <folding />
         </state>
       </provider>
