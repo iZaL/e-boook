@@ -1,4 +1,7 @@
 
+body {
+    background-color: white !important;
+}
 .header-shadow {
     background-color : #232323;
 }

@@ -14,7 +14,7 @@
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-left {{ App::getLocale() === 'ar' ? 'pull-right': '' }}">
-                    <li><a href="{{ route('home') }}"><i class="fa fa-home"></i> {{ trans('word.home') }}</a></li>
+                    <li><a href="{{ route('home') }}"><i class="fa fa-home fa-fw"></i> {{ trans('word.home') }}</a></li>
                     <li><a href="{{ action('CategoryController@index') }}">{{ trans('word.categories') }}</a></li>
                     <li><a href="{{ action('BookController@getAllBooks') }}">{{ trans('word.books') }}</a></li>
                     {{--<li class="dropdown">

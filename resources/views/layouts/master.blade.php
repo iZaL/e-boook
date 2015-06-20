@@ -17,43 +17,13 @@
     <meta name="description" content="Page description here">
     <meta name="author" content="BigBase - D. Tiems">
     <meta name="viewport" content="width=device-width">
+
     @section('style')
-        @include('partials.fonts')
-        <link rel="stylesheet" href="/css/app.css"/>
-        @if(App::getLocale() == 'ar')
-            <link href="css/bootstrap-rtl.css" rel="stylesheet">
-            <link rel="stylesheet" href="/css/custom_ar.css">
-        @endif
-
-        <link rel="stylesheet" href="/css/everything.css"/>
-        @if(App::getLocale() == 'en')
-            <link rel="stylesheet" href="/css/custom_en.css">
-        @endif
-
+        @include('partials.styles')
     @show
 
     @section('script')
-        <script src="/js/config.js"></script>
-        <script src="/bower_components/modernizr/modernizr.js"></script>
-
-        <script src="/js/app.js"></script>
-
-        <script src="/bower_components/nivoslider/jquery.nivo.slider.pack.js"></script>
-        <script src="/bower_components/colorbox/jquery.colorbox-min.js"></script>
-        <script src="/bower_components/respond/dest/respond.min.js"></script>
-        <script src="/js/script.js"></script>
-        <script type="text/javascript">
-            /* * * CONFIGURATION VARIABLES * * */
-            var disqus_shortname = 'ebookapp';
-
-            /* * * DON'T EDIT BELOW THIS LINE * * */
-            (function () {
-                var s = document.createElement('script'); s.async = true;
-                s.type = 'text/javascript';
-                s.src = '//' + disqus_shortname + '.disqus.com/count.js';
-                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-            }());
-        </script>
+      @include('partials.scripts')
     @show
 
 </head>

@@ -1,16 +1,12 @@
 @extends('admin.layouts.one_col')
 
-@section('style')
-    @parent
-@stop
-
 @section('script')
     @parent
-    <script src="/bower_components/tinymce/tinymce.min.js"></script>
-    <script src="/bower_components/tinymce/tinymce.jquery.min.js"></script>
+    <script src="/css/bower_components/tinymce/tinymce.min.js"></script>
+    <script src="/css/bower_components/tinymce/tinymce.jquery.min.js"></script>
     <script type="text/javascript">
         tinymce.init({
-            selector: "textarea.editor",
+            selector: ".editor",
             plugins: [
                 ["advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker"],
                 ["searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking"],

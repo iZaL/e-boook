@@ -20,22 +20,29 @@ elixir(function (mix)
  ]);
 
  mix.styles([
-  "bower_components/nivoslider/nivo-slider.css",
-  "bower_components/colorbox/example1/colorbox.css",
-  "bower_components/nivoslider/themes/bar/bar.css",
-  "bower_components/nivoslider/themes/light/light.css",
-  "bower_components/fontawesome/css/font-awesome.min.css",
+  "../bower_components/nivoslider/nivo-slider.css",
+  "../bower_components/colorbox/example1/colorbox.css",
+  "../bower_components/nivoslider/themes/bar/bar.css",
+  "../bower_components/nivoslider/themes/light/light.css",
+  "../bower_components/fontawesome/css/font-awesome.min.css",
   "style.css",
-  "custom.css",
   "admin.css",
-  "sb-admin-2.css"
+  "sb-admin-2.css",
+  "custom.css",
  ], 'public/css/everything.css');
 
  mix.scripts([
 
-  'sass/bootstrap/javascripts/jquery.js',
-  'sass/bootstrap/javascripts/bootstrap.min.js',
-
+   'sass/bootstrap/javascripts/jquery.js',
+   'sass/bootstrap/javascripts/bootstrap.min.js',
+   "bower_components/modernizr/modernizr.js",
+    'bower_components/nivoslider/jquery.nivo.slider.pack.js',
+    'bower_components/colorbox/jquery.colorbox-min.js',
+    'bower_components/colorbox/jquery.colorbox-min.js',
+    'bower_components/respond/dest/respond.min.js',
+    'js/script.js',
+    'js/sb-admin-2.js',
+    'js/config.js'
  ], 'public/js/app.js','resources/assets/','./');
  mix.version([
   'public/css/app.css',
