@@ -141,9 +141,11 @@ class BookController extends Controller
      */
     public function getRemoveBookFromUserFavoriteList($userId,$bookId) {
 
-        $this->favoriteRepository->model->where(['book_id'=> $bookId,'user_id'=>$userId])->delete();
+        if($this->favoriteRepository->model->where(['book_id'=> $bookId,'user_id'=>$userId])->delete()) {
+            return redirect()->back()->with(['success',trans('word.success-favorite-remove')]);
+        }
+        return redirect()->back()->with(['error',trans('word.error-favorite-remove')]);
 
-        return redirect()->back();
     }
 
     /**
@@ -153,9 +155,11 @@ class BookController extends Controller
      */
     public function getRemoveBookFromUserOrderList($userId,$bookId) {
 
-        $this->purchaseRepository->model->where(['book_id'=> $bookId,'user_id'=>$userId,'stage'=>'order'])->delete();
+        if($this->purchaseRepository->model->where(['book_id'=> $bookId,'user_id'=>$userId,'stage'=>'order'])->delete()) {
+            return redirect()->back()->with(['success',trans('word.success-order-remove')]);
+        }
 
-        return redirect()->back()->with(['success'=>trans('word.order-removed')]);
+        return redirect()->back()->with(['error',trans('word.error-order-remove')]);
     }
 
     /**

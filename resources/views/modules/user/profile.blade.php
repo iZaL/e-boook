@@ -191,7 +191,7 @@
                                                 <span> {{ $book->status }} </span>
                                             </td>
                                             <td>
-                                                <a class="btn btn-danger" href="{{ action('BookController@getRemoveBookFromUserOrderList',[$user->id,$book->id]) }}">{{ trans('word.remove') }}</a>
+                                                <a class="btn btn-danger" href="{{ action('BookController@getRemoveBookFromUserFavoriteList',[$user->id,$book->id]) }}">{{ trans('word.remove') }}</a>
                                             </td>
                                         </tr>
                                     @endforeach
