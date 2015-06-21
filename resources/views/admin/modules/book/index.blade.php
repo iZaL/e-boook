@@ -2,8 +2,6 @@
 @extends('admin.layouts.one_col')
 
 @section('content')
-
-@section('content')
     <div class="row">
         <div class="col-xs-12">
 
