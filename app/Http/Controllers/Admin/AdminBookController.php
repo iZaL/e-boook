@@ -64,12 +64,12 @@ class AdminBookController extends Controller
     {
 
         if(Session::get('role.admin')) {
-            $books = $this->bookRepository->model->with('meta')->orderBy('created_at', 'ASC')->paginate(15);
+            $books = $this->bookRepository->model->with('meta')->orderBy('created_at', 'desc')->paginate(15);
         }
         else {
             $books = $this->bookRepository->model
                     ->where('user_id','=',Session::get('auth.id'))->with('meta')
-                    ->orderBy('created_at', 'ASC')->paginate(15);
+                    ->orderBy('created_at', 'desc')->paginate(15);
         }
 
         $orders = $this->purchaseRepository->model->with('book')->get();
