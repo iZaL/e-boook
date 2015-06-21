@@ -14,11 +14,9 @@ use App\Src\Book\BookHelpers;
 use App\Src\Purchase\PurchaseRepository;
 use App\Src\Role\RoleRepository;
 use App\Src\User\UserRepository;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
 
 
@@ -70,7 +68,7 @@ class AdminBookController extends Controller
         }
         else {
             $books = $this->bookRepository->model
-                    ->where('user_id','=',Auth::user()->id)->with('meta')
+                    ->where('user_id','=',Session::get('auth.id'))->with('meta')
                     ->orderBy('created_at', 'ASC')->paginate(15);
         }
 

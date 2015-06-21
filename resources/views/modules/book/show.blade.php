@@ -1,5 +1,15 @@
 @extends('layouts.one_col')
 
+
+@section('style')
+    @parent
+    <link rel="stylesheet" href="/css/lightbox.css"/>
+@stop
+@section('script')
+    @parent
+    <script src="/js/lightbox.min.js"></script>
+@stop
+
 @section('content')
     <!-- START CONTENT ITEM -->
 
@@ -27,8 +37,13 @@
         <div class="col-xs-12 col-sm-5 col-md-4">
 
             <!-- START CONTENT ITEM -->
-            <a class="product-detail-lightbox colorbox" rel="colorbox1" href="/img/cover/cover_{{App::getLocale()}}/large/{{$book->__get('cover') }}" title="{{ $book->title }}">
-                <img class="details_page product-image img-responsive" src="/img/cover/cover_{{App::getLocale()}}/thumbnail/{{$book->__get('cover') }}" alt="{{ $book->title }}"></a>
+            <a data-lightbox="example-1" data-title="My caption" href="/img/cover/cover_{{App::getLocale()}}/large/{{$book->__get('cover') }}">
+
+                <img id="example-1" class="product-image img-responsive" src="/img/cover/cover_{{App::getLocale()}}/large/{{$book->__get('cover') }}" alt="{{ $book->title }}">
+            </a>
+
+            {{--<a class="product-detail-lightbox colorbox" rel="colorbox1" href="/img/cover/cover_{{App::getLocale()}}/large/{{$book->__get('cover') }}" title="{{ $book->title }}">
+                <img class="details_page product-image img-responsive" src="/img/cover/cover_{{App::getLocale()}}/thumbnail/{{$book->__get('cover') }}" alt="{{ $book->title }}"></a>--}}
 
             <!-- END CONTENT ITEM -->
         </div>
@@ -39,9 +54,9 @@
             <div class="row">
                 <div class="col-sm-6 col-md-12 visible-xs">
 
-                    <a rel="colorbox1" href="{{ $book->__get('title') }}" class="colorbox thumbnail">
+                   {{-- <a rel="colorbox1" href="{{ $book->__get('title') }}" class="colorbox thumbnail">
                         <img alt="{{ $book->__get('title') }}" src="{{ $book->__get('cover') }}" class="img-responsive">
-                    </a>
+                    </a>--}}
                 </div>
             </div>
             <!-- END CONTENT ITEM -->
@@ -140,4 +155,5 @@
     </script>
     <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
     {{--Rating Scripts--}}
+
 @stop
