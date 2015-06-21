@@ -351,6 +351,15 @@ Route::group(['prefix'=>'app'],function () {
  *
  * 2- within the app.sass you will import all files needed
  * @import url (whatever)
+ *
+ * 9- Blade Templates
+ * 1- master blade
+ *   you put all sections including section for scripts and styles
+ * 2- one_col layout that extending the master
+ *      within that layout we make content section like so :
+ *  @section('content') @endsection('content')
+ *  3- within all other blade templates that extending the one_col layout make the following :
+ *  @section('content') .... @stop
  ***************************************************************************************************/
 
 
