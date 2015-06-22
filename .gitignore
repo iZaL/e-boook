@@ -1,6 +1,13 @@
 /vendor
 /node_modules
+/resources/assets/*
+/storage/debugbar
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+/storage/logs/*
 .env
 /template
 /storage/app
 /public/img/cover
+.idea
