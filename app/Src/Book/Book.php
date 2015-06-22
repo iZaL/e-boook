@@ -51,4 +51,18 @@ class Book extends AbstractModel
         return $this->belongsToMany('App\Src\User\User','purchases');
     }
 
+    public function favorites()
+    {
+        return $this->hasMany('App\Src\Favorite\Favorite','book_id');
+    }
+
+    public function mostFavorites($paginate)
+    {
+        return $this
+            ->selectRaw('books.*, count(*) as book_count')
+            ->join('book_user', 'books.id', '=', 'book_user.book_id')
+            ->groupBy('book_id')
+            ->orderBy('book_count', 'DESC')
+            ->paginate($paginate);
+    }
 }

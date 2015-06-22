@@ -31,12 +31,12 @@ class BookController extends Controller
      *
      * @return Response
      */
-    public function index($all = '4')
+    public function index($all = 4)
     {
         // get 4 published books for index
         $books = $this->bookRepository->model->with('meta')->where('status','=','published')->orderBy('created_at','desc')->paginate($all);
         // get 4 published and most favorite books for index
-        $mostFavoriteBooks = $this->favoriteRepository->getMostFavorited();
+        $mostFavoriteBooks = $this->bookRepository->getMostFavorited($all);
 
         return view('modules.book.index',compact('books','mostFavoriteBooks','bookMeta'));
     }

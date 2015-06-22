@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder {
         'book_previews',
         'book_readers',
         'book_metas',
-        'purchases'
+        'purchases',
+        'book_user'
     ];
     /**
      * Run the database seeds.
@@ -30,7 +31,7 @@ class DatabaseSeeder extends Seeder {
     {
         //if ( App::environment() == 'local' ) {
             Model::unguard();
-           // $this->cleanDatabase();
+            $this->cleanDatabase();
                 $this->call('UsersTableSeeder');
                 $this->call('BooksTableSeeder');
                 $this->call('CategoriesTableSeeder');
@@ -43,11 +44,11 @@ class DatabaseSeeder extends Seeder {
 
     private function cleanDatabase()
     {
-//        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
         foreach ( $this->tables as $table ) {
             DB::table($table)->truncate();
         }
-//        DB::statement('SET FOREIGN_KEY_CHECKS=1');
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
     }
 
 }

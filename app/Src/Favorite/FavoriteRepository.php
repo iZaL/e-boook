@@ -15,12 +15,10 @@ use App\Src\Book\BookRepository;
 class FavoriteRepository extends AbstractRepository
 {
 
-
     public $bookRepository;
 
     public function __construct(Favorite $favorite, BookRepository $bookRepository)
     {
-
         $this->model = $favorite;
         $this->bookRepository = $bookRepository;
     }
@@ -30,31 +28,16 @@ class FavoriteRepository extends AbstractRepository
      */
     public function getMostFavorited()
     {
-        return ($this->generateGetMostFavorited($this->model->MostFavorited()));
-    }
+        $favorites = $this->model->mostFavorited();
 
-    public function generateGetMostFavorited($mostFavorites)
-    {
+        $favoritesArray = $favorites->lists('book_id');
 
-        if ($mostFavorites) {
-            $mostFavoriteArray = $this->bookRepository->model
+        if ($favoritesArray) {
+            return $this->bookRepository->model
                 ->with('meta')
-                ->whereIn('id', [
-                    $mostFavorites[0]->book_id,
-                    $mostFavorites[1]->book_id,
-                    $mostFavorites[2]->book_id,
-                    $mostFavorites[3]->book_id
-                ])
+                ->whereIn('id', $favoritesArray)
                 ->get();
-
-
         }
-
-        $mostFavoriteArray = $this->bookRepository->model->with('meta')->get();
-
-        return $mostFavoriteArray;
-
     }
-
 
 }
