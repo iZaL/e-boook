@@ -24,4 +24,21 @@
         s.src = '//' + disqus_shortname + '.disqus.com/count.js';
         (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
+
+    $('.nav-tabs > li[id^="tab-"]').on('click', function () {
+        var idVal = $(this).attr('id');
+        var tabLink = idVal.split('-');
+        var tabLink = 'step'+tabLink[1];
+        $.cookie("tabLastSelected", idVal);
+        $.cookie('TabHrefLastSelected',tabLink);
+        console.log('Clicked : ' + idVal);
+    });
+
+    if($.cookie('tabLastSelected')) {
+        var idVal = $.cookie('tabLastSelected');
+        var tabLink = $.cookie('TabHrefLastSelected');
+        console.log('From Inside If Statement : ' + idVal);
+        $('#'+idVal+'> a').trigger('click');
+    }
+
 </script>

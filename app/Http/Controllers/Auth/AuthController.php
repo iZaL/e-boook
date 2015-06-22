@@ -45,7 +45,7 @@ class AuthController extends Controller
             'name_en' => 'required|max:255',
             'name_ar' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
-            'mobile' => 'numeric',
+            'mobile' => 'required|numeric|min:8|max:15',
             'bank_number' => 'max:255',
             'bank_name' => 'max:255',
             'password' => 'required|confirmed|min:6',

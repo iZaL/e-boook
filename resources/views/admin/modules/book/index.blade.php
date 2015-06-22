@@ -7,17 +7,17 @@
 
             <!-- START CONTENT ITEM -->
             <ul class="nav nav-tabs">
-                <li class="active"><a href="#step1" data-toggle="tab"><i class="fa fa-aw fa-book"></i>{{ trans('word.volumes') }} </a></li>
-                <li><a href="#step2" data-toggle="tab"><i class="fa fa-aw fa-book"></i>{{ trans('word.draft') }}</a></li>
-                <li><a href="#step3" data-toggle="tab"><i class="fa fa-aw fa-book"></i>{{ trans('word.published') }}</a></li>
-                <li><a href="#step4" data-toggle="tab"><i class="fa fa-aw fa-order"></i>{{ trans('word.orders') }}</a></li>
+                <li id="tab-1" class="" href="#step1"><a href="#step1" data-toggle="tab"><i class="fa fa-aw fa-book"></i>{{ trans('word.volumes') }} </a></li>
+                <li id="tab-2"><a href="#step2" data-toggle="tab"><i class="fa fa-aw fa-book"></i>{{ trans('word.draft') }}</a></li>
+                <li id="tab-3"><a href="#step3" data-toggle="tab"><i class="fa fa-aw fa-book"></i>{{ trans('word.published') }}</a></li>
+                <li id="tab-4"><a href="#step4" data-toggle="tab"><i class="fa fa-aw fa-order"></i>{{ trans('word.orders') }}</a></li>
             </ul>
 
             {{--All Books--}}
 
             <div class="tab-content">
 
-                <div class="tab-pane active" id="step1">
+                <div class="tab-pane" id="step1">
                     <div class="row">
                         <div class="col-xs-12 paddingTop10">
                             <table class="table table-bordered table-order">
@@ -197,7 +197,8 @@
                                     <tr>
                                         <th class="hidden-xs">&nbsp;</th>
                                         <th></th>
-                                        <th>{{ trans('word.total-pages') }}</th>
+                                        <th>{{ trans('word.email') }}</th>
+                                        <th>{{ trans('word.mobile') }}</th>
                                         <th>{{ trans('word.status') }}</th>
                                         <th>{{ trans('word.order-stage') }}</th>
                                         <th>{{ trans('word.stage-change') }}</th>
@@ -214,8 +215,10 @@
                                                 <p> {{ e(Str::limit(strip_tags($order->book->body))) }} </p>
                                             </td>
                                             <td>
-                                                <span> {{ $order->book->meta ? $order->book->meta->total_pages : 'N/A' }} </span>
-
+                                                {{ $order->user->email }}
+                                            </td>
+                                            <td>
+                                                {{ $order->user->mobile }}
                                             </td>
                                             <td>
                                                 <span> {{ $order->book->status }} </span>
@@ -225,9 +228,9 @@
                                             </td>
                                             <td class="text-center">
                                                 @if($order->stage === 'order')
-                                                <a class="btn btn-success" href="{{ action('Admin\AdminBookController@getAcceptOrder',[$order->user_id,$order->book->id,'under_process']) }}">{{ trans('word.accept') }}</a>
+                                                <a class="btn btn-success" href="{{ action('Admin\AdminBookController@getAcceptOrder',[$order->user_id,$order->book->id,$order->user->email]) }}/under_process">{{ trans('word.accept') }}</a>
                                                 @elseif($order->stage === 'under_process')
-                                                <a class="btn btn-primary" href="{{ action('Admin\AdminBookController@getAcceptOrder',[$order->user_id,$order->book->id,'purchased']) }}">{{ trans('word.purchased') }}</a>
+                                                <a class="btn btn-primary" href="{{ action('Admin\AdminBookController@getAcceptOrder',[$order->user_id,$order->book->id,$order->user->email]) }}/purchased">{{ trans('word.purchased') }}</a>
                                                 @endif
                                             </td>
                                             <td class="text-center">

@@ -36,13 +36,13 @@ class AdminBookController extends Controller
 
     use BookHelpers, LocaleTrait;
 
-    protected $localeStrings = ['name_ar','name_en'];
+    protected $localeStrings = ['name_ar', 'name_en'];
 
     /**
      * @param BookRepository $book
      * @param CategoryRepository $category
      */
-    public function __construct(BookRepository $book,CategoryRepository $categoryRepository, BookMeta $bookMeta, PurchaseRepository $purchaseRepository,UserRepository $userRepository,RoleRepository $roleRepository)
+    public function __construct(BookRepository $book, CategoryRepository $categoryRepository, BookMeta $bookMeta, PurchaseRepository $purchaseRepository, UserRepository $userRepository, RoleRepository $roleRepository)
     {
         $this->bookRepository = $book;
 
@@ -63,18 +63,18 @@ class AdminBookController extends Controller
     public function index()
     {
 
-        if(Session::get('role.admin')) {
+        if (Session::get('role.admin')) {
             $books = $this->bookRepository->model->with('meta')->orderBy('created_at', 'desc')->paginate(15);
-        }
-        else {
+        } else {
             $books = $this->bookRepository->model
-                    ->where('user_id','=',Session::get('auth.id'))->with('meta')
-                    ->orderBy('created_at', 'desc')->paginate(15);
+                ->where('user_id', '=', Session::get('auth.id'))->with('meta')
+                ->orderBy('created_at', 'desc')->paginate(15);
         }
 
-        $orders = $this->purchaseRepository->model->with('book')->get();
+        $orders = $this->purchaseRepository->model->orderBy('created_at', 'desc')->with('book')->with('user')->get();
 
-        return view('admin.modules.book.index',['books' => $books,'orders'=>$orders]);
+
+        return view('admin.modules.book.index', ['books' => $books, 'orders' => $orders]);
     }
 
 
@@ -89,9 +89,9 @@ class AdminBookController extends Controller
 
         $getLang = App()->getLocale();
 
-        $categories = $categories->lists('name_'.$getLang,'id');
+        $categories = $categories->lists('name_' . $getLang, 'id');
 
-        return view('admin.modules.book.create',['categories'=> $categories]);
+        return view('admin.modules.book.create', ['categories' => $categories]);
     }
 
     /**
@@ -105,7 +105,7 @@ class AdminBookController extends Controller
         - Job will handle the Storing the Book in the DB + Firing an event for PDF creation
         */
 
-        $request->merge(['url' => $this->generateFileName(),'user_id'=> Auth::id()]);
+        $request->merge(['url' => $this->generateFileName(), 'user_id' => Auth::id()]);
 
         // create a book meta
         // create a book
@@ -114,7 +114,7 @@ class AdminBookController extends Controller
         // pass the book and images to update the book with cover url
 
         // create a book record
-        $book = $this->bookRepository->model->create($request->except('_token','price','cover_ar','cover_en'));
+        $book = $this->bookRepository->model->create($request->except('_token', 'price', 'cover_ar', 'cover_en'));
 
         // check if the
         $price = ($request->input('price') > 0) ? $request->input('price') : '00.0';
@@ -135,7 +135,7 @@ class AdminBookController extends Controller
 
         $this->dispatch(new CreateBookCover($book, $request));
 
-        if($book) {
+        if ($book) {
 
             Session::forget('total_pages');
 
@@ -147,7 +147,7 @@ class AdminBookController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function show($id)
@@ -158,38 +158,36 @@ class AdminBookController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function edit($id)
     {
 
-        if(Session::get('role.admin')) {
+        if (Session::get('role.admin')) {
 
-            $book = $this->bookRepository->model->where('id','=',$id)->with('meta')->first();
+            $book = $this->bookRepository->model->where('id', '=', $id)->with('meta')->first();
 
-        }
+        } elseif (Session::get('role.editor')) {
 
-        elseif(Session::get('role.editor')) {
-
-            $book = $this->bookRepository->model->where(['id'=>$id,'user_id'=>Session::get('auth.id')])->with('meta')->first();
+            $book = $this->bookRepository->model->where(['id' => $id, 'user_id' => Session::get('auth.id')])->with('meta')->first();
         }
 
         $getLang = App()->getLocale();
 
         $categories = $this->categoryRepository->model->first();
 
-        $categories = $categories->lists('name_'.$getLang,'id');
+        $categories = $categories->lists('name_' . $getLang, 'id');
 
-        $status = ['draft'=>'draft','published'=>'published'];
+        $status = ['draft' => 'draft', 'published' => 'published'];
 
-        return view('admin.modules.book.edit',['book'=>$book,'categories'=>$categories,'status'=>$status]);
+        return view('admin.modules.book.edit', ['book' => $book, 'categories' => $categories, 'status' => $status]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      * * check if new covers
      * get all data in the request
@@ -199,19 +197,19 @@ class AdminBookController extends Controller
      */
     public function update(Requests\EditBook $request)
     {
-        $cover_ar = ($request->file('cover_ar')) ? $request->file('cover_ar') : '' ;
+        $cover_ar = ($request->file('cover_ar')) ? $request->file('cover_ar') : '';
 
-        $cover_en = ($request->file('cover_en')) ? $request->file('cover_en') : '' ;
+        $cover_en = ($request->file('cover_en')) ? $request->file('cover_en') : '';
 
         $id = $request->input('id');
 
         // check if cover_ar changed
-        if(is_null($cover_ar)) {
-           $request->except('cover_ar');
+        if (is_null($cover_ar)) {
+            $request->except('cover_ar');
         }
 
         // check if the cover_en changed
-        if(is_null($cover_en)) {
+        if (is_null($cover_en)) {
             $request->except('cover_en');
         }
 
@@ -220,9 +218,9 @@ class AdminBookController extends Controller
         $price = ($request->input('price') > 0) ? $request->input('price') : '00.0';
 
         // update the book table
-        $this->bookRepository->model->where('id','=',$id)->update($request->except('_token','_method','price','total_pages'));
+        $this->bookRepository->model->where('id', '=', $id)->update($request->except('_token', '_method', 'price', 'total_pages'));
 
-        if($book = $this->bookRepository->model->where('id','=',$id)->first()) {
+        if ($book = $this->bookRepository->model->where('id', '=', $id)->first()) {
 
             event(new BookPublished($book));
 
@@ -231,30 +229,30 @@ class AdminBookController extends Controller
             $total_pages = Session::get('total_pages');
 
             // update the book_metas table
-            $this->bookMeta->where('book_id','=',$book->id)->update([
+            $this->bookMeta->where('book_id', '=', $book->id)->update([
                 'price' => $price,
                 'total_pages' => $total_pages
             ]);
 
-            return redirect()->back()->with('success',trans('word.success-update'));
+            return redirect()->back()->with('success', trans('word.success-update'));
         }
-        return redirect()->back()->with('success',trans('word.error-update'));
+        return redirect()->back()->with('success', trans('word.error-update'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function destroy($id)
     {
-        if($this->bookRepository->getById($id)->delete()) {
+        if ($this->bookRepository->getById($id)->delete()) {
 
-            return redirect()->back()->with('success',trans('word.success-delete'));
+            return redirect()->back()->with('success', trans('word.success-delete'));
         }
 
-        return redirect()->back()->with('error',trans('word.error-delete'));
+        return redirect()->back()->with('error', trans('word.error-delete'));
     }
 
 
@@ -264,52 +262,92 @@ class AdminBookController extends Controller
      * @param Admin to accept order (change status to [order/under_process/purchased£])
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function getAcceptOrder($userId,$bookId,$stage) {
+    public function getAcceptOrder($buyerId, $bookId, $buyerEmail, $stage)
+    {
 
-        $this->purchaseRepository->model->where(['user_id'=>$userId,'book_id'=>$bookId])->update([
+        if ($order = $this->purchaseRepository->model->where(['user_id' => $buyerId, 'book_id' => $bookId])->update([
             'stage' => $stage
-        ]);
+        ])
+        ) {
+            // create an email to notify the buyer that his order stage has been changed
+            // from us to buyeremail .. this book with the title bla bla has been accepted by adminstration ..
+            // we will contact u soon on your mobile number plesae get ready for payment and fulfil your order.
 
-        return redirect()->back()->with(['success'=>trans('success.order')]);
-    }
+            $book = $this->bookRepository->getById($bookId)->with('meta')->first();
 
-    public function getDeleteOrder($userId,$bookId) {
+            $buyerUserName = Auth::user()->__get('name');
 
-        if($this->purchaseRepository->deleteOrder($userId,$bookId)) {
+            $buyerMobile = Auth::user()->mobile;
 
-            return redirect()->back()->with(['success'=>trans('success.delete-order')]);
+            $this->NotifyChangeStageOrder(['stage'=>$stage,'email' => $buyerEmail, 'book' => $book, 'username' => $buyerUserName, 'mobile' => $buyerMobile]);
 
+            return redirect()->back()->with(['success' => trans('success.order')]);
         }
 
+        return redirect()->back()->with(['error' => trans('error.order')]);
     }
 
-    public function getCreateNewCustomizedPreview($bookId,$authId,$total_pages) {
+    /**
+     * @param $buyerId
+     * @param $bookId
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function getDeleteOrder($buyerId, $bookId)
+    {
+        if ($this->purchaseRepository->deleteOrder($buyerId, $bookId)) {
 
-        //$book = $this->bookRepository->getById($bookId)->where('user_id','=',$authId)->with('meta')->first();
+            return redirect()->back()->with(['success' => trans('success.delete-order')]);
+        }
+    }
 
-        //$users = $this->userRepository->model->where('id','!=',2)->get();
+    /**
+     * @param $bookId
+     * @param $autherId
+     * @param $total_pages
+     * @return \Illuminate\View\View
+     */
+    public function getCreateNewCustomizedPreview($bookId, $autherId, $total_pages)
+    {
 
-        $users = DB::table('users')->where('users.id','!=',$authId)->join('user_roles', 'user_roles.user_id', '=', 'users.id')
-            ->where('user_roles.role_id','!=',1)->get();
+        $users = $this->userRepository->fetchAllUsersWithoutAdmins($autherId);
+
         $usersList = [];
 
-        foreach($users as $user) {
-            array_set($usersList,$user->id,$user->name_ar);
+        foreach ($users as $user) {
+            array_set($usersList, $user->id, $user->name_ar);
         }
 
         //$usersList = $users->lists('name_'.App::getlocale(),'id');
 
 
-        return view('admin.modules.book._create_preview_form',compact('bookId','authId','total_pages','usersList'));
+        return view('admin.modules.book._create_preview_form', compact('bookId', 'autherId', 'total_pages', 'usersList'));
 
     }
 
-    public function postCreateNewCustomizedPreview() {
-        dd(Input::all());
+    /**
+     * @param Requests\CreateNewCustomizedPreviewRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function postCreateNewCustomizedPreview(Requests\CreateNewCustomizedPreviewRequest $request)
+    {
+
+        $users = $request->input('usersList');
+
+        foreach ($users as $userId) {
+
+            $request->merge(['user_id' => $userId]);
+
+            if (!$this->userRepository->CreateNewCustomizedPreview($request->all())) {
+
+                return redirect()->back()->with(['error' => trans('word.error-preview-not-created')]);
+            }
+        }
+        return redirect()->back()->with(['success' => 'success-preview-created']);
     }
 
-    public function deleteCreateNewCustomizedPreview() {
-        return 'this is from delete method';
+    public function deleteCreateNewCustomizedPreview()
+    {
+
     }
     /*    public function getBookByType ($type = 'book') {
 

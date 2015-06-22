@@ -6,12 +6,12 @@
 
             <!-- START CONTENT ITEM -->
             <ul class="nav nav-tabs">
-                <li class="active"><a href="#step1" data-toggle="tab"><i class="fa fa-aw fa-book"></i>{{ trans('word.books') }} </a></li>
-                <li><a href="#step2" data-toggle="tab"><i class="fa fa-aw fa-book"></i>{{ trans('word.books-draft') }}</a></li>
-                <li><a href="#step3" data-toggle="tab"><i class="fa fa-aw fa-book"></i>{{ trans('word.books-published') }}</a></li>
-                <li><a href="#step4" data-toggle="tab"><i class="fa fa-aw fa-profile"></i>{{ trans('word.favorite-books') }}</a></li>
-                <li><a href="#step5" data-toggle="tab"><i class="fa fa-aw fa-order"></i>{{  trans('word.orders') }}</a></li>
-                <li><a href="#step6" data-toggle="tab"><i class="fa fa-aw fa-profile"></i>{{  trans('word.personal-info') }}</a></li>
+                <li id="tab-1"><a href="#step1" data-toggle="tab"><i class="fa fa-aw fa-book"></i>{{ trans('word.books') }} </a></li>
+                <li id="tab-2"><a href="#step2" data-toggle="tab"><i class="fa fa-aw fa-book"></i>{{ trans('word.books-draft') }}</a></li>
+                <li id="tab-3"><a href="#step3" data-toggle="tab"><i class="fa fa-aw fa-book"></i>{{ trans('word.books-published') }}</a></li>
+                <li id="tab-4"><a href="#step4" data-toggle="tab"><i class="fa fa-aw fa-profile"></i>{{ trans('word.favorite-books') }}</a></li>
+                <li id="tab-5"><a href="#step5" data-toggle="tab"><i class="fa fa-aw fa-order"></i>{{  trans('word.orders') }}</a></li>
+                <li id="tab-6"><a href="#step6" data-toggle="tab"><i class="fa fa-aw fa-profile"></i>{{  trans('word.personal-info') }}</a></li>
             </ul>
 
             <div class="tab-content">
@@ -236,6 +236,7 @@
                                             <td>
                                                 <span> {{ $book->status }} </span>
                                             </td>
+                                            {{-- Notice that this btn will not be shown unless the order is in "order status"--}}
                                             <td>
                                                 <a class="btn btn-danger" href="{{ action('BookController@getRemoveBookFromUserOrderList',[$user->id,$book->id]) }}">{{ trans('word.remove') }}</a>
                                             </td>

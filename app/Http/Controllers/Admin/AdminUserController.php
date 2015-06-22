@@ -11,11 +11,11 @@ class AdminUserController extends Controller
 
 
 
-    public $userRepository;
+    public $userRepository
+    ;
 
 
-    public function __construct(UserRepository $user)
-    {
+    public function __construct(UserRepository $user){
         $this->userRepository = $user;
     }
 
@@ -26,6 +26,7 @@ class AdminUserController extends Controller
     public function index() {
 
         $users = $this->userRepository->model->with('roles')->where('id','!=','1')->paginate(10);
+
 
         return view('admin.modules.user.index',['users' => $users]);
 

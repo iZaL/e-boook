@@ -34,12 +34,12 @@ elixir(function (mix)
 
  mix.scripts([
     'bower_components/jquery/dist/jquery.js',
+     'js/jquery.cookie.js',
     'sass/bootstrap/javascripts/bootstrap.js',
      'bower_components/respond/dest/respond.min.js',
      "bower_components/modernizr/modernizr.js",
    //'bower_components/nivoslider/jquery.nivo.slider.pack.js',
    //'bower_components/colorbox/jquery.colorbox-min.js',
-
    'js/script.js',
    'js/sb-admin-2.js',
    'js/config.js',

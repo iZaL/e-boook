@@ -11,9 +11,11 @@ namespace App\Src\Book;
 use App\Core\AbstractRepository;
 
 
-class BookRepository extends AbstractRepository {
+class BookRepository extends AbstractRepository
+{
 
-    public function __construct(Book $book) {
+    public function __construct(Book $book)
+    {
         $this->model = $book;
     }
 
@@ -23,7 +25,8 @@ class BookRepository extends AbstractRepository {
      * a book belongs to one user
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function getUser () {
+    public function getUser()
+    {
         return $this->model->user();
     }
 
@@ -33,8 +36,9 @@ class BookRepository extends AbstractRepository {
      */
     public function draftedBooks($id = '')
     {
-        return $this->model->where(['status' => 'draft','user_id'=> $id]);
+        return $this->model->where(['status' => 'draft', 'user_id' => $id]);
     }
+
     /**
      * @return mixed
      * return All books that has a Published Status
@@ -44,31 +48,35 @@ class BookRepository extends AbstractRepository {
         return $this->model->where('status', 'published');
     }
 
-    public function increaseBookViewById($bookId) {
+    public function increaseBookViewById($bookId)
+    {
 
-        $this->model->where('id','=',$bookId)->increment('views');
-
-    }
-
-    public function increaseBookViewByUrl($bookUrl) {
-
-        $this->model->where('url','=',$bookUrl)->increment('views');
+        $this->model->where('id', '=', $bookId)->increment('views');
 
     }
 
-    public function SearchBooks($searchItem) {
+    public function increaseBookViewByUrl($bookUrl)
+    {
+
+        $this->model->where('url', '=', $bookUrl)->increment('views');
+
+    }
+
+    public function SearchBooks($searchItem)
+    {
         return $this->model
             // no results for drafts -- only for published
-            ->having('status','=','published')
-            ->orWhere('description_ar','like','%'.$searchItem.'%')
-            ->orWhere('description_en','like','%'.$searchItem.'%')
-            ->orWhere('title_ar','like','%'.$searchItem.'%')
-            ->orWhere('title_en','like','%'.$searchItem.'%')
-            ->orWhere('body','like','%'.$searchItem.'%')
+            ->having('status', '=', 'published')
+            ->orWhere('description_ar', 'like', '%' . $searchItem . '%')
+            ->orWhere('description_en', 'like', '%' . $searchItem . '%')
+            ->orWhere('title_ar', 'like', '%' . $searchItem . '%')
+            ->orWhere('title_en', 'like', '%' . $searchItem . '%')
+            ->orWhere('body', 'like', '%' . $searchItem . '%')
             ->with('meta')->get();
     }
 
-    public function getAllBookOrders() {
+    public function getAllBookOrders()
+    {
         return $this->model->users_orders()->with('meta')->get();
     }
 

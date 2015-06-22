@@ -197,9 +197,10 @@ Route::group(['prefix'=>'app'],function () {
             Route::delete('/book/pdf/preview/customized/{bookId}/{authorId}/{total_pages}',
                 ['as' =>'app.admin.book.deleteCreateNewCustomizedPreview','uses' => 'Admin\AdminBookController@deleteCreateNewCustomizedPreview']);
 
+            // Book Previews
 
             // Routes for Accept Order / Delete Order
-            Route::get('/orders/accept/{userId}/{bookId}/{stage}','Admin\AdminBookController@getAcceptOrder');
+            Route::get('/orders/accept/{userId}/{bookId}/{email}/{stage}','Admin\AdminBookController@getAcceptOrder');
             Route::get('/orders/delete/{userId}/{bookId}','Admin\AdminBookController@getDeleteOrder');
 
             /***************************************************************************************************

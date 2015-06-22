@@ -81,4 +81,8 @@ class User extends AbstractModel implements AuthenticatableContract, CanResetPas
         return $this->belongsToMany('App\Src\Book\Book','purchases');
     }
 
+    public function purchases() {
+        $this->hasMany('App\Src\Purchase\Purchase');
+    }
+
 }

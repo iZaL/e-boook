@@ -37,7 +37,7 @@
                                         </td>
                                         <td class="text-center">
                                             <a href="{{ action('Admin\AdminCategoryController@edit',$category->id) }}" class="text-center btn btn-primary btn-sm">
-                                                <i class="fa fa-trash-o fa-2x"></i>
+                                                <i class="fa fa-pencil fa-2x"></i>
                                             </a>
                                         </td>
                                         <td>
