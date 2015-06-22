@@ -50,13 +50,19 @@
 
                                         </td>
                                         <td>
-                                            <span> {{ $book->status }} </span>
+                                            <span> {{ $book->type }} </span>
                                         </td>
                                         <td>
                                             <span> {{ $book->created_at->format('Y-m-d') }} </span>
                                         </td>
-                                        <td>
-                                            <span> {{ $book->status }} </span>
+                                        <td class="text-center">
+                                            @if($book->status === 'published')
+                                                {{ $book->status }}
+                                            @else
+                                                @if(Session::get('role.admin'))
+                                                <a class="btn btn-sm btn-warning" href="{{ route('app.admin.book.getUpdateBookStatus',$book->id) }}"><i class="fa fa-pencil fa-2x"></i></a>
+                                                @endif
+                                            @endif
                                         </td>
                                         @if(Session::get('role.admin'))
                                         <td>
@@ -230,7 +236,7 @@
                                                 @if($order->stage === 'order')
                                                 <a class="btn btn-success" href="{{ action('Admin\AdminBookController@getAcceptOrder',[$order->user_id,$order->book->id,$order->user->email]) }}/under_process">{{ trans('word.accept') }}</a>
                                                 @elseif($order->stage === 'under_process')
-                                                <a class="btn btn-primary" href="{{ action('Admin\AdminBookController@getAcceptOrder',[$order->user_id,$order->book->id,$order->user->email]) }}/purchased">{{ trans('word.purchased') }}</a>
+                                                <a class="btn btn-primary" href="{{ action('Admin\AdminBookController@getAcceptOrder',[$order->user_id,$order->book->id,$order->user->email,'']) }}">{{ trans('word.purchased') }}</a>
                                                 @endif
                                             </td>
                                             <td class="text-center">

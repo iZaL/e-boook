@@ -185,6 +185,7 @@ Route::group(['prefix'=>'app'],function () {
 
             // resource route for book & poem
             Route::resource('book','Admin\AdminBookController');
+            Route::get('book/status/update/{bookId}',['as'=>'app.admin.book.getUpdateBookStatus','uses'=>'Admin\AdminBookController@getUpdateBookStatus']);
             /*
              * Routes to create / post / delete Preview Book for Admin
              * */

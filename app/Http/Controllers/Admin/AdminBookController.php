@@ -279,7 +279,7 @@ class AdminBookController extends Controller
 
             $buyerMobile = Auth::user()->mobile;
 
-            $this->NotifyChangeStageOrder(['stage'=>$stage,'email' => $buyerEmail, 'book' => $book, 'username' => $buyerUserName, 'mobile' => $buyerMobile]);
+            $this->NotifyChangeStageOrder(['stage' => $stage, 'email' => $buyerEmail, 'book' => $book, 'username' => $buyerUserName, 'mobile' => $buyerMobile]);
 
             return redirect()->back()->with(['success' => trans('success.order')]);
         }
@@ -345,9 +345,18 @@ class AdminBookController extends Controller
         return redirect()->back()->with(['success' => 'success-preview-created']);
     }
 
-    public function deleteCreateNewCustomizedPreview()
+    public function getUpdateBookStatus($bookId)
     {
+        $book = $this->bookRepository->getById($bookId)->update([
+            'status' => 'published'
+        ]);
 
+        if ($book) {
+
+            return redirect()->back()->with(['success' => trans('word.success-status-updated')]);
+        }
+
+        return redirect()->back()->with(['error' => 'error-status-updated']);
     }
     /*    public function getBookByType ($type = 'book') {
 
