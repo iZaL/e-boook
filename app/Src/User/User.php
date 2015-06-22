@@ -25,7 +25,7 @@ class User extends AbstractModel implements AuthenticatableContract, CanResetPas
      *
      * @var array
      */
-    protected $fillable = ['name_ar','name_en','active', 'email','mobile','bank_name','bank_number', 'password'];
+    protected $fillable = ['name_ar', 'name_en', 'active', 'email', 'mobile', 'bank_name', 'bank_number', 'password'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -43,8 +43,9 @@ class User extends AbstractModel implements AuthenticatableContract, CanResetPas
      * user has many roles
      * */
 
-    public function roles () {
-        return $this->belongsToMany('App\Src\Role\Role','user_roles');
+    public function roles()
+    {
+        return $this->belongsToMany('App\Src\Role\Role', 'user_roles');
     }
 
 
@@ -55,9 +56,10 @@ class User extends AbstractModel implements AuthenticatableContract, CanResetPas
      * a book belongs to one user
      * TABLE : books
      */
-    public function book() {
+    public function book()
+    {
 
-        return $this->hasMany('App\Src\Book\Book','user_id');
+        return $this->hasMany('App\Src\Book\Book', 'user_id');
     }
 
     /**
@@ -67,8 +69,9 @@ class User extends AbstractModel implements AuthenticatableContract, CanResetPas
      * @return mixed
      * Table : favorites
      */
-    public function books() {
-        return $this->belongsToMany('App\Src\Book\Book','book_user');
+    public function books()
+    {
+        return $this->belongsToMany('App\Src\Book\Book', 'book_user');
     }
 
     /**
@@ -77,11 +80,13 @@ class User extends AbstractModel implements AuthenticatableContract, CanResetPas
      * a book belongs to many user
      * Table : Purchases
      */
-    public function books_orders(){
-        return $this->belongsToMany('App\Src\Book\Book','purchases');
+    public function books_orders()
+    {
+        return $this->belongsToMany('App\Src\Book\Book', 'purchases');
     }
 
-    public function purchases() {
+    public function purchases()
+    {
         $this->hasMany('App\Src\Purchase\Purchase');
     }
 

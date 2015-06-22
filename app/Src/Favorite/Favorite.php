@@ -10,7 +10,7 @@ class Favorite extends Model
     //
     protected $table = "book_user";
 
-    protected $fillable = ['book_id','user_id'];
+    protected $fillable = ['book_id', 'user_id'];
 
     public $timestamps = false;
 
@@ -18,14 +18,16 @@ class Favorite extends Model
     /**
      * @return count how many times book_id repeated then get the max 4
      */
-    public function MostFavorited() {
-        $books = DB::table('book_user')
-        ->select('user_id','book_id',DB::raw('count(book_id) as book_count'))
-        ->groupBy('book_id')
-        ->orderBy('book_id','asc')
-        ->get();
+    public function mostFavorited()
+    {
+        $books = $this
+            ->select('user_id', 'book_id', DB::raw('count(book_id) as book_count'))
+            ->join()
+            ->groupBy('book_id')
+            ->orderBy('book_id', 'asc')
+            ->get();
 
-        if($books) {
+        if ($books) {
             return $books;
         }
         return false;

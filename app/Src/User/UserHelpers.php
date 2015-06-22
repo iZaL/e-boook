@@ -13,38 +13,44 @@ namespace App\Src\User;
  * Class UserHelpers
  * @package App\Src\User
  */
-trait UserHelpers {
+trait UserHelpers
+{
 
     /**
      * @return the first role of a user
      */
-    public function getUserRole () {
+    public function getUserRole()
+    {
         return $this->roles()->get()->first()->name;
     }
 
-    public function isAdmin() {
-        if($this->getUserRole() === 'Admin') {
+    public function isAdmin()
+    {
+        if ($this->getUserRole() === 'Admin') {
             return true;
         }
         return false;
     }
 
-    public function isEditor () {
-        if($this->getUserRole() === 'Editor') {
+    public function isEditor()
+    {
+        if ($this->getUserRole() === 'Editor') {
             return true;
         }
         return false;
     }
 
-    public function isSubscriber () {
-        if($this->getUserRole() === 'Subscriber') {
+    public function isSubscriber()
+    {
+        if ($this->getUserRole() === 'Subscriber') {
             return true;
         }
         return false;
     }
 
-    public function isActive () {
-        if($this->getActiveStatusForUser()->active === 1) {
+    public function isActive()
+    {
+        if ($this->getActiveStatusForUser()->active === 1) {
             return true;
         }
         return false;

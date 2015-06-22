@@ -11,11 +11,13 @@ namespace App\Src\Category;
 use App\Core\AbstractRepository;
 use App\Src\Book\BookRepository;
 
-class CategoryRepository extends AbstractRepository {
+class CategoryRepository extends AbstractRepository
+{
 
     public $category;
 
-    public function __construct(Category $category) {
+    public function __construct(Category $category)
+    {
 
         $this->model = $category;
     }

@@ -28,7 +28,7 @@ trait BookHelpers
 
             $message->from('Admin@e-boook.com');
 
-            $message->subject('Order Notification - '.$data['stage']. ' Book : ' . $data['book']->title_en . '-' . $data['book']->title_ar);
+            $message->subject('Order Notification - ' . $data['stage'] . ' Book : ' . $data['book']->title_en . '-' . $data['book']->title_ar);
 
             // will be replaced with the auth user who made the order
             $message->to('uusa35@gmail.com');

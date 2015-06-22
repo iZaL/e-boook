@@ -11,13 +11,16 @@ namespace App\Src\Purchase;
 
 use App\Core\AbstractRepository;
 
-class PurchaseRepository extends AbstractRepository {
+class PurchaseRepository extends AbstractRepository
+{
 
-    public function __construct(Purchase $purchase) {
+    public function __construct(Purchase $purchase)
+    {
         $this->model = $purchase;
     }
 
-    public function createNewOrder($bookId,$authId) {
+    public function createNewOrder($bookId, $authId)
+    {
 
         return $this->model->create([
             'book_id' => $bookId,
@@ -27,15 +30,17 @@ class PurchaseRepository extends AbstractRepository {
 
     }
 
-    public function checkOrderExists ($bookId,$authId) {
+    public function checkOrderExists($bookId, $authId)
+    {
 
-        return $this->model->where('book_id','=',$bookId)->where('user_id','=',$authId)->first();
+        return $this->model->where('book_id', '=', $bookId)->where('user_id', '=', $authId)->first();
 
     }
 
-    public function deleteOrder($userId,$bookId) {
+    public function deleteOrder($userId, $bookId)
+    {
 
-        return $this->model->where(['book_id'=>$bookId,'user_id'=>$userId])->delete();
+        return $this->model->where(['book_id' => $bookId, 'user_id' => $userId])->delete();
 
     }
 }

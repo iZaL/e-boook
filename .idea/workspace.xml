@@ -28,13 +28,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="UserRepository.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Src/User/UserRepository.php">
+      <file leaf-file-name="routes.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.416667" vertical-offset="965" max-vertical-offset="1815">
-              <caret line="86" column="85" selection-start-line="86" selection-start-column="85" selection-end-line="86" selection-end-column="85" />
+            <state vertical-scroll-proportion="-11.791667" vertical-offset="1217" max-vertical-offset="5685">
+              <caret line="102" column="83" selection-start-line="102" selection-start-column="83" selection-end-line="102" selection-end-column="83" />
               <folding>
-                <element signature="e#118#150#0#PHP" expanded="true" />
+                <marker date="1434996360000" expanded="true" signature="16609:16630" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -43,8 +43,8 @@
       <file leaf-file-name="BookController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/BookController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-48.75" vertical-offset="2100" max-vertical-offset="4050">
-              <caret line="218" column="52" selection-start-line="218" selection-start-column="52" selection-end-line="218" selection-end-column="52" />
+            <state vertical-scroll-proportion="-13.666667" vertical-offset="257" max-vertical-offset="4050">
+              <caret line="39" column="66" selection-start-line="39" selection-start-column="66" selection-end-line="39" selection-end-column="66" />
               <folding>
                 <element signature="e#39#61#0#PHP" expanded="true" />
               </folding>
@@ -52,68 +52,73 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Book.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Src/Book/Book.php">
+      <file leaf-file-name="UserController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UserController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-19.375" vertical-offset="300" max-vertical-offset="960">
-              <caret line="52" column="34" selection-start-line="52" selection-start-column="34" selection-end-line="52" selection-end-column="34" />
+            <state vertical-scroll-proportion="-4.2916665" vertical-offset="1022" max-vertical-offset="2415">
+              <caret line="86" column="51" selection-start-line="86" selection-start-column="51" selection-end-line="86" selection-end-column="51" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/admin/modules/book/index.blade.php">
+      <file leaf-file-name="_latest_added.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/modules/book/_latest_added.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-23.125" vertical-offset="375" max-vertical-offset="4125">
-              <caret line="62" column="143" selection-start-line="62" selection-start-column="91" selection-end-line="62" selection-end-column="143" />
+            <state vertical-scroll-proportion="-16.25" vertical-offset="15" max-vertical-offset="675">
+              <caret line="27" column="165" selection-start-line="27" selection-start-column="165" selection-end-line="27" selection-end-column="165" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="routes.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
+      <file leaf-file-name="FavoriteRepository.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Src/Favorite/FavoriteRepository.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.58787876" vertical-offset="2387" max-vertical-offset="5685">
-              <caret line="187" column="153" selection-start-line="187" selection-start-column="153" selection-end-line="187" selection-end-column="153" />
-              <folding>
-                <marker date="1434987031000" expanded="true" signature="16659:16680" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AdminBookController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AdminBookController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-21.25" vertical-offset="4875" max-vertical-offset="5730">
-              <caret line="359" column="4" selection-start-line="359" selection-start-column="4" selection-end-line="359" selection-end-column="4" />
-              <folding>
-                <element signature="e#46#71#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BookHelpers.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Src/Book/BookHelpers.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-15.625" vertical-offset="0" max-vertical-offset="600">
-              <caret line="30" column="52" selection-start-line="30" selection-start-column="52" selection-end-line="30" selection-end-column="52" />
+            <state vertical-scroll-proportion="0.25" vertical-offset="165" max-vertical-offset="825">
+              <caret line="28" column="24" selection-start-line="28" selection-start-column="24" selection-end-line="28" selection-end-column="24" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="order_notification.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/emails/order_notification.blade.php">
+      <file leaf-file-name="ModelFactory.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/database/factories/ModelFactory.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-15.0" vertical-offset="0" max-vertical-offset="450">
-              <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+            <state vertical-scroll-proportion="-50.0" vertical-offset="0" max-vertical-offset="1305">
+              <caret line="89" column="1" selection-start-line="89" selection-start-column="1" selection-end-line="89" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Favorite.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Src/Favorite/Favorite.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-13.75" vertical-offset="15" max-vertical-offset="615">
+              <caret line="24" column="20" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DatabaseSeeder.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/database/seeds/DatabaseSeeder.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-19.375" vertical-offset="0" max-vertical-offset="885">
+              <caret line="32" column="16" selection-start-line="32" selection-start-column="16" selection-end-line="32" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserRepository.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Src/User/UserRepository.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-24.291666" vertical-offset="77" max-vertical-offset="1830">
+              <caret line="49" column="51" selection-start-line="49" selection-start-column="51" selection-end-line="49" selection-end-column="51" />
               <folding>
-                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#h1#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="e#118#150#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -124,12 +129,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/resources/views/modules/book/_latest_added.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/modules/book/_most_favorited.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/modules/category/show.blade.php" />
-        <option value="$PROJECT_DIR$/config/app.php" />
-        <option value="$PROJECT_DIR$/public/css/app.css" />
-        <option value="$PROJECT_DIR$/resources/assets/sass/app.scss" />
         <option value="$PROJECT_DIR$/public/css/everything.css" />
         <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/database/migrations/2015_06_07_154836_create_book_user_pivot_table.php" />
@@ -175,6 +174,12 @@
         <option value="$PROJECT_DIR$/resources/views/admin/modules/book/index.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/AdminBookController.php" />
         <option value="$PROJECT_DIR$/app/Http/routes.php" />
+        <option value="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" />
+        <option value="$PROJECT_DIR$/resources/views/modules/book/_latest_added.blade.php" />
+        <option value="$PROJECT_DIR$/database/factories/ModelFactory.php" />
+        <option value="$PROJECT_DIR$/app/Src/Favorite/Favorite.php" />
+        <option value="$PROJECT_DIR$/app/Src/Favorite/FavoriteRepository.php" />
+        <option value="$PROJECT_DIR$/app/Src/User.php" />
       </list>
     </option>
   </component>
@@ -186,6 +191,22 @@
     <option name="y" value="23" />
     <option name="width" value="1440" />
     <option name="height" value="807" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>Blade files</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -238,47 +259,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ebook" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ebook" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="emails" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ebook" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ebook" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
+              <option name="myItemId" value="config" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -335,164 +316,6 @@
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Book" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ebook" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ebook" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ebook" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ebook" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Http" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ebook" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ebook" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Http" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Requests" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ebook" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ebook" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Http" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Middleware" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ebook" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ebook" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Http" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Controllers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ebook" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ebook" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Http" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Controllers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Auth" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ebook" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ebook" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Http" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Controllers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Admin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
@@ -502,21 +325,21 @@
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../lts" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="SearchEverywhereHistoryKey" value="AdminB&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/Controllers/Admin/AdminBookController.php&#10;INDEX&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/admin/modules/book/index.blade.php&#10;noti&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/emails/order_notification.blade.php&#10;order_&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/emails/order_notification.php&#10;routes&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/routes.php&#10;HOMEC&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/Controllers/HomeController.php&#10;BookRe&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Src/Book/BookRepository.php&#10;AppSer&#9;null&#9;null&#10;HomeC&#9;null&#9;null&#10;ADminBook&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/Controllers/Admin/AdminBookController.php&#10;Index&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/admin/modules/book/index.blade.php&#10;AdminBook&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/Controllers/Admin/AdminBookController.php&#10;Book&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Src/Book/Book.php&#10;UserCon&#9;null&#9;null&#10;profile&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/modules/user/profile.blade.php&#10;Purc&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Src/Purchase/Purchase.php&#10;User&#9;null&#9;null&#10;AdminBo&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/Controllers/Admin/AdminBookController.php&#10;index&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/admin/modules/category/index.blade.php&#10;catego&#9;null&#9;null&#10;BookCon&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/Controllers/BookController.php&#10;ind&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/admin/modules/book/index.blade.php&#10;purch&#9;null&#9;null&#10;Admin&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/Controllers/Admin/AdminBookController.php&#10;AdminBoo&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/Controllers/Admin/AdminBookController.php&#10;scrip&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/partials/scripts.blade.php&#10;gul&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/gulpfile.js&#10;creat&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/admin/modules/book/create.blade.php&#10;gulp&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/gulpfile.js&#10;edit&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/admin/modules/book/edit.blade.php&#10;inde&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/admin/modules/book/index.blade.php&#10;route&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/routes.php&#10;create&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/admin/modules/book/_create_preview_form.blade.php&#10;AdminUser&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/Controllers/Admin/AdminUserController.php&#10;AdminCa&#9;null&#9;null&#10;AdminUs&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/Controllers/Admin/AdminUserController.php&#10;show&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/modules/book/show.blade.php&#10;sty&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/partials/styles.blade.php&#10;mas&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/admin/layouts/master.blade.php&#10;style&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/partials/styles.blade.php&#10;custom.css&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/assets/css/custom.css&#10;main&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/partials/mainmenu.blade.php&#10;crea&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/admin/modules/book/create.blade.php&#10;mast&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/admin/layouts/master.blade.php&#10;master&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/admin/layouts/master.blade.php&#10;BookC&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/Controllers/BookController.php&#10;_c&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/admin/modules/book/_create_preview_form.blade.php&#10;role&#9;null&#9;null&#10;_cr&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/admin/modules/book/_create_preview_form.blade.php&#10;_create&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/admin/modules/book/_create_preview_form.blade.php" />
+    <property name="SearchEverywhereHistoryKey" value="favo&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Src/Favorite/Favorite.php&#10;Modelfac&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/database/factories/ModelFactory.php&#10;factor&#9;null&#9;null&#10;fav&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Src/Favorite/Favorite.php&#10;DataBaseS&#9;null&#9;null&#10;BookCon&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/Controllers/BookController.php&#10;routes&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/routes.php&#10;Usercont&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/Controllers/UserController.php&#10;userR&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Src/User/UserRepository.php&#10;FavoriteR&#9;null&#9;null&#10;_latest&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/modules/book/_latest_added.blade.php&#10;contactus&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/pages/contactus.blade.php&#10;Appser&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Providers/AppServiceProvider.php&#10;AdminB&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/Controllers/Admin/AdminBookController.php&#10;INDEX&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/admin/modules/book/index.blade.php&#10;noti&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/emails/order_notification.blade.php&#10;order_&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/emails/order_notification.php&#10;HOMEC&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/Controllers/HomeController.php&#10;BookRe&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Src/Book/BookRepository.php&#10;AppSer&#9;null&#9;null&#10;HomeC&#9;null&#9;null&#10;ADminBook&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/Controllers/Admin/AdminBookController.php&#10;Index&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/admin/modules/book/index.blade.php&#10;AdminBook&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/Controllers/Admin/AdminBookController.php&#10;Book&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Src/Book/Book.php&#10;UserCon&#9;null&#9;null&#10;profile&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/modules/user/profile.blade.php&#10;Purc&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Src/Purchase/Purchase.php&#10;User&#9;null&#9;null&#10;AdminBo&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/Controllers/Admin/AdminBookController.php&#10;index&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/admin/modules/category/index.blade.php&#10;catego&#9;null&#9;null&#10;ind&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/admin/modules/book/index.blade.php&#10;purch&#9;null&#9;null&#10;Admin&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/Controllers/Admin/AdminBookController.php&#10;AdminBoo&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/Controllers/Admin/AdminBookController.php&#10;scrip&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/partials/scripts.blade.php&#10;gul&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/gulpfile.js&#10;creat&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/admin/modules/book/create.blade.php&#10;gulp&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/gulpfile.js&#10;edit&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/admin/modules/book/edit.blade.php&#10;inde&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/admin/modules/book/index.blade.php&#10;route&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/routes.php&#10;create&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/admin/modules/book/_create_preview_form.blade.php&#10;AdminUser&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/Controllers/Admin/AdminUserController.php&#10;AdminCa&#9;null&#9;null&#10;AdminUs&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/app/Http/Controllers/Admin/AdminUserController.php&#10;show&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/modules/book/show.blade.php&#10;sty&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/partials/styles.blade.php&#10;mas&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/Homestead/projects/ebook/resources/views/admin/layouts/master.blade.php" />
     <property name="FullScreen" value="false" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
-    <property name="options.lastSelected" value="preferences.sourceCode" />
+    <property name="options.lastSelected" value="preferences.sourceCode.PHP" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="LayoutCode.rearrangeEntriesPHP" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/Src" />
       <recent name="$PROJECT_DIR$/resources/views/emails" />
       <recent name="$PROJECT_DIR$/resources/assets/js" />
       <recent name="$PROJECT_DIR$/public/img" />
       <recent name="$PROJECT_DIR$/resources/assets/css" />
-      <recent name="$PROJECT_DIR$/public/css" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/public/fonts" />
@@ -574,6 +397,7 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -584,7 +408,6 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -646,69 +469,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/public/css/lightbox.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3240">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/lightbox.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="689">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.bowerrc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.02255639" vertical-offset="0" max-vertical-offset="665">
-          <caret line="1" column="27" selection-start-line="1" selection-start-column="27" selection-end-line="1" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/layouts/master.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7218045" vertical-offset="0" max-vertical-offset="915">
-          <caret line="32" column="12" selection-start-line="32" selection-start-column="12" selection-end-line="32" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/layouts/one_col.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="689">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/modules/book/_latest_added.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.60902256" vertical-offset="0" max-vertical-offset="675">
-          <caret line="27" column="33" selection-start-line="27" selection-start-column="33" selection-end-line="27" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/modules/book/_most_favorited.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.65413535" vertical-offset="0" max-vertical-offset="665">
-          <caret line="29" column="22" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/partials/styles.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.067669176" vertical-offset="0" max-vertical-offset="665">
-          <caret line="3" column="17" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/assets/bower_components/jquery/dist/jquery.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="689">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/assets/bower_components/jquery/dist/jquery.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.30478954" vertical-offset="120" max-vertical-offset="138240">
@@ -907,34 +667,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/BookController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-48.75" vertical-offset="2100" max-vertical-offset="4050">
-          <caret line="218" column="52" selection-start-line="218" selection-start-column="52" selection-end-line="218" selection-end-column="52" />
-          <folding>
-            <element signature="e#39#61#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UserController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-21.791666" vertical-offset="602" max-vertical-offset="2415">
-          <caret line="86" column="51" selection-start-line="86" selection-start-column="51" selection-end-line="86" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Src/User/UserRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.416667" vertical-offset="965" max-vertical-offset="1815">
-          <caret line="86" column="85" selection-start-line="86" selection-start-column="85" selection-end-line="86" selection-end-column="85" />
-          <folding>
-            <element signature="e#118#150#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/modules/user/profile.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-8.125" vertical-offset="0" max-vertical-offset="4515">
@@ -979,14 +711,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.47727272" vertical-offset="0" max-vertical-offset="780">
           <caret line="23" column="37" selection-start-line="23" selection-start-column="37" selection-end-line="23" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Providers/AppServiceProvider.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.45454547" vertical-offset="0" max-vertical-offset="705">
-          <caret line="26" column="8" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="8" />
           <folding />
         </state>
       </provider>
@@ -1044,13 +768,113 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/contactus.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="684">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Providers/AppServiceProvider.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.625" vertical-offset="0" max-vertical-offset="705">
+          <caret line="23" column="51" selection-start-line="23" selection-start-column="51" selection-end-line="23" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/app.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="70.625" vertical-offset="1695" max-vertical-offset="3195">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Src/User/UserRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-24.291666" vertical-offset="77" max-vertical-offset="1815">
+          <caret line="49" column="51" selection-start-line="49" selection-start-column="51" selection-end-line="49" selection-end-column="51" />
+          <folding>
+            <element signature="e#118#150#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UserController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.2916665" vertical-offset="1022" max-vertical-offset="2415">
+          <caret line="86" column="51" selection-start-line="86" selection-start-column="51" selection-end-line="86" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.58787876" vertical-offset="2387" max-vertical-offset="5685">
-          <caret line="187" column="153" selection-start-line="187" selection-start-column="153" selection-end-line="187" selection-end-column="153" />
+        <state vertical-scroll-proportion="-11.791667" vertical-offset="1217" max-vertical-offset="5685">
+          <caret line="102" column="83" selection-start-line="102" selection-start-column="83" selection-end-line="102" selection-end-column="83" />
           <folding>
-            <marker date="1434987031000" expanded="true" signature="16659:16680" placeholder="..." />
+            <marker date="1434996360000" expanded="true" signature="16609:16630" placeholder="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/BookController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.666667" vertical-offset="257" max-vertical-offset="4050">
+          <caret line="39" column="66" selection-start-line="39" selection-start-column="66" selection-end-line="39" selection-end-column="66" />
+          <folding>
+            <element signature="e#39#61#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/seeds/DatabaseSeeder.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-19.375" vertical-offset="0" max-vertical-offset="885">
+          <caret line="32" column="16" selection-start-line="32" selection-start-column="16" selection-end-line="32" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/modules/book/_latest_added.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-16.25" vertical-offset="15" max-vertical-offset="675">
+          <caret line="27" column="165" selection-start-line="27" selection-start-column="165" selection-end-line="27" selection-end-column="165" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/laracasts/testdummy/src/FactoriesFinder.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.13636364" vertical-offset="0" max-vertical-offset="1155">
+          <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/factories/ModelFactory.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-50.0" vertical-offset="0" max-vertical-offset="1305">
+          <caret line="89" column="1" selection-start-line="89" selection-start-column="1" selection-end-line="89" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Src/Favorite/Favorite.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.75" vertical-offset="15" max-vertical-offset="615">
+          <caret line="24" column="20" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Src/Favorite/FavoriteRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.25" vertical-offset="165" max-vertical-offset="825">
+          <caret line="28" column="24" selection-start-line="28" selection-start-column="24" selection-end-line="28" selection-end-column="24" />
+          <folding />
         </state>
       </provider>
     </entry>
