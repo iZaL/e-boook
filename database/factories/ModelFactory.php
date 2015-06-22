@@ -11,11 +11,13 @@
 |
 */
 
-$factory->define('App\Src\User\User', function($faker) {
+use Illuminate\Support\Facades\DB;
+
+$factory->define('App\Src\User\User', function ($faker) {
     return [
         'name_en' => 'usama',
         'name_ar' => 'افضل',
-        'email' => 'uusa35@gmail.com'.$faker->randomDigit,
+        'email' => 'uusa35@gmail.com' . $faker->randomDigit,
         'password' => bcrypt('admin'),
         'bank_number' => $faker->creditCardNumber,
         'bank_name' => $faker->company,
@@ -24,7 +26,7 @@ $factory->define('App\Src\User\User', function($faker) {
     ];
 });
 
-$factory->define('App\Src\Book\Book', function($faker) {
+$factory->define('App\Src\Book\Book', function ($faker) {
     return [
         'user_id' => 1,
         'cover_en' => '',
@@ -48,7 +50,7 @@ $factory->define('App\Src\Contactus\Contactus', function ($faker) {
     return [
         'company' => $faker->company,
         'mobile' => $faker->phoneNumber,
-        'phone'  => $faker->phoneNumber,
+        'phone' => $faker->phoneNumber,
         'address' => $faker->address,
         'zipcode' => $faker->phoneNumber,
         'country' => $faker->country,
@@ -61,14 +63,14 @@ $factory->define('App\Src\Contactus\Contactus', function ($faker) {
 $factory->define('App\Src\Category\Category', function ($faker) {
     return [
         'name_en' => $faker->name,
-        'name_ar' => 'تصنيف'.$faker->phoneNumber,
+        'name_ar' => 'تصنيف' . $faker->phoneNumber,
     ];
 });
 
 
 $factory->define('App\Src\Book\BookMeta', function ($faker) {
     return [
-        'book_id' => $faker->numberBetween(1,10),
+        'book_id' => $faker->numberBetween(1, 10),
         'total_pages' => $faker->randomDigit,
         'price' => $faker->randomDigit
     ];
@@ -76,6 +78,13 @@ $factory->define('App\Src\Book\BookMeta', function ($faker) {
 
 $factory->define('App\Src\Role\Role', function ($faker) {
     return [
-        'name' => 'Admin'
-    ];
+        'name' => $faker->randomElement(['Admin', 'Editor', 'Subscriber'])
+        ];
 });
+
+for ($i = 0; $i <= 2; $i++) {
+    DB::table('user_roles')->insert([
+        'user_id' => '1',
+        'role_id' => rand(1,3)
+    ]);
+}

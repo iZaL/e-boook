@@ -6,20 +6,7 @@
 
 @section('script')
     @parent
-    <script src="/bower_components/tinymce/tinymce.min.js"></script>
-    <script src="/bower_components/tinymce/tinymce.jquery.min.js"></script>
-    <script type="text/javascript">
-        tinymce.init({
-            selector: "textarea.editor",
-            plugins: [
-                ["advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker"],
-                ["searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking"],
-                ["save table contextmenu directionality emoticons template paste textcolor  directionality"]
-            ],
-            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image jbimages | print preview media fullpage | forecolor backcolor emoticons | ltr rtl ",
-            relative_urls: false
-        });
-    </script>
+    @include('partials.tinymce')
 @stop
 
 @section('content')
@@ -123,14 +110,5 @@
     {!! Form::close() !!}
     </div>
 </div>
-    <script>
-        $('.free').on('change', function () {
-            if(this.checked) {
-                $('.price').attr('disabled','disabled');
-            }
-            else {
-                $('.price').removeAttr('disabled','disabled');
-            }
-        });
-    </script>
+
 @stop

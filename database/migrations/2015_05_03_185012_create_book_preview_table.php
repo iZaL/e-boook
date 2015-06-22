@@ -17,7 +17,11 @@ class CreateBookPreviewTable extends Migration {
 			//
             $table->increments('id');
             $table->integer('book_id');
-            $table->integer('list_id');
+			$table->integer('author_id');
+			$table->integer('user_id');
+            $table->integer('preview_start');
+			$table->integer('preview_end');
+			$table->integer('total_pages');
             $table->timestamps();
             $table->softDeletes();
 		});

@@ -11,7 +11,7 @@ class Book extends AbstractModel
     protected $guarded = ['id'];
 
 
-    protected $localeStrings = ['title','cover','description'];
+    protected $localeStrings = ['title', 'cover', 'description'];
 
 
     /**
@@ -21,9 +21,11 @@ class Book extends AbstractModel
      * get the author of the book
      * Table : Book
      */
-    public function user() {
-        return $this->belongsTo('App\Src\User\User','user_id');
+    public function user()
+    {
+        return $this->belongsTo('App\Src\User\User', 'user_id');
     }
+
     /**
      * Many To Many Relation - Favorite Relation
      * a user has many  books
@@ -31,11 +33,13 @@ class Book extends AbstractModel
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      * Table : book_user : Favorite Relation
      */
-    public function users () {
-        return $this->belongsToMany('App\Src\User\User','book_user');
+    public function users()
+    {
+        return $this->belongsToMany('App\Src\User\User', 'book_user');
     }
 
-    public function meta() {
+    public function meta()
+    {
         return $this->hasOne('App\Src\Book\BookMeta');
     }
 
@@ -46,9 +50,10 @@ class Book extends AbstractModel
      * Table : purchases
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function users_orders() {
+    public function users_orders()
+    {
         // this book belongs to many users where forign id is user_id and
-        return $this->belongsToMany('App\Src\User\User','purchases');
+        return $this->belongsToMany('App\Src\User\User', 'purchases');
     }
 
     public function favorites()

@@ -17,55 +17,12 @@
     <meta name="description" content="Page description here">
     <meta name="author" content="BigBase - D. Tiems">
     <meta name="viewport" content="width=device-width">
+
     @section('style')
-        @include('partials.fonts')
-        <link rel="stylesheet" href="/css/app.css"/>
-        @if(App::getLocale() === 'ar')
-            <link href="/bower_components/bootstrap-rtl/dist/css/bootstrap-rtl.css" rel="stylesheet">
-            <link rel="stylesheet" href="/css/custom_ar.css">
-        @endif
-        <link rel="stylesheet" href="/bower_components/nivoslider/nivo-slider.css">
-        <link rel="stylesheet" href="/bower_components/colorbox/example1/colorbox.css">
-        <link rel="stylesheet" href="/bower_components/nivoslider/themes/bar/bar.css" type="text/css" media="screen"/>
-        <link rel="stylesheet" href="/bower_components/nivoslider/themes/light/light.css" type="text/css" media="screen"/>
-        <link rel="stylesheet" href="/bower_components/fontawesome/css/font-awesome.min.css" type="text/css"/>
-        <link rel="stylesheet" href="/css/style.css">
-        <link rel="stylesheet" href="/css/custom.css">
-        @if(App::getLocale() === 'en')
-            <link rel="stylesheet" href="/css/custom_en.css">
-        @endif
-
+        @include('partials.styles')
     @show
 
-    @section('script')
-        <script src="/js/config.js"></script>
-        <script src="/bower_components/modernizr/modernizr.js"></script>
 
-        <!-- jQuery -->
-        {{--<script src="/bower_components/jquery/dist/jquery.min.js"></script>--}}
-
-        <!-- Bootstrap Core JavaScript -->
-        {{--<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>--}}
-
-        <script src="/js/app.js"></script>
-
-        <script src="/bower_components/nivoslider/jquery.nivo.slider.pack.js"></script>
-        <script src="/bower_components/colorbox/jquery.colorbox-min.js"></script>
-        <script src="/bower_components/respond/dest/respond.min.js"></script>
-        <script src="/js/script.js"></script>
-        <script type="text/javascript">
-            /* * * CONFIGURATION VARIABLES * * */
-            var disqus_shortname = 'ebookapp';
-
-            /* * * DON'T EDIT BELOW THIS LINE * * */
-            (function () {
-                var s = document.createElement('script'); s.async = true;
-                s.type = 'text/javascript';
-                s.src = '//' + disqus_shortname + '.disqus.com/count.js';
-                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-            }());
-        </script>
-    @show
 
 </head>
 
@@ -89,7 +46,9 @@
 </div>
 
 
-
+@section('script')
+    @include('partials.scripts')
+@show
 </body>
 
 

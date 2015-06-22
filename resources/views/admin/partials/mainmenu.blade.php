@@ -27,8 +27,6 @@
                         <ul class="dropdown-menu">
                             @if(Session::get('role.admin'))
                                 <li><a href="{{ route('app.admin.book.index') }}"><i class="fa fa-pencil fa-fw"></i>&nbsp;{{ trans('word.all-book-poem') }}</a></li>
-                                {{--<li><a href="{{ route('app.admin.book.type.getBookByType') }}/book"><i class="fa fa-pencil fa-fw"></i>&nbsp;{{ trans('word.book') }}</a></li>--}}
-                                {{--<li><a href="{{ route('app.admin.book.type.getBookByType') }}/poem"><i class="fa fa-pencil fa-fw"></i>&nbsp;{{ trans('word.poem') }}</a></li>--}}
                                 <li><a href="{{ route('app.admin.book.create') }}"><i class="fa fa-pencil fa-fw"></i>&nbsp;{{ trans('word.create-book') }} || {{ trans('word.poem') }}</a></li>
                             @elseif(Session::get('role.editor'))
                                 <li><a href="{{ route('app.editor.book.index') }}"><i class="fa fa-pencil fa-fw"></i>&nbsp;{{ trans('word.all-book-poem') }}</a></li>

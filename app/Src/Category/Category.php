@@ -9,7 +9,7 @@ class Category extends AbstractModel
 
     public $table = 'categories';
 
-    protected $fillable = ['name_ar','name_en'];
+    protected $fillable = ['name_ar', 'name_en'];
 
     protected $localeStrings = ['name'];
 

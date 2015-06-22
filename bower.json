@@ -25,7 +25,8 @@
     "respond": "~1.4.2",
     "startbootstrap-sb-admin-2": null,
     "bootstrap-datepicker": "~1.4.0",
-    "tinymce": "~4.1.10"
+    "tinymce": "~4.1.10",
+    "normalize.scss": "~3.0.2+normalize.3.0.2"
   },
   "homepage": "https://github.com/iZaL/book",
   "description": "ebook application",

@@ -14,18 +14,4 @@ class Favorite extends Model
 
     public $timestamps = false;
 
-    /**
-     * @return count how many times book_id repeated then get the max 4
-     */
-    public function mostFavorited()
-    {
-        return $this
-            ->select('user_id', 'book_id', DB::raw('count(book_id) as book_count'))
-            ->groupBy('book_id')
-            ->orderBy('book_id', 'desc')
-            ->limit(4)
-            ->get();
-
-    }
-
 }

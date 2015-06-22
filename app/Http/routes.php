@@ -106,7 +106,7 @@ Route::group(['prefix'=>'app'],function () {
 
 
         /***************************************************************************************************
-         *                                          Favorite
+         *
          *
          ***************************************************************************************************/
         Route::get('user/{user}',['uses'=>'UserController@edit']);
@@ -135,6 +135,17 @@ Route::group(['prefix'=>'app'],function () {
 
             Route::resource('book','Admin\AdminBookController', ['except'=>['destroy']]);
             Route::get('book/type/{type?}','Admin\AdminBookController@getBookByType');
+            /*
+             * Routes to create / post / delete Preview Book for Editor
+             * */
+            Route::get('/book/pdf/preview/customized/{bookId}/{authorId}/{total_pages}',
+                        ['as' =>'app.editor.book.getCreateNewCustomizedPreview','uses' => 'Admin\AdminBookController@getCreateNewCustomizedPreview']);
+
+            Route::post('/book/pdf/preview/customized',
+                ['as' =>'app.editor.book.postCreateNewCustomizedPreview','uses' => 'Admin\AdminBookController@postCreateNewCustomizedPreview']);
+
+            Route::delete('/book/pdf/preview/customized/{bookId}/{authorId}/{total_pages}',
+                ['as' =>'app.editor.book.deleteCreateNewCustomizedPreview','uses' => 'Admin\AdminBookController@deleteCreateNewCustomizedPreview']);
 
 
         }); // end of editor middlware*/
@@ -170,11 +181,27 @@ Route::group(['prefix'=>'app'],function () {
             Route::get('/','Admin\AdminBookController@index');
 
             // route to fetch peoms only
-            Route::get('/book/type/{type?}','Admin\AdminBookController@getBookByType');
+            Route::get('/book/preview/{type?}','Admin\AdminBookController@getBookByType');
 
             // resource route for book & poem
             Route::resource('book','Admin\AdminBookController');
-            Route::get('/orders/accept/{userId}/{bookId}/{stage}','Admin\AdminBookController@getAcceptOrder');
+            Route::get('book/status/update/{bookId}',['as'=>'app.admin.book.getUpdateBookStatus','uses'=>'Admin\AdminBookController@getUpdateBookStatus']);
+            /*
+             * Routes to create / post / delete Preview Book for Admin
+             * */
+            Route::get('/book/pdf/preview/customized/{bookId}/{authorId}/{total_pages}',
+                    ['as' =>'app.admin.book.getCreateNewCustomizedPreview','uses' => 'Admin\AdminBookController@getCreateNewCustomizedPreview']);
+
+            Route::post('/book/pdf/preview/test',
+                ['as' =>'app.admin.book.postCreateNewCustomizedPreview','uses' => 'Admin\AdminBookController@postCreateNewCustomizedPreview']);
+
+            Route::delete('/book/pdf/preview/customized/{bookId}/{authorId}/{total_pages}',
+                ['as' =>'app.admin.book.deleteCreateNewCustomizedPreview','uses' => 'Admin\AdminBookController@deleteCreateNewCustomizedPreview']);
+
+            // Book Previews
+
+            // Routes for Accept Order / Delete Order
+            Route::get('/orders/accept/{userId}/{bookId}/{email}/{stage}','Admin\AdminBookController@getAcceptOrder');
             Route::get('/orders/delete/{userId}/{bookId}','Admin\AdminBookController@getDeleteOrder');
 
             /***************************************************************************************************
@@ -315,14 +342,33 @@ Route::group(['prefix'=>'app'],function () {
  * });
  * - that means that the middleware still didn't work you have to assign the middleware within each controller (still not sure about this line)
  *
+ *8- elixir
  *
+/*
+ * 1- elixir(function (mix){
+ * mix.sass(["name of the file within the resources/assets/ then create a folder sass if you will use sass or create less folder"]);
+ * mix.scripts([list of files that will be cloned in the public/js],'path to the file in public','base path for cloned files','./');
+ * mix.version(['public/css/app.css','public/js/app.js']);
+ * });
+ *
+ * 2- within the app.sass you will import all files needed
+ * @import url (whatever)
+ *
+ * 9- Blade Templates
+ * 1- master blade
+ *   you put all sections including section for scripts and styles
+ * 2- one_col layout that extending the master
+ *      within that layout we make content section like so :
+ *  @section('content') @endsection('content')
+ *  3- within all other blade templates that extending the one_col layout make the following :
+ *  @section('content') .... @stop
  ***************************************************************************************************/
 
 
 /*
  * Pending ::
- * 1- make order system
- * 2- make rating system
+ * 1- make rating system
+ * 2- assing some pages for specific user.
  * 3- make abstraction to the whole application
  * */
 
