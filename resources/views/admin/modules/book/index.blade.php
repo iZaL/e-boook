@@ -46,7 +46,7 @@
                                             <p> {!! Str::limit(strip_tags($book->body)) !!} </p>
                                         </td>
                                         <td>
-                                            <span> {{ $book->meta ? $book->meta->total_pages : 'N/A' }} </span>
+                                            <span> {{ ($book->meta) ? $book->meta->total_pages : 'N/A' }} </span>
 
                                         </td>
                                         <td>
@@ -78,7 +78,9 @@
                                                 </a>
                                         </td>
                                         <td>
+                                            @if($book->meta)
                                             <a class="btn btn-info btn-rounded btn-sm" href="{{ route('app.editor.book.getCreateNewCustomizedPreview',[$book->id,$book->user_id,$book->meta->total_pages]) }}"><i class="fa fa-newspaper-o fa-2x"></i></a>
+                                            @endif
                                         </td>
                                         @endif
                                         {{--Delete Btn with Modal to confirm delete process--}}
@@ -91,7 +93,9 @@
                                         </td>
                                         {{-- Create New Customized Preview--}}
                                         <td>
+                                            @if($book->meta)
                                             <a class="btn btn-info btn-rounded btn-sm" href="{{ route('app.admin.book.getCreateNewCustomizedPreview',[$book->id,$book->user_id,$book->meta->total_pages]) }}"><i class="fa fa-newspaper-o fa-2x"></i></a>
+                                            @endif
                                         </td>
                                         @endif
                                     </tr>
@@ -172,7 +176,7 @@
                                                 <p> {!! Str::limit(strip_tags($book->body)) !!} </p>
                                             </td>
                                             <td>
-                                                <span> {{ $book->meta ? $book->meta->total_pages : 'N/A' }} </span>
+                                                <span> {{ ($book->meta) ? $book->meta->total_pages : 'N/A' }} </span>
 
                                             </td>
                                             <td>
