@@ -60,7 +60,6 @@ class BookController extends Controller
         // get all books by book ID
         $book = $this->bookRepository->model->with(['user', 'meta'])->find($id);
 
-        dd($book);
         //@todo: redirec if the book is not published with a not published message
         if ($book->status != 'published') {
             return redirect('/')->with('');
