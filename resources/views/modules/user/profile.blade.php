@@ -6,13 +6,13 @@
 
             <!-- START CONTENT ITEM -->
             <ul class="nav nav-tabs">
-                <li id="tab-1"><a href="#step1" data-toggle="tab"><i class="fa fa-aw fa-book"></i>{{ trans('word.books') }} </a></li>
-                <li id="tab-2"><a href="#step2" data-toggle="tab"><i class="fa fa-aw fa-book"></i>{{ trans('word.books-draft') }}</a></li>
-                <li id="tab-3"><a href="#step3" data-toggle="tab"><i class="fa fa-aw fa-book"></i>{{ trans('word.books-published') }}</a></li>
-                <li id="tab-5"><a href="#step5" data-toggle="tab"><i class="fa fa-aw fa-order"></i>{{  trans('word.prviews') }}</a></li>
-                <li id="tab-4"><a href="#step4" data-toggle="tab"><i class="fa fa-aw fa-profile"></i>{{ trans('word.favorite-books') }}</a></li>
-                <li id="tab-5"><a href="#step5" data-toggle="tab"><i class="fa fa-aw fa-order"></i>{{  trans('word.orders') }}</a></li>
-                <li id="tab-6"><a href="#step6" data-toggle="tab"><i class="fa fa-aw fa-profile"></i>{{  trans('word.personal-info') }}</a></li>
+                <li id="tab-1"><a href="#step1" data-toggle="tab"><i class="fa fa-aw fa-book"></i>&nbsp;{{ trans('word.books') }} </a></li>
+                <li id="tab-2"><a href="#step2" data-toggle="tab"><i class="fa fa-aw fa-book"></i>&nbsp;{{ trans('word.books-draft') }}</a></li>
+                <li id="tab-3"><a href="#step3" data-toggle="tab"><i class="fa fa-aw fa-book"></i>&nbsp;{{ trans('word.books-published') }}</a></li>
+                <li id="tab-4"><a href="#step4" data-toggle="tab"><i class="fa fa-aw fa-eye"></i>&nbsp;{{ trans('word.prviews') }}</a></li>
+                <li id="tab-5"><a href="#step5" data-toggle="tab"><i class="fa fa-aw fa-bookmark"></i>&nbsp;{{  trans('word.favorite-books') }}</a></li>
+                <li id="tab-6"><a href="#step6" data-toggle="tab"><i class="fa fa-aw fa-file-pdf-o"></i>&nbsp;{{  trans('word.orders') }}</a></li>
+                <li id="tab-7"><a href="#step7" data-toggle="tab"><i class="fa fa-aw fa-info"></i>&nbsp;{{  trans('word.personal-info') }}</a></li>
             </ul>
 
             <div class="tab-content">
@@ -25,7 +25,7 @@
                                 <thead>
                                 <tr>
                                     <th class="hidden-xs">&nbsp;</th>
-                                    <th></th>
+                                    <th> {{ trans('word.subject') }} </th>
                                     <th>{{ trans('word.total-pages') }}</th>
                                     <th>{{ trans('word.status') }}</th>
                                     <th>Last Edited</th>
@@ -39,7 +39,7 @@
                                             <td>
                                                 <a href="{{ route('book.show',$book->id) }}"> {{ $book->title }} </a>
 
-                                                <p> {{ Str::limit(strip_tags($book->description )) }} </p>
+                                                <p> {!! Str::words(strip_tags($book->__get('body')),8) !!} </p>
                                             </td>
                                             <td>
                                                 <span> {{ $book->meta ? $book->meta->total_pages : 'N/A' }} </span>
@@ -132,7 +132,7 @@
                                         <tr>
                                             <td class="hidden-xs"><img class="img-table img-responsive" src="/img/cover/cover_{{App::getLocale()}}/thumbnail/{{$book->cover }}" alt="{{ $book->title }}"></td>
                                             <td>
-                                                <a href="{{ action('BookController@show'),$book->id }}"> {!! $book->title !!} </a>
+                                                <a href="{{ action('BookController@show',$book->id) }}"> {!! $book->title !!} </a>
 
                                                 <p> {!! Str::limit(strip_tags($book->body)) !!} </p>
                                             </td>
@@ -164,7 +164,7 @@
 
                 {{--Previews Created for a user--}}
 
-                <div class="tab-pane" id="step3">
+                <div class="tab-pane" id="step4">
                     <div class="row">
                         <div class="col-xs-12 paddingTop10">
                             <table class="table table-bordered table-order">
@@ -178,17 +178,18 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($books as $book)
-                                    @if($book->status === 'published')
+                                @foreach($customizedPreviews as $book)
+
                                         <tr>
                                             <td class="hidden-xs"><img class="img-table img-responsive" src="/img/cover/cover_{{App::getLocale()}}/thumbnail/{{$book->cover }}" alt="{{ $book->title }}"></td>
                                             <td>
-                                                <a href="{{ action('BookController@show'),$book->id }}"> {!! $book->title !!} </a>
+                                                {{--<a href="{{ action('',$book->url) }}"> {!! $book->title !!}</a>--}}
 
-                                                <p> {!! Str::limit(strip_tags($book->body)) !!} </p>
+                                                <p> {!! Str::words(strip_tags($book->body),6) !!} </p>
+
                                             </td>
                                             <td>
-                                                <span> {{ $book->meta ? $book->meta->total_pages : 'N/A' }} </span>
+                                                <span> {{ ($book->meta) ? $book->meta->total_pages : 'N/A' }} </span>
 
                                             </td>
                                             <td>
@@ -198,7 +199,7 @@
                                                 <span> {{ $book->updated_at->format('Y-m-d') }} </span>
                                             </td>
                                         </tr>
-                                    @endif
+
                                 @endforeach
                                 {{--@else
                                     <div class="alert alert-warning" role="alert">{{ trans('word.no-books-found') }}</div>
@@ -213,7 +214,7 @@
 
 
                 {{--Favorite List for a user --}}
-                <div class="tab-pane" id="step4">
+                <div class="tab-pane" id="step5">
                     <div class="row">
                         <div class="col-xs-12 paddingTop10">
                             @if(count($favoriteBooks) > 0)
@@ -259,7 +260,7 @@
 
                 {{--Orders --}}
 
-                <div class="tab-pane" id="step5">
+                <div class="tab-pane" id="step6">
                     <div class="row">
                         <div class="col-xs-12 paddingTop10">
                             @if(count($orders) > 0)
@@ -308,7 +309,7 @@
 
                 {{--Person Information --}}
 
-                <div class="tab-pane" id="step6">
+                <div class="tab-pane" id="step7">
                     <div class="row">
                         <div class="col-xs-12 paddingTop10">
 

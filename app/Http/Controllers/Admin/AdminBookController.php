@@ -6,6 +6,7 @@ use App\Events\BookPublished;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Jobs\CreateBookCover;
+use App\Jobs\CreateCustomizedPreview;
 use App\Src\Book\BookMeta;
 use App\Src\Category\CategoryRepository;
 use App\Src\Book\BookRepository;
@@ -14,6 +15,7 @@ use App\Src\Book\BookHelpers;
 use App\Src\Purchase\PurchaseRepository;
 use App\Src\Role\RoleRepository;
 use App\Src\User\UserRepository;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
@@ -42,8 +44,14 @@ class AdminBookController extends Controller
      * @param BookRepository $book
      * @param CategoryRepository $category
      */
-    public function __construct(BookRepository $book, CategoryRepository $categoryRepository, BookMeta $bookMeta, PurchaseRepository $purchaseRepository, UserRepository $userRepository, RoleRepository $roleRepository)
-    {
+    public function __construct(
+        BookRepository $book,
+        CategoryRepository $categoryRepository,
+        BookMeta $bookMeta,
+        PurchaseRepository $purchaseRepository,
+        UserRepository $userRepository,
+        RoleRepository $roleRepository
+    ) {
         $this->bookRepository = $book;
 
         $this->categoryRepository = $categoryRepository;
@@ -64,17 +72,25 @@ class AdminBookController extends Controller
     {
 
         if (Session::get('role.admin')) {
+
             $books = $this->bookRepository->model->with('meta')->orderBy('created_at', 'desc')->paginate(15);
-        } else {
+
+            $allCustomizedPreviews = $this->bookRepository->getCustomizedPreviews();
+
+        } elseif (Session::get('role.editor')) {
+
             $books = $this->bookRepository->model
                 ->where('user_id', '=', Session::get('auth.id'))->with('meta')
                 ->orderBy('created_at', 'desc')->paginate(15);
+
+            $allCustomizedPreviews = $this->bookRepository->getCustomizedPreviews(Session::get('auth.id'));
         }
 
         $orders = $this->purchaseRepository->model->orderBy('created_at', 'desc')->with('book')->with('user')->get();
 
-
-        return view('admin.modules.book.index', ['books' => $books, 'orders' => $orders]);
+//dd($allCustomizedPreviews);
+        return view('admin.modules.book.index',
+            ['books' => $books, 'orders' => $orders, 'allCustomizedPreviews' => $allCustomizedPreviews]);
     }
 
 
@@ -170,7 +186,10 @@ class AdminBookController extends Controller
 
         } elseif (Session::get('role.editor')) {
 
-            $book = $this->bookRepository->model->where(['id' => $id, 'user_id' => Session::get('auth.id')])->with('meta')->first();
+            $book = $this->bookRepository->model->where([
+                'id' => $id,
+                'user_id' => Session::get('auth.id')
+            ])->with('meta')->first();
         }
 
         $getLang = App()->getLocale();
@@ -218,7 +237,8 @@ class AdminBookController extends Controller
         $price = ($request->input('price') > 0) ? $request->input('price') : '00.0';
 
         // update the book table
-        $this->bookRepository->model->where('id', '=', $id)->update($request->except('_token', '_method', 'price', 'total_pages'));
+        $this->bookRepository->model->where('id', '=', $id)->update($request->except('_token', '_method', 'price',
+            'total_pages'));
 
         if ($book = $this->bookRepository->model->where('id', '=', $id)->first()) {
 
@@ -279,7 +299,13 @@ class AdminBookController extends Controller
 
             $buyerMobile = Auth::user()->mobile;
 
-            $this->NotifyChangeStageOrder(['stage' => $stage, 'email' => $buyerEmail, 'book' => $book, 'username' => $buyerUserName, 'mobile' => $buyerMobile]);
+            $this->NotifyChangeStageOrder([
+                'stage' => $stage,
+                'email' => $buyerEmail,
+                'book' => $book,
+                'username' => $buyerUserName,
+                'mobile' => $buyerMobile
+            ]);
 
             return redirect()->back()->with(['success' => trans('success.order')]);
         }
@@ -309,18 +335,12 @@ class AdminBookController extends Controller
     public function getCreateNewCustomizedPreview($bookId, $autherId, $total_pages)
     {
 
-        $users = $this->userRepository->fetchAllUsersWithoutAdmins($autherId);
+        $users = $this->userRepository->getAllUsersWithoutAdmins($autherId);
 
-        $usersList = [];
+        $usersList = $users->pluck('name_' . App::getlocale(), 'id');
 
-        foreach ($users as $user) {
-            array_set($usersList, $user->id, $user->name_ar);
-        }
-
-        //$usersList = $users->lists('name_'.App::getlocale(),'id');
-
-
-        return view('admin.modules.book._create_preview_form', compact('bookId', 'autherId', 'total_pages', 'usersList'));
+        return view('admin.modules.book._create_preview_form',
+            compact('bookId', 'autherId', 'total_pages', 'usersList'));
 
     }
 
@@ -343,6 +363,27 @@ class AdminBookController extends Controller
             }
         }
         return redirect()->back()->with(['success' => 'success-preview-created']);
+    }
+
+    public function deleteCustomizedPreview($bookId, $authorId, $total_pages)
+    {
+        return 'from delete customized preview';
+    }
+
+    public function getShowNewCustomizedPreviewForAdmin($bookId, $authorId)
+    {
+
+        $book = $this->bookRepository->ShowNewCustomizedPreviewForAdmin($bookId, $authorId);
+
+        return $this->dispatch(new CreateCustomizedPreview($book));
+    }
+
+    public function getShowNewCustomizedPreviewForUsers($bookId, $authorId)
+    {
+
+        $book = $this->bookRepository->ShowNewCustomizedPreviewForUsers($bookId, $authorId);
+
+        return $this->dispatch(new CreateCustomizedPreview($book));
     }
 
     public function getUpdateBookStatus($bookId)

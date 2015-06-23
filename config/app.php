@@ -148,6 +148,7 @@ return [
         'Barryvdh\Debugbar\ServiceProvider',
         'Collective\Html\HtmlServiceProvider',
         'Intervention\Image\ImageServiceProvider',
+        'App\Providers\ViewServiceProvider',
 
     ],
 

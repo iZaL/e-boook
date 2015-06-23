@@ -121,7 +121,7 @@
                         @else
                         {{--Preview Link for Paid Books Only 10 Pages can be previewed - Free Value = 0 --}}
                         <a class="btn btn-block btn-default {{ (!Session::get('auth.id')) ? 'disabled' : '' }}"
-                           href="{{ (Session::get('auth.id') && !$book->free) ? action('BookController@getCreateNewPreview',$book->url) : '#' }}">
+                           href="{{ (Session::get('auth.id') && !$book->free) ? action('BookController@getFirstTenPagesForPaidBooks',$book->url) : '#' }}">
                             <i class="fa fa-fw fa-book"></i>  {{ trans('word.book-preview') }}
                         </a>
                         @endif

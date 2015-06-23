@@ -37,6 +37,10 @@ class CreateBookPreview extends Job implements SelfHandling
 
         // check the total pages of each book
 
+        // if preview is in free mode then
+        /*
+         * free books
+         * */
         if ($totalPageNumber >= 10) {
             for ($i = 1; $i <= 10; $i++) {
 

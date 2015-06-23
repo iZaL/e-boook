@@ -195,15 +195,16 @@ class BookController extends Controller
      * @param $bookUrl
      * @return creating on the fly a link with 10 pages of a pdf file of a book
      */
-    public function getCreateNewPreview($bookUrl)
+    public function getFirstTenPagesForPaidBooks($bookUrl)
     {
 
-        // every request on preview .. View will be increased
+        // every request on preview .. View will be increaseds
         $this->bookRepository->increaseBookViewByUrl($bookUrl);
 
         return $this->dispatch(new CreateBookPreview($bookUrl));
 
     }
+
 
     /**
      * @param $bookId

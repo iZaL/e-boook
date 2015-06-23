@@ -70,10 +70,16 @@ class UserController extends Controller
 
         $orders = $this->userRepository->getAllOrdersByUser($id);
 
-        return view('modules.user.profile',
-            ['books' => $allbooks, 'favoriteBooks' => $favoriteBooks, 'user' => $this->authUser, 'orders' => $orders]);
 
-        //return redirect()->back()->with('error', trans('word.error-no-auth'));
+        $customizedPreviews = $this->bookRepository->getCustomizedPreviews($id);
+
+        return view('modules.user.profile', [
+            'books'              => $allbooks,
+            'favoriteBooks'      => $favoriteBooks,
+            'user'               => $this->authUser,
+            'orders'             => $orders,
+            'customizedPreviews' => $customizedPreviews
+        ]);
 
     }
 

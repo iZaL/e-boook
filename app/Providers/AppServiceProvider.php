@@ -17,17 +17,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // create cache from contact us for 20 minutes
-        // this cache will be cleared if the admin only clicked AdminContactUsController@edit
-        $contactusInfo = Cache::remember('contactusInfo', 20, function () {
-
-            return DB::table('contactus')->first();
-
-        });
-
-        // share the contact us information all over the views from the cache
-        view()->share('contactusInfo', $contactusInfo);
-
 
     }
 
