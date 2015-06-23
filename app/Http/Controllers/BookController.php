@@ -19,8 +19,12 @@ class BookController extends Controller
     public $purchaseRepository;
     public $authUser;
 
-    public function __construct(BookRepository $book, FavoriteRepository $favoriteRepository, UserRepository $userRepository, PurchaseRepository $purchaseRepository)
-    {
+    public function __construct(
+        BookRepository $book,
+        FavoriteRepository $favoriteRepository,
+        UserRepository $userRepository,
+        PurchaseRepository $purchaseRepository
+    ) {
         $this->bookRepository = $book;
         $this->favoriteRepository = $favoriteRepository;
         $this->userRepository = $userRepository;
@@ -32,36 +36,17 @@ class BookController extends Controller
      *
      * @return Response
      */
-    public function index($all = 4)
+    public function index()
     {
+        $paginate = 4;
         // get 4 published books for index
-        $books = $this->bookRepository->model->with('meta')->where('status','=','published')->orderBy('created_at','desc')->paginate($all);
+        $books = $this->bookRepository->model->with('meta')->where('status', '=', 'published')->orderBy('created_at',
+            'desc')->paginate($paginate);
 
         // get 4 published and most favorite books for index
-        $mostFavoriteBooks = $this->bookRepository->getMostFavorited($all);
+        $mostFavoriteBooks = $this->bookRepository->getMostFavorited($paginate);
 
-        return view('modules.book.index', compact('books', 'mostFavoriteBooks', 'bookMeta'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-        //
-
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @return Response
-     */
-    public function store()
-    {
-        //
+        return view('modules.book.index', compact('books', 'mostFavoriteBooks', 'bookMeta', 'page'));
     }
 
     /**
@@ -73,63 +58,35 @@ class BookController extends Controller
     public function show($id)
     {
         // get all books by book ID
-        $book = $this->bookRepository->model->where(['id' => $id, 'status' => 'published'])->first();
+        $book = $this->bookRepository->model->with(['user', 'meta'])->find($id);
+
+        //@todo: redirec if the book is not published with a not published message
+        if ($book->status != 'published') {
+            return redirect('/')->with('');
+        }
 
         // get the author of the book
-        $author = $book->user()->first();
+        $author = $book->user;
 
         // book info
-        $bookMeta = $book->meta()->first();
+        $bookMeta = $book->meta;
 
         return view('modules.book.show', ['book' => $book, 'author' => $author, 'bookMeta' => $bookMeta]);
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  int $id
-     * @return Response
-     */
-    public function update($id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
 
     public function getCreateNewFavoriteList($userId, $bookId)
     {
 
         $checkFavorite = $this->favoriteRepository->model->where(['book_id' => $bookId, 'user_id' => $userId])->get();
 
-        if (count($checkFavorite) <= 0) {
+        if (!$checkFavorite) {
 
-            if ($favorited = $this->favoriteRepository->model->create([
+            $favorited = $this->favoriteRepository->model->create([
                 'book_id' => $bookId,
                 'user_id' => $userId
-            ])
-            ) {
+            ]);
+
+            if ($favorited) {
                 return redirect()->back()->with(['success' => trans('word.success-book-favorites')]);
             }
 
@@ -149,6 +106,7 @@ class BookController extends Controller
         if ($this->favoriteRepository->model->where(['book_id' => $bookId, 'user_id' => $userId])->delete()) {
             return redirect()->back()->with(['success', trans('word.success-favorite-remove')]);
         }
+
         return redirect()->back()->with(['error', trans('word.error-favorite-remove')]);
 
     }
@@ -161,7 +119,12 @@ class BookController extends Controller
     public function getRemoveBookFromUserOrderList($userId, $bookId)
     {
 
-        if ($this->purchaseRepository->model->where(['book_id' => $bookId, 'user_id' => $userId, 'stage' => 'order'])->delete()) {
+        if ($this->purchaseRepository->model->where([
+            'book_id' => $bookId,
+            'user_id' => $userId,
+            'stage'   => 'order'
+        ])->delete()
+        ) {
             return redirect()->back()->with(['success', trans('word.success-order-remove')]);
         }
 
@@ -174,7 +137,8 @@ class BookController extends Controller
     public function getAllBooks()
     {
 
-        $books = $this->bookRepository->model->where('status', '=', 'published')->with('meta')->orderBy('created_at', 'desc')->paginate(10);
+        $books = $this->bookRepository->model->where('status', '=', 'published')->with('meta')->orderBy('created_at',
+            'desc')->paginate(10);
 
         $render = true;
 
@@ -217,7 +181,7 @@ class BookController extends Controller
 
             return Response::make(file_get_contents($link), 200, [
 
-                'Content-Type' => 'application/pdf',
+                'Content-Type'        => 'application/pdf',
                 'Content-Disposition' => 'inline; ' . $bookUrl,
 
             ]);
