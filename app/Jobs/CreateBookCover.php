@@ -16,9 +16,10 @@ class CreateBookCover extends Job implements SelfHandling
     /**
      * Create a new job instance.
      *
-     * @return void
+     * @param Book $book
+     * @param $request
      */
-    public function __construct(Book $book,$request)
+    public function __construct(Book $book, $request)
     {
         $this->book = $book;
         $this->request = $request;
@@ -29,7 +30,7 @@ class CreateBookCover extends Job implements SelfHandling
     /**
      * Execute the job.
      *
-     * @return void
+     * @param Image $cover
      */
     public function handle(Image $cover)
     {
@@ -37,20 +38,22 @@ class CreateBookCover extends Job implements SelfHandling
         // creating array
         // creating the covers
         $covers = [];
-        if(!is_null($this->request->file('cover_ar'))) {
-            $covers = array_add($covers,0,'cover_ar');
+        if (!is_null($this->request->file('cover_ar'))) {
+            $covers = array_add($covers, 0, 'cover_ar');
         }
-        if(!is_null($this->request->file('cover_en'))) {
-            $covers = array_add($covers,1,'cover_en');
+        if (!is_null($this->request->file('cover_en'))) {
+            $covers = array_add($covers, 1, 'cover_en');
         }
         //$covers = ['cover_ar','cover_en'];
-        foreach($covers as $coverImage) {
+        foreach ($covers as $coverImage) {
             $fileName = $this->request->file($coverImage)->getClientOriginalName();
-            $fileName = Str::random(5).''.$fileName;
+            $fileName = Str::random(5) . '' . $fileName;
             $realPath = $this->request->file($coverImage)->getRealPath();
-            $cover->make($realPath)->resize('227','350')->save(public_path('img/cover/'.$coverImage.'/thumbnail/'.$fileName));
-            $cover->make($realPath)->resize('600','927')->save(public_path('img/cover/'.$coverImage.'/large/'.$fileName));
-            $this->book->where('id','=',$this->book->id)->update([$coverImage => $fileName]);
+            $cover->make($realPath)->resize('227',
+                '350')->save(public_path('img/cover/' . $coverImage . '/thumbnail/' . $fileName));
+            $cover->make($realPath)->resize('600',
+                '927')->save(public_path('img/cover/' . $coverImage . '/large/' . $fileName));
+            $this->book->where('id', '=', $this->book->id)->update([$coverImage => $fileName]);
             $this->book->save();
         }
     }

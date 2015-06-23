@@ -10,10 +10,11 @@ use Illuminate\Support\Facades\DB;
 class AssignSubscriberForNewUser extends Job implements SelfHandling
 {
     public $userId;
+
     /**
      * Create a new job instance.
      *
-     * @return void
+     * @param $userId
      */
     public function __construct($userId)
     {
