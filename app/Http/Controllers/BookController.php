@@ -206,7 +206,9 @@ class BookController extends Controller
     }
 
     /**
-     * @param Create New Order
+     * @param $bookId
+     * @param $authId
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function getCreateNewOrder($bookId, $authId)
     {

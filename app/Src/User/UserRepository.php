@@ -55,7 +55,7 @@ class UserRepository extends AbstractRepository
      */
     public function getAllBooksForUser($id)
     {
-        return $this->model->findOrNew($id)->book()->with('meta')->paginate(10);
+        return $this->model->find($id)->book()->with('meta')->paginate(10);
     }
 
     /**
@@ -74,17 +74,17 @@ class UserRepository extends AbstractRepository
      */
     public function getFavoritedBooksForUser($id)
     {
-        return $this->model->findOrNew($id)->books()->with('meta')->paginate(10);
+        return $this->model->find($id)->books()->with('meta')->paginate(10);
     }
 
     public function getActiveStatusForUser($id)
     {
-        return $this->model->findOrNew($id)->first();
+        return $this->model->find($id)->first();
     }
 
     public function getAllOrdersByUser($id)
     {
-        return $this->model->findOrNew($id)->books_orders()->where('stage', '=', 'order')->with('meta')->paginate(10);
+        return $this->model->find($id)->books_orders()->where('stage', '=', 'order')->with('meta')->paginate(10);
     }
 
 
