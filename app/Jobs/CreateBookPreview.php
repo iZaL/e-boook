@@ -5,10 +5,11 @@ namespace App\Jobs;
 use App\Jobs\Job;
 use Illuminate\Contracts\Bus\SelfHandling;
 
-class CreatePreviewBook extends Job implements SelfHandling
+class CreateBookPreview extends Job implements SelfHandling
 {
     public $fileName;
     public $pdfPreview;
+
     /**
      * Create a new job instance.
      *
@@ -16,9 +17,9 @@ class CreatePreviewBook extends Job implements SelfHandling
      */
     public function __construct($bookUrl)
     {
-        $this->fileName = storage_path('app/pdfs/').$bookUrl;
+        $this->fileName = storage_path('app/pdfs/') . $bookUrl;
 
-        $this->pdfPreview =  new \FPDI();
+        $this->pdfPreview = new \FPDI();
     }
 
     /**
@@ -36,26 +37,31 @@ class CreatePreviewBook extends Job implements SelfHandling
 
         // check the total pages of each book
 
-        if($totalPageNumber >= 10) {
+        if ($totalPageNumber >= 10) {
             for ($i = 1; $i <= 10; $i++) {
 
-                $this->pdfPreview->AddPage();
-
-                $this->pdfPreview->useTemplate($this->pdfPreview->importPage($i));
+                $this->addPages($i);
 
             }
-        }
-        else {
+        } else {
             for ($i = 1; $i <= $totalPageNumber; $i++) {
 
-                $this->pdfPreview->AddPage();
-
-                $this->pdfPreview->useTemplate($this->pdfPreview->importPage($i));
+                $this->addPages($i);
 
             }
         }
 
         return $this->pdfPreview->Output();
 
+    }
+
+    /**
+     * @param $pageNumber
+     */
+    public function addPages($pageNumber)
+    {
+        $this->pdfPreview->AddPage($pageNumber);
+
+        $this->pdfPreview->useTemplate($this->pdfPreview->importPage($pageNumber));
     }
 }

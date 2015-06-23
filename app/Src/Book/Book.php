@@ -58,7 +58,7 @@ class Book extends AbstractModel
 
     public function favorites()
     {
-        return $this->hasMany('App\Src\Favorite\Favorite','book_id');
+        return $this->hasMany('App\Src\Favorite\Favorite', 'book_id');
     }
 
     public function mostFavorites($paginate)

@@ -1,7 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Requests;
-use App\Jobs\CreatePreviewBook;
+use App\Jobs\CreateBookPreview;
 use App\Src\Book\BookRepository;
 use App\Src\Favorite\FavoriteRepository;
 use App\Src\Purchase\PurchaseRepository;
@@ -60,6 +60,7 @@ class BookController extends Controller
         // get all books by book ID
         $book = $this->bookRepository->model->with(['user', 'meta'])->find($id);
 
+        dd($book);
         //@todo: redirec if the book is not published with a not published message
         if ($book->status != 'published') {
             return redirect('/')->with('');
@@ -136,8 +137,7 @@ class BookController extends Controller
      */
     public function getAllBooks()
     {
-
-        $books = $this->bookRepository->model->where('status', '=', 'published')->with('meta')->orderBy('created_at',
+        $books = $this->bookRepository->model->with('meta')->where('status', '=', 'published')->orderBy('created_at',
             'desc')->paginate(10);
 
         $render = true;
@@ -201,7 +201,7 @@ class BookController extends Controller
         // every request on preview .. View will be increased
         $this->bookRepository->increaseBookViewByUrl($bookUrl);
 
-        return $this->dispatch(new CreatePreviewBook($bookUrl));
+        return $this->dispatch(new CreateBookPreview($bookUrl));
 
     }
 
