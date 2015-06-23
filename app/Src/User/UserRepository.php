@@ -26,6 +26,7 @@ class UserRepository extends AbstractRepository
      * One To Many Relation
      * a user has many  books
      * a book belongs to one user
+     * @param $id
      * @return mixed
      */
     public function getFavoritedBooks($id)
@@ -103,21 +104,22 @@ class UserRepository extends AbstractRepository
     {
         // if there is no such preview
         if (DB::table('book_previews')->select('*')->where([
-            'book_id' => $request['book_id'],
-            'user_id' => $request['user_id'],
+            'book_id'   => $request['book_id'],
+            'user_id'   => $request['user_id'],
             'author_id' => $request['author_id'],
         ])
         ) {
             // create new preview
             return DB::table('book_previews')->insert([
-                'book_id' => $request['book_id'],
-                'user_id' => $request['user_id'],
-                'author_id' => $request['author_id'],
+                'book_id'       => $request['book_id'],
+                'user_id'       => $request['user_id'],
+                'author_id'     => $request['author_id'],
                 'preview_start' => $request['preview_start'],
-                'preview_end' => $request['preview_end'],
-                'total_pages' => $request['total_pages']
+                'preview_end'   => $request['preview_end'],
+                'total_pages'   => $request['total_pages']
             ]);
         }
+
         return false;
     }
 
