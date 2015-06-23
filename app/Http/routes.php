@@ -119,7 +119,7 @@ Route::group(['prefix'=>'app'],function () {
          ***************************************************************************************************/
 
         Route::get('/book/pdf/{url}',['uses'=>'BookController@getFreePdfFile']);
-        Route::get('/book/pdf/preview/{url}',['uses' => 'BookController@getCreateNewPreview']);
+        Route::get('/book/pdf/preview/{url}',['uses' => 'BookController@getFirstTenPagesForPaidBooks']);
         Route::get('/book/order/{bookId}/{userId}',['uses'=>'BookController@getCreateNewOrder']);
 
 
@@ -145,7 +145,7 @@ Route::group(['prefix'=>'app'],function () {
                 ['as' =>'app.editor.book.postCreateNewCustomizedPreview','uses' => 'Admin\AdminBookController@postCreateNewCustomizedPreview']);
 
             Route::delete('/book/pdf/preview/customized/{bookId}/{authorId}/{total_pages}',
-                ['as' =>'app.editor.book.deleteCreateNewCustomizedPreview','uses' => 'Admin\AdminBookController@deleteCreateNewCustomizedPreview']);
+                ['as' =>'app.editor.book.deleteCustomizedPreview','uses' => 'Admin\AdminBookController@deleteCustomizedPreview']);
 
 
         }); // end of editor middlware*/
@@ -196,7 +196,7 @@ Route::group(['prefix'=>'app'],function () {
                 ['as' =>'app.admin.book.postCreateNewCustomizedPreview','uses' => 'Admin\AdminBookController@postCreateNewCustomizedPreview']);
 
             Route::delete('/book/pdf/preview/customized/{bookId}/{authorId}/{total_pages}',
-                ['as' =>'app.admin.book.deleteCreateNewCustomizedPreview','uses' => 'Admin\AdminBookController@deleteCreateNewCustomizedPreview']);
+                ['as' =>'app.admin.book.deleteCustomizedPreview','uses' => 'Admin\AdminBookController@deleteCustomizedPreview']);
 
             // Book Previews
 
@@ -362,6 +362,11 @@ Route::group(['prefix'=>'app'],function () {
  *  @section('content') @endsection('content')
  *  3- within all other blade templates that extending the one_col layout make the following :
  *  @section('content') .... @stop
+ *
+ *
+ * 9- to deal with HTML tags within the html blade template
+ * e to escape the tages
+ * strip_tags to even remove the tags
  ***************************************************************************************************/
 
 

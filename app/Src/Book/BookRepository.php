@@ -75,12 +75,17 @@ class BookRepository extends AbstractRepository
             ->with('meta')->get();
     }
 
+    /**
+     * Admin Zone
+     * @return return all books that has been ordered
+     */
     public function getAllBookOrders()
     {
         return $this->model->users_orders()->with('meta')->get();
     }
 
     /**
+     *
      * @param int $paginate
      * @return most favorite books from all users
      */
@@ -88,6 +93,12 @@ class BookRepository extends AbstractRepository
     {
         $favorites = $this->model->mostFavorites($paginate);
         return $favorites;
+    }
+
+    public function getCustomizedPreviews($userId,$paginate='10') {
+
+        return $this->model->customizedPreviews($userId,$paginate);
+
     }
 
 

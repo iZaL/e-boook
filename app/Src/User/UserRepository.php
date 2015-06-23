@@ -88,10 +88,12 @@ class UserRepository extends AbstractRepository
     }
 
 
-    public function fetchAllUsersWithoutAdmins($authId)
+    public function getAllUsersWithoutAdmins($authId)
     {
-        return DB::table('users')->where('users.id', '!=', $authId)->join('user_roles', 'user_roles.user_id', '=',
-            'users.id')
+        return $this->model
+            ->selectRaw('users.*')
+            ->join('user_roles', 'user_roles.user_id', '=', 'users.id')
+            ->where('users.id', '!=', $authId)
             ->where('user_roles.role_id', '!=', 1)->get();
     }
 

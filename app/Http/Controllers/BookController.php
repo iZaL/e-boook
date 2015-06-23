@@ -2,6 +2,7 @@
 
 use App\Http\Requests;
 use App\Jobs\CreatePreviewBook;
+use App\Src\Book\Book;
 use App\Src\Book\BookRepository;
 use App\Src\Favorite\FavoriteRepository;
 use App\Src\Purchase\PurchaseRepository;
@@ -231,10 +232,10 @@ class BookController extends Controller
      * @param $bookUrl
      * @return creating on the fly a link with 10 pages of a pdf file of a book
      */
-    public function getCreateNewPreview($bookUrl)
+    public function getFirstTenPagesForPaidBooks($bookUrl)
     {
 
-        // every request on preview .. View will be increased
+        // every request on preview .. View will be increaseds
         $this->bookRepository->increaseBookViewByUrl($bookUrl);
 
         return $this->dispatch(new CreatePreviewBook($bookUrl));

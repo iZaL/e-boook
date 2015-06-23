@@ -66,8 +66,18 @@ class Book extends AbstractModel
         return $this
             ->selectRaw('books.*, count(*) as book_count')
             ->join('book_user', 'books.id', '=', 'book_user.book_id')
-            ->groupBy('book_id')
+            ->groupBy('book_id') // responsible to get the sum of books returned
             ->orderBy('book_count', 'DESC')
             ->paginate($paginate);
+    }
+
+    public function customizedPreviews($userId,$paginate='10') {
+        return $this
+            ->selectRaw('books.*')
+            ->with('meta')
+            ->join('book_previews','books.id','=','book_previews.book_id')
+            ->where('book_previews.user_id','=',$userId)
+            ->orderBy('book_previews.created_at','DESC')
+            ->get();
     }
 }

@@ -14,6 +14,7 @@ use App\Src\Book\BookHelpers;
 use App\Src\Purchase\PurchaseRepository;
 use App\Src\Role\RoleRepository;
 use App\Src\User\UserRepository;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
@@ -65,16 +66,18 @@ class AdminBookController extends Controller
 
         if (Session::get('role.admin')) {
             $books = $this->bookRepository->model->with('meta')->orderBy('created_at', 'desc')->paginate(15);
-        } else {
+            $allCustomizedPreviews = $this->bookRepository->getCustomizedPreviews('*');
+        } elseif(Session::get('role.editor')) {
             $books = $this->bookRepository->model
                 ->where('user_id', '=', Session::get('auth.id'))->with('meta')
                 ->orderBy('created_at', 'desc')->paginate(15);
+            $allCustomizedPreviews = $this->bookRepository->getCustomizedPreviews(Session::get('auth.id'));
         }
 
         $orders = $this->purchaseRepository->model->orderBy('created_at', 'desc')->with('book')->with('user')->get();
 
 
-        return view('admin.modules.book.index', ['books' => $books, 'orders' => $orders]);
+        return view('admin.modules.book.index', ['books' => $books, 'orders' => $orders,'allCustomizedPreviews'=>$allCustomizedPreviews]);
     }
 
 
@@ -309,16 +312,9 @@ class AdminBookController extends Controller
     public function getCreateNewCustomizedPreview($bookId, $autherId, $total_pages)
     {
 
-        $users = $this->userRepository->fetchAllUsersWithoutAdmins($autherId);
+        $users = $this->userRepository->getAllUsersWithoutAdmins($autherId);
 
-        $usersList = [];
-
-        foreach ($users as $user) {
-            array_set($usersList, $user->id, $user->name_ar);
-        }
-
-        //$usersList = $users->lists('name_'.App::getlocale(),'id');
-
+        $usersList = $users->pluck('name_'.App::getlocale(),'id');
 
         return view('admin.modules.book._create_preview_form', compact('bookId', 'autherId', 'total_pages', 'usersList'));
 
@@ -343,6 +339,10 @@ class AdminBookController extends Controller
             }
         }
         return redirect()->back()->with(['success' => 'success-preview-created']);
+    }
+
+    public function deleteCustomizedPreview($bookId,$authorId,$total_pages) {
+        return 'from delete customized preview';
     }
 
     public function getUpdateBookStatus($bookId)
