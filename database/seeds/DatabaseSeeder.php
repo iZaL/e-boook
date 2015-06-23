@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder {
      */
     public function run()
     {
-        if ( App::environment() == 'local' ) {
+        //if ( App::environment() == 'local' ) {
             Model::unguard();
             $this->cleanDatabase();
                 $this->call('UsersTableSeeder');
@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder {
                 $this->call('BookMetasTableSeeder');
                 $this->call('ContactusTableSeeder');
                 $this->call('RolesTableSeeder');
-        }
+        //}
 
     }
 
