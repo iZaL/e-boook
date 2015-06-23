@@ -3,24 +3,22 @@
 
 use App\Core\LocaleTrait;
 use App\Events\BookPublished;
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Requests;
+use App\Http\Requests\CreateBook;
+use App\Http\Requests\EditBook;
 use App\Jobs\CreateBookCover;
 use App\Jobs\CreateCustomizedPreview;
-use App\Src\Book\BookMeta;
-use App\Src\Category\CategoryRepository;
-use App\Src\Book\BookRepository;
-use App\Http\Requests\CreateBook;
 use App\Src\Book\BookHelpers;
+use App\Src\Book\BookMeta;
+use App\Src\Book\BookRepository;
+use App\Src\Category\CategoryRepository;
 use App\Src\Purchase\PurchaseRepository;
 use App\Src\Role\RoleRepository;
 use App\Src\User\UserRepository;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
-
 
 /**
  * Class AdminBookController
@@ -42,7 +40,12 @@ class AdminBookController extends Controller
 
     /**
      * @param BookRepository $book
-     * @param CategoryRepository $category
+     * @param CategoryRepository $categoryRepository
+     * @param BookMeta $bookMeta
+     * @param PurchaseRepository $purchaseRepository
+     * @param UserRepository $userRepository
+     * @param RoleRepository $roleRepository
+     * @internal param CategoryRepository $category
      */
     public function __construct(
         BookRepository $book,
@@ -53,13 +56,9 @@ class AdminBookController extends Controller
         RoleRepository $roleRepository
     ) {
         $this->bookRepository = $book;
-
         $this->categoryRepository = $categoryRepository;
-
         $this->bookMeta = $bookMeta;
-
         $this->purchaseRepository = $purchaseRepository;
-
         $this->userRepository = $userRepository;
     }
 
@@ -88,7 +87,7 @@ class AdminBookController extends Controller
 
         $orders = $this->purchaseRepository->model->orderBy('created_at', 'desc')->with('book')->with('user')->get();
 
-//dd($allCustomizedPreviews);
+        //dd($allCustomizedPreviews);
         return view('admin.modules.book.index',
             ['books' => $books, 'orders' => $orders, 'allCustomizedPreviews' => $allCustomizedPreviews]);
     }
@@ -113,6 +112,7 @@ class AdminBookController extends Controller
     /**
      * Store a newly created resource in storage.
      *  CreateBook Request Checks for the Rules of Create Book Form
+     * @param CreateBook $request
      * @return Response
      */
     public function store(CreateBook $request)
@@ -141,12 +141,11 @@ class AdminBookController extends Controller
 
         // create images wit a job
 
-
         // create meta for a book
         $this->bookMeta->create([
-            'book_id' => $book->id,
+            'book_id'     => $book->id,
             'total_pages' => Session::get('total_pages'),
-            'price' => $price,
+            'price'       => $price,
         ]);
 
         $this->dispatch(new CreateBookCover($book, $request));
@@ -157,6 +156,7 @@ class AdminBookController extends Controller
 
             return redirect()->back()->with(['success' => trans('word.book-created')]);
         }
+
         return redirect()->back()->with(['error' => trans('word.book-not-created')]);
     }
 
@@ -187,7 +187,7 @@ class AdminBookController extends Controller
         } elseif (Session::get('role.editor')) {
 
             $book = $this->bookRepository->model->where([
-                'id' => $id,
+                'id'      => $id,
                 'user_id' => Session::get('auth.id')
             ])->with('meta')->first();
         }
@@ -206,15 +206,15 @@ class AdminBookController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  int $id
-     * @return Response
-     * * check if new covers
+     * @param EditBook $request
+     * @return Response * check if new covers
+     * check if new covers
      * get all data in the request
      * create new covers if added
      * create new pdf file
      * get the url of the new file and add to the request
      */
-    public function update(Requests\EditBook $request)
+    public function update(EditBook $request)
     {
         $cover_ar = ($request->file('cover_ar')) ? $request->file('cover_ar') : '';
 
@@ -250,12 +250,13 @@ class AdminBookController extends Controller
 
             // update the book_metas table
             $this->bookMeta->where('book_id', '=', $book->id)->update([
-                'price' => $price,
+                'price'       => $price,
                 'total_pages' => $total_pages
             ]);
 
             return redirect()->back()->with('success', trans('word.success-update'));
         }
+
         return redirect()->back()->with('success', trans('word.error-update'));
     }
 
@@ -277,10 +278,12 @@ class AdminBookController extends Controller
 
 
     /**
-     * @param $userId
+     * @param $buyerId
      * @param $bookId
-     * @param Admin to accept order (change status to [order/under_process/purchased£])
+     * @param $buyerEmail
+     * @param $stage
      * @return \Illuminate\Http\RedirectResponse
+     * @internal param to $Admin accept order (change status to [order/under_process/purchased£])
      */
     public function getAcceptOrder($buyerId, $bookId, $buyerEmail, $stage)
     {
@@ -300,11 +303,11 @@ class AdminBookController extends Controller
             $buyerMobile = Auth::user()->mobile;
 
             $this->NotifyChangeStageOrder([
-                'stage' => $stage,
-                'email' => $buyerEmail,
-                'book' => $book,
+                'stage'    => $stage,
+                'email'    => $buyerEmail,
+                'book'     => $book,
                 'username' => $buyerUserName,
-                'mobile' => $buyerMobile
+                'mobile'   => $buyerMobile
             ]);
 
             return redirect()->back()->with(['success' => trans('success.order')]);
@@ -362,6 +365,7 @@ class AdminBookController extends Controller
                 return redirect()->back()->with(['error' => trans('word.error-preview-not-created')]);
             }
         }
+
         return redirect()->back()->with(['success' => 'success-preview-created']);
     }
 
