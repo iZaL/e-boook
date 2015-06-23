@@ -16,6 +16,7 @@ class AdminUserController extends Controller
 
 
     public function __construct(UserRepository $user){
+
         $this->userRepository = $user;
     }
 
@@ -44,7 +45,6 @@ class AdminUserController extends Controller
 
         return view('modules.user.profile',['books'=>$Allbooks,'favoriteBooks'=>$favoriteBooks]);
     }
-
 
 
 }

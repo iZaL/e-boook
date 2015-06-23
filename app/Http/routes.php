@@ -147,6 +147,8 @@ Route::group(['prefix'=>'app'],function () {
             Route::delete('/book/pdf/preview/customized/{bookId}/{authorId}/{total_pages}',
                 ['as' =>'app.editor.book.deleteCustomizedPreview','uses' => 'Admin\AdminBookController@deleteCustomizedPreview']);
 
+            Route::get('/book/pdf/preview/show/customized/{bookId}/{authorId}',
+                ['as' =>'app.editor.book.getShowNewCustomizedPreviewForAdmin','uses' => 'Admin\AdminBookController@getShowNewCustomizedPreviewForAdmin']);
 
         }); // end of editor middlware*/
 
@@ -197,6 +199,9 @@ Route::group(['prefix'=>'app'],function () {
 
             Route::delete('/book/pdf/preview/customized/{bookId}/{authorId}/{total_pages}',
                 ['as' =>'app.admin.book.deleteCustomizedPreview','uses' => 'Admin\AdminBookController@deleteCustomizedPreview']);
+
+            Route::get('/book/pdf/preview/show/customized/{bookId}/{authorId}',
+                ['as' =>'app.admin.book.getShowNewCustomizedPreviewForAdmin','uses' => 'Admin\AdminBookController@getShowNewCustomizedPreviewForAdmin']);
 
             // Book Previews
 

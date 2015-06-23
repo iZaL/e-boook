@@ -274,36 +274,45 @@
                                     <th></th>
                                     <th>{{ trans('word.total-pages') }}</th>
                                     <th>{{ trans('word.status') }}</th>
-                                    <th>Last Edited</th>
+                                    <th>{{ trans('word.remove') }}</th>
+                                    <th>{!! trans('word.last-edited') !!}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($allCustomizedPreviews as $book)
+                                @if($allCustomizedPreviews)
 
-                                    <tr>
-                                        <td class="hidden-xs"><img class="img-table img-responsive" src="/img/cover/cover_{{App::getLocale()}}/thumbnail/{{$book->__get('cover') }}" alt="{{ $book->title }}"></td>
-                                        <td>
-                                            {{--<a href="{{ action('',$book->url) }}"> {!! $book->title !!}</a>--}}
+                                    @foreach($allCustomizedPreviews as $book)
 
-                                            <p> {!! Str::words(strip_tags($book->body),6) !!} </p>
+                                        <tr>
+                                            <td class="hidden-xs"><img class="img-table img-responsive" src="/img/cover/cover_{{App::getLocale()}}/thumbnail/{{$book->__get('cover') }}" alt="{{ $book->title }}"></td>
+                                            <td>
+                                                @if(Session::get('role.admin'))
+                                                <a href="{{ route('app.admin.book.getShowNewCustomizedPreviewForAdmin',[$book->id,$book->user_id]) }}"> {!! $book->title !!}</a>
+                                                @elseif(Session::get('role.editor'))
+                                                    <a href="{{ route('app.editor.book.getShowNewCustomizedPreviewForUsers',[$book->id,$book->user_id]) }}"> {!! $book->title !!}</a>
+                                                @endif
+                                                <p> {!! Str::words(strip_tags($book->body),6) !!} </p>
 
-                                        </td>
-                                        <td>
-                                            <span> {{ ($book->meta) ? $book->meta->total_pages : 'N/A' }} </span>
+                                            </td>
+                                            <td>
+                                                <span> {{ ($book->meta) ? $book->meta->total_pages : 'N/A' }} </span>
 
-                                        </td>
-                                        <td>
-                                            <span> {{ $book->status }} </span>
-                                        </td>
-                                        <td>
-                                            <span> {{ $book->updated_at->format('Y-m-d') }} </span>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                            <td>
+                                                <span> {{ $book->status }} </span>
+                                            </td>
+                                            <td class="text-center">
+                                                <a class="btn btn-sm btn-danger" href="#"><i class="fa fa-trash-o fa-2x"></i></a>
+                                            </td>
+                                            <td>
+                                                <span> {{ $book->updated_at->format('Y-m-d') }} </span>
+                                            </td>
+                                        </tr>
 
-                                @endforeach
-                                {{--@else
+                                    @endforeach
+                                @else
                                     <div class="alert alert-warning" role="alert">{{ trans('word.no-books-found') }}</div>
-                                @endif--}}
+                                @endif
                                 </tbody>
                             </table>
 

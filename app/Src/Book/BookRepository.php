@@ -9,6 +9,7 @@ namespace App\Src\Book;
 
 
 use App\Core\AbstractRepository;
+use Illuminate\Support\Facades\Session;
 
 
 class BookRepository extends AbstractRepository
@@ -95,11 +96,35 @@ class BookRepository extends AbstractRepository
         return $favorites;
     }
 
-    public function getCustomizedPreviews($userId,$paginate='10') {
+    public function getCustomizedPreviews($userId='',$paginate='10') {
 
         return $this->model->customizedPreviews($userId,$paginate);
 
     }
 
+    public function ShowNewCustomizedPreviewForAdmin($bookId,$authorId) {
+        return $this->model
+                ->selectRaw('books.*')
+                ->selectRaw('book_previews.*')
+                ->join('book_previews','book_previews.book_id','=','books.id')
+                ->where('book_previews.author_id','=',$authorId)
+                ->where('books.id',$bookId)
+                ->where('books.user_id',$authorId)
+                ->first();
+
+    }
+
+    public function ShowNewCustomizedPreviewForUsers($bookId,$authorId) {
+        return $this->model
+            ->selectRaw('books.*')
+            ->selectRaw('book_previews.*')
+            ->join('book_previews','book_previews.book_id','=','books.id')
+            ->where('book_previews.author_id','=',$authorId)
+            ->where('books.id',$bookId)
+            ->where('books.user_id',$authorId)
+            ->where('book_previews',Session::get('auth.id'))
+            ->first();
+
+    }
 
 }

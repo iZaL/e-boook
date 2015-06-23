@@ -17,7 +17,7 @@ $factory->define('App\Src\User\User', function ($faker) {
     return [
         'name_en' => 'usama',
         'name_ar' => 'افضل',
-        'email' => 'uusa35@gmail.com' . $faker->randomDigit,
+        'email' => 'test@test.com'.str_random(1),
         'password' => bcrypt('admin'),
         'bank_number' => $faker->creditCardNumber,
         'bank_name' => $faker->company,

@@ -20,8 +20,12 @@ class BookController extends Controller
     public $purchaseRepository;
     public $authUser;
 
-    public function __construct(BookRepository $book, FavoriteRepository $favoriteRepository, UserRepository $userRepository, PurchaseRepository $purchaseRepository)
-    {
+    public function __construct(
+        BookRepository $book,
+        FavoriteRepository $favoriteRepository,
+        UserRepository $userRepository,
+        PurchaseRepository $purchaseRepository
+    ) {
         $this->bookRepository = $book;
         $this->favoriteRepository = $favoriteRepository;
         $this->userRepository = $userRepository;
@@ -36,7 +40,8 @@ class BookController extends Controller
     public function index($all = 4)
     {
         // get 4 published books for index
-        $books = $this->bookRepository->model->with('meta')->where('status','=','published')->orderBy('created_at','desc')->paginate($all);
+        $books = $this->bookRepository->model->with('meta')->where('status', '=', 'published')->orderBy('created_at',
+            'desc')->paginate($all);
 
         // get 4 published and most favorite books for index
         $mostFavoriteBooks = $this->bookRepository->getMostFavorited($all);
@@ -162,7 +167,12 @@ class BookController extends Controller
     public function getRemoveBookFromUserOrderList($userId, $bookId)
     {
 
-        if ($this->purchaseRepository->model->where(['book_id' => $bookId, 'user_id' => $userId, 'stage' => 'order'])->delete()) {
+        if ($this->purchaseRepository->model->where([
+            'book_id' => $bookId,
+            'user_id' => $userId,
+            'stage' => 'order'
+        ])->delete()
+        ) {
             return redirect()->back()->with(['success', trans('word.success-order-remove')]);
         }
 
@@ -175,7 +185,8 @@ class BookController extends Controller
     public function getAllBooks()
     {
 
-        $books = $this->bookRepository->model->where('status', '=', 'published')->with('meta')->orderBy('created_at', 'desc')->paginate(10);
+        $books = $this->bookRepository->model->where('status', '=', 'published')->with('meta')->orderBy('created_at',
+            'desc')->paginate(10);
 
         $render = true;
 
@@ -241,6 +252,7 @@ class BookController extends Controller
         return $this->dispatch(new CreatePreviewBook($bookUrl));
 
     }
+
 
     /**
      * @param Create New Order
