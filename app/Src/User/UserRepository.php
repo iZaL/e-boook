@@ -65,7 +65,7 @@ class UserRepository extends AbstractRepository
      */
     public function getStatusBooks($id, $status)
     {
-        return $this->model->firstOrNew(['id' => $id])->book()->where('books.status', '=', $status)->paginate(10);
+        return $this->model->find($id)->book()->where('books.status', '=', $status)->paginate(10);
     }
 
     /**
@@ -90,6 +90,7 @@ class UserRepository extends AbstractRepository
 
     public function fetchAllUsersWithoutAdmins($authId)
     {
+        //todo: change ID for admin to get dynamic
         return DB::table('users')->where('users.id', '!=', $authId)->join('user_roles', 'user_roles.user_id', '=',
             'users.id')
             ->where('user_roles.role_id', '!=', 1)->get();

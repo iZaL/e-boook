@@ -358,6 +358,7 @@ class AdminBookController extends Controller
 
         return redirect()->back()->with(['error' => 'error-status-updated']);
     }
+
     /*    public function getBookByType ($type = 'book') {
 
         if(Session::get('role.admin') || Session::get('role.editor')) {

@@ -58,7 +58,6 @@ class User extends AbstractModel implements AuthenticatableContract, CanResetPas
      */
     public function book()
     {
-
         return $this->hasMany('App\Src\Book\Book', 'user_id');
     }
 
