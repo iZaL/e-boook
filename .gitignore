@@ -9,5 +9,4 @@ resources/assets/*
 .env
 template
 /storage/app
-/public/img/cover
 .idea
