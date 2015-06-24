@@ -173,7 +173,6 @@
                                     <th></th>
                                     <th>{{ trans('word.total-pages') }}</th>
                                     <th>{{ trans('word.status') }}</th>
-                                    <th>{{ trans('word.remove') }}</th>
                                     <th>{!! trans('word.last-edited') !!}</th>
                                 </tr>
                                 </thead>
@@ -197,13 +196,6 @@
                                             </td>
                                             <td>
                                                 <span> {{ $book->status }} </span>
-                                            </td>
-                                            <td class="text-center">
-                                                @if(Session::get('role.admin'))
-                                                    <a class="btn btn-sm btn-danger" href="{{ route('app.admin.book.getDeleteNewCustomizedPreview',[$book->id,$book->user_id]) }}"><i class="fa fa-trash-o fa-2x"></i></a>
-                                                @elseif(Session::get('role.editor'))
-                                                    <a class="btn btn-sm btn-danger" href="{{ route('app.edit.book.getDeleteNewCustomizedPreview',[$book->id,$book->user_id]) }}"><i class="fa fa-trash-o fa-2x"></i></a>
-                                                @endif
                                             </td>
                                             <td>
                                                 <span> {{ $book->updated_at->format('Y-m-d') }} </span>

@@ -305,7 +305,7 @@
                                                 @if(Session::get('role.admin'))
                                                  <a class="btn btn-sm btn-danger" href="{{ route('app.admin.book.getDeleteNewCustomizedPreview',[$book->id,$book->user_id]) }}"><i class="fa fa-trash-o fa-2x"></i></a>
                                                 @elseif(Session::get('role.editor'))
-                                                    <a class="btn btn-sm btn-danger" href="{{ route('app.edit.book.getDeleteNewCustomizedPreview',[$book->id,$book->user_id]) }}"><i class="fa fa-trash-o fa-2x"></i></a>
+                                                    <a class="btn btn-sm btn-danger" href="{{ route('app.editor.book.getDeleteNewCustomizedPreview',[$book->id,$book->user_id]) }}"><i class="fa fa-trash-o fa-2x"></i></a>
                                                 @endif
                                             </td>
                                             <td>

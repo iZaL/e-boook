@@ -87,9 +87,13 @@ class AdminBookController extends Controller
 
         $orders = $this->purchaseRepository->model->orderBy('created_at', 'desc')->with('book')->with('user')->get();
 
-        //dd($allCustomizedPreviews);
-        return view('admin.modules.book.index',
-            ['books' => $books, 'orders' => $orders, 'allCustomizedPreviews' => $allCustomizedPreviews]);
+        if($books) {
+            return view('admin.modules.book.index',
+                ['books' => $books, 'orders' => $orders, 'allCustomizedPreviews' => $allCustomizedPreviews]);
+        }
+
+        return redirect()->back()->with(['error' => trans('word.no-books')]);
+
     }
 
 
