@@ -35,9 +35,9 @@
                                 @if($books->count() > 0)
                                     @foreach($books as $book)
                                         <tr>
-                                            <td class="hidden-xs"><img class="img-table img-responsive" src="/img/cover/cover_{{App::getLocale()}}/thumbnail/{{$book->__get('cover') }}" alt="{{ $book->title }}"></td>
+                                            <td class="hidden-xs"><img class="img-table img-responsive" src="/img/cover/cover_{{App::getLocale()}}/thumbnail/{{$book->cover }}" alt="{{ $book->title }}"></td>
                                             <td>
-                                                <a href="{{ route('book.show',$book->id) }}"> {{ $book->__get('title') }} </a>
+                                                <a href="{{ route('book.show',$book->id) }}"> {{ $book->title }} </a>
 
                                                 <p> {!! Str::words(strip_tags($book->__get('body')),8) !!} </p>
                                             </td>
@@ -86,7 +86,7 @@
                                     @foreach($books as $book)
                                         @if($book->status === 'draft')
                                         <tr>
-                                            <td class="hidden-xs"><img class="img-table img-responsive" src="/img/cover/cover_{{App::getLocale()}}/thumbnail/{{$book->__get('cover') }}" alt="{{ $book->title }}"></td>
+                                            <td class="hidden-xs"><img class="img-table img-responsive" src="/img/cover/cover_{{App::getLocale()}}/thumbnail/{{$book->cover }}" alt="{{ $book->title }}"></td>
                                             <td>
                                                 <a href="{{ action('BookController@show',$book->id) }}"> {!! $book->title !!} </a>
 
@@ -130,7 +130,7 @@
                                     @foreach($books as $book)
                                         @if($book->status === 'published')
                                         <tr>
-                                            <td class="hidden-xs"><img class="img-table img-responsive" src="/img/cover/cover_{{App::getLocale()}}/thumbnail/{{$book->__get('cover') }}" alt="{{ $book->title }}"></td>
+                                            <td class="hidden-xs"><img class="img-table img-responsive" src="/img/cover/cover_{{App::getLocale()}}/thumbnail/{{$book->cover }}" alt="{{ $book->title }}"></td>
                                             <td>
                                                 <a href="{{ action('BookController@show',$book->id) }}"> {!! $book->title !!} </a>
 
@@ -181,7 +181,7 @@
                                 @foreach($customizedPreviews as $book)
 
                                         <tr>
-                                            <td class="hidden-xs"><img class="img-table img-responsive" src="/img/cover/cover_{{App::getLocale()}}/thumbnail/{{$book->__get('cover') }}" alt="{{ $book->title }}"></td>
+                                            <td class="hidden-xs"><img class="img-table img-responsive" src="/img/cover/cover_{{App::getLocale()}}/thumbnail/{{$book->cover }}" alt="{{ $book->title }}"></td>
                                             <td>
                                                 {{--<a href="{{ action('',$book->url) }}"> {!! $book->title !!}</a>--}}
 
@@ -231,7 +231,7 @@
                                     <tbody>
                                     @foreach($favoriteBooks as $book)
                                         <tr>
-                                            <td class="hidden-xs"><img class="img-table img-responsive" src="/img/cover/cover_{{App::getLocale()}}/thumbnail/{{$book->__get('cover') }}" alt="{{ $book->title }}"></td>
+                                            <td class="hidden-xs"><img class="img-table img-responsive" src="/img/cover/cover_{{App::getLocale()}}/thumbnail/{{$book->cover }}" alt="{{ $book->title }}"></td>
                                             <td>
                                                 <a href="{{ action('BookController@show',$book->id) }}"> {!! $book->title !!} </a>
 
@@ -277,7 +277,7 @@
                                     <tbody>
                                     @foreach($orders as $book)
                                         <tr>
-                                            <td class="hidden-xs"><img class="img-table img-responsive" src="/img/cover/cover_{{App::getLocale()}}/thumbnail/{{$book->__get('cover') }}" alt="{{ $book->title }}"></td>
+                                            <td class="hidden-xs"><img class="img-table img-responsive" src="/img/cover/cover_{{App::getLocale()}}/thumbnail/{{$book->cover }}" alt="{{ $book->title }}"></td>
                                             <td>
                                                 <a href="{{ action('BookController@show',$book->id) }}"> {!! $book->title !!} </a>
 
@@ -318,7 +318,7 @@
 
                                     <div class="col-lg-10">
 
-                                        <div>{{ trans('word.name') }} : {{ $user->__get('name') }}</div>
+                                        <div>{{ trans('word.name') }} : {{ $user->name }}</div>
                                         <div>{{ trans('word.email') }} : {{ $user->email }}</div>
                                         <div>{{ trans('word.mobile') }} : {{ $user->mobile }}</div>
 

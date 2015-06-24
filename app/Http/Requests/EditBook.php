@@ -25,14 +25,14 @@ class EditBook extends Request
     public function rules()
     {
         return [
-            'title_en' => 'required|min:5',
-            'title_ar' => 'required|min:5',
+            'title_en'    => 'required|min:5',
+            'title_ar'    => 'required|min:5',
             'category_id' => 'required',
-            'body'     => 'required|min:10',
-            'price'     => 'required|numeric|max:500',
-            'cover_ar' => 'mimes:jpeg,bmp,png',
-            'cover_en' => 'mimes:jpeg,bmp,png',
-            'type'     => 'required'
+            'body'        => 'required|min:10',
+            'price'       => 'required|numeric|max:500',
+            'cover_ar'    => 'mimes:jpeg,bmp,png',
+            'cover_en'    => 'mimes:jpeg,bmp,png',
+            'type'        => 'required'
         ];
     }
 }

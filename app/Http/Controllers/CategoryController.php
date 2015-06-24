@@ -12,12 +12,10 @@ class CategoryController extends Controller
     public $categoryRepository;
     public $bookRepository;
 
-    public function __construct(CategoryRepository $categoryRepository, BookRepository $bookRepository) {
-
+    public function __construct(CategoryRepository $categoryRepository, BookRepository $bookRepository)
+    {
         $this->categoryRepository = $categoryRepository;
-
         $this->bookRepository = $bookRepository;
-
     }
 
     /**
@@ -30,76 +28,24 @@ class CategoryController extends Controller
         //
         $categories = $this->categoryRepository->getAll();
 
-        $books = $this->bookRepository->model->where('status','=','published')->with('meta')->paginate(5);
+        $books = $this->bookRepository->model->with('meta')->where('status', '=', 'published')->paginate(5);
 
-        return view('modules.category.index',['categories' => $categories, 'books' => $books]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @return Response
-     */
-    public function store()
-    {
-        //
+        return view('modules.category.index', ['categories' => $categories, 'books' => $books]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function show($id)
     {
         $categories = $this->categoryRepository->getAll();
 
-        $books = $this->bookRepository->model->where(['category_id' => $id,'status'=>'published'])->paginate(9);
+        $books = $this->bookRepository->model->where(['category_id' => $id, 'status' => 'published'])->paginate(9);
 
-        return view('modules.category.show',compact('categories','books'));
+        return view('modules.category.show', compact('categories', 'books'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function update($id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

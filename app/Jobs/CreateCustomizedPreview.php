@@ -9,18 +9,19 @@ use Illuminate\Contracts\Bus\SelfHandling;
 class CreateCustomizedPreview extends Job implements SelfHandling
 {
     public $book;
+
     /**
      * Create a new job instance.
      *
-     * @return void
+     * @param Book $book
      */
     public function __construct(Book $book)
     {
         $this->book = $book;
 
-        $this->fileName = storage_path('app/pdfs/').$book->url;
+        $this->fileName = storage_path('app/pdfs/') . $book->url;
 
-        $this->pdfPreview =  new \FPDI();
+        $this->pdfPreview = new \FPDI();
     }
 
     /**
@@ -34,7 +35,7 @@ class CreateCustomizedPreview extends Job implements SelfHandling
         * Steps to split a pdf
         * */
 
-         $this->pdfPreview->setSourceFile($this->fileName);
+        $this->pdfPreview->setSourceFile($this->fileName);
 
         // check the total pages of each book
 

@@ -11,15 +11,14 @@ class GetUserRole
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Closure $next
      * @return mixed
      */
     public function handle($request, Closure $next)
     {
 
-
-        if(Auth::user()) {
+        if (Auth::user()) {
 
             $authUser = Auth::user();
 
@@ -27,22 +26,21 @@ class GetUserRole
 
             $authId = $authUser->id;
 
-            Session::put('role',$authRole);
+            Session::put('role', $authRole);
 
-            Session::put('auth.id',$authId);
+            Session::put('auth.id', $authId);
 
-            if(Session::get('role') === 'Admin') {
+            if (Session::get('role') === 'Admin') {
 
-                Session::put('role.admin', rand(50,32098));
+                Session::put('role.admin', rand(50, 32098));
 
-            }
+            } elseif (Session::get('role') === 'Editor') {
 
-            elseif(Session::get('role') === 'Editor') {
-
-                Session::put('role.editor', rand(3,42098));
+                Session::put('role.editor', rand(3, 42098));
 
             }
         }
+
         return $next($request);
     }
 }

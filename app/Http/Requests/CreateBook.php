@@ -4,7 +4,6 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-
 class CreateBook extends Request
 {
     /**
@@ -26,14 +25,14 @@ class CreateBook extends Request
     public function rules()
     {
         return [
-            'title_en' => 'required|min:5',
-            'title_ar' => 'required|min:5',
+            'title_en'    => 'required|min:5',
+            'title_ar'    => 'required|min:5',
             'category_id' => 'required',
-            'body'     => 'required|min:10',
-            'price'     => 'required|numeric|max:500',
-            'cover_ar' => 'required',
-            'cover_en' => 'required',
-            'type'     => 'required'
+            'body'        => 'required|min:10',
+            'price'       => 'required|numeric|max:500',
+            'cover_ar'    => 'required',
+            'cover_en'    => 'required',
+            'type'        => 'required'
         ];
     }
 }

@@ -51,7 +51,6 @@ class BookRepository extends AbstractRepository
 
     public function increaseBookViewById($bookId)
     {
-
         $this->model->where('id', '=', $bookId)->increment('views');
 
     }

@@ -18,7 +18,6 @@ class CategoryRepository extends AbstractRepository
 
     public function __construct(Category $category)
     {
-
         $this->model = $category;
     }
 

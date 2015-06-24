@@ -24,11 +24,11 @@ class CreateNewCustomizedPreviewRequest extends Request
     public function rules()
     {
         return [
-            'author_id' => 'required',
-            'book_id' => 'required',
-            'usersList' => 'required',
+            'author_id'     => 'required',
+            'book_id'       => 'required',
+            'usersList'     => 'required',
             'preview_start' => 'required',
-            'preview_end' => 'required'
+            'preview_end'   => 'required'
         ];
     }
 }

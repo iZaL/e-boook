@@ -11,7 +11,8 @@ class AdminCategoryController extends Controller
 {
     public $categoryRepository;
 
-    public function __construct (CategoryRepository $categoryRepository) {
+    public function __construct(CategoryRepository $categoryRepository)
+    {
         $this->categoryRepository = $categoryRepository;
     }
 
@@ -23,7 +24,8 @@ class AdminCategoryController extends Controller
     public function index()
     {
         $categories = $this->categoryRepository->getAll();
-        return view('admin.modules.category.index',['categories'=>$categories]);
+
+        return view('admin.modules.category.index', ['categories' => $categories]);
     }
 
     /**
@@ -39,19 +41,20 @@ class AdminCategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
+     * @param CreateCategory $request
      * @return Response
      */
     public function store(CreateCategory $request)
     {
         $this->categoryRepository->model->create($request->except('_token'));
 
-        return redirect()->back()->with('success' , trans('word.create-success-category'));
+        return redirect()->back()->with('success', trans('word.create-success-category'));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function show($id)
@@ -62,36 +65,37 @@ class AdminCategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function edit($id)
     {
         $category = $this->categoryRepository->getById($id);
 
-        return view('admin.modules.category.edit',['category'=>$category]);
+        return view('admin.modules.category.edit', ['category' => $category]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  int  $id
+     * @param  int $id
+     * @param Request $request
      * @return Response
      */
-    public function update($id,Request $request)
+    public function update($id, Request $request)
     {
-        $this->categoryRepository->model->where('id','=',$id)->update([
+        $this->categoryRepository->model->where('id', '=', $id)->update([
             'name_ar' => $request->input('name_ar'),
             'name_en' => $request->input('name_en')
         ]);
 
-        return redirect()->back()->with('success',trans('word.create-category-success'));
+        return redirect()->back()->with('success', trans('word.create-category-success'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function destroy($id)

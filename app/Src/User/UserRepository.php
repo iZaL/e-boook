@@ -26,6 +26,7 @@ class UserRepository extends AbstractRepository
      * One To Many Relation
      * a user has many  books
      * a book belongs to one user
+     * @param $id
      * @return mixed
      */
     public function getFavoritedBooks($id)
@@ -55,7 +56,7 @@ class UserRepository extends AbstractRepository
      */
     public function getAllBooksForUser($id)
     {
-        return $this->model->findOrNew($id)->book()->with('meta')->paginate(10);
+        return $this->model->find($id)->book()->with('meta')->paginate(10);
     }
 
     /**
@@ -65,7 +66,7 @@ class UserRepository extends AbstractRepository
      */
     public function getStatusBooks($id, $status)
     {
-        return $this->model->firstOrNew(['id' => $id])->book()->where('books.status', '=', $status)->paginate(10);
+        return $this->model->find($id)->book()->where('books.status', '=', $status)->paginate(10);
     }
 
     /**
@@ -74,22 +75,23 @@ class UserRepository extends AbstractRepository
      */
     public function getFavoritedBooksForUser($id)
     {
-        return $this->model->findOrNew($id)->books()->with('meta')->paginate(10);
+        return $this->model->find($id)->books()->with('meta')->paginate(10);
     }
 
     public function getActiveStatusForUser($id)
     {
-        return $this->model->findOrNew($id)->first();
+        return $this->model->find($id)->first();
     }
 
     public function getAllOrdersByUser($id)
     {
-        return $this->model->findOrNew($id)->books_orders()->where('stage', '=', 'order')->with('meta')->paginate(10);
+        return $this->model->find($id)->books_orders()->where('stage', '=', 'order')->with('meta')->paginate(10);
     }
 
 
     public function getAllUsersWithoutAdmins($authId)
     {
+        //todo: change ID for admin to get dynamic
         return $this->model
             ->selectRaw('users.*')
             ->join('user_roles', 'user_roles.user_id', '=', 'users.id')
@@ -102,21 +104,22 @@ class UserRepository extends AbstractRepository
     {
         // if there is no such preview
         if (DB::table('book_previews')->select('*')->where([
-            'book_id' => $request['book_id'],
-            'user_id' => $request['user_id'],
+            'book_id'   => $request['book_id'],
+            'user_id'   => $request['user_id'],
             'author_id' => $request['author_id'],
         ])
         ) {
             // create new preview
             return DB::table('book_previews')->insert([
-                'book_id' => $request['book_id'],
-                'user_id' => $request['user_id'],
-                'author_id' => $request['author_id'],
+                'book_id'       => $request['book_id'],
+                'user_id'       => $request['user_id'],
+                'author_id'     => $request['author_id'],
                 'preview_start' => $request['preview_start'],
-                'preview_end' => $request['preview_end'],
-                'total_pages' => $request['total_pages']
+                'preview_end'   => $request['preview_end'],
+                'total_pages'   => $request['total_pages']
             ]);
         }
+
         return false;
     }
 
