@@ -216,8 +216,10 @@
                                         <th>{{ trans('word.mobile') }}</th>
                                         <th>{{ trans('word.status') }}</th>
                                         <th>{{ trans('word.order-stage') }}</th>
+                                        @if(Session::get('role.admin'))
                                         <th>{{ trans('word.stage-change') }}</th>
                                         <th>{{ trans('word.stage-delete') }}</th>
+                                        @endif
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -241,16 +243,18 @@
                                             <td>
                                                 <span> {{ $order->stage }} </span>
                                             </td>
+                                            @if(Session::get('role.admin'))
                                             <td class="text-center">
                                                 @if($order->stage === 'order')
                                                 <a class="btn btn-success" href="{{ action('Admin\AdminBookController@getAcceptOrder',[$order->user_id,$order->book->id,$order->user->email]) }}/under_process">{{ trans('word.accept') }}</a>
                                                 @elseif($order->stage === 'under_process')
-                                                <a class="btn btn-primary" href="{{ action('Admin\AdminBookController@getAcceptOrder',[$order->user_id,$order->book->id,$order->user->email,'']) }}">{{ trans('word.purchased') }}</a>
+                                                <a class="btn btn-primary" href="{{ action('Admin\AdminBookController@getAcceptOrder',[$order->user_id,$order->book->id,$order->user->email]) }}/purchased">{{ trans('word.purchased') }}</a>
                                                 @endif
                                             </td>
                                             <td class="text-center">
                                                 <a class="btn btn-danger btn-sm" href="{{ action('Admin\AdminBookController@getDeleteOrder',[$order->user_id,$order->book->id]) }}"><i class="fa fa-trash-o fa-2x"></i></a>
                                             </td>
+                                            @endif
                                         </tr>
                                     @endforeach
                                     </tbody>
