@@ -77,9 +77,9 @@ class BookController extends Controller
     public function getCreateNewFavoriteList($userId, $bookId)
     {
 
-        $checkFavorite = $this->favoriteRepository->model->where(['book_id' => $bookId, 'user_id' => $userId])->get();
+        $checkFavorite = $this->favoriteRepository->model->where(['book_id' => $bookId, 'user_id' => $userId])->first();
 
-        if (!$checkFavorite) {
+        if (is_null($checkFavorite)) {
 
             $favorited = $this->favoriteRepository->model->create([
                 'book_id' => $bookId,
