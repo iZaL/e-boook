@@ -123,6 +123,15 @@ Route::group(['prefix'=>'app'],function () {
         Route::get('/book/order/{bookId}/{userId}',['uses'=>'BookController@getCreateNewOrder']);
 
 
+        /*
+         * get show customized previews for all authintecated users
+         * FOR ALL USERS - EVEN FOR ADMIN
+         * */
+
+        Route::get('/book/pdf/preview/show/customized/{bookId}/{authorId}',
+            ['as' =>'app.book.getShowNewCustomizedPreviewForUsers','uses' => 'Admin\AdminBookController@getShowNewCustomizedPreviewForUsers']);
+
+
         /***************************************************************************************************
          *                                          Editor Zone
          *
@@ -144,11 +153,9 @@ Route::group(['prefix'=>'app'],function () {
             Route::post('/book/pdf/preview/customized',
                 ['as' =>'app.editor.book.postCreateNewCustomizedPreview','uses' => 'Admin\AdminBookController@postCreateNewCustomizedPreview']);
 
-            Route::delete('/book/pdf/preview/customized/{bookId}/{authorId}/{total_pages}',
-                ['as' =>'app.editor.book.deleteCustomizedPreview','uses' => 'Admin\AdminBookController@deleteCustomizedPreview']);
 
-            Route::get('/book/pdf/preview/show/customized/{bookId}/{authorId}',
-                ['as' =>'app.editor.book.getShowNewCustomizedPreviewForAdmin','uses' => 'Admin\AdminBookController@getShowNewCustomizedPreviewForAdmin']);
+            Route::get('/book/pdf/preview/delete/customized/{bookId}/{authorId}',
+                ['as' =>'app.editor.book.getDeleteNewCustomizedPreview','uses' => 'Admin\AdminBookController@getDeleteNewCustomizedPreview']);
 
         }); // end of editor middlware*/
 
@@ -187,23 +194,30 @@ Route::group(['prefix'=>'app'],function () {
 
             // resource route for book & poem
             Route::resource('book','Admin\AdminBookController');
+
             Route::get('book/status/update/{bookId}',['as'=>'app.admin.book.getUpdateBookStatus','uses'=>'Admin\AdminBookController@getUpdateBookStatus']);
             /*
              * Routes to create / post / delete Preview Book for Admin
              * */
             Route::get('/book/pdf/preview/customized/{bookId}/{authorId}/{total_pages}',
                     ['as' =>'app.admin.book.getCreateNewCustomizedPreview','uses' => 'Admin\AdminBookController@getCreateNewCustomizedPreview']);
-
-            Route::post('/book/pdf/preview/test',
+            /*
+             * post request to add a new preview
+             * */
+            Route::post('/book/pdf/preview/customized',
                 ['as' =>'app.admin.book.postCreateNewCustomizedPreview','uses' => 'Admin\AdminBookController@postCreateNewCustomizedPreview']);
-
-            Route::delete('/book/pdf/preview/customized/{bookId}/{authorId}/{total_pages}',
-                ['as' =>'app.admin.book.deleteCustomizedPreview','uses' => 'Admin\AdminBookController@deleteCustomizedPreview']);
-
+            /*
+             *  get show  customized preview for only admins
+            */
             Route::get('/book/pdf/preview/show/customized/{bookId}/{authorId}',
                 ['as' =>'app.admin.book.getShowNewCustomizedPreviewForAdmin','uses' => 'Admin\AdminBookController@getShowNewCustomizedPreviewForAdmin']);
 
-            // Book Previews
+            /*
+             * Route to delete a previously created customized preview
+             * Tip : this route should have been made by Delete Request within a form .. normal get reqeust is made which is wrong
+             * */
+            Route::get('/book/pdf/preview/delete/customized/{bookId}/{authorId}',
+                ['as' =>'app.admin.book.getDeleteNewCustomizedPreview','uses' => 'Admin\AdminBookController@getDeleteNewCustomizedPreview']);
 
             // Routes for Accept Order / Delete Order
             Route::get('/orders/accept/{userId}/{bookId}/{email}/{stage}','Admin\AdminBookController@getAcceptOrder');

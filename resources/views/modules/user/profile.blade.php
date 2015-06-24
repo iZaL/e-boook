@@ -162,8 +162,7 @@
 
 
 
-                {{--Previews Created for a user--}}
-
+                {{--Previews --}}
                 <div class="tab-pane" id="step4">
                     <div class="row">
                         <div class="col-xs-12 paddingTop10">
@@ -174,17 +173,21 @@
                                     <th></th>
                                     <th>{{ trans('word.total-pages') }}</th>
                                     <th>{{ trans('word.status') }}</th>
-                                    <th>Last Edited</th>
+                                    <th>{{ trans('word.remove') }}</th>
+                                    <th>{!! trans('word.last-edited') !!}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($customizedPreviews as $book)
+                                @if($customizedPreviews)
+
+                                    @foreach($customizedPreviews as $book)
 
                                         <tr>
-                                            <td class="hidden-xs"><img class="img-table img-responsive" src="/img/cover/cover_{{App::getLocale()}}/thumbnail/{{$book->cover }}" alt="{{ $book->title }}"></td>
+                                            <td class="hidden-xs"><img class="img-table img-responsive" src="/img/cover/cover_{{App::getLocale()}}/thumbnail/{{$book->__get('cover') }}" alt="{{ $book->title }}"></td>
                                             <td>
-                                                {{--<a href="{{ action('',$book->url) }}"> {!! $book->title !!}</a>--}}
-
+                                                @if(Session::get('auth.id'))
+                                                    <a href="{{ route('app.book.getShowNewCustomizedPreviewForUsers',[$book->id,$book->user_id]) }}"> {!! $book->title !!}</a>
+                                                @endif
                                                 <p> {!! Str::words(strip_tags($book->body),6) !!} </p>
 
                                             </td>
@@ -195,21 +198,29 @@
                                             <td>
                                                 <span> {{ $book->status }} </span>
                                             </td>
+                                            <td class="text-center">
+                                                @if(Session::get('role.admin'))
+                                                    <a class="btn btn-sm btn-danger" href="{{ route('app.admin.book.getDeleteNewCustomizedPreview',[$book->id,$book->user_id]) }}"><i class="fa fa-trash-o fa-2x"></i></a>
+                                                @elseif(Session::get('role.editor'))
+                                                    <a class="btn btn-sm btn-danger" href="{{ route('app.edit.book.getDeleteNewCustomizedPreview',[$book->id,$book->user_id]) }}"><i class="fa fa-trash-o fa-2x"></i></a>
+                                                @endif
+                                            </td>
                                             <td>
                                                 <span> {{ $book->updated_at->format('Y-m-d') }} </span>
                                             </td>
                                         </tr>
 
-                                @endforeach
-                                {{--@else
+                                    @endforeach
+                                @else
                                     <div class="alert alert-warning" role="alert">{{ trans('word.no-books-found') }}</div>
-                                @endif--}}
+                                @endif
                                 </tbody>
                             </table>
 
                         </div>
                     </div>
                 </div>
+
 
 
 

@@ -70,15 +70,17 @@ class UserController extends Controller
 
         $orders = $this->userRepository->getAllOrdersByUser($id);
 
+        //$allCustomizedPreviews = $this->bookRepository->getCustomizedPreviews(Session::get('auth.id'));
+
 
         $customizedPreviews = $this->bookRepository->getCustomizedPreviews($id);
 
         return view('modules.user.profile', [
-            'books'              => $allbooks,
-            'favoriteBooks'      => $favoriteBooks,
-            'user'               => $this->authUser,
-            'orders'             => $orders,
-            'customizedPreviews' => $customizedPreviews
+            'books'                 => $allbooks,
+            'favoriteBooks'         => $favoriteBooks,
+            'user'                  => $this->authUser,
+            'orders'                => $orders,
+            'customizedPreviews'    => $customizedPreviews,
         ]);
 
     }

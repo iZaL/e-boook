@@ -143,9 +143,9 @@ class AdminBookController extends Controller
 
         // create meta for a book
         $this->bookMeta->create([
-            'book_id'     => $book->id,
+            'book_id' => $book->id,
             'total_pages' => Session::get('total_pages'),
-            'price'       => $price,
+            'price' => $price,
         ]);
 
         $this->dispatch(new CreateBookCover($book, $request));
@@ -187,7 +187,7 @@ class AdminBookController extends Controller
         } elseif (Session::get('role.editor')) {
 
             $book = $this->bookRepository->model->where([
-                'id'      => $id,
+                'id' => $id,
                 'user_id' => Session::get('auth.id')
             ])->with('meta')->first();
         }
@@ -250,7 +250,7 @@ class AdminBookController extends Controller
 
             // update the book_metas table
             $this->bookMeta->where('book_id', '=', $book->id)->update([
-                'price'       => $price,
+                'price' => $price,
                 'total_pages' => $total_pages
             ]);
 
@@ -303,11 +303,11 @@ class AdminBookController extends Controller
             $buyerMobile = Auth::user()->mobile;
 
             $this->NotifyChangeStageOrder([
-                'stage'    => $stage,
-                'email'    => $buyerEmail,
-                'book'     => $book,
+                'stage' => $stage,
+                'email' => $buyerEmail,
+                'book' => $book,
                 'username' => $buyerUserName,
-                'mobile'   => $buyerMobile
+                'mobile' => $buyerMobile
             ]);
 
             return redirect()->back()->with(['success' => trans('success.order')]);
@@ -338,12 +338,20 @@ class AdminBookController extends Controller
     public function getCreateNewCustomizedPreview($bookId, $autherId, $total_pages)
     {
 
-        $users = $this->userRepository->getAllUsersWithoutAdmins($autherId);
+        $isFree = $this->bookRepository->model->where('id',$bookId)->first()->free;
 
-        $usersList = $users->pluck('name_' . App::getlocale(), 'id');
+        if($isFree != 1) {
 
-        return view('admin.modules.book._create_preview_form',
-            compact('bookId', 'autherId', 'total_pages', 'usersList'));
+            $users = $this->userRepository->getAllUsersWithoutAdmins($autherId);
+
+            $usersList = $users->pluck('name_' . App::getlocale(), 'id');
+
+            return view('admin.modules.book._create_preview_form',
+                compact('bookId', 'autherId', 'total_pages', 'usersList'));
+        }
+
+        return redirect()->back()->with(['error' => trans('word.error-preview-not-created')]);
+
 
     }
 
@@ -369,9 +377,17 @@ class AdminBookController extends Controller
         return redirect()->back()->with(['success' => 'success-preview-created']);
     }
 
-    public function deleteCustomizedPreview($bookId, $authorId, $total_pages)
+    public function getDeleteNewCustomizedPreview($bookId, $authorId)
     {
-        return 'from delete customized preview';
+        $previewDeleted = $this->bookRepository->deleteNewCustomizedPreview($bookId, $authorId);
+
+        if ($previewDeleted) {
+
+            return redirect()->back()->with(['success' => 'success-preview-deleted']);
+
+        }
+
+        return redirect()->back()->with(['error' => trans('word.error-preview-not-deleted')]);
     }
 
     public function getShowNewCustomizedPreviewForAdmin($bookId, $authorId)

@@ -9,6 +9,7 @@ namespace App\Src\Book;
 
 
 use App\Core\AbstractRepository;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 
@@ -121,9 +122,13 @@ class BookRepository extends AbstractRepository
             ->where('book_previews.author_id','=',$authorId)
             ->where('books.id',$bookId)
             ->where('books.user_id',$authorId)
-            ->where('book_previews',Session::get('auth.id'))
+            ->where('book_previews.user_id',Session::get('auth.id'))
             ->first();
 
+    }
+
+    public function deleteNewCustomizedPreview($bookId,$authorId) {
+        return DB::table('book_previews')->where(['book_id'=>$bookId,'author_id'=>$authorId])->delete();
     }
 
 }
