@@ -236,13 +236,10 @@ class AdminBookController extends Controller
         // Update Meta Table
         if ($hasBodyChanged) {
             event(new BookPublished($book));
-
-            $price = ($request->input('price') > 0) ? $request->input('price') : '00.0';
-
-            $book->meta->price = $price;
-            $book->meta->save();
-
         }
+        $price = ($request->input('price') > 0) ? $request->input('price') : '00.0';
+        $book->meta->price = $price;
+        $book->meta->save();
 
         $this->dispatch(new CreateBookCover($book, $request));
 
