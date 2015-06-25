@@ -43,7 +43,7 @@ class CategoryController extends Controller
     {
         $categories = $this->categoryRepository->getAll();
 
-        $books = $this->bookRepository->model->where(['category_id' => $id, 'status' => 'published'])->paginate(9);
+        $books = $this->bookRepository->model->with('meta')->where(['category_id' => $id, 'status' => 'published'])->paginate(9);
 
         return view('modules.category.show', compact('categories', 'books'));
     }
