@@ -7,6 +7,6 @@ resources/assets/*
 /storage/framework/views/*
 /storage/logs/*
 .env
-template
+/template
 /storage/app
 .idea
