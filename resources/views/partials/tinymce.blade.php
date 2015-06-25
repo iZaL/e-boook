@@ -1,5 +1,6 @@
 <script src="/css/bower_components/tinymce/tinymce.min.js"></script>
 <script src="/css/bower_components/tinymce/tinymce.jquery.min.js"></script>
+<script src="/css/bower_components/tinymce/plugins/template/plugin.min.js"></script>
 <script type="text/javascript">
     tinymce.init({
         selector: "textarea.editor",
