@@ -37,10 +37,10 @@ class CalculateBookPage implements ShouldQueue
         $pageCount = $fpdi->setSourceFile($this->uploadPath.$event->book->url);
 
         // update the database with total page count
-        //$event->book->meta->total_pages = $pageCount;
-        //$event->book->meta->save();
+        $event->book->meta->total_pages = $pageCount;
+        $event->book->meta->save();
 
-        Session::put('total_pages',$pageCount);
+//        Session::put('total_pages',$pageCount);
     }
 
 }

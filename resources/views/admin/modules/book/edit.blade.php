@@ -24,7 +24,7 @@
         </div>
         <div class="panel-body">
             @if(Session::get('role.admin'))
-            {!! Form::model($book,['route' => 'app.admin.book.update', 'method' => 'PATCH','files'=>'true'], ['class'=>'form-horizontal']) !!}
+            {!! Form::model($book,['route' => ['app.admin.book.update',$book->id], 'method' => 'PATCH','files'=>'true'], ['class'=>'form-horizontal']) !!}
             @elseif(Session::get('role.editor'))
             {!! Form::model($book,['route' => 'app.editor.book.update', 'method' => 'PATCH','files'=>'true'], ['class'=>'form-horizontal']) !!}
             @endif

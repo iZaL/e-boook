@@ -87,7 +87,7 @@ class AdminBookController extends Controller
 
         $orders = $this->purchaseRepository->model->orderBy('created_at', 'desc')->with('book')->with('user')->get();
 
-        if($books) {
+        if ($books) {
             return view('admin.modules.book.index',
                 ['books' => $books, 'orders' => $orders, 'allCustomizedPreviews' => $allCustomizedPreviews]);
         }
@@ -127,8 +127,8 @@ class AdminBookController extends Controller
 
         $request->merge(['url' => $this->generateFileName(), 'user_id' => Auth::id()]);
 
-        // create a book meta
         // create a book
+        // create a book meta
         // create a pdf
         // create images
         // pass the book and images to update the book with cover url
@@ -136,28 +136,19 @@ class AdminBookController extends Controller
         // create a book record
         $book = $this->bookRepository->model->create($request->except('_token', 'price', 'cover_ar', 'cover_en'));
 
-        // check if the
+        // create a pdf
         $price = ($request->input('price') > 0) ? $request->input('price') : '00.0';
 
+        // Create Meta
+        $book->meta()->create(['price' => $price]);
 
-        // create a pdf
         event(new BookPublished($book));
-
         // create images wit a job
-
         // create meta for a book
-        $this->bookMeta->create([
-            'book_id' => $book->id,
-            'total_pages' => Session::get('total_pages'),
-            'price' => $price,
-        ]);
 
         $this->dispatch(new CreateBookCover($book, $request));
 
         if ($book) {
-
-            Session::forget('total_pages');
-
             return redirect()->back()->with(['success' => trans('word.book-created')]);
         }
 
@@ -191,7 +182,7 @@ class AdminBookController extends Controller
         } elseif (Session::get('role.editor')) {
 
             $book = $this->bookRepository->model->where([
-                'id' => $id,
+                'id'      => $id,
                 'user_id' => Session::get('auth.id')
             ])->with('meta')->first();
         }
@@ -218,50 +209,52 @@ class AdminBookController extends Controller
      * create new pdf file
      * get the url of the new file and add to the request
      */
-    public function update(EditBook $request)
+    public function update(EditBook $request, $id)
     {
-        $cover_ar = ($request->file('cover_ar')) ? $request->file('cover_ar') : '';
-
-        $cover_en = ($request->file('cover_en')) ? $request->file('cover_en') : '';
-
-        $id = $request->input('id');
+        $book = $this->bookRepository->model->find($id);
 
         // check if cover_ar changed
-        if (is_null($cover_ar)) {
+        if (!$request->hasFile('cover_ar')) {
             $request->except('cover_ar');
         }
 
         // check if the cover_en changed
-        if (is_null($cover_en)) {
+        if (!$request->hasFile('cover_en')) {
             $request->except('cover_en');
         }
 
         $request->merge(['url' => $this->generateFileName()]);
 
-        $price = ($request->input('price') > 0) ? $request->input('price') : '00.0';
 
         // update the book table
-        $this->bookRepository->model->where('id', '=', $id)->update($request->except('_token', '_method', 'price',
+        $book->fill($request->except('_token', '_method', 'price',
             'total_pages'));
 
-        if ($book = $this->bookRepository->model->where('id', '=', $id)->first()) {
+        $hasBodyChanged = $book->isDirty('body') ? true : false;
 
-            event(new BookPublished($book));
+        try {
+            $book->update($request->except('_token', '_method', 'price',
+                'total_pages'));
 
-            $this->dispatch(new CreateBookCover($book, $request));
-
-            $total_pages = Session::get('total_pages');
-
-            // update the book_metas table
-            $this->bookMeta->where('book_id', '=', $book->id)->update([
-                'price' => $price,
-                'total_pages' => $total_pages
-            ]);
-
-            return redirect()->back()->with('success', trans('word.success-update'));
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', trans('word.error-update'));
         }
 
-        return redirect()->back()->with('success', trans('word.error-update'));
+        // Update Meta Table
+        if ($hasBodyChanged) {
+            event(new BookPublished($book));
+
+            $price = ($request->input('price') > 0) ? $request->input('price') : '00.0';
+
+            $book->meta->price = $price;
+            $book->meta->save();
+
+        }
+
+        $this->dispatch(new CreateBookCover($book, $request));
+
+        return redirect()->back()->with('success', trans('word.success-update'));
+
     }
 
     /**
@@ -307,11 +300,11 @@ class AdminBookController extends Controller
             $buyerMobile = Auth::user()->mobile;
 
             $this->NotifyChangeStageOrder([
-                'stage' => $stage,
-                'email' => $buyerEmail,
-                'book' => $book,
+                'stage'    => $stage,
+                'email'    => $buyerEmail,
+                'book'     => $book,
                 'username' => $buyerUserName,
-                'mobile' => $buyerMobile
+                'mobile'   => $buyerMobile
             ]);
 
             return redirect()->back()->with(['success' => trans('success.order')]);
@@ -342,9 +335,9 @@ class AdminBookController extends Controller
     public function getCreateNewCustomizedPreview($bookId, $autherId, $total_pages)
     {
 
-        $isFree = $this->bookRepository->model->where('id',$bookId)->first()->free;
+        $isFree = $this->bookRepository->model->where('id', $bookId)->first()->free;
 
-        if($isFree != 1) {
+        if ($isFree != 1) {
 
             $users = $this->userRepository->getAllUsersWithoutAdmins($autherId);
 

@@ -38,12 +38,13 @@ class CreateBookCover extends Job implements SelfHandling
         // creating array
         // creating the covers
         $covers = [];
-        if (!is_null($this->request->file('cover_ar'))) {
-            $covers = array_add($covers, 0, 'cover_ar');
+        if ($this->request->hasFile('cover_ar')) {
+            $covers[] ='cover_ar';
         }
-        if (!is_null($this->request->file('cover_en'))) {
-            $covers = array_add($covers, 1, 'cover_en');
+        if ($this->request->hasFile('cover_en')) {
+            $covers[] = 'cover_en';
         }
+
         //$covers = ['cover_ar','cover_en'];
         foreach ($covers as $coverImage) {
             $fileName = $this->request->file($coverImage)->getClientOriginalName();
@@ -53,7 +54,7 @@ class CreateBookCover extends Job implements SelfHandling
                 '350')->save(public_path('img/cover/' . $coverImage . '/thumbnail/' . $fileName));
             $cover->make($realPath)->resize('600',
                 '927')->save(public_path('img/cover/' . $coverImage . '/large/' . $fileName));
-            $this->book->where('id', '=', $this->book->id)->update([$coverImage => $fileName]);
+            $this->book->update([$coverImage => $fileName]);
             $this->book->save();
         }
     }
