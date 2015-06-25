@@ -1,7 +1,7 @@
-<?php namespace App\Http\Controllers\Admin;
+<?php
 
+namespace App\Http\Controllers\Admin;
 
-use App\Core\LocaleTrait;
 use App\Events\BookPublished;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
@@ -10,7 +10,6 @@ use App\Http\Requests\EditBook;
 use App\Jobs\CreateBookCover;
 use App\Jobs\CreateCustomizedPreview;
 use App\Src\Book\BookHelpers;
-use App\Src\Book\BookMeta;
 use App\Src\Book\BookRepository;
 use App\Src\Category\CategoryRepository;
 use App\Src\Purchase\PurchaseRepository;
@@ -27,39 +26,33 @@ use Illuminate\Support\Facades\Session;
 class AdminBookController extends Controller
 {
 
-    public $categoryRepository;
     public $bookRepository;
-    public $bookMeta;
     public $purchaseRepository;
     public $userRepository;
     public $roleRepository;
-
-    use BookHelpers, LocaleTrait;
-
-    protected $localeStrings = ['name_ar', 'name_en'];
+    public $categoryRepository;
+    
+    use BookHelpers;
 
     /**
      * @param BookRepository $book
      * @param CategoryRepository $categoryRepository
-     * @param BookMeta $bookMeta
      * @param PurchaseRepository $purchaseRepository
      * @param UserRepository $userRepository
      * @param RoleRepository $roleRepository
-     * @internal param CategoryRepository $category
      */
     public function __construct(
         BookRepository $book,
         CategoryRepository $categoryRepository,
-        BookMeta $bookMeta,
         PurchaseRepository $purchaseRepository,
         UserRepository $userRepository,
         RoleRepository $roleRepository
     ) {
         $this->bookRepository = $book;
         $this->categoryRepository = $categoryRepository;
-        $this->bookMeta = $bookMeta;
         $this->purchaseRepository = $purchaseRepository;
         $this->userRepository = $userRepository;
+        $this->roleRepository = $roleRepository;
     }
 
     /**
@@ -104,7 +97,7 @@ class AdminBookController extends Controller
      */
     public function create()
     {
-        $categories = $this->categoryRepository->model->first();
+        $categories = $this->categoryRepository->model->all();
 
         $getLang = App()->getLocale();
 
@@ -295,7 +288,7 @@ class AdminBookController extends Controller
 
             $book = $this->bookRepository->getById($bookId)->with('meta')->first();
 
-            $buyerUserName = Auth::user()->__get('name');
+            $buyerUserName = Auth::user()->name;
 
             $buyerMobile = Auth::user()->mobile;
 
