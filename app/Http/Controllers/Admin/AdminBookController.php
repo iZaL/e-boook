@@ -31,7 +31,7 @@ class AdminBookController extends Controller
     public $userRepository;
     public $roleRepository;
     public $categoryRepository;
-    
+
     use BookHelpers;
 
     /**
