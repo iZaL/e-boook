@@ -44,7 +44,7 @@
                                             <a href="{{ action('BookController@show',$book->id) }}"><img src="/img/cover/cover_{{App::getLocale()}}/thumbnail/{{$book->cover }}" alt="{{ $book->title }}"></a>
                                             <div class="caption">
                                                 <a href="{{ action('BookController@show',$book->id) }}"><h4>{{ $book->title }}</h4></a>
-                                                <p>{{ \Str::words($book->__get('body'),3) }} </p>
+                                                <p>{{ \Str::words(strip_tags($book->'body'),3) }} </p>
                                                 <span class="label label-info price pull-right">{{ ($book->free == 0) ? ($book->meta) ? $book->meta->price.' KD': '' :  trans('word.free') }}</span>
                                             </div>
                                         </div>
